@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap">
 <style>
 :root{
-  --ground:#E9EDF1; --surface:#FFFFFF; --sunken:#F3F5F8; --ink:#141C25; --muted:#586472; --faint:#8C97A3; --line:#D3DAE2;
-  --accent:#A7801A; --accent-soft:rgba(167,128,26,.14);
-  --q-S:#C75F00; --q-A:#8A2BD0; --q-B:#0063C2; --q-C:#23851A; --q-D:#7C8288;
-  --maxed:#B8860B; --partial:#23851A;
+  --ground:#E9EDF1; --surface:#FFFFFF; --sunken:#F3F5F8; --ink:#141C25; --muted:#4B5563; --faint:#5F6A78; --line:#D3DAE2;
+  --accent:#8A5F24; --accent-soft:rgba(138,95,36,.13);
+  --q-S:#A84F00; --q-A:#8A2BD0; --q-B:#0063C2; --q-C:#1F7A17; --q-D:#656B73;
+  --maxed:#A87B12; --partial:#1F7A17;
   --chart-line:rgba(20,28,37,.13);
   --f-display:"Noto Serif SC","Songti SC","SimSun",serif;
   --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
@@ -23,7 +23,7 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ground:#0C1117; --surface:#141B24; --sunken:#10161E; --ink:#E4EAF0; --muted:#95A1AE; --faint:#66727F; --line:#243040;
+    --ground:#0C1117; --surface:#141B24; --sunken:#10161E; --ink:#E4EAF0; --muted:#A3AEBA; --faint:#8A96A4; --line:#243040;
     --accent:#FFD100; --accent-soft:rgba(255,209,0,.12);
     --q-S:#FF8000; --q-A:#B865FF; --q-B:#3D9BFF; --q-C:#3FD62A; --q-D:#9D9D9D;
     --maxed:#FFD100; --partial:#3FD62A;
@@ -31,18 +31,22 @@
   }
 }
 :root[data-theme="dark"]{
-  --ground:#0C1117; --surface:#141B24; --sunken:#10161E; --ink:#E4EAF0; --muted:#95A1AE; --faint:#66727F; --line:#243040;
+  --ground:#0C1117; --surface:#141B24; --sunken:#10161E; --ink:#E4EAF0; --muted:#A3AEBA; --faint:#8A96A4; --line:#243040;
   --accent:#FFD100; --accent-soft:rgba(255,209,0,.12);
   --q-S:#FF8000; --q-A:#B865FF; --q-B:#3D9BFF; --q-C:#3FD62A; --q-D:#9D9D9D;
   --maxed:#FFD100; --partial:#3FD62A;
   --chart-line:rgba(228,234,240,.12);
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
 .wrap{max-width:1280px;margin:0 auto}
 button,input{font:inherit;color:inherit}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+::selection{background:var(--accent-soft);color:var(--ink)}
+html{scrollbar-color:var(--line) var(--ground);accent-color:var(--accent)}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 header.top{display:grid;grid-template-columns:1fr auto;gap:8px 32px;align-items:end;padding-block:36px 20px;border-bottom:1px solid var(--line)}
 h1{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,4.4vw,44px);line-height:1.1;margin:0;letter-spacing:.02em;text-wrap:balance}
@@ -268,8 +272,21 @@ table.sk tr.more p{margin:4px 0 0;max-width:80ch;color:var(--ink)}
   .meta{grid-row:auto;grid-column:1;text-align:left}
 }
 @media (max-width:700px){
-  .controls{position:static}
-  aside.detail{top:auto}
+  .controls{position:static;gap:10px 16px;padding-block:12px}
+  .controls .seg{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}
+  .controls .seg::-webkit-scrollbar{display:none}
+  .level{min-width:0;flex-basis:100%;gap:10px}
+  .lvnum{font-size:32px}
+  .lvinfo{min-width:0}
+  aside.detail{top:auto;padding:14px}
+  .trees3{grid-template-columns:repeat(3,minmax(214px,1fr));overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-inline:-2px}
+  .trees3 .tcol{scroll-snap-align:start}
+}
+@media (pointer:coarse){
+  .seg button{min-height:40px}
+  .filters button{min-height:36px;padding-inline:14px}
+  details summary{padding-block:8px}
+  .whlink,.jump{min-height:36px;padding-inline:14px;display:inline-flex;align-items:center}
 }
 @media (max-width:480px){
   .row{grid-template-columns:44px 1fr}
@@ -279,10 +296,10 @@ table.sk tr.more p{margin:4px 0 0;max-width:80ch;color:var(--ink)}
   .grid{gap:3px;padding:4px}
 }
 .cw{position:relative;display:block;flex:none;width:34px;height:34px}
-.chip .cw img.cr,.dh .cw img.cr{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
-.chip .cw img.sb,.dh .cw img.sb{position:absolute;right:-5px;bottom:-4px;width:17px;height:17px;border-radius:3px;box-shadow:0 0 0 1.5px var(--cc),0 0 0 3px var(--surface)}
-.dh .cw.big{width:58px;height:58px}
-.dh .cw.big img.sb{width:24px;height:24px;right:-6px;bottom:-5px}
+.cw img.cr{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.cw img.sb{position:absolute;right:-5px;bottom:-4px;width:17px;height:17px;border-radius:3px;box-shadow:0 0 0 1.5px var(--cc),0 0 0 3px var(--surface)}
+.cw.big{width:58px;height:58px}
+.cw.big img.sb{width:24px;height:24px;right:-6px;bottom:-5px}
 .dh:has(.cw.big){grid-template-columns:58px 1fr auto}
 .tabcrest{width:20px;height:20px;object-fit:contain;margin-right:5px;vertical-align:-5px}
 .race .rh img.crest{width:52px;height:52px;object-fit:contain;border-radius:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
@@ -290,13 +307,218 @@ table.sk tr.more p{margin:4px 0 0;max-width:80ch;color:var(--ink)}
 .race .cls i.hc img{width:14px;height:14px;object-fit:contain;vertical-align:-3px;margin-right:3px}
 .hcrest{width:34px;height:34px;object-fit:contain;vertical-align:-9px;margin-right:8px}
 .icrest{width:18px;height:18px;object-fit:contain;vertical-align:-4px;margin:0 2px}
+/* ---------- 顶部导航 + 路由页 ---------- */
+.appbar{position:sticky;top:0;z-index:6;background:var(--ground);border-bottom:1px solid var(--line)}
+.appbar .controls{position:static;border-bottom:0;padding-block:10px 12px}
+.appnav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line);margin-inline:-4px}
+.appnav::-webkit-scrollbar{display:none}
+.appnav a{position:relative;padding:12px 14px 11px;text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;white-space:nowrap;border-radius:6px 6px 0 0}
+.appnav a:hover{color:var(--ink);background:var(--sunken)}
+.appnav a[aria-current="page"]{color:var(--ink)}
+.appnav a::after{content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transition:transform .28s cubic-bezier(.16,1,.3,1)}
+.appnav a[aria-current="page"]::after{transform:scaleX(1)}
+aside.detail{top:128px;max-height:calc(100vh - 140px)}
+.route{padding-top:20px}
+.route > main{padding-top:0}
+.jumps{display:flex;flex-wrap:wrap;gap:8px}
+.jump{text-decoration:none;color:var(--ink)}
+.jump.primary{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:500}
+.jump.primary:hover{filter:brightness(1.08)}
+.warn{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 14px;padding:10px 14px;border-radius:8px;border:1px solid color-mix(in srgb,var(--q-S) 45%,var(--line));background:color-mix(in srgb,var(--q-S) 9%,var(--surface));color:var(--ink);font-size:13px}
+.warn button,.simact button,.lgsum button,.simact select{font-size:13px;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.warn button:hover,.simact button:hover:not(:disabled),.lgsum button:hover:not(:disabled){border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.clspick{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;padding-bottom:4px;margin-bottom:16px}
+.clspick a{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:64px;padding:8px 6px 6px;border-radius:8px;text-decoration:none;color:var(--muted);font-size:12px;border:1px solid transparent;transition:background .2s,border-color .2s,color .2s}
+.clspick a img{width:36px;height:36px;object-fit:contain;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.clspick a:hover{background:var(--surface);color:var(--ink)}
+.clspick a:hover img{transform:translateY(-2px)}
+.clspick a[aria-current="page"]{background:var(--surface);border-color:var(--line);color:var(--ink);box-shadow:inset 0 -2px 0 var(--cc)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card > summary{font-size:13px;color:var(--muted)}
+
+/* ---------- 天赋模拟器 ---------- */
+.simbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;margin-bottom:14px}
+.simsum{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.spts{font-family:var(--f-num);font-size:18px;color:var(--muted);font-variant-numeric:tabular-nums}
+.spts b{font-size:32px;font-weight:700;color:var(--ink);margin-right:2px}
+.spts.over b{color:var(--q-S)}
+.ssplit{font-family:var(--f-num);font-size:18px;font-weight:600;letter-spacing:.04em;color:var(--muted);font-variant-numeric:tabular-nums}
+.simact{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.simact .whlink{padding:6px 12px}
+.simgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+.simtrees{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.stree{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;transition:border-color .3s}
+.stree.main{border-color:color-mix(in srgb,var(--maxed) 55%,var(--line))}
+.stree header{display:grid;grid-template-columns:30px 1fr auto;gap:2px 8px;align-items:center;margin-bottom:10px}
+.stree header img{width:30px;height:30px;border-radius:4px;box-shadow:0 0 0 1.5px var(--cc)}
+.stree header b{font-size:14px;display:block;line-height:1.2}
+.stree header .en{margin:0;font-size:11px}
+.stree header em{font-style:normal;font-family:var(--f-num);font-weight:700;font-size:24px;line-height:1;font-variant-numeric:tabular-nums}
+.stree.main header em{color:var(--maxed)}
+.treereset{grid-column:1/-1;justify-self:start;font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer}
+.sgrid{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(7,auto);gap:8px;padding:4px}
+.sgrid .arrows{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);pointer-events:none;overflow:visible}
+.arrows line{stroke:var(--line);stroke-width:3;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.arrows line.met{stroke:var(--partial)}
+.sgap{aspect-ratio:1}
+.scell{position:relative;aspect-ratio:1;border:0;padding:0;border-radius:6px;background:var(--sunken);cursor:pointer;z-index:1;touch-action:manipulation;-webkit-touch-callout:none;user-select:none}
+.scell img{width:100%;height:100%;display:block;border-radius:6px;transition:filter .25s,opacity .25s,box-shadow .25s}
+.scell[data-s="lock"] img{filter:grayscale(1) brightness(.7);opacity:.4;box-shadow:0 0 0 1px var(--line)}
+.scell[data-s="open"] img{box-shadow:0 0 0 1.5px var(--faint)}
+.scell[data-s="open"]:hover img{box-shadow:0 0 0 2px var(--ink)}
+.scell[data-s="part"] img{box-shadow:0 0 0 2.5px var(--partial)}
+.scell[data-s="max"] img{box-shadow:0 0 0 2.5px var(--maxed)}
+.scell .rk{position:absolute;right:-5px;bottom:-5px;font-family:var(--f-num);font-weight:700;font-size:11px;line-height:1;padding:2px 3px;border-radius:4px;background:var(--surface);border:1px solid var(--line);color:var(--muted);font-variant-numeric:tabular-nums}
+.scell[data-s="lock"] .rk{opacity:.6}
+.scell[data-s="part"] .rk{color:var(--partial);border-color:var(--partial)}
+.scell[data-s="max"] .rk{color:var(--maxed);border-color:var(--maxed)}
+.scell[aria-current="true"]{outline:2px solid var(--ink);outline-offset:3px}
+.scell.justmax img{animation:maxglow .9s cubic-bezier(.16,1,.3,1)}
+@keyframes maxglow{0%{box-shadow:0 0 0 2.5px var(--maxed),0 0 0 0 color-mix(in srgb,var(--maxed) 70%,transparent)}100%{box-shadow:0 0 0 2.5px var(--maxed),0 0 0 12px transparent}}
+.simside{position:sticky;top:128px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 140px);overflow:auto}
+.score{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center}
+.stier{font-family:var(--f-num);font-weight:700;font-size:64px;line-height:.9;color:var(--q)}
+.slabel{font-size:12px;color:var(--muted)}
+.sbig{font-family:var(--f-num);font-weight:700;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+.sbig small{font-size:13px;font-weight:500;color:var(--muted);margin-left:4px}
+.sbar{height:6px;border-radius:3px;background:var(--sunken);overflow:hidden;margin:6px 0 4px}
+.sbar i{display:block;height:100%;background:var(--q);border-radius:3px;transition:width .4s cubic-bezier(.16,1,.3,1)}
+.ssub{font-size:12px;color:var(--muted)}
+.ssub b{color:var(--ink);font-family:var(--f-num);font-size:14px;font-variant-numeric:tabular-nums}
+.dims{margin-top:12px;display:grid;gap:6px}
+.dim{display:grid;grid-template-columns:4.5em 1fr 3.6em;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.dim b{font-family:var(--f-num);font-size:14px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+.dbar{position:relative;height:8px;border-radius:4px;background:var(--sunken)}
+.dbar .mine{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--accent);transition:width .4s cubic-bezier(.16,1,.3,1)}
+.dbar .best{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);border-radius:1px}
+.ends{display:grid;gap:8px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.erole{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:center;font-size:12px;color:var(--muted)}
+.erole .et{font-family:var(--f-num);font-weight:700;font-size:28px;line-height:1;color:var(--q);text-align:center}
+.erole b{display:block;color:var(--ink);font-size:13px}
+.sinfo p{margin:6px 0 0}
+.sinfo .lbl{display:inline-block;font-size:11px;font-weight:500;color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:0 5px;margin-right:6px}
+.sinfo .can{color:var(--partial);font-weight:500}
+.sinfo .cant{color:var(--q-S);font-weight:500}
+.sinfo .delta{color:var(--muted)} .sinfo .delta.up b{color:var(--partial)}
+.pm{grid-column:1/-1;display:flex;gap:8px;margin-top:10px}
+.pm button{flex:1;padding:8px;border-radius:6px;border:1px solid var(--line);background:var(--sunken);font-weight:500;cursor:pointer}
+.pm button:hover:not(:disabled){border-color:var(--accent)}
+.sorder li.overpt{color:var(--q-S)}
+.sorder li.overpt img{opacity:.5}
+.sspec button{padding:4px 10px;font-size:12px}
+.simhelp{margin-top:14px}
+
+/* ---------- 职业 / 种族 ---------- */
+.chead{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin-bottom:18px}
+.ccrest{width:88px;height:88px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.3))}
+.chead h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(26px,3.4vw,36px);line-height:1.15}
+.chead h2 .en{font-family:var(--f-body);font-size:15px}
+.lede2{margin:4px 0 0;color:var(--muted);max-width:70ch}
+.specgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:20px}
+.speccard{display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.speccard:hover{transform:translateY(-2px);box-shadow:0 8px 20px -12px rgba(0,0,0,.35)}
+.sch{display:grid;grid-template-columns:58px 1fr auto;gap:12px;align-items:center}
+.sch h3{margin:0;font-size:18px;letter-spacing:0;color:var(--ink);font-weight:700}
+.scs{margin:0;font-size:13px;color:var(--muted)}
+.ets{display:flex;flex-wrap:wrap;gap:6px}
+.et2{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 10px 1px 3px}
+.et2 b{font-family:var(--f-num);font-size:15px;color:var(--q);min-width:18px;text-align:center}
+.cblock{margin-bottom:22px}
+.cblock > h3{font-size:13px;letter-spacing:.04em}
+.cchart{max-width:900px}
+.cchart.draw .specs{animation:reveal 1.1s cubic-bezier(.16,1,.3,1) both}
+@keyframes reveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.racechips{display:flex;flex-wrap:wrap;gap:8px}
+.rchip{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border:1px solid var(--line);border-radius:999px;background:var(--surface);text-decoration:none;color:var(--ink);font-size:13px;transition:border-color .2s,transform .3s cubic-bezier(.16,1,.3,1)}
+.rchip:hover{border-color:var(--accent);transform:translateY(-1px)}
+.rchip img{width:30px;height:30px;object-fit:contain}
+.rchip small{display:block;font-size:11px;color:var(--faint)}
+.racepick{display:flex;flex-wrap:wrap;gap:10px 24px;margin-bottom:18px}
+.rgroup{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rfac{font-size:12px;color:var(--faint);margin-right:4px}
+.rgroup a{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:70px;padding:8px 6px 6px;border-radius:8px;text-decoration:none;color:var(--muted);font-size:12px;border:1px solid transparent;transition:background .2s,border-color .2s}
+.rgroup a img{width:40px;height:40px;object-fit:contain}
+.rgroup a:hover{background:var(--surface);color:var(--ink)}
+.rgroup a[aria-current="page"]{background:var(--surface);border-color:var(--accent);color:var(--ink)}
+.rcols{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px}
+.rab li{padding:8px 0;border-bottom:1px dashed var(--line)}
+.rclasses{display:grid;gap:8px}
+.rclass{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:8px 14px 8px 8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink);transition:border-color .2s,transform .3s cubic-bezier(.16,1,.3,1)}
+.rclass:hover{border-color:var(--cc);transform:translateX(3px)}
+.rclass img{width:44px;height:44px;object-fit:contain}
+.rclass .mini{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--muted)}
+.rclass .mini i{font-style:normal}
+.rclass .mini em{font-style:normal;font-family:var(--f-num);font-weight:700;color:var(--q)}
+.rclass .go{color:var(--faint)}
+
+/* ---------- Legacy ---------- */
+.lghead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 24px;margin-bottom:14px}
+.lghead h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(26px,3.4vw,36px)}
+.lgsum{display:flex;align-items:baseline;gap:8px;font-size:13px;color:var(--muted)}
+.lgsum b{font-family:var(--f-num);font-weight:700;font-size:40px;color:var(--ink);font-variant-numeric:tabular-nums}
+.callout.on{border-color:color-mix(in srgb,var(--partial) 50%,var(--line));background:color-mix(in srgb,var(--partial) 8%,var(--surface))}
+.ltree h3 em{margin-left:auto;font-style:normal;font-family:var(--f-num);font-weight:700;font-size:22px;color:var(--muted)}
+.lperk{transition:background .3s}
+.lperk.has .pn{color:var(--ink)}
+.lperk.key{background:linear-gradient(90deg,var(--accent-soft),transparent 70%);border-radius:6px;padding-inline:6px}
+.lstep{grid-column:2;display:flex;align-items:center;gap:8px;margin-top:6px}
+.lstep button{width:30px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--sunken);font-size:16px;line-height:1;cursor:pointer}
+.lstep button:hover:not(:disabled){border-color:var(--accent)}
+.lstep b{font-family:var(--f-num);font-size:15px;min-width:2.4em;text-align:center;font-variant-numeric:tabular-nums}
+.pips{display:flex;gap:3px}
+.pips i{width:12px;height:6px;border-radius:2px;background:var(--line);transition:background .25s}
+.pips i.on{background:var(--accent)}
+.lperk.full .pips i.on{background:var(--maxed)}
+
+@media (max-width:980px){
+  .simgrid{grid-template-columns:1fr}
+  .simside{position:static;max-height:none}
+  .rcols{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .appbar{display:contents}
+  .appnav{position:sticky;top:0;z-index:7;background:var(--ground)}
+  .simtrees{grid-template-columns:repeat(3,minmax(250px,1fr));overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+  .stree{scroll-snap-align:start}
+  .chead{grid-template-columns:64px 1fr;gap:12px}
+  .ccrest{width:64px;height:64px}
+  .sgrid{gap:7px}
+}
+@media (pointer:coarse){.lstep button{width:40px;height:40px}.clspick a,.rgroup a{min-height:44px}}
+.cmp{display:none;position:absolute;left:-5px;top:-5px;z-index:2;font-size:10px;font-weight:700;line-height:1;padding:2px 3px;border-radius:3px;color:var(--surface);pointer-events:none}
+body.cmp-on .cmp[data-c="new"],body.cmp-on .cmp[data-c="changed"],body.cmp-on .cmp[data-c="moved"]{display:block}
+.cmp[data-c="new"]{background:var(--q-A)} .cmp[data-c="changed"]{background:var(--q-B)} .cmp[data-c="moved"]{background:var(--q-D)}
+.cmpblock{display:none}
+body.cmp-on .cmpblock{display:block}
+body.cmp-on span.cmpblock{display:inline}
+.classic{grid-column:1/-1;margin-top:10px;padding:10px 12px;border-radius:6px;border:1px dashed var(--line);background:var(--sunken);font-size:12px}
+.classic .ch{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin-bottom:4px;color:var(--muted)}
+.classic .ch b{color:var(--ink);font-size:12px}
+.classic p{margin:4px 0 0}
+.cstat{display:inline-block;font-size:11px;font-weight:700;padding:0 6px;border-radius:3px;color:var(--surface)}
+.cstat[data-c="new"]{background:var(--q-A)} .cstat[data-c="changed"]{background:var(--q-B)} .cstat[data-c="moved"]{background:var(--q-D)} .cstat[data-c="same"]{background:var(--q-C)}
+.cmpsum{display:none;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--muted)}
+body.cmp-on .cmpsum{display:flex}
+.cmpsum b{font-family:var(--f-num);font-size:14px;color:var(--ink)}
+.removed ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:13px}
+.removed li b{font-weight:600}
+.removed li span{display:block;color:var(--muted);font-size:12px}
+.verify{grid-column:1/-1;margin-top:8px;font-size:12px;color:var(--muted)}
+.verify summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:6px;align-items:center;list-style:none}
+.verify summary::-webkit-details-marker{display:none}
+.vbadge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.vbadge.ok{color:var(--q-C);border-color:color-mix(in srgb,var(--q-C) 40%,var(--line))}
+.vbadge.fix{color:var(--q-B);border-color:color-mix(in srgb,var(--q-B) 40%,var(--line))}
+.vbadge.diff{color:var(--q-S);border-color:color-mix(in srgb,var(--q-S) 40%,var(--line))}
+.verify ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px}
 
 /* ---- 网站版: Forever 品牌 ---- */
-:root{--accent:#94672A;--accent-soft:rgba(148,103,42,.14);--arcane:#1F7FB0}
+:root{--accent:#8A5F24;--accent-soft:rgba(138,95,36,.13);--arcane:#1F7FB0}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--accent:#E3B872;--accent-soft:rgba(227,184,114,.13);--arcane:#4FB6E3}}
 :root[data-theme="dark"]{--accent:#E3B872;--accent-soft:rgba(227,184,114,.13);--arcane:#4FB6E3}
 body{overflow-x:clip}
-section.block,#tiers{scroll-margin-top:96px}
+section.block{scroll-margin-top:130px}
 .brand{position:relative;isolation:isolate;overflow:hidden;margin-inline:calc(50% - 50vw);padding-inline:calc(50vw - 50% + 16px);color:#F4ECDD;background:#0A121C}
 .brand-art{position:absolute;inset:0;z-index:-2}
 .brand-art i{position:absolute;top:0;bottom:0;width:62%;background-size:cover;display:block}
@@ -305,41 +527,46 @@ section.block,#tiers{scroll-margin-top:96px}
 .brand::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,14,24,.15) 0%,rgba(8,14,24,.72) 24%,rgba(8,14,24,.62) 70%,rgba(8,14,24,.2) 100%),linear-gradient(180deg,transparent 55%,var(--ground) 100%)}
 .brand-in{display:grid;grid-template-columns:auto 1fr;gap:12px 36px;align-items:center;padding-block:34px 44px;max-width:1280px;margin:0 auto}
 .brand .logo{width:clamp(150px,19vw,240px);height:auto;display:block;filter:drop-shadow(0 10px 24px rgba(0,0,0,.55))}
-.brand .kicker{font-size:12px;letter-spacing:.14em;color:#E3B872;text-transform:uppercase}
-.brand h1{color:#FFF7E8;font-size:clamp(30px,4.6vw,50px);margin:6px 0 10px;text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.brand h1{color:#FFF7E8;font-size:clamp(30px,4.6vw,50px);margin:0 0 12px;text-shadow:0 2px 16px rgba(0,0,0,.6)}
 .brand .lede{color:#D7DEE6;max-width:60ch;margin:0;text-shadow:0 1px 8px rgba(0,0,0,.7)}
-.brand .facts{display:flex;flex-wrap:wrap;gap:6px 18px;margin:14px 0 0;padding:0;list-style:none;font-size:12px;color:#BFC8D2}
-.brand .facts b{font-family:var(--f-num);font-size:20px;font-weight:700;color:#FFF7E8;margin-right:4px;font-variant-numeric:tabular-nums}
+.brand .byline{margin:10px 0 0;font-size:12px;color:#C9D1DA;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 .brand nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.brand nav a{font-size:13px;text-decoration:none;color:#F4ECDD;padding:5px 14px;border-radius:999px;border:1px solid rgba(227,184,114,.45);background:rgba(10,18,28,.55);backdrop-filter:blur(4px)}
+.brand nav a{font-size:13px;text-decoration:none;color:#F4ECDD;padding:8px 14px;white-space:nowrap;border-radius:999px;border:1px solid rgba(227,184,114,.45);background:rgba(10,18,28,.55);backdrop-filter:blur(4px)}
 .brand nav a:hover,.brand nav a:focus-visible{border-color:#E3B872;background:rgba(227,184,114,.2)}
 .site-foot{margin-top:48px;padding-block:22px 8px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:12px;color:var(--faint)}
 .site-foot img{width:64px;height:auto;opacity:.9}
 .site-foot p{margin:0;max-width:90ch}
-@media (max-width:700px){.brand-in{grid-template-columns:1fr;justify-items:start;padding-block:24px 34px}.brand .logo{width:150px}.brand-art i{width:100%}.brand-art .alliance{display:none}.brand-art .horde{-webkit-mask-image:none;mask-image:none}}
+@media (max-width:700px){.brand-in{grid-template-columns:auto 1fr;gap:10px 14px;padding-block:18px 26px}.brand .logo{width:92px}.brand h1{font-size:26px;margin:0}.brand .lede{grid-column:1/-1;font-size:13px}.brand .byline{grid-column:1/-1;margin-top:6px}.brand nav{grid-column:1/-1;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:12px}.brand nav::-webkit-scrollbar{display:none}.brand-in > div{display:contents}.brand-art i{width:100%}.brand-art .alliance{display:none}.brand-art .horde{-webkit-mask-image:none;mask-image:none}}
 
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<script src="data.js"></script>
 <div class="wrap">
   <header class="brand">
     <div class="brand-art" aria-hidden="true"><i class="horde"></i><i class="alliance"></i></div>
     <div class="brand-in">
-      <img class="logo" src="assets/forever-logo.webp" width="240" height="196" alt="World of Warcraft Forever">
+      <img class="logo" src="assets/forever-logo.webp" width="240" height="196" alt="World of Warcraft Forever" fetchpriority="high">
       <div>
-        <div class="kicker">非官方粉丝工具 · BlizzCon 2026 试玩数据 · 模型生成 2026-09-14</div>
         <h1>专精天梯 · 天赋模拟器</h1>
-        <p class="lede">九职业 27 个专精，1 到 60 级每一级的强弱排名和最佳加点。按 Wowhead 天赋计算器的规则逐级模拟，附职业技能、种族天赋和 Legacy 传承，中文译名保留英文原文。</p>
-        <ul class="facts"><li><b>27</b>专精</li><li><b>470</b>天赋</li><li><b>382</b>职业技能</li><li><b>10</b>种族</li><li><b>19</b>Legacy 传承</li></ul>
-        <nav aria-label="页面导航"><a href="#tiers">专精天梯</a><a href="#skills">技能 · 种族 · Legacy</a><a href="#xcheck">网上榜单对照</a><a href="#method">算法说明</a></nav>
+        <p class="lede">九职业 27 个专精，1 到 60 级每一级的强弱排名和最佳加点。470 个天赋按 Wowhead 计算器规则逐级模拟，另收 382 个职业技能、10 个种族和 19 项 Legacy 传承，中文译名保留英文原文。</p>
+        <p class="byline">非官方粉丝工具 · 数据来自 BlizzCon 2026 试玩 · 模型生成于 2026-09-14</p>
+        <nav aria-label="快速入口"><a href="#/tiers">看专精天梯</a><a href="#/sim">打开天赋模拟器</a></nav>
       </div>
     </div>
   </header>
 
+  <div class="appbar" id="appbar">
+  <nav class="appnav" id="appnav" aria-label="主导航">
+    <a href="#/tiers" data-route="tiers">专精天梯</a>
+    <a href="#/sim" data-route="sim">天赋模拟器</a>
+    <a href="#/class" data-route="class">职业</a>
+    <a href="#/race" data-route="race">种族</a>
+    <a href="#/legacy" data-route="legacy">Legacy 传承</a>
+    <a href="#/about" data-route="about">说明</a>
+  </nav>
   <div class="controls" id="tiers">
-    <div class="seg" role="group" aria-label="榜单">
+    <div class="seg" id="viewSeg" role="group" aria-label="榜单">
       <button id="v-lv" data-view="lv">升级综合</button>
       <button id="v-tal" data-view="tal">纯天赋提升</button>
       <span class="sep" aria-hidden="true"></span>
@@ -356,25 +583,29 @@ section.block,#tiers{scroll-margin-top:96px}
       <div class="lvinfo" id="lvinfo"></div>
     </div>
     <label class="toggle" for="showEn" title="在中文下面显示英文原文，方便核对"><input type="checkbox" id="showEn" checked><span class="sw" aria-hidden="true"></span><span>英文原文<small>中英对照核查</small></span></label>
+    <label class="toggle" for="cmpClassic" title="在天赋树上标出 Forever 相对 Classic 新增、改动、移位的天赋"><input type="checkbox" id="cmpClassic"><span class="sw" aria-hidden="true"></span><span>对比 Classic<small>标出新增和改动</small></span></label>
     <label class="toggle" for="talented" title="Legacy 传承「Talented」点满：9 级开始拿天赋点，上限仍是 51"><input type="checkbox" id="talented"><span class="sw" aria-hidden="true"></span><span>Legacy Talented<small>9 级起有天赋点</small></span></label>
   </div>
+  </div>
+  <p class="sr" id="announce" aria-live="polite"></p>
 
+  <div class="route" data-page="tiers">
   <main>
     <div>
       <p class="note" id="note" hidden></p>
       <div class="board" id="board"></div>
       <p class="hint">点任意专精，右边显示它的最佳加点；点天赋图标看说明和估值依据。</p>
     </div>
-    <aside class="detail" id="detail" aria-live="polite"></aside>
+    <aside class="detail" id="detail" aria-label="专精详情与最佳加点"></aside>
   </main>
+  </div>
 
-  <section class="block" id="skills">
-    <h2>技能 · 种族 · Legacy</h2>
-    <p class="sub">学习等级和训练费来自 Wowhead Forever 技能库。它目前还是 Classic 数据的镜像，Wowhead 说要等 beta 拆包才更新，所以每个技能都用 BlizzCon 试玩 38 级技能书核对了一遍。等级跟着上面的滑条走。</p>
-    <div class="seg skilltabs" id="skillTabs" role="group" aria-label="技能表"></div>
-    <div id="skillBody"></div>
-  </section>
+  <div class="route" data-page="sim" id="sim" hidden></div>
+  <div class="route" data-page="class" id="classPage" hidden></div>
+  <div class="route" data-page="race" id="racePage" hidden></div>
+  <div class="route" data-page="legacy" id="legacyPage" hidden></div>
 
+  <div class="route" data-page="about" hidden>
   <section class="block" id="xcheck">
     <h2>和网上榜单对照</h2>
     <p class="sub">截至 2026-09-14，网上还没有基于实测的 Forever 榜单（Icy Veins 仍是 Coming Soon）。能找到的只有 AOEAH 和 FrostyBoost 当天发的文章，都是看天赋说明写的，没有数值，仅作参考。</p>
@@ -424,12 +655,14 @@ section.block,#tiers{scroll-margin-top:96px}
     </div>
     </div>
   </section>
+  </div>
   <footer class="site-foot">
-    <img src="assets/forever-logo.webp" alt="" width="64" height="52">
+    <img src="assets/forever-logo.webp" alt="" width="64" height="52" loading="lazy">
     <p>非官方粉丝工具，与暴雪娱乐无关，仅供个人研究使用。《魔兽世界：Forever》徽标与主视觉版权归 Blizzard Entertainment，取自 BlizzCon 2026 官方媒体包。天赋与技能数据来自 Wowhead Forever 天赋计算器和技能库、BlizzCon 2026 试玩；强弱排名是模型估算，不是实测。</p>
   </footer>
 </div>
 
+<script src="data.js"></script>
 <script>
 const D = window.FOREVER_DATA;
 const TIERS = ["S","A","B","C","D"];
@@ -475,7 +708,8 @@ function renderBoard() {
   board.textContent = "";
   for (const t of TIERS) {
     const row = document.createElement("div"); row.className = "row"; row.dataset.t = t;
-    const tl = document.createElement("div"); tl.className = "tier"; tl.textContent = t;
+    row.setAttribute("role", "group"); row.setAttribute("aria-label", `${t} 档，${list.filter(x=>x.tier===t).length} 个专精`);
+    const tl = document.createElement("div"); tl.className = "tier"; tl.textContent = t; tl.setAttribute("aria-hidden", "true");
     const chips = document.createElement("div"); chips.className = "chips";
     for (const x of list.filter(x=>x.tier===t)) {
       const s = D.specs[x.i];
@@ -485,7 +719,7 @@ function renderBoard() {
       const val = state.view==="tal" ? (x.gain>=0?"+":"")+Math.round(x.gain)+"%" : x.index.toFixed(0);
       b.innerHTML = `${specBadge(s)}<span class="nm"><span class="sp">${s.cn}</span><span class="cl">${s.clsCn}</span></span><span class="ix">${val}</span>`;
       b.title = `${s.cn} ${s.clsCn} · 指数 ${x.index} · 点击看最佳加点`;
-      b.onclick = () => { if (state.sel !== x.i) state.talent = null; state.sel = x.i; renderBoard(); renderDetail(); if (matchMedia("(max-width:980px)").matches) document.getElementById("detail").scrollIntoView({behavior:"smooth", block:"start"}); };
+      b.onclick = () => { if (state.sel !== x.i) state.talent = null; state.sel = x.i; renderBoard(); renderDetail(); document.getElementById("announce").textContent = `已选择 ${s.cn}${s.clsCn}，${x.tier} 档，指数 ${x.index}`; if (matchMedia("(max-width:980px)").matches) document.getElementById("detail").scrollIntoView({behavior:"smooth", block:"start"}); };
       chips.appendChild(b);
     }
     row.append(tl, chips); board.appendChild(row);
@@ -499,8 +733,8 @@ function renderBoard() {
   document.getElementById("lvnum").innerHTML = end ? `60<small>级</small>` : `${L}<small>级</small>`;
   const rows = Math.min(7, Math.floor(p/5)+1);
   document.getElementById("lvinfo").innerHTML = end ? `<b>51</b> 天赋点<br>满级加点` : `<b>${p}</b> / 51 天赋点<br>${p? `最深可点第 <b>${rows}</b> 行` : "还没有天赋"}`;
-  document.getElementById("levelBox").setAttribute("aria-disabled", end);
-  document.querySelector(".toggle").setAttribute("aria-disabled", end);
+  document.getElementById("levelBox").setAttribute("aria-disabled", end && route.name === "tiers");
+  document.querySelector('label[for="talented"]').setAttribute("aria-disabled", end && route.name === "tiers");
   document.getElementById("talented").checked = state.talented;
   document.getElementById("lv").value = L;
   document.querySelectorAll(".controls .seg button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.view===state.view));
@@ -543,7 +777,7 @@ function treesView(s, ranks, tp, valueOf) {
       const id = cells[row+","+col];
       if (!id) { h += `<span class="cell gap" aria-hidden="true"></span>`; continue; }
       const t = D.talents[id], r = ranks[id]||0, st = r===0 ? "none" : r>=t[4] ? "max" : "part";
-      h += `<button class="cell" id="cell-${id}" data-id="${id}" data-s="${st}" aria-pressed="${state.talent==id}" title="${esc(tn(t))} · ${esc(t[0])} ${r}/${t[4]}"><img alt="${esc(tn(t))}" src="${ico(t[8])}">${r?`<span class="rk">${r}/${t[4]}</span>`:""}</button>`;
+      h += `<button class="cell" id="cell-${id}" data-id="${id}" data-s="${st}" aria-pressed="${state.talent==id}" title="${esc(tn(t))} · ${esc(t[0])} ${r}/${t[4]}"><img alt="${esc(tn(t))}" src="${ico(t[8])}">${r?`<span class="rk">${r}/${t[4]}</span>`:""}${cmpBadge(t)}</button>`;
     }
     h += `</div></div>`;
   });
@@ -551,12 +785,12 @@ function treesView(s, ranks, tp, valueOf) {
   const sel = state.talent && D.talents[state.talent] && D.talents[state.talent][1] && s.trees.includes(D.talents[state.talent][1]) ? state.talent : null;
   if (sel) {
     const t = D.talents[sel], r = ranks[sel]||0, ri = Math.max(0,r-1), desc = t[9][ri] || t[9][0] || "", descZh = (t[14]||[])[ri] || (t[14]||[])[0] || "";
-    const flags = (t[5]==="low"?`<span class="flag low">低置信</span>`:"") + (Math.max(r,1)>t[7]?`<span class="flag ext">推算等级</span>`:"");
+    const flags = (t[5]==="low"?`<span class="flag low">低置信</span>`:"") + (!t[7].includes(Math.max(r,1))?`<span class="flag ext">推算等级</span>`:"");
     const req = t[10].map(([rid,q])=>`${esc(tn(D.talents[rid]))} ${q} 点`).join("、");
     const val = valueOf(sel);
     h += `<div class="tinfo"><img alt="" src="${ico(t[8])}"><div><div class="nm">${esc(tn(t))}<span class="r">${r}/${t[4]}</span>${srcBadge(t[13])}${flags}</div><div class="sub">${t[12]?`<span class="en">${esc(t[0])}</span> · `:""}${treeCn(s.cls,t[1])} · 第 ${t[2]+1} 行${req?` · 前置 ${req}`:""}</div></div>
       <p>${r?"":"（未点）第 1 级："}${esc(descZh || desc)}</p>${descZh?`<p class="orig"><span>原文</span>${esc(desc)}</p>`:""}
-      <p class="est">估值：${esc(t[6])}${val!=null?` · 在这套加点里贡献 <b>+${val}</b> 分`:""}</p></div>`;
+      <p class="est">估值：${esc(t[6])}${val!=null?` · 在这套加点里贡献 <b>+${val}</b> 分`:""}</p>${classicBlock(t)}${verifyBlock(t)}</div>`;
   } else {
     h += `<p class="hint">点图标看天赋说明。金框 = 点满，绿框 = 点了一部分。</p>`;
   }
@@ -582,7 +816,7 @@ function renderDetail() {
   const list = entries(), me = list.find(x=>x.i===i), rank = list.indexOf(me)+1;
   let h = `<div class="dh" style="--cc:${s.color}">${specBadge(s, true)}<div><h2>${s.cn} · ${s.clsCn}</h2><div class="en">${s.treeEn} ${s.cls} · ${VIEW_NAME[v]}第 ${rank} / ${list.length}</div></div>
     <div class="badge" style="--q:var(--q-${me.tier})"><span class="t">${me.tier}</span><span class="v">${me.index.toFixed(1)}</span></div></div>
-    <button class="jump" id="jumpSkills">${s.clsCn}技能表 · 种族 · Legacy ↓</button>`;
+    <div class="jumps"><a class="jump" href="#/class/${s.cls}">${s.clsCn}职业总览 →</a><a class="jump primary" id="toSim" href="#/sim">在模拟器里编辑这套加点 →</a></div>`;
   let ranks = {}, top, unc, tp, wh, total;
   if (isLevelView()) {
     for (const [lv,id] of p.picks) if (lv<=L) ranks[id]=(ranks[id]||0)+1;
@@ -649,19 +883,10 @@ const skill = {tab: null, filter: "all", open: null};
 const coin = c => { if (!c) return `<span class="coin">免费</span>`; const g=Math.floor(c/10000), s=Math.floor(c%10000/100), cu=c%100; return `<span class="coin">${g?`${g}<span class="g">金</span> `:""}${s?`${s}<span class="s">银</span> `:""}${cu?`${cu}<span class="c">铜</span>`:""}</span>`; };
 const img = (n, cls="") => n>=0 ? `<img alt="" class="${cls}" src="${ico(n)}">` : `<span class="noimg"></span>`;
 
-function renderSkillTabs() {
-  if (!skill.tab) skill.tab = D.specs[state.sel].cls;
-  const el = document.getElementById("skillTabs");
-  el.innerHTML = CLS_ORDER.map(c => `<button id="sk-${c}" data-sk="${c}" aria-pressed="${skill.tab===c}" style="--cc:${CLS[c].color}">${crestC(c)?`<img class="tabcrest" alt="" src="${crestC(c)}">`:`<span class="dot"></span>`}${CLS[c].cn}</button>`).join("") +
-    `<span class="sep" aria-hidden="true"></span><button id="sk-race" data-sk="race" aria-pressed="${skill.tab==="race"}">种族天赋</button><button id="sk-legacy" data-sk="legacy" aria-pressed="${skill.tab==="legacy"}">Legacy 传承</button>`;
-  el.querySelectorAll("button").forEach(b => b.onclick = () => { skill.tab = b.dataset.sk; skill.open = null; renderSkillTabs(); renderSkills(); });
-}
-
 function renderSkills() {
-  const body = document.getElementById("skillBody");
-  if (skill.tab === "race") return body.innerHTML = raceView();
-  if (skill.tab === "legacy") return body.innerHTML = legacyView();
-  const cls = skill.tab, C = SK.classes[cls], L = isLevelView() ? state.level : 60;
+  const body = document.getElementById("classSkills");
+  if (!body || !skill.tab) return;
+  const cls = skill.tab, C = SK.classes[cls], L = state.level;
   const learnedAt = s => s[2].filter(r => r[0] <= L);
   const got = C.spells.filter(s => learnedAt(s).length);
   const nowList = C.spells.filter(s => s[2].some(r => r[0] === L));
@@ -707,47 +932,614 @@ function renderSkills() {
   body.querySelectorAll("tr.sp").forEach(r => r.onclick = () => { skill.open = skill.open === r.dataset.key ? null : r.dataset.key; renderSkills(); });
 }
 
-function raceView() {
-  const cls = D.specs[state.sel].cls;
-  let h = `<p class="callout">每个种族 2 个主动 + 2 个被动。职业标签是这个种族能选的职业；当前选中的是 <b>${CLS[cls].cn}</b>，不能玩${CLS[cls].cn}的种族会变淡。</p><div class="racegrid">`;
-  for (const [fac, list] of Object.entries(SK.races)) {
-    h += `<div class="racecol"><h3>${fac==="Horde"?"部落":"联盟"}</h3><div class="racecards">`;
-    for (const r of list) {
-      h += `<div class="race" data-dim="${r.classes.includes(cls)?0:1}"><div class="rh">${crestR(r.race)?`<img class="crest" alt="" src="${crestR(r.race)}">`:img(r.icon)}<b>${bi(r.raceZh, r.race)}</b>${srcBadge(r.raceSrc==="provisional"?"provisional":null)}<div class="cls">${r.classes.map(c=>`<i style="--cc:${CLS[c].color}"${crestC(c)?` class="hc"`:""}>${crestC(c)?`<img alt="" src="${crestC(c)}">`:""}${CLS[c].cn}</i>`).join("")}</div></div>
-        <ul class="ab">${r.abilities.map(a=>`<li>${img(a[2])}<div><b>${bi(a[3], a[0])}</b>${srcBadge(a[4])}<span class="txt">${esc(a[5] || a[1])}</span>${a[5]?`<span class="orig"><span>原文</span>${esc(a[1])}</span>`:""}</div></li>`).join("")}</ul></div>`;
-    }
-    h += `</div></div>`;
-  }
-  h += `</div>`;
-  const pr = SK.classes.Priest.classRacials;
-  if (pr) {
-    h += `<h3 style="margin-top:22px">牧师种族专属法术</h3><p class="callout">${esc(pr.noteZh || pr.note)}${pr.noteZh?`<span class="orig"><span>原文</span>${esc(pr.note)}</span>`:""}</p><div class="changes">`;
-    for (const [race, arr] of Object.entries(pr.races)) for (const a of arr) h += `<div class="change">${img(a[2])}<div><div class="nm">${esc(a[3] || a[0])}<small>${esc(a[6] || race)}</small></div>${a[3]?`<div class="en">${esc(a[0])}</div>`:""}${srcBadge(a[4])}</div><p>${esc(a[5] || a[1])}</p>${a[5]?`<p class="orig"><span>原文</span>${esc(a[1])}</p>`:""}</div>`;
-    h += `</div>`;
-  }
-  return h;
-}
-
-function legacyView() {
-  const lg = SK.legacy;
-  let h = `<p class="callout"><b>怎么拿点：</b>完成 Legacy 挑战（${lg.challenges.join("、")}），每个挑战 1 点，全账号共享；每个角色各自在三棵树里花。${esc(lg.rewards)}</p>
-    <p class="callout"><b>和天梯的关系：</b>「Talented」点满后 9 级就开始拿天赋点（上限仍是 51）。顶部的「Legacy Talented」开关打开后，升级榜和加点会按 9 级开始重新计算。</p><div class="legacy">`;
-  for (const t of lg.trees) {
-    h += `<div class="ltree"><h3>${img(t.icon)}${bi(t.nameZh, t.name)}</h3>`;
-    for (const p of t.perks) h += `<div class="perk">${img(p.icon)}<div class="pn">${bi(p.nameZh, p.name)}<span class="mx">0/${p.max}</span>${srcBadge(p.nameSrc)}</div><p>${esc(p.textZh || p.text)}</p>${p.textZh?`<p class="orig"><span>原文</span>${esc(p.text)}</p>`:""}<div class="src"><span class="pill ${p.confirmed?"ok2":"only"}">${esc(p.src)}</span>${p.diff?`<span>${esc(p.diff)}</span>`:""}</div></div>`;
-    h += `</div>`;
-  }
-  return h + `</div>`;
-}
-
-document.querySelectorAll(".controls .seg button").forEach(b => b.onclick = () => { state.view = b.dataset.view; save(); renderBoard(); renderDetail(); renderSkills(); });
+document.querySelectorAll("#viewSeg button").forEach(b => b.onclick = () => { state.view = b.dataset.view; save(); renderBoard(); renderDetail(); });
 document.getElementById("showEn").addEventListener("change", e => { document.body.classList.toggle("hide-en", !e.target.checked); try { localStorage.setItem("forever-tiers-en", e.target.checked ? "1" : "0"); } catch(_) {} });
 try { if (localStorage.getItem("forever-tiers-en") === "0") { document.getElementById("showEn").checked = false; document.body.classList.add("hide-en"); } } catch(_) {}
-document.getElementById("talented").addEventListener("change", e => { state.talented = e.target.checked; state.talent = null; save(); renderBoard(); renderDetail(); });
-document.getElementById("lv").addEventListener("input", e => { state.level = +e.target.value; save(); renderBoard(); renderDetail(); renderSkills(); });
-document.getElementById("detail").addEventListener("click", e => { const j = e.target.closest("#jumpSkills"); if (!j) return; skill.tab = D.specs[state.sel].cls; skill.open = null; renderSkillTabs(); renderSkills(); document.getElementById("skills").scrollIntoView({behavior:"smooth"}); });
-function start(){ renderBoard(); renderDetail(); renderXcheck(); renderSkillTabs(); renderSkills(); }
-start();
+document.getElementById("talented").addEventListener("change", e => { setTalented(e.target.checked); });
+let lvFrame = 0;
+document.getElementById("lv").addEventListener("input", e => { state.level = +e.target.value; if (lvFrame) return; lvFrame = requestAnimationFrame(() => { lvFrame = 0; save(); renderRoute(true); }); });
+// ===================== 路由 · 天赋模拟器 · 职业 · 种族 · Legacy · 动效 =====================
+// 这个文件由 build_page.cjs / build_site.cjs 内联进页面脚本末尾，可直接使用上面定义的 D、state、PER 等
+
+const MODEL = D.model, ANN = D.ann;
+
+// ---------- Classic 老天赋对比 ----------
+const CMP = { new: ["新", "Forever 新增"], changed: ["改", "相对 Classic 有改动"], moved: ["移", "只是换了位置"], same: ["", "和 Classic 一样"] };
+function cmpBadge(t) { const c = t[15]; return c && c[0] !== "same" ? `<span class="cmp" data-c="${c[0]}" aria-hidden="true">${CMP[c[0]][0]}</span>` : ""; }
+const CLASSIC_TREE = { Affliction: "Curses", Demonology: "Summoning", Retribution: "Combat", "Shadow Magic": "Shadow" };
+const classicTreeCn = (cls, name) => treeCn(cls, CLASSIC_TREE[name] || String(name).replace(/s+/g, ""));
+function classicBlock(t) {
+  const c = t[15]; if (!c) return "";
+  const [st, oldName, tree, row, col, max, text, zh] = c;
+  if (st === "new") return `<div class="classic cmpblock"><div class="ch"><span class="cstat" data-c="new">新增</span><b>Classic 没有这个天赋</b></div></div>`;
+  const bits = [];
+  if (oldName) bits.push(`原名 ${esc(oldName)}`);
+  if (tree && ((CLASSIC_TREE[tree] || tree.replace(/s+/g, "")) !== t[1] || row !== t[2] + 1 || col !== t[3] + 1)) bits.push(`原位置 ${esc(classicTreeCn(t[11], tree))}系第 ${row} 行第 ${col} 列`);
+  if (max && max !== t[4]) bits.push(`等级 ${max} → ${t[4]}`);
+  return `<div class="classic cmpblock"><div class="ch"><span class="cstat" data-c="${st}">${{ changed: "改动", moved: "移位", same: "未变" }[st]}</span><b>Classic 版本</b>${bits.length ? `<span>${bits.join(" · ")}</span>` : ""}</div>
+    ${text && st !== "same" ? `<p>1 级：${esc(zh || text)}</p>${zh ? `<p class="orig"><span>原文</span>${esc(text)}</p>` : ""}` : ""}</div>`;
+}
+function cmpSummary(cls) {
+  const n = { new: 0, changed: 0, moved: 0, same: 0 };
+  for (const id of Object.keys(D.talents)) { const t = D.talents[id]; if (t[11] === cls && t[15]) n[t[15][0]]++; }
+  return `<div class="cmpsum">和 Classic 比：<span>新增 <b>${n.new}</b></span><span>改动 <b>${n.changed}</b></span><span>移位 <b>${n.moved}</b></span><span>未变 <b>${n.same}</b></span><span>移除 <b>${(D.classicRemoved[cls] || []).length}</b></span></div>`;
+}
+// Icy Veins 交叉核对
+const IV_CH = { new: "新增", changed: "改动", same: "未变", moved: "移位" };
+function verifyBlock(t) {
+  const v = t[16], verified = t[7] || [], all = t[4];
+  const coverage = `${verified.length}/${all} 级已实录`;
+  if (!v) return `<details class="verify"><summary><span class="vbadge ok">Wowhead · Icy Veins 一致</span><span class="vbadge">${coverage}</span></summary><ul><li>名字、位置、等级数、前置和已捕获的说明文字，两个站点完全一致。未实录的等级是按已知等级推算的。</li></ul></details>`;
+  const items = [], badges = [];
+  if (v.r && v.r.length) { badges.push(`<span class="vbadge fix">第 ${v.r.join("、")} 级数值按 Icy Veins 实录修正</span>`); items.push(...v.r.map((k) => `<li>第 ${k} 级原来的推算：${esc(v.w[k])}</li>`)); }
+  if (v.alt) { badges.push(`<span class="vbadge diff">Icy Veins 数值不同</span>`); items.push(...Object.entries(v.alt).map(([k, s]) => `<li>Icy Veins 记录的第 ${k} 级：${esc(s)}（多为试玩角色等级不同导致的技能数值差异）</li>`)); }
+  if (v.req !== undefined) { badges.push(`<span class="vbadge diff">前置天赋有分歧</span>`); items.push(`<li>Icy Veins 记录的前置：${esc(v.req || "无")}。模拟器按 Wowhead 的前置规则。</li>`); }
+  if (v.ch) items.push(`<li>Icy Veins 把它标为「${IV_CH[v.ch] || v.ch}」（本站 Classic 对比沿用 talentsforever 的判断）。</li>`);
+  if (!badges.length) badges.push(`<span class="vbadge ok">说明文字一致</span>`);
+  return `<details class="verify"><summary>${badges.join("")}<span class="vbadge">${coverage}</span></summary><ul>${items.join("")}</ul></details>`;
+}
+const removedList = (cls) => { const list = D.classicRemoved[cls] || []; return list.length ? `<details class="card cmpblock removed"><summary>Classic 里有、Forever 删掉的天赋（${list.length}）</summary><ul>${list.map(([tree, name, max, text]) => `<li><b>${esc(name)}</b> · ${esc(treeCn(cls, tree))}系 · ${max} 级<span>${esc(text || "")}</span></li>`).join("")}</ul></details>` : ""; };
+
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)");
+const motionOK = () => !REDUCED.matches;
+const EASE = "cubic-bezier(.16,1,.3,1)";
+const ROLE_I = { dps: 4, tank: 5, heal: 6 };
+const ROLE_CN = { dps: "输出", tank: "坦克", heal: "治疗" };
+const tierOf = (idx) => (idx >= 112 ? "S" : idx >= 104 ? "A" : idx >= 96 ? "B" : idx >= 88 ? "C" : "D");
+const slugOf = (x) => x.toLowerCase().replace(/[^a-z]+/g, "-").replace(/^-|-$/g, "");
+const specsOf = (cls) => D.specs.map((s, i) => ({ ...s, i })).filter((s) => s.cls === cls);
+const store = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (_) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} } };
+
+// 每个职业的天赋，按 Wowhead 顺序（系 → 行 → 列），分享码和 Wowhead 链接都靠这个顺序
+const CT = {};
+for (const cls of CLS_ORDER) {
+  const trees = specsOf(cls)[0].trees;
+  const ids = Object.keys(D.talents).filter((id) => D.talents[id][11] === cls)
+    .sort((a, b) => { const x = D.talents[a], y = D.talents[b]; return trees.indexOf(x[1]) - trees.indexOf(y[1]) || x[2] - y[2] || x[3] - y[3]; });
+  CT[cls] = { trees, ids, index: Object.fromEntries(ids.map((id, k) => [id, k])) };
+}
+
+// ---------- 评分（与 model.cjs 同一套公式） ----------
+function interp(arr, L) {
+  const lv = MODEL.levels;
+  if (L <= lv[0]) return arr[0];
+  for (let i = 1; i < lv.length; i++) if (L <= lv[i]) { const t = (L - lv[i - 1]) / (lv[i] - lv[i - 1]); return arr[i - 1] + t * (arr[i] - arr[i - 1]); }
+  return arr[arr.length - 1];
+}
+function sumsOf(ranks, spec, L) {
+  const s = [0, 0, 0, 0, 0, 0, 0];
+  for (const [id, r] of Object.entries(ranks)) {
+    const a = ANN[id]; if (!r || !a) continue;
+    const v = a[2][spec]; if (!v || (a[1] && L < a[1])) continue;
+    const max = D.talents[id][4];
+    const f = a[0] ? (a[0][Math.min(r, a[0].length) - 1] ?? r / max) : r / max;
+    for (let k = 0; k < 7; k++) s[k] += v[k] * f;
+  }
+  return s;
+}
+function lvScore(cls, s, L) {
+  const b = MODEL.classes[cls];
+  const kill = interp(b.kill, L) * (1 + s[0] / 100), rest = interp(b.rest, L), safe = interp(b.safe, L) / 100;
+  const tF = 100 / kill;
+  const tR = (rest / (1 - rest)) * tF * (1 - Math.min(0.7, s[1] / 100)) * (1 - Math.min(0.5, (0.4 * s[2]) / 100));
+  return (100 / (tF + tR)) * Math.pow(safe * (1 + s[2] / 100), 0.3) * (1 + 0.008 * s[3]);
+}
+const endScore = (cls, role, s) => MODEL.classes[cls].end[role] * (1 + s[ROLE_I[role]] / 100);
+const ZERO = [0, 0, 0, 0, 0, 0, 0];
+
+// ---------- 加点规则 ----------
+const ranksFromOrder = (order) => { const r = {}; for (const id of order) r[id] = (r[id] || 0) + 1; return r; };
+const totalPts = (ranks) => Object.values(ranks).reduce((a, b) => a + b, 0);
+function rowPts(cls, ranks, tree) {
+  const rows = [0, 0, 0, 0, 0, 0, 0];
+  for (const id of CT[cls].ids) { const t = D.talents[id]; if (t[1] === tree) rows[t[2]] += ranks[id] || 0; }
+  return rows;
+}
+function canAdd(cls, ranks, id, avail) {
+  const t = D.talents[id], r = ranks[id] || 0;
+  if (r >= t[4]) return { ok: false, why: "已经点满" };
+  if (avail != null && totalPts(ranks) >= avail) return { ok: false, why: avail ? `${state.level} 级一共只有 ${avail} 点，已经用完` : `${firstLv()} 级才开始有天赋点` };
+  const inTree = rowPts(cls, ranks, t[1]).reduce((a, b) => a + b, 0);
+  if (inTree < 5 * t[2]) return { ok: false, why: `要先在${treeCn(cls, t[1])}系投入 ${5 * t[2]} 点（现在 ${inTree} 点）` };
+  for (const [rid, q] of t[10]) if ((ranks[rid] || 0) < q) return { ok: false, why: `要先把「${tn(D.talents[rid])}」点到 ${q} 点` };
+  return { ok: true };
+}
+function canRemove(cls, ranks, id) {
+  const t = D.talents[id], r = ranks[id] || 0;
+  if (!r) return { ok: false, why: "还没有点" };
+  for (const oid of CT[cls].ids) {
+    const o = D.talents[oid];
+    if ((ranks[oid] || 0) > 0 && o[10].some(([rid, q]) => String(rid) === String(id) && r - 1 < q)) return { ok: false, why: `「${tn(o)}」需要它，先减掉那个` };
+  }
+  const rows = rowPts(cls, ranks, t[1]); rows[t[2]] -= 1;
+  for (let row = t[2] + 1; row < 7; row++) {
+    if (!rows[row]) continue;
+    const above = rows.slice(0, row).reduce((a, b) => a + b, 0);
+    if (above < 5 * row) return { ok: false, why: `减掉后第 ${row + 1} 行的天赋就不够 ${5 * row} 点门槛了` };
+  }
+  return { ok: true };
+}
+// 保持原有顺序，把点数排成一个每一步都合法的加点顺序
+function normalizeOrder(cls, order) {
+  const pending = order.slice(), out = [], r = {};
+  while (pending.length) {
+    const k = pending.findIndex((id) => canAdd(cls, r, id, null).ok);
+    if (k < 0) break;
+    const id = pending.splice(k, 1)[0]; out.push(id); r[id] = (r[id] || 0) + 1;
+  }
+  return out;
+}
+const orderFromRanks = (cls, ranks) => normalizeOrder(cls, CT[cls].ids.flatMap((id) => Array(ranks[id] || 0).fill(id)));
+const bestLvOrder = (i, L) => PER()[i].picks.filter((p) => p[0] <= L).map((p) => String(p[1]));
+const endEntry = (role, i) => D.end[role].find((e) => e.s === i);
+
+// 分享码: 每一点 = 该天赋在职业里的序号（base62 一位）
+const B62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const encodeOrder = (cls, order) => order.map((id) => B62[CT[cls].index[id]]).join("");
+const decodeOrder = (cls, code) => [...(code || "")].map((ch) => CT[cls].ids[B62.indexOf(ch)]).filter(Boolean);
+const simHash = (cls, order, L = state.level) => `#/sim/${cls}/${L}/${state.talented ? 1 : 0}/${encodeOrder(cls, order)}`;
+function whLink(cls, ranks) {
+  const hash = CT[cls].trees.map((tr) => CT[cls].ids.filter((id) => D.talents[id][1] === tr).map((id) => ranks[id] || 0).join("").replace(/0+$/, "")).join("-").replace(/-+$/, "");
+  return `https://www.wowhead.com/forever/talent-calc/${D.slugs[cls]}${hash ? "/" + hash : ""}`;
+}
+
+// ---------- 动效小工具 ----------
+function enter(el) { if (motionOK()) el.animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: EASE }); }
+function pop(el, strong) { if (el && motionOK()) el.animate([{ transform: "scale(1)" }, { transform: `scale(${strong ? 1.16 : 1.1})` }, { transform: "scale(1)" }], { duration: strong ? 360 : 240, easing: EASE }); }
+function shake(el) { if (el && motionOK()) el.animate([{ transform: "translateX(0)" }, { transform: "translateX(-4px)" }, { transform: "translateX(4px)" }, { transform: "translateX(0)" }], { duration: 220 }); }
+function tween(root) {
+  root.querySelectorAll("[data-tween]").forEach((el) => {
+    const to = +el.dataset.tween, from = +(el.dataset.from ?? to), dec = +(el.dataset.dec || 0);
+    const fmt = (v) => (el.dataset.sign && v > 0 ? "+" : "") + v.toFixed(dec) + (el.dataset.unit || "");
+    if (!motionOK() || from === to) { el.textContent = fmt(to); return; }
+    const t0 = performance.now();
+    const step = (now) => { const p = Math.min(1, (now - t0) / 320), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(from + (to - from) * e); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}
+const announce = (msg) => { document.getElementById("announce").textContent = msg; };
+
+// ---------- 路由 ----------
+const route = { name: "tiers", cls: null, race: null };
+const sim = { builds: store.get("forever-sim", {}), cls: null, spec: "auto", hist: [], focus: null, prev: {} };
+const legacyRanks = store.get("forever-legacy", {});
+const TALENTED_MAX = (SK.legacy.trees.flatMap((t) => t.perks).find((p) => p.name === "Talented") || { max: 5 }).max;
+if ("Talented" in legacyRanks) state.talented = legacyRanks.Talented >= TALENTED_MAX; else legacyRanks.Talented = state.talented ? TALENTED_MAX : 0;
+
+function applyHash() {
+  const raw = location.hash || "";
+  if (!raw.startsWith("#/")) { const old = { "#xcheck": "about", "#method": "about", "#skills": "class", "#tiers": "tiers" }[raw]; route.name = old || "tiers"; return; }
+  const p = raw.slice(2).split("/");
+  route.name = ["tiers", "sim", "class", "race", "legacy", "about"].includes(p[0]) ? p[0] : "tiers";
+  if (route.name === "sim" && CT[p[1]]) {
+    sim.cls = p[1];
+    if (p[2]) { const L = Math.max(1, Math.min(60, +p[2] || state.level)); state.level = L; }
+    if (p[3] === "0" || p[3] === "1") { state.talented = p[3] === "1"; legacyRanks.Talented = state.talented ? TALENTED_MAX : 0; }
+    if (p[4] != null) sim.builds[p[1]] = normalizeOrder(p[1], decodeOrder(p[1], p[4]));
+  }
+  if (route.name === "class") route.cls = CT[p[1]] ? p[1] : route.cls;
+  if (route.name === "race") route.race = p[1] || route.race;
+}
+function replaceHash(h) { try { history.replaceState(null, "", h); } catch (_) {} }
+
+function updateLevelBar() {
+  const L = state.level, p = pts(L), rows = Math.min(7, Math.floor(p / 5) + 1);
+  document.getElementById("lvnum").innerHTML = `${L}<small>级</small>`;
+  document.getElementById("lvinfo").innerHTML = `<b>${p}</b> / 51 天赋点<br>${p ? `最深可点第 <b>${rows}</b> 行` : "还没有天赋"}`;
+  document.getElementById("levelBox").setAttribute("aria-disabled", "false");
+  document.querySelector('label[for="talented"]').setAttribute("aria-disabled", "false");
+  document.getElementById("talented").checked = state.talented;
+  document.getElementById("lv").value = L;
+}
+
+let xDone = false;
+function renderRoute(fromSlider) {
+  document.querySelectorAll(".route").forEach((el) => {
+    const on = el.dataset.page === route.name;
+    if (el.hidden === on) { el.hidden = !on; if (on && !fromSlider) enter(el); }
+  });
+  document.querySelectorAll("#appnav a").forEach((a) => { if (a.dataset.route === route.name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  document.getElementById("viewSeg").hidden = route.name !== "tiers";
+  if (route.name === "tiers") { renderBoard(); renderDetail(); } else updateLevelBar();
+  if (route.name === "sim") renderSim(fromSlider);
+  if (route.name === "class") renderClass(fromSlider);
+  if (route.name === "race") renderRace();
+  if (route.name === "legacy") renderLegacy();
+  if (route.name === "about" && !xDone) { renderXcheck(); xDone = true; }
+}
+function setTalented(on, fromLegacy) {
+  state.talented = on; state.talent = null;
+  if (!fromLegacy) { legacyRanks.Talented = on ? TALENTED_MAX : 0; store.set("forever-legacy", legacyRanks); }
+  save(); renderRoute(true);
+  if (route.name === "sim") replaceHash(simHash(sim.cls, sim.builds[sim.cls] || []));
+  announce(on ? "Legacy Talented 已生效：9 级开始有天赋点" : "Legacy Talented 已关闭：10 级开始有天赋点");
+}
+
+// 天梯: 档位变化时专精卡片平滑移动（FLIP），切换专精时详情淡入
+const _renderBoard = renderBoard;
+let lastBoardAt = 0;
+renderBoard = function () {
+  const now = performance.now(), animate = motionOK() && now - lastBoardAt > 140;
+  lastBoardAt = now;
+  const before = {};
+  if (animate) document.querySelectorAll("#board .chip").forEach((c) => (before[c.id] = c.getBoundingClientRect()));
+  _renderBoard();
+  if (!animate) return;
+  document.querySelectorAll("#board .chip").forEach((c) => {
+    const b = before[c.id]; if (!b) return;
+    const a = c.getBoundingClientRect(), dx = b.left - a.left, dy = b.top - a.top;
+    if (Math.abs(dx) > 1 || Math.abs(dy) > 1) c.animate([{ transform: `translate(${dx}px,${dy}px)` }, { transform: "none" }], { duration: 380, easing: EASE });
+  });
+};
+const _renderDetail = renderDetail;
+let lastSel = null;
+renderDetail = function () {
+  _renderDetail();
+  const s = D.specs[state.sel], a = document.getElementById("toSim");
+  if (a) {
+    const order = isLevelView() ? bestLvOrder(state.sel, state.level) : orderFromRanks(s.cls, endEntry(state.view, state.sel).ranks);
+    a.href = simHash(s.cls, order, isLevelView() ? state.level : 60);
+    a.onclick = () => { sim.builds[s.cls] = order; sim.cls = s.cls; sim.spec = s.spec; store.set("forever-sim", sim.builds); };
+  }
+  if (lastSel !== null && lastSel !== state.sel && motionOK()) document.getElementById("detail").animate([{ opacity: 0.2, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: EASE });
+  lastSel = state.sel;
+};
+
+// ---------- 通用: 职业选择条 ----------
+const clsPicker = (current, hrefOf, label) => `<nav class="clspick" aria-label="${label}">${CLS_ORDER.map((c) => `<a href="${hrefOf(c)}" style="--cc:${CLS[c].color}"${c === current ? ' aria-current="page"' : ""}>${crestC(c) ? `<img alt="" src="${crestC(c)}">` : `<span class="dot"></span>`}<span>${CLS[c].cn}</span></a>`).join("")}</nav>`;
+
+// ===================== 天赋模拟器 =====================
+function simState() {
+  const cls = sim.cls || D.specs[state.sel].cls; sim.cls = cls;
+  const order = sim.builds[cls] || [];
+  const ranks = ranksFromOrder(order), total = order.length, avail = pts(state.level);
+  const specs = specsOf(cls);
+  const split = CT[cls].trees.map((tr) => CT[cls].ids.filter((id) => D.talents[id][1] === tr).reduce((a, id) => a + (ranks[id] || 0), 0));
+  const auto = total ? specs[split.indexOf(Math.max(...split))] : specs.find((s) => s.i === state.sel) || specs[0];
+  const spec = sim.spec === "auto" ? auto : specs.find((s) => s.spec === sim.spec) || auto;
+  return { cls, order, ranks, total, avail, specs, split, auto, spec };
+}
+
+function simScores(S) {
+  const { cls, ranks, spec } = S, L = state.level, out = { L };
+  if (pts(L)) {
+    const best = sumsOf(ranksFromOrder(bestLvOrder(spec.i, L)), spec.spec, L), mine = sumsOf(ranks, spec.spec, L);
+    const sb = lvScore(cls, best, L), su = lvScore(cls, mine, L), z = lvScore(cls, ZERO, L);
+    out.lv = { idx: (su / sb) * PER()[spec.i].lv[L - 1], pct: (su / sb) * 100, gain: (su / z - 1) * 100, mine, best };
+  }
+  out.end = (MODEL.specRoles[cls][spec.spec] || []).map((role) => {
+    const e = endEntry(role, spec.i), sb = endScore(cls, role, sumsOf(e.ranks, spec.spec, 60)), su = endScore(cls, role, sumsOf(ranks, spec.spec, 60));
+    return { role, idx: (su / sb) * e.index, pct: (su / sb) * 100, dim: sumsOf(ranks, spec.spec, 60)[ROLE_I[role]] };
+  });
+  return out;
+}
+
+function renderSim(fromSlider) {
+  const el = document.getElementById("sim");
+  const S = simState(), { cls, order, ranks, total, avail, specs, split, spec } = S;
+  const over = total - avail, L = state.level;
+  const sc = simScores(S);
+  const prev = sim.prev[cls + spec.spec] || {};
+
+  const treePanel = (tr, k) => {
+    const sp = specs.find((s) => s.spec === tr), ids = CT[cls].ids.filter((id) => D.talents[id][1] === tr);
+    const at = {}; for (const id of ids) at[D.talents[id][2] + "," + D.talents[id][3]] = id;
+    let cells = "", arrows = "";
+    for (let row = 0; row < 7; row++) for (let col = 0; col < 4; col++) {
+      const id = at[row + "," + col];
+      if (!id) { cells += `<span class="sgap" aria-hidden="true"></span>`; continue; }
+      const t = D.talents[id], r = ranks[id] || 0, add = canAdd(cls, ranks, id, avail).ok;
+      const st = r >= t[4] ? "max" : r ? "part" : add ? "open" : "lock";
+      cells += `<button class="scell" data-id="${id}" data-s="${st}" aria-label="${esc(tn(t))} ${r}/${t[4]}${st === "lock" ? "，未解锁" : ""}"${sim.focus === id ? ' aria-current="true"' : ""}><img alt="" src="${ico(t[8])}"><span class="rk">${r}/${t[4]}</span>${cmpBadge(t)}</button>`;
+      for (const [rid] of t[10]) {
+        const rt = D.talents[rid], met = canAdd(cls, ranks, id, null).ok || r > 0;
+        arrows += `<line x1="${rt[3] + 0.5}" y1="${rt[2] + 0.5}" x2="${col + 0.5}" y2="${row + 0.5}" class="${met ? "met" : ""}" />`;
+      }
+    }
+    return `<section class="stree${sp.i === spec.i ? " main" : ""}" style="--cc:${sp.color}">
+      <header><img alt="" src="${ico(sp.icon)}"><div><b>${sp.cn}</b><span class="en">${sp.treeEn}</span></div><em data-tween="${split[k]}" data-from="${prev["t" + k] ?? split[k]}">${split[k]}</em>
+        <button class="treereset" data-tree="${tr}"${split[k] ? "" : " disabled"}>清空此系</button></header>
+      <div class="sgrid"><svg class="arrows" viewBox="0 0 4 7" preserveAspectRatio="none" aria-hidden="true">${arrows}</svg>${cells}</div>
+    </section>`;
+  };
+
+  const lvCard = sc.lv ? `
+      <div class="score" style="--q:var(--q-${tierOf(sc.lv.idx)})">
+        <div class="stier">${tierOf(sc.lv.idx)}</div>
+        <div><div class="slabel">${L} 级升级（${spec.cn}）</div><div class="sbig"><span data-tween="${sc.lv.idx.toFixed(1)}" data-from="${prev.idx ?? sc.lv.idx.toFixed(1)}" data-dec="1">${sc.lv.idx.toFixed(1)}</span><small>指数</small></div>
+        <div class="sbar"><i style="width:${Math.min(100, sc.lv.pct)}%"></i></div>
+        <div class="ssub">达到模型最佳加点的 <b data-tween="${sc.lv.pct.toFixed(0)}" data-from="${prev.pct ?? sc.lv.pct.toFixed(0)}" data-unit="%">${sc.lv.pct.toFixed(0)}%</b> · 升级提速 <b>${sc.lv.gain >= 0 ? "+" : ""}${sc.lv.gain.toFixed(1)}%</b></div></div>
+      </div>
+      <div class="dims">${[["击杀速度", 0, "%"], ["休息减少", 1, "%"], ["生存", 2, "%"], ["便利", 3, ""]].map(([n, k, u]) => {
+        const m = sc.lv.mine[k], b = sc.lv.best[k], w = Math.max(m, b, 1);
+        return `<div class="dim"><span>${n}</span><div class="dbar"><i class="mine" style="width:${(m / w) * 100}%"></i><i class="best" style="left:${(b / w) * 100}%"></i></div><b>${m.toFixed(1)}${u}</b></div>`;
+      }).join("")}<p class="hint">竖线 = 模型在 ${L} 级的最佳加点</p></div>` : `<p class="note">${L} 级还没有天赋点，把等级拖到 ${firstLv()} 级以上。</p>`;
+
+  const endCard = sc.end.map((e) => `<div class="erole" style="--q:var(--q-${tierOf(e.idx)})"><span class="et">${tierOf(e.idx)}</span><div><b>60 级${ROLE_CN[e.role]}</b><span>指数 ${e.idx.toFixed(1)} · 最佳的 ${e.pct.toFixed(0)}% · 天赋${ROLE_CN[e.role]} +${e.dim.toFixed(1)}%</span></div></div>`).join("");
+
+  const orderList = order.length ? `<ol class="order sorder">${(() => {
+    const runs = []; const got = {};
+    order.forEach((id, k) => { got[id] = (got[id] || 0) + 1; const lv = firstLv() + k, last = runs[runs.length - 1]; if (last && last.id === id && last.to === lv - 1) { last.to = lv; last.rank = got[id]; last.k2 = k; } else runs.push({ id, from: lv, to: lv, rank: got[id], k1: k, k2: k }); });
+    return runs.map((r) => { const t = D.talents[r.id]; return `<li${r.k2 >= avail ? ' class="overpt"' : ""}><span class="lv">${r.from === r.to ? r.from : r.from + "–" + r.to} 级</span><img alt="" src="${ico(t[8])}"><span>${bi(t[12], t[0])}</span><span class="r">→ ${r.rank}/${t[4]}</span></li>`; }).join("");
+  })()}</ol>` : `<p class="hint">还没有加点。点左边的天赋，或者在上面「套用模型加点」。</p>`;
+
+  const bestOpts = specs.map((s) => `<option value="lv:${s.i}">${s.cn} · ${L} 级升级最佳</option>`).join("") +
+    specs.flatMap((s) => (MODEL.specRoles[cls][s.spec] || []).map((role) => `<option value="end:${role}:${s.i}">${s.cn} · 60 级${ROLE_CN[role]}最佳</option>`)).join("");
+
+  el.innerHTML = `
+    ${clsPicker(cls, (c) => simHash(c, sim.builds[c] || []), "选择职业")}
+    <div class="simbar">
+      <div class="simsum">
+        <span class="spts${over > 0 ? " over" : ""}"><b data-tween="${total}" data-from="${prev.total ?? total}">${total}</b> / ${avail} 点</span>
+        <span class="ssplit">${split.join(" / ")}</span>
+        ${cmpSummary(cls)}
+        <div class="seg sspec" role="group" aria-label="按哪个专精评分"><button data-spec="auto" aria-pressed="${sim.spec === "auto"}">自动（${S.auto.cn}）</button>${specs.map((s) => `<button data-spec="${s.spec}" aria-pressed="${sim.spec === s.spec}">${s.cn}</button>`).join("")}</div>
+      </div>
+      <div class="simact">
+        <label class="sel"><span class="sr">套用模型加点</span><select id="applyBest"><option value="">套用模型加点…</option>${bestOpts}</select></label>
+        <button id="simUndo"${sim.hist.length ? "" : " disabled"}>撤销</button>
+        <button id="simClear"${total ? "" : " disabled"}>全部清空</button>
+        <button id="simCopy">复制分享链接</button>
+        <a class="whlink" href="${whLink(cls, ranks)}" target="_blank" rel="noopener">在 Wowhead 打开 ↗</a>
+      </div>
+    </div>
+    ${over > 0 ? `<p class="warn">${L} 级只有 ${avail} 点，这套加点用了 ${total} 点，多出 ${over} 点（下方加点顺序里标红）。<button id="simTrim">撤回多出的 ${over} 点</button></p>` : ""}
+    <div class="simgrid">
+      <div><div class="simtrees">${CT[cls].trees.map(treePanel).join("")}</div>${removedList(cls)}</div>
+      <aside class="simside">
+        <div class="card">${lvCard}${endCard ? `<div class="ends">${endCard}${total < 51 ? `<p class="hint">60 级分数按这套加点现有的 ${total} 点计算，点满 51 点才公平。</p>` : ""}</div>` : ""}</div>
+        <div class="card" id="simInfo"></div>
+        <details class="card" open><summary>加点顺序 · 第 N 点在 ${firstLv()}+N−1 级拿到</summary>${orderList}</details>
+      </aside>
+    </div>
+    <p class="hint simhelp">左键加点 · 右键或 Shift+左键减点 · 手机长按减点 · 键盘选中天赋后按 + / − 。加点规则和 Wowhead 计算器一致：每系第 N 行要先投 5×(N−1) 点，前置天赋要点够。</p>`;
+
+  sim.prev[cls + spec.spec] = { idx: sc.lv ? sc.lv.idx.toFixed(1) : undefined, pct: sc.lv ? sc.lv.pct.toFixed(0) : undefined, total, t0: split[0], t1: split[1], t2: split[2] };
+  tween(el);
+  renderSimInfo(S);
+  if (!fromSlider && route.name === "sim") replaceHash(simHash(cls, order));
+}
+
+function renderSimInfo(S = simState()) {
+  const box = document.getElementById("simInfo"); if (!box) return;
+  const { cls, ranks, avail, spec } = S, id = sim.focus;
+  if (!id || D.talents[id][11] !== cls) {
+    box.innerHTML = `<h3>天赋说明</h3><p class="hint">把鼠标移到天赋上，或者用 Tab 键选中，这里显示说明、解锁条件和加这一点能提升多少。</p>`;
+    return;
+  }
+  const t = D.talents[id], r = ranks[id] || 0, L = state.level;
+  const add = canAdd(cls, ranks, id, avail), rem = canRemove(cls, ranks, id);
+  const cur = r ? ((t[14] || [])[r - 1] || t[9][r - 1]) : null, curEn = r ? t[9][r - 1] : null;
+  const nxt = r < t[4] ? ((t[14] || [])[r] || t[9][r]) : null, nxtEn = r < t[4] ? t[9][r] : null;
+  let delta = "";
+  if (add.ok && pts(L)) {
+    const plus = { ...ranks, [id]: r + 1 };
+    const a = lvScore(cls, sumsOf(ranks, spec.spec, L), L), b = lvScore(cls, sumsOf(plus, spec.spec, L), L), best = lvScore(cls, sumsOf(ranksFromOrder(bestLvOrder(spec.i, L)), spec.spec, L), L);
+    const d = ((b - a) / best) * PER()[spec.i].lv[L - 1];
+    delta = `<p class="delta${d > 0.05 ? " up" : ""}">加这一点：${spec.cn} ${L} 级指数 <b>${d >= 0 ? "+" : ""}${d.toFixed(2)}</b>${ANN[id] && ANN[id][1] > L ? `（要到 ${ANN[id][1]} 级学会相关技能才生效）` : ""}</p>`;
+  }
+  box.innerHTML = `<div class="tinfo sinfo"><img alt="" src="${ico(t[8])}"><div><div class="nm">${esc(tn(t))}<span class="r">${r}/${t[4]}</span>${srcBadge(t[13])}${t[5] === "low" ? '<span class="flag low">低置信</span>' : ""}</div>
+      <div class="sub">${t[12] ? `<span class="en">${esc(t[0])}</span> · ` : ""}${treeCn(cls, t[1])}系 · 第 ${t[2] + 1} 行</div></div>
+    ${cur ? `<p><b class="lbl">当前</b>${esc(cur)}</p>${t[14] && t[14][r - 1] ? `<p class="orig"><span>原文</span>${esc(curEn)}</p>` : ""}` : ""}
+    ${nxt ? `<p><b class="lbl">${r ? "下一级" : "第 1 级"}</b>${esc(nxt)}</p>${t[14] && t[14][r] ? `<p class="orig"><span>原文</span>${esc(nxtEn)}</p>` : ""}` : ""}
+    <p class="${add.ok ? "can" : "cant"}">${add.ok ? "可以加点" : esc(add.why)}</p>${delta}
+    <p class="est">估值依据：${esc(t[6])}</p>${classicBlock(t)}${verifyBlock(t)}
+    <div class="pm"><button data-act="rem" data-id="${id}"${rem.ok ? "" : ` disabled title="${esc(rem.why)}"`}>− 减一点</button><button data-act="add" data-id="${id}"${add.ok ? "" : ` disabled title="${esc(add.why)}"`}>+ 加一点</button></div></div>`;
+}
+
+function simAdd(id) {
+  const S = simState(), res = canAdd(S.cls, S.ranks, id, S.avail);
+  const cell = document.querySelector(`.scell[data-id="${id}"]`);
+  if (!res.ok) { shake(cell); announce(res.why); sim.focus = id; renderSimInfo(); return; }
+  sim.hist.push(S.order.slice());
+  sim.builds[S.cls] = [...S.order, id]; store.set("forever-sim", sim.builds);
+  const t = D.talents[id], r = (S.ranks[id] || 0) + 1;
+  sim.focus = id; renderSim();
+  const c = document.querySelector(`.scell[data-id="${id}"]`);
+  pop(c, r === t[4]);
+  if (r === t[4] && c && motionOK()) c.classList.add("justmax");
+  c && c.focus({ preventScroll: true });
+  announce(`${tn(t)} ${r}/${t[4]}`);
+}
+function simRemove(id) {
+  const S = simState(), res = canRemove(S.cls, S.ranks, id);
+  const cell = document.querySelector(`.scell[data-id="${id}"]`);
+  if (!res.ok) { shake(cell); announce(res.why); sim.focus = id; renderSimInfo(); return; }
+  sim.hist.push(S.order.slice());
+  const k = S.order.lastIndexOf(id), next = S.order.slice(); next.splice(k, 1);
+  sim.builds[S.cls] = normalizeOrder(S.cls, next); store.set("forever-sim", sim.builds);
+  sim.focus = id; renderSim();
+  const c = document.querySelector(`.scell[data-id="${id}"]`); c && c.focus({ preventScroll: true });
+  announce(`${tn(D.talents[id])} ${(S.ranks[id] || 1) - 1}/${D.talents[id][4]}`);
+}
+function simSet(order, note) {
+  const S = simState(); sim.hist.push(S.order.slice());
+  sim.builds[S.cls] = normalizeOrder(S.cls, order); store.set("forever-sim", sim.builds);
+  renderSim(); if (note) announce(note);
+  if (motionOK()) document.querySelectorAll("#sim .scell[data-s='max'], #sim .scell[data-s='part']").forEach((c, k) => c.animate([{ opacity: 0.3, transform: "scale(.85)" }, { opacity: 1, transform: "none" }], { duration: 300, delay: Math.min(k * 12, 400), easing: EASE, fill: "backwards" }));
+}
+
+// 模拟器事件（委托，只绑一次）
+(() => {
+  const el = document.getElementById("sim");
+  let press = null, suppressClick = false;
+  el.addEventListener("click", (e) => {
+    const cell = e.target.closest(".scell");
+    if (cell) { if (suppressClick) { suppressClick = false; return; } return e.shiftKey ? simRemove(cell.dataset.id) : simAdd(cell.dataset.id); }
+    const pm = e.target.closest(".pm button"); if (pm) return pm.dataset.act === "add" ? simAdd(pm.dataset.id) : simRemove(pm.dataset.id);
+    const sp = e.target.closest(".sspec button"); if (sp) { sim.spec = sp.dataset.spec; return renderSim(); }
+    const tr = e.target.closest(".treereset");
+    if (tr) { const S = simState(); return simSet(S.order.filter((id) => D.talents[id][1] !== tr.dataset.tree), `已清空${treeCn(S.cls, tr.dataset.tree)}系`); }
+    if (e.target.closest("#simUndo")) { const last = sim.hist.pop(); if (last) { sim.builds[simState().cls] = last; store.set("forever-sim", sim.builds); renderSim(); announce("已撤销"); } return; }
+    if (e.target.closest("#simClear")) return simSet([], "已全部清空");
+    if (e.target.closest("#simTrim")) { const S = simState(); return simSet(S.order.slice(0, S.avail), "已撤回多出的点"); }
+    const cp = e.target.closest("#simCopy");
+    if (cp) {
+      const S = simState(), url = location.href.split("#")[0] + simHash(S.cls, S.order);
+      const done = () => { cp.textContent = "已复制"; setTimeout(() => (cp.textContent = "复制分享链接"), 1600); };
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(done).catch(() => { prompt("复制这个链接：", url); });
+    }
+  });
+  el.addEventListener("change", (e) => {
+    if (e.target.id !== "applyBest" || !e.target.value) return;
+    const [kind, a, b] = e.target.value.split(":"), S = simState();
+    if (kind === "lv") { const s = D.specs[+a]; sim.spec = s.spec; simSet(bestLvOrder(+a, state.level), `已套用${s.cn} ${state.level} 级升级最佳加点`); }
+    else { const s = D.specs[+b]; sim.spec = s.spec; state.level = 60; save(); updateLevelBar(); simSet(orderFromRanks(S.cls, endEntry(a, +b).ranks), `已套用${s.cn} 60 级${ROLE_CN[a]}最佳加点，等级调到 60`); }
+  });
+  el.addEventListener("contextmenu", (e) => { const cell = e.target.closest(".scell"); if (!cell) return; e.preventDefault(); simRemove(cell.dataset.id); });
+  el.addEventListener("pointerdown", (e) => {
+    const cell = e.target.closest(".scell"); if (!cell || e.pointerType === "mouse") return;
+    press = setTimeout(() => { suppressClick = true; simRemove(cell.dataset.id); if (navigator.vibrate) navigator.vibrate(12); }, 480);
+  });
+  ["pointerup", "pointercancel", "pointerleave"].forEach((ev) => el.addEventListener(ev, () => clearTimeout(press)));
+  const focusCell = (e) => { const cell = e.target.closest(".scell"); if (!cell || sim.focus === cell.dataset.id) return; sim.focus = cell.dataset.id; renderSimInfo(); };
+  el.addEventListener("pointerover", focusCell);
+  el.addEventListener("focusin", focusCell);
+  el.addEventListener("keydown", (e) => {
+    const cell = e.target.closest(".scell"); if (!cell) return;
+    if (e.key === "+" || e.key === "=") { e.preventDefault(); simAdd(cell.dataset.id); }
+    if (e.key === "-" || e.key === "Backspace" || e.key === "Delete") { e.preventDefault(); simRemove(cell.dataset.id); }
+  });
+})();
+
+// ===================== 职业总览 =====================
+function classChart(cls, fromSlider) {
+  const W = 640, H = 230, l = 34, r = 70, t = 12, b = 26, y0 = 60, y1 = 150, L = state.level;
+  const X = (v) => l + ((v - 1) / 59) * (W - l - r), Y = (v) => t + (1 - (Math.max(y0, Math.min(y1, v)) - y0) / (y1 - y0)) * (H - t - b);
+  const path = (arr) => arr.map((v, k) => (k ? "L" : "M") + X(k + 1).toFixed(1) + " " + Y(v).toFixed(1)).join("");
+  const specs = specsOf(cls), dashes = ["", "7 5", "2 4"], c = readable(CLS[cls].color);
+  let s = `<svg class="chart cchart${fromSlider ? "" : " draw"}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${CLS[cls].cn}三个专精 1 到 60 级升级指数">`;
+  for (const [v, tn2] of [[112, "S"], [104, "A"], [96, "B"], [88, "C"]]) s += `<line x1="${l}" x2="${W - r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--q-${tn2})" stroke-opacity=".45" stroke-dasharray="3 3"/><text x="${l - 8}" y="${Y(v) + 4}" text-anchor="end" style="fill:var(--q-${tn2})">${tn2}</text>`;
+  for (const v of [1, 10, 20, 30, 40, 50, 60]) s += `<text x="${X(v)}" y="${H - 6}" text-anchor="middle">${v}</text>`;
+  for (let k = 0; k < PER().length; k++) if (D.specs[k].cls !== cls) s += `<path d="${path(PER()[k].lv)}" fill="none" stroke="var(--chart-line)" stroke-width="1"/>`;
+  s += `<line x1="${X(L)}" x2="${X(L)}" y1="${t}" y2="${H - b}" stroke="var(--accent)" stroke-width="1.5"/>`;
+  // 曲线末端的专精名按 y 排开，至少隔 15px，避免重叠
+  const labelY = specs.map((sp) => ({ i: sp.i, y: Y(PER()[sp.i].lv[59]) + 4 })).sort((a2, b2) => a2.y - b2.y);
+  labelY.forEach((o, k) => { if (k && o.y - labelY[k - 1].y < 15) o.y = labelY[k - 1].y + 15; });
+  const labelAt = Object.fromEntries(labelY.map((o) => [o.i, o.y]));
+  specs.forEach((sp, k) => {
+    const arr = PER()[sp.i].lv;
+    s += `<g class="specs"><path d="${path(arr)}" fill="none" stroke="${c}" stroke-width="2.5" stroke-dasharray="${dashes[k]}"/></g>`;
+    s += `<circle cx="${X(L)}" cy="${Y(arr[L - 1])}" r="4" fill="${c}" stroke="var(--surface)" stroke-width="2"/>`;
+    s += `<text x="${W - r + 8}" y="${labelAt[sp.i]}" style="fill:var(--ink);font-family:var(--f-body);font-size:12px">${sp.cn}</text>`;
+  });
+  return s + "</svg>";
+}
+function renderClass(fromSlider) {
+  const cls = route.cls || D.specs[state.sel].cls; route.cls = cls; skill.tab = cls;
+  const el = document.getElementById("classPage"), L = state.level, specs = specsOf(cls);
+  const races = Object.entries(SK.races).flatMap(([f, list]) => list.filter((r) => r.classes.includes(cls)).map((r) => ({ ...r, f })));
+  const dashes = ["实线", "虚线", "点线"];
+  el.innerHTML = `
+    ${clsPicker(cls, (c) => `#/class/${c}`, "选择职业")}
+    <header class="chead" style="--cc:${CLS[cls].color}">
+      ${crestC(cls) ? `<img class="ccrest" alt="" src="${crestC(cls)}">` : ""}
+      <div><h2>${CLS[cls].cn} <span class="en">${cls}</span></h2>
+      <p class="lede2">${specs.map((s) => `${s.cn}（${(MODEL.specRoles[cls][s.spec] || []).map((r) => ROLE_CN[r]).join("、")}）`).join(" · ")}</p></div>
+    </header>
+    <div class="specgrid">${specs.map((s, k) => {
+      const p = PER()[s.i], idx = p.lv[L - 1], tier = p.lvT[L - 1];
+      const ends = (MODEL.specRoles[cls][s.spec] || []).map((role) => { const e = endEntry(role, s.i); return `<span class="et2" style="--q:var(--q-${e.tier})"><b>${e.tier}</b>60 级${ROLE_CN[role]}</span>`; }).join("");
+      return `<article class="speccard" style="--cc:${s.color};--q:var(--q-${tier})">
+        <div class="sch">${specBadge(s, true)}<div><h3>${s.cn}</h3><span class="en">${s.treeEn} · 曲线${dashes[k]}</span></div><div class="badge"><span class="t">${tier}</span><span class="v">${idx.toFixed(1)}</span></div></div>
+        <p class="scs">${L} 级升级 ${tier} 档 · 天赋让升级提速 ${p.gain[L - 1] >= 0 ? "+" : ""}${p.gain[L - 1]}%</p>
+        <div class="ets">${ends}</div>
+        <div class="jumps"><a class="jump" href="#/tiers" data-sel="${s.i}">看天梯和最佳加点</a><a class="jump primary" href="${simHash(cls, bestLvOrder(s.i, L))}" data-simcls="${cls}" data-simspec="${s.spec}" data-simi="${s.i}">在模拟器打开</a></div>
+      </article>`;
+    }).join("")}</div>
+    <section class="cblock"><h3>三个专精 1–60 级升级指数</h3>${classChart(cls, fromSlider)}</section>
+    <section class="cblock"><h3>能选${CLS[cls].cn}的种族</h3><div class="racechips">${races.map((r) => `<a href="#/race/${slugOf(r.race)}" class="rchip">${crestR(r.race) ? `<img alt="" src="${crestR(r.race)}">` : img(r.icon)}<span>${esc(r.raceZh || r.race)}<small>${r.f === "Horde" ? "部落" : "联盟"}</small></span></a>`).join("")}</div></section>
+    <section class="cblock"><h3>职业技能 · 按 ${L} 级</h3><p class="hint">学习等级和训练费是 Wowhead Forever 技能库里的 Classic 数据，每个技能都用 BlizzCon 试玩 38 级技能书核对过。</p><div id="classSkills"></div></section>`;
+  renderSkills();
+}
+document.getElementById("classPage").addEventListener("click", (e) => {
+  const a = e.target.closest("a[data-sel]"); if (a) { state.sel = +a.dataset.sel; state.view = "lv"; state.talent = null; save(); }
+  const b = e.target.closest("a[data-simcls]"); if (b) { sim.cls = b.dataset.simcls; sim.spec = b.dataset.simspec; sim.builds[sim.cls] = bestLvOrder(+b.dataset.simi, state.level); store.set("forever-sim", sim.builds); }
+});
+
+// ===================== 种族 =====================
+function renderRace() {
+  const all = Object.entries(SK.races).flatMap(([f, list]) => list.map((r) => ({ ...r, f })));
+  const r = all.find((x) => slugOf(x.race) === route.race) || all[0];
+  route.race = slugOf(r.race);
+  const L = state.level, el = document.getElementById("racePage");
+  const pick = Object.entries(SK.races).map(([f, list]) => `<div class="rgroup"><span class="rfac">${f === "Horde" ? "部落" : "联盟"}</span>${list.map((x) => `<a href="#/race/${slugOf(x.race)}"${x === r || slugOf(x.race) === route.race ? ' aria-current="page"' : ""}>${crestR(x.race) ? `<img alt="" src="${crestR(x.race)}">` : img(x.icon)}<span>${esc(x.raceZh || x.race)}</span></a>`).join("")}</div>`).join("");
+  const classes = r.classes.map((c) => {
+    const specs = specsOf(c).map((s) => ({ ...s, idx: PER()[s.i].lv[L - 1], tier: PER()[s.i].lvT[L - 1] })).sort((a, b) => b.idx - a.idx);
+    return `<a class="rclass" href="#/class/${c}" style="--cc:${CLS[c].color}">
+      ${crestC(c) ? `<img alt="" src="${crestC(c)}">` : ""}<div><b>${CLS[c].cn}</b><span class="mini">${specs.map((s) => `<i style="--q:var(--q-${s.tier})">${s.cn} <em>${s.tier}</em></i>`).join("")}</span></div><span class="go">→</span></a>`;
+  }).join("");
+  const pr = SK.classes.Priest.classRacials, prKey = pr && Object.keys(pr.races).find((k) => r.race.startsWith(k));
+  const priestSpells = pr && prKey && r.classes.includes("Priest") ? `<section class="cblock"><h3>${esc(r.raceZh || r.race)}牧师专属法术</h3><div class="changes">${pr.races[prKey].map((a) => `<div class="change">${img(a[2])}<div><div class="nm">${esc(a[3] || a[0])}</div>${a[3] ? `<div class="en">${esc(a[0])}</div>` : ""}${srcBadge(a[4])}</div><p>${esc(a[5] || a[1])}</p>${a[5] ? `<p class="orig"><span>原文</span>${esc(a[1])}</p>` : ""}</div>`).join("")}</div></section>` : "";
+  el.innerHTML = `
+    <nav class="racepick" aria-label="选择种族">${pick}</nav>
+    <div class="rdetail">
+      <header class="chead rhead">${crestR(r.race) ? `<img class="ccrest" alt="" src="${crestR(r.race)}">` : img(r.icon)}<div><h2>${esc(r.raceZh || r.race)} <span class="en">${esc(r.race)}</span>${srcBadge(r.raceSrc === "provisional" ? "provisional" : null)}</h2><p class="lede2">${r.f === "Horde" ? "部落" : "联盟"} · 可选 ${r.classes.length} 个职业</p></div></header>
+      <div class="rcols">
+        <section class="cblock"><h3>种族天赋</h3><ul class="ab rab">${r.abilities.map((a) => `<li>${img(a[2])}<div><b>${bi(a[3], a[0])}</b>${srcBadge(a[4])}<span class="txt">${esc(a[5] || a[1])}</span>${a[5] ? `<span class="orig"><span>原文</span>${esc(a[1])}</span>` : ""}</div></li>`).join("")}</ul></section>
+        <section class="cblock"><h3>能选的职业 · ${L} 级升级档位</h3><div class="rclasses">${classes}</div><p class="hint">点职业进入职业总览。档位是专精在当前等级的升级综合排名，没有算种族天赋的加成。</p></section>
+      </div>
+      ${priestSpells}
+    </div>`;
+}
+
+// ===================== Legacy =====================
+function renderLegacy() {
+  const lg = SK.legacy, el = document.getElementById("legacyPage");
+  const spent = lg.trees.flatMap((t) => t.perks).reduce((a, p) => a + (legacyRanks[p.name] || 0), 0);
+  const maxAll = lg.trees.flatMap((t) => t.perks).reduce((a, p) => a + p.max, 0);
+  el.innerHTML = `
+    <header class="lghead">
+      <div><h2>Legacy 传承</h2><p class="lede2">完成 Legacy 挑战（${lg.challenges.join("、")}）拿点数，全账号共享，每个角色各自在三棵树里花。点数上限暂时不知道。</p></div>
+      <div class="lgsum"><b data-tween="${spent}" data-from="${sim.prev.legacy ?? spent}">${spent}</b><span>/ ${maxAll} 已花点数</span><button id="lgReset"${spent ? "" : " disabled"}>全部重置</button></div>
+    </header>
+    <p class="callout${state.talented ? " on" : ""}"><b>「${esc((lg.trees.flatMap((t) => t.perks).find((p) => p.name === "Talented") || {}).nameZh || "Talented")}」${state.talented ? "已点满：天梯和模拟器都按 9 级开始有天赋点计算。" : `点满 ${TALENTED_MAX} 点后，天梯和模拟器会按 9 级开始有天赋点计算。`}</b></p>
+    <div class="legacy lgtrees">${lg.trees.map((t) => `
+      <section class="ltree"><h3>${img(t.icon)}${bi(t.nameZh, t.name)}<em>${t.perks.reduce((a, p) => a + (legacyRanks[p.name] || 0), 0)}</em></h3>
+      ${t.perks.map((p) => {
+        const r = Math.min(legacyRanks[p.name] || 0, p.max);
+        return `<div class="perk lperk${r ? " has" : ""}${r === p.max ? " full" : ""}${p.name === "Talented" ? " key" : ""}">${img(p.icon)}
+          <div class="pn">${bi(p.nameZh, p.name)}${srcBadge(p.nameSrc)}</div>
+          <p>${esc(p.textZh || p.text)}</p>${p.textZh ? `<p class="orig"><span>原文</span>${esc(p.text)}</p>` : ""}
+          <div class="src"><span class="pill ${p.confirmed ? "ok2" : "only"}">${esc(p.src)}</span>${p.diff ? `<span>${esc(p.diff)}</span>` : ""}</div>
+          <div class="lstep"><button data-perk="${esc(p.name)}" data-d="-1" aria-label="${esc(p.nameZh || p.name)} 减一点"${r ? "" : " disabled"}>−</button><span class="pips" aria-hidden="true">${Array.from({ length: p.max }, (_, k) => `<i${k < r ? ' class="on"' : ""}></i>`).join("")}</span><b>${r}/${p.max}</b><button data-perk="${esc(p.name)}" data-d="1" aria-label="${esc(p.nameZh || p.name)} 加一点"${r < p.max ? "" : " disabled"}>+</button></div>
+        </div>`;
+      }).join("")}</section>`).join("")}</div>
+    <p class="hint">${esc(lg.rewards)}</p>`;
+  sim.prev.legacy = spent;
+  tween(el);
+}
+document.getElementById("legacyPage").addEventListener("click", (e) => {
+  if (e.target.closest("#lgReset")) { for (const k of Object.keys(legacyRanks)) legacyRanks[k] = 0; store.set("forever-legacy", legacyRanks); if (state.talented) setTalented(false, true); renderLegacy(); announce("Legacy 点数已全部重置"); return; }
+  const b = e.target.closest("button[data-perk]"); if (!b) return;
+  const p = SK.legacy.trees.flatMap((t) => t.perks).find((x) => x.name === b.dataset.perk);
+  const r = Math.max(0, Math.min(p.max, (legacyRanks[p.name] || 0) + +b.dataset.d));
+  legacyRanks[p.name] = r; store.set("forever-legacy", legacyRanks);
+  if (p.name === "Talented" && (r >= TALENTED_MAX) !== state.talented) setTalented(r >= TALENTED_MAX, true);
+  renderLegacy();
+  const again = document.querySelector(`button[data-perk="${CSS.escape(p.name)}"][data-d="${b.dataset.d}"]`);
+  if (again && !again.disabled) again.focus({ preventScroll: true }); else document.querySelector(`button[data-perk="${CSS.escape(p.name)}"]:not([disabled])`)?.focus({ preventScroll: true });
+  pop(again?.closest(".lperk")?.querySelector(".pips i.on:last-of-type"), r === p.max);
+  announce(`${p.nameZh || p.name} ${r}/${p.max}`);
+});
+
+// Classic 对比开关
+(() => {
+  const box = document.getElementById("cmpClassic"), on = store.get("forever-cmp", false);
+  box.checked = on; document.body.classList.toggle("cmp-on", on);
+  box.addEventListener("change", () => { document.body.classList.toggle("cmp-on", box.checked); store.set("forever-cmp", box.checked); announce(box.checked ? "已开启 Classic 对比：新 = 新增，改 = 改动，移 = 移位" : "已关闭 Classic 对比"); });
+})();
+
+// ===================== 启动 =====================
+window.addEventListener("hashchange", () => {
+  applyHash(); renderRoute();
+  const bar = document.getElementById("appbar");
+  if (window.scrollY > bar.offsetTop) window.scrollTo({ top: bar.offsetTop, behavior: "instant" });
+});
+applyHash();
+store.set("forever-legacy", legacyRanks);
+renderRoute(true);
+
 </script>
 </body>
 </html>
