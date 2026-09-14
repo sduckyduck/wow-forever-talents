@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Forever 专精天梯</title>
-<meta name="description" content="魔兽世界 Forever 27 个专精 1–60 级天梯与最佳加点（非官方）">
+<title>魔兽世界：无限 · Forever 专精天梯</title>
+<meta name="description" content="《魔兽世界：无限》（WoW Forever）新手入门、职业介绍、27 个专精 1–60 级强弱排名和天赋模拟器（非官方）">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/forever-logo-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -404,6 +404,8 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .pm{grid-column:1/-1;display:flex;gap:8px;margin-top:10px}
 .pm button{flex:1;padding:8px;border-radius:6px;border:1px solid var(--line);background:var(--sunken);font-weight:500;cursor:pointer}
 .pm button:hover:not(:disabled){border-color:var(--accent)}
+.simempty{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:var(--accent-soft)}
+.warn button.primary{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:500}
 .sorder li.overpt{color:var(--q-S)}
 .sorder li.overpt img{opacity:.5}
 .sspec button{padding:4px 10px;font-size:12px}
@@ -582,6 +584,119 @@ body.cmp-on .cmpsum{display:flex}
 .sch{grid-template-columns:48px 1fr auto}
 .dh:has(img){grid-template-columns:48px 1fr auto}
 
+/* ---------- 显示选项（收起的高级开关） ---------- */
+.opts{position:relative;margin-left:auto}
+.opts > summary{list-style:none;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink);padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;user-select:none}
+.opts > summary::-webkit-details-marker{display:none}
+.opts > summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.opts[open] > summary::after{transform:translateY(1px) rotate(-135deg)}
+.opts > summary:hover{border-color:var(--accent)}
+.opts-n{font-family:var(--f-num);font-weight:700;font-size:12px;line-height:1;min-width:18px;padding:3px 5px;border-radius:999px;background:var(--accent);color:var(--surface);text-align:center}
+.opts-panel{position:absolute;right:0;top:calc(100% + 8px);z-index:9;width:min(320px,calc(100vw - 32px));display:grid;gap:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 34px -14px rgba(0,0,0,.45)}
+.opts-panel .toggle{align-items:flex-start;line-height:1.35}
+.opts-panel .toggle .sw{margin-top:1px}
+.opts-panel .toggle small{margin-top:2px;line-height:1.45}
+
+/* ---------- 天梯: 怎么看这张榜 ---------- */
+.explain{margin:0 0 12px;padding:12px 16px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;background:var(--surface);font-size:13px}
+.explain > summary{font-weight:700;color:var(--ink);font-size:13px}
+.explain[open] > summary{margin-bottom:6px}
+.explain p{margin:4px 0 0;color:var(--muted);max-width:78ch}
+.explain p b{color:var(--ink)}
+.exleg{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0 2px;padding:0;list-style:none;font-size:12px;color:var(--muted)}
+.exleg li{display:flex;align-items:center;gap:6px}
+.exleg i{font-style:normal;font-family:var(--f-num);font-weight:700;font-size:16px;line-height:1;width:20px;text-align:center;color:var(--q)}
+
+/* ---------- 新手入门 ---------- */
+.start{display:grid;gap:44px;max-width:1120px}
+.st-kicker{margin:0 0 6px;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:.04em}
+.start h2{overflow-wrap:anywhere;margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(26px,3.6vw,38px);line-height:1.2;text-wrap:balance}
+.start h3.sth{margin:0 0 4px;font-family:var(--f-display);font-weight:900;font-size:clamp(20px,2.4vw,26px);letter-spacing:0;color:var(--ink)}
+.start .stsub{margin:0 0 16px;color:var(--muted);max-width:70ch}
+.st-intro .lede2{font-size:15px;line-height:1.8;color:var(--ink);max-width:62ch;margin-top:10px}
+.st-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:20px 0 16px}
+.st-fact{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.st-fact span{display:block;font-size:12px;color:var(--faint)}
+.st-fact b{display:block;font-size:20px;line-height:1.35;margin-top:2px}
+.st-fact small{display:block;font-size:12px;color:var(--muted);line-height:1.5;margin-top:2px}
+.st-basics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.st-basic{display:grid;grid-template-columns:32px 1fr;gap:4px 12px;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.st-basic .n{grid-row:1/3;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-num);font-weight:700;font-size:17px;background:var(--accent-soft);color:var(--accent)}
+.st-basic h4{margin:0;font-size:16px;line-height:1.5}
+.st-basic p{margin:0;color:var(--muted);line-height:1.75}
+.rolechip{display:inline-flex;align-items:center;font-size:12px;line-height:1.5;padding:0 8px;border-radius:999px;font-weight:500;white-space:nowrap;color:var(--rc);background:color-mix(in srgb,var(--rc) 13%,transparent)}
+.rolechip[data-r="tank"]{--rc:var(--q-B)} .rolechip[data-r="heal"]{--rc:var(--q-C)} .rolechip[data-r="dps"]{--rc:var(--q-S)} .rolechip[data-r="range"]{--rc:var(--muted)}
+.dif{display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--muted);white-space:nowrap}
+.dif i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dif i.on{background:var(--accent)}
+
+.quiz{scroll-margin-top:64px;padding:20px;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));border-radius:12px;background:linear-gradient(180deg,var(--accent-soft),transparent 60%),var(--surface)}
+.qgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:18px}
+.qq > p{margin:0 0 8px;font-weight:700}
+.qq > p span{font-family:var(--f-num);color:var(--accent);margin-right:6px}
+.qopts{display:grid;gap:6px}
+.qopts button{display:grid;grid-template-columns:1fr;text-align:left;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:14px;line-height:1.35;transition:border-color .15s,background .15s}
+.qopts button small{font-size:12px;color:var(--faint)}
+.qopts button:hover{border-color:var(--faint)}
+.qopts button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent);font-weight:500}
+.qres-h{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.qres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.qcard{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.qcard.top{border-color:color-mix(in srgb,var(--accent) 60%,var(--line))}
+.qcard .qh{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center}
+.qcard .qh img{width:40px;height:40px;border-radius:6px;box-shadow:0 0 0 2px var(--cc)}
+.qcard .qh b{display:block;font-size:16px;line-height:1.3}
+.qcard .qh span{font-size:12px;color:var(--muted)}
+.qcard .qrank{font-family:var(--f-num);font-weight:700;font-size:13px;color:var(--faint)}
+.qcard p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+.qwhy{display:flex;flex-wrap:wrap;gap:4px 6px}
+.qwhy span{font-size:12px;padding:1px 8px;border-radius:4px;background:var(--sunken);border:1px solid var(--line);color:var(--ink)}
+.qwhy span em{font-style:normal;font-family:var(--f-num);font-weight:700;color:var(--q)}
+.qcard .jumps{margin-top:auto}
+
+.st-classes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.st-cls{display:grid;grid-template-columns:48px 1fr;gap:4px 12px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink);transition:border-color .2s,transform .3s cubic-bezier(.16,1,.3,1)}
+.st-cls:hover{border-color:var(--cc);transform:translateY(-2px)}
+.st-cls img{grid-row:1/4;width:48px;height:48px;border-radius:8px;box-shadow:0 0 0 2px var(--cc)}
+.st-cls b{font-size:16px;line-height:1.3}
+.st-cls .tg{font-size:13px;color:var(--muted);line-height:1.55}
+.st-cls .meta2{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;margin-top:4px}
+.st-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:st}
+.st-step{position:relative;display:block;padding:16px 16px 16px 56px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink);transition:border-color .2s}
+.st-step::before{counter-increment:st;content:counter(st);position:absolute;left:16px;top:16px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-num);font-weight:700;background:var(--ink);color:var(--surface)}
+.st-step:hover{border-color:var(--accent)}
+.st-step b{display:block;font-size:15px}
+.st-step span{display:block;margin-top:4px;font-size:13px;color:var(--muted);line-height:1.65}
+
+/* 职业页: 新手介绍 */
+.cintro{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px 24px;margin:-4px 0 22px;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.cintro .tagl{grid-column:1/-1;margin:0;font-size:16px;font-weight:700}
+.cintro .play{margin:0;color:var(--ink);line-height:1.8}
+.cfacts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:13px;align-content:start}
+.cfacts dt{color:var(--faint)}
+.cfacts dd{margin:0;display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
+.cpc{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cpc h4{margin:0 0 4px;font-size:13px}
+.cpc ul{margin:0;padding-left:18px;color:var(--muted);font-size:13px;display:grid;gap:2px}
+.cpc .good h4{color:var(--q-C)} .cpc .bad h4{color:var(--q-S)}
+.sline{margin:0;font-size:13px;color:var(--ink);line-height:1.6}
+.dnew{margin:-8px 0 0;font-size:13px;color:var(--muted);line-height:1.6}
+
+@media (max-width:980px){
+  .qgrid,.qres{grid-template-columns:1fr}
+  .st-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .st-steps{grid-template-columns:1fr}
+  .cintro{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .st-basics,.cpc{grid-template-columns:1fr}
+  .opts{margin-left:0}
+  .opts-panel{right:auto;left:0}
+  .start{gap:32px}
+  .quiz{padding:14px}
+}
+@media (max-width:480px){.start h2{font-size:24px}.st-fact{padding:10px 12px}.st-fact b{font-size:16px}.st-fact small{font-size:11px}.qopts{grid-template-columns:repeat(2,minmax(0,1fr))}.qopts button{padding:7px 10px}.chip .rl{display:none}}
+
 /* ---- 网站版: Forever 品牌 ---- */
 :root{--accent:#8A5F24;--accent-soft:rgba(138,95,36,.13);--arcane:#1F7FB0}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--accent:#E3B872;--accent-soft:rgba(227,184,114,.13);--arcane:#4FB6E3}}
@@ -602,10 +717,13 @@ section.block{scroll-margin-top:130px}
 .brand nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .brand nav a{font-size:13px;text-decoration:none;color:#F4ECDD;padding:8px 14px;white-space:nowrap;border-radius:999px;border:1px solid rgba(227,184,114,.45);background:rgba(10,18,28,.55);backdrop-filter:blur(4px)}
 .brand nav a:hover,.brand nav a:focus-visible{border-color:#E3B872;background:rgba(227,184,114,.2)}
+.brand nav a.primary{background:#E3B872;border-color:#E3B872;color:#1A1206;font-weight:700}
+.brand nav a.primary:hover,.brand nav a.primary:focus-visible{background:#F0CB8C}
+.brand .kick{margin:0 0 4px;font-size:13px;letter-spacing:.06em;color:#E3B872;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 .site-foot{margin-top:48px;padding-block:22px 8px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:12px;color:var(--faint)}
 .site-foot img{width:64px;height:auto;opacity:.9}
 .site-foot p{margin:0;max-width:90ch}
-@media (max-width:700px){.brand-in{grid-template-columns:auto 1fr;gap:10px 14px;padding-block:18px 26px}.brand .logo{width:92px}.brand h1{font-size:26px;margin:0}.brand .lede{grid-column:1/-1;font-size:13px}.brand .byline{grid-column:1/-1;margin-top:6px}.brand nav{grid-column:1/-1;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:12px}.brand nav::-webkit-scrollbar{display:none}.brand-in > div{display:contents}.brand-art i{width:100%}.brand-art .alliance{display:none}.brand-art .horde{-webkit-mask-image:none;mask-image:none}}
+@media (max-width:700px){.brand-in{grid-template-columns:auto 1fr;gap:10px 14px;padding-block:18px 26px}.brand .logo{width:92px}.brand h1{font-size:26px;margin:0}.brand .lede{grid-column:1/-1;font-size:13px}.brand .byline{grid-column:1/-1;margin-top:6px}.brand .kick{grid-column:1/-1;order:-1;font-size:12px;margin:0}.brand nav{grid-column:1/-1;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:12px}.brand nav::-webkit-scrollbar{display:none}.brand-in > div{display:contents}.brand-art i{width:100%}.brand-art .alliance{display:none}.brand-art .horde{-webkit-mask-image:none;mask-image:none}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
@@ -617,23 +735,25 @@ section.block{scroll-margin-top:130px}
     <div class="brand-in">
       <img class="logo" src="assets/forever-logo.webp" width="240" height="196" alt="World of Warcraft Forever" fetchpriority="high">
       <div>
+        <p class="kick">《魔兽世界：无限》中文资料站</p>
         <h1>专精天梯 · 天赋模拟器</h1>
-        <p class="lede">九职业 27 个专精，1 到 60 级每一级的强弱排名和最佳加点。470 个天赋按 Wowhead 计算器规则逐级模拟，另收 382 个职业技能、10 个种族和 19 项 Legacy 传承，中文译名保留英文原文。</p>
+        <p class="lede">没玩过魔兽也能看懂：先弄清楚这是什么游戏，再挑一个适合自己的职业，最后看它每一级怎么加天赋。九个职业 27 个专精，1 到 60 级的强弱排名和加点都在这里。</p>
         <p class="byline">非官方粉丝工具 · 数据来自 BlizzCon 2026 试玩 · 模型生成于 2026-09-14</p>
-        <nav aria-label="快速入口"><a href="#/guide">新手先看游戏机制</a><a href="#/tiers">看专精天梯</a><a href="#/sim">打开天赋模拟器</a></nav>
+        <nav aria-label="快速入口"><a class="primary" href="#/start">我是新手，从这里开始</a><a href="#/tiers">看专精强弱排名</a><a href="#/sim">打开天赋模拟器</a></nav>
       </div>
     </div>
   </header>
 
   <div class="appbar" id="appbar">
   <nav class="appnav" id="appnav" aria-label="主导航">
-    <a href="#/tiers" data-route="tiers">专精天梯</a>
-    <a href="#/guide" data-route="guide">游戏机制</a>
-    <a href="#/sim" data-route="sim">天赋模拟器</a>
+    <a href="#/start" data-route="start">新手入门</a>
+    <a href="#/guide" data-route="guide">游戏介绍</a>
     <a href="#/class" data-route="class">职业</a>
+    <a href="#/tiers" data-route="tiers">专精天梯</a>
+    <a href="#/sim" data-route="sim">天赋模拟器</a>
     <a href="#/race" data-route="race">种族</a>
     <a href="#/legacy" data-route="legacy">Legacy 传承</a>
-    <a href="#/about" data-route="about">说明</a>
+    <a href="#/about" data-route="about">排名怎么算</a>
   </nav>
   <div class="controls" id="tiers">
     <div class="seg" id="viewSeg" role="group" aria-label="榜单">
@@ -652,9 +772,14 @@ section.block{scroll-margin-top:130px}
       </div>
       <div class="lvinfo" id="lvinfo"></div>
     </div>
-    <label class="toggle" for="showEn" title="在中文下面显示英文原文，方便核对"><input type="checkbox" id="showEn" checked><span class="sw" aria-hidden="true"></span><span>英文原文<small>中英对照核查</small></span></label>
-    <label class="toggle" for="cmpClassic" title="在天赋树上标出 Forever 相对 Classic 新增、改动、移位的天赋"><input type="checkbox" id="cmpClassic"><span class="sw" aria-hidden="true"></span><span>对比 Classic<small>标出新增和改动</small></span></label>
-    <label class="toggle" for="talented" title="Legacy 传承「Talented」点满：9 级开始拿天赋点，上限仍是 51"><input type="checkbox" id="talented"><span class="sw" aria-hidden="true"></span><span>Legacy Talented<small>9 级起有天赋点</small></span></label>
+    <details class="opts" id="opts">
+      <summary>显示选项<span class="opts-n" id="optsN" hidden></span></summary>
+      <div class="opts-panel">
+        <label class="toggle" for="showEn" title="在中文下面显示英文原文，方便核对"><input type="checkbox" id="showEn"><span class="sw" aria-hidden="true"></span><span>显示英文原名<small>中文译名下面附上英文，方便对照外网资料</small></span></label>
+        <label class="toggle" for="cmpClassic" title="在天赋树上标出 Forever 相对 Classic 新增、改动、移位的天赋"><input type="checkbox" id="cmpClassic"><span class="sw" aria-hidden="true"></span><span>标出和怀旧服不同的天赋<small>玩过怀旧服（Classic）的人看：新增、改动、移位</small></span></label>
+        <label class="toggle" for="talented" title="Legacy 传承「Talented」点满：9 级开始拿天赋点，上限仍是 51"><input type="checkbox" id="talented"><span class="sw" aria-hidden="true"></span><span>已点满传承「天赋异禀」<small>老玩家的账号奖励，9 级就开始有天赋点。新号不用开</small></span></label>
+      </div>
+    </details>
   </div>
   </div>
   <p class="sr" id="announce" aria-live="polite"></p>
@@ -662,6 +787,7 @@ section.block{scroll-margin-top:130px}
   <div class="route" data-page="tiers">
   <main>
     <div>
+      <details class="explain" id="explain" open><summary>怎么看这张榜</summary><div id="explainBody"></div></details>
       <p class="note" id="note" hidden></p>
       <div class="board" id="board"></div>
       <p class="hint">点任意专精，右边显示它的最佳加点；点天赋图标看说明和估值依据。</p>
@@ -670,6 +796,7 @@ section.block{scroll-margin-top:130px}
   </main>
   </div>
 
+  <div class="route" data-page="start" id="startPage" hidden></div>
   <div class="route" data-page="guide" id="guidePage" hidden></div>
   <div class="route" data-page="sim" id="sim" hidden></div>
   <div class="route" data-page="class" id="classPage" hidden></div>
@@ -789,7 +916,7 @@ function renderBoard() {
       b.style.setProperty("--cc", s.color);
       b.setAttribute("aria-pressed", x.i===state.sel);
       const val = state.view==="tal" ? (x.gain>=0?"+":"")+Math.round(x.gain)+"%" : x.index.toFixed(0);
-      b.innerHTML = `${specBadge(s)}<span class="nm"><span class="sp">${s.cn}</span><span class="cl">${s.clsCn}</span></span><span class="ix">${val}</span>`;
+      b.innerHTML = `${specBadge(s)}<span class="nm"><span class="sp">${s.cn}</span><span class="cl">${s.clsCn}<span class="rl"> · ${(D.model.specRoles[s.cls][s.spec]||[]).map(r=>({dps:"输出",tank:"坦克",heal:"治疗"})[r]).join("/")}</span></span></span><span class="ix">${val}</span>`;
       b.title = `${s.cn} ${s.clsCn} · 指数 ${x.index} · 点击看最佳加点`;
       b.onclick = () => { if (state.sel !== x.i) state.talent = null; state.sel = x.i; renderBoard(); renderDetail(); document.getElementById("announce").textContent = `已选择 ${s.cn}${s.clsCn}，${x.tier} 档，指数 ${x.index}`; if (matchMedia("(max-width:980px)").matches) document.getElementById("detail").scrollIntoView({behavior:"smooth", block:"start"}); };
       chips.appendChild(b);
@@ -798,7 +925,6 @@ function renderBoard() {
   }
   const note = document.getElementById("note");
   if (isLevelView() && state.level < firstLv()) { note.hidden = false; note.textContent = state.view==="tal" ? `${firstLv()} 级之前没有天赋点，纯天赋榜全部持平。` : `${firstLv()} 级之前没有天赋点，同职业三个专精完全一样，这里只是职业底子的排名。`; }
-  else if (!isLevelView()) { note.hidden = false; note.textContent = `${VIEW_NAME[state.view]}：按这个定位从零加满 51 点后的排名，指数以本榜平均为 100。`; }
   else note.hidden = true;
 
   const L = state.level, p = pts(L), end = !isLevelView();
@@ -1006,14 +1132,19 @@ function renderSkills() {
 
 document.querySelectorAll("#viewSeg button").forEach(b => b.onclick = () => { state.view = b.dataset.view; save(); renderBoard(); renderDetail(); });
 document.getElementById("showEn").addEventListener("change", e => { document.body.classList.toggle("hide-en", !e.target.checked); try { localStorage.setItem("forever-tiers-en", e.target.checked ? "1" : "0"); } catch(_) {} });
-try { if (localStorage.getItem("forever-tiers-en") === "0") { document.getElementById("showEn").checked = false; document.body.classList.add("hide-en"); } } catch(_) {}
+// 英文原名默认隐藏（新手不需要），打开过的人记住选择
+(() => { let on = false; try { on = localStorage.getItem("forever-tiers-en") === "1"; } catch(_) {} document.getElementById("showEn").checked = on; document.body.classList.toggle("hide-en", !on); })();
 document.getElementById("talented").addEventListener("change", e => { setTalented(e.target.checked); });
 let lvFrame = 0;
 document.getElementById("lv").addEventListener("input", e => { state.level = +e.target.value; if (lvFrame) return; lvFrame = requestAnimationFrame(() => { lvFrame = 0; save(); renderRoute(true); }); });
 // ===================== 路由 · 天赋模拟器 · 职业 · 种族 · Legacy · 动效 =====================
 // 这个文件由 build_page.cjs / build_site.cjs 内联进页面脚本末尾，可直接使用上面定义的 D、state、PER 等
 
-const MODEL = D.model, ANN = D.ann;
+const MODEL = D.model, ANN = D.ann, NB = D.newbie;
+const ROLE_ZH = { dps: "输出", tank: "坦克", heal: "治疗" };
+const RANGE_ZH = { melee: "近战", ranged: "远程", any: "近战 / 远程" };
+function roleChips(s) { return (MODEL.specRoles[s.cls][s.spec] || []).map((r) => `<span class="rolechip" data-r="${r}">${ROLE_ZH[r]}</span>`).join(""); }
+const diffDots = (n) => `<span class="dif" title="上手难度（本站主观判断）">${[1, 2, 3].map((k) => `<i${k <= n ? ' class="on"' : ""}></i>`).join("")}<span>${["", "容易上手", "中等", "要多花时间"][n]}</span></span>`;
 
 // ---------- Classic 老天赋对比 ----------
 const CMP = { new: ["新", "Forever 新增"], changed: ["改", "相对 Classic 有改动"], moved: ["移", "只是换了位置"], same: ["", "和 Classic 一样"] };
@@ -1180,9 +1311,10 @@ if ("Talented" in legacyRanks) state.talented = legacyRanks.Talented >= TALENTED
 
 function applyHash() {
   const raw = location.hash || "";
-  if (!raw.startsWith("#/")) { const old = { "#xcheck": "about", "#method": "about", "#skills": "class", "#tiers": "tiers" }[raw]; route.name = old || "tiers"; return; }
+  // 没有 hash（直接打开首页）进新手入门
+  if (!raw.startsWith("#/")) { const old = { "#xcheck": "about", "#method": "about", "#skills": "class", "#tiers": "tiers" }[raw]; route.name = old || "start"; return; }
   const p = raw.slice(2).split("/");
-  route.name = ["tiers", "guide", "sim", "class", "race", "legacy", "about"].includes(p[0]) ? p[0] : "tiers";
+  route.name = ["start", "tiers", "guide", "sim", "class", "race", "legacy", "about"].includes(p[0]) ? p[0] : "start";
   if (route.name === "sim" && CT[p[1]]) {
     sim.cls = p[1];
     if (p[2]) { const L = Math.max(1, Math.min(60, +p[2] || state.level)); state.level = L; }
@@ -1212,7 +1344,10 @@ function renderRoute(fromSlider) {
   });
   document.querySelectorAll("#appnav a").forEach((a) => { if (a.dataset.route === route.name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   document.getElementById("viewSeg").hidden = route.name !== "tiers";
+  // 新手入门和游戏介绍用不到等级条和显示选项
+  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide";
   if (route.name === "tiers") { renderBoard(); renderDetail(); } else updateLevelBar();
+  if (route.name === "start") renderStart(fromSlider);
   if (route.name === "sim") renderSim(fromSlider);
   if (route.name === "class") renderClass(fromSlider);
   if (route.name === "race") renderRace();
@@ -1237,6 +1372,7 @@ renderBoard = function () {
   const before = {};
   if (animate) document.querySelectorAll("#board .chip").forEach((c) => (before[c.id] = c.getBoundingClientRect()));
   _renderBoard();
+  renderExplain();
   if (!animate) return;
   document.querySelectorAll("#board .chip").forEach((c) => {
     const b = before[c.id]; if (!b) return;
@@ -1254,9 +1390,30 @@ renderDetail = function () {
     a.href = simHash(s.cls, order, isLevelView() ? state.level : 60);
     a.onclick = () => { sim.builds[s.cls] = order; sim.cls = s.cls; sim.spec = s.spec; store.set("forever-sim", sim.builds); };
   }
+  const nb = NB && NB.specs[s.k], dh = document.querySelector("#detail .dh");
+  if (nb && dh) dh.insertAdjacentHTML("afterend", `<p class="dnew">${roleChips(s)} ${esc(nb.line)}</p>`);
   if (lastSel !== null && lastSel !== state.sel && motionOK()) document.getElementById("detail").animate([{ opacity: 0.2, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: EASE });
   lastSel = state.sel;
 };
+
+// 天梯顶部的大白话说明，跟着榜单和等级变
+const EXPLAIN = {
+  lv: (L) => `一个人从 1 级打怪升到 60 级，<b>${L} 级</b>这个时候谁升得最快、最不容易死。算上了职业本身的强弱，比如猎人有宠物帮忙扛怪。拖动上面的等级条可以换等级。`,
+  tal: (L) => `只看天赋在 <b>${L} 级</b>让这个专精升级快了多少，数字是提速百分比。适合比较同一个职业的三个专精该走哪条路。`,
+  dps: () => `满级 60 级、点满 51 个天赋点以后，在队伍里<b>打伤害</b>的能力。`,
+  tank: () => `满级在队伍里<b>当坦克</b>（站最前面让怪物打自己、保护队友）的能力。`,
+  heal: () => `满级在队伍里<b>给队友加血</b>的能力。`,
+};
+const explainOpen = store.get("forever-explain", true);
+function renderExplain() {
+  const box = document.getElementById("explainBody"); if (!box) return;
+  const det = document.getElementById("explain");
+  if (!det.dataset.bound) { det.open = explainOpen; det.dataset.bound = "1"; det.addEventListener("toggle", () => store.set("forever-explain", det.open)); }
+  const v = state.view, val = v === "tal" ? "提速百分比" : "指数：100 = 这张榜的平均水平，越高越强";
+  box.innerHTML = `<p><b>${VIEW_NAME[v]}</b>：${EXPLAIN[v](state.level)}</p>
+    <ul class="exleg">${[["S", "最强"], ["A", "很强"], ["B", "中上"], ["C", "中下"], ["D", "偏弱"]].map(([t, n]) => `<li style="--q:var(--q-${t})"><i>${t}</i>${n}</li>`).join("")}<li>专精后面的数字是${val}</li></ul>
+    <p>排名是按天赋数据估算的，不是实测。差一两档不影响正常升级和打副本，<b>选自己喜欢的职业最重要</b>。还没想好玩什么？<a href="#/start" data-quiz="1">回答三个问题帮你挑</a>。</p>`;
+}
 
 // ---------- 通用: 职业选择条 ----------
 const clsPicker = (current, hrefOf, label) => `<nav class="clspick" aria-label="${label}">${CLS_ORDER.map((c) => `<a href="${hrefOf(c)}" style="--cc:${CLS[c].color}"${c === current ? ' aria-current="page"' : ""}>${crestC(c) ? `<img alt="" src="${crestC(c)}">` : `<span class="dot"></span>`}<span>${CLS[c].cn}</span></a>`).join("")}</nav>`;
@@ -1356,6 +1513,7 @@ function renderSim(fromSlider) {
         <a class="whlink" href="${whLink(cls, ranks)}" target="_blank" rel="noopener">在 Wowhead 打开 ↗</a>
       </div>
     </div>
+    ${!total && avail ? `<p class="warn simempty"><span>还没有加点，所以分数很低。<b>第一次用？</b>先套用模型推荐的加点，再按自己的想法改。</span><button id="simQuick" class="primary">一键套用${spec.cn} ${L} 级推荐加点</button></p>` : ""}
     ${over > 0 ? `<p class="warn">${L} 级只有 ${avail} 点，这套加点用了 ${total} 点，多出 ${over} 点（下方加点顺序里标红）。<button id="simTrim">撤回多出的 ${over} 点</button></p>` : ""}
     <div class="simgrid">
       <div><div class="simtrees">${CT[cls].trees.map(treePanel).join("")}</div>${removedList(cls)}</div>
@@ -1445,6 +1603,7 @@ function simSet(order, note) {
     if (tr) { const S = simState(); return simSet(S.order.filter((id) => D.talents[id][1] !== tr.dataset.tree), `已清空${treeCn(S.cls, tr.dataset.tree)}系`); }
     if (e.target.closest("#simUndo")) { const last = sim.hist.pop(); if (last) { sim.builds[simState().cls] = last; store.set("forever-sim", sim.builds); renderSim(); announce("已撤销"); } return; }
     if (e.target.closest("#simClear")) return simSet([], "已全部清空");
+    if (e.target.closest("#simQuick")) { const S = simState(); return simSet(bestLvOrder(S.spec.i, state.level), `已套用${S.spec.cn} ${state.level} 级推荐加点`); }
     if (e.target.closest("#simTrim")) { const S = simState(); return simSet(S.order.slice(0, S.avail), "已撤回多出的点"); }
     const cp = e.target.closest("#simCopy");
     if (cp) {
@@ -1498,6 +1657,22 @@ function classChart(cls, fromSlider) {
   });
   return s + "</svg>";
 }
+function classIntro(cls) {
+  const c = NB && NB.classes[cls]; if (!c) return "";
+  const roles = [...new Set(specsOf(cls).flatMap((s) => MODEL.specRoles[cls][s.spec] || []))];
+  return `<section class="cintro" aria-label="${CLS[cls].cn}是什么样的职业">
+    <p class="tagl">${esc(c.tagline)}</p>
+    <p class="play">${esc(c.play)}</p>
+    <dl class="cfacts">
+      <dt>能做</dt><dd>${roles.map((r) => `<span class="rolechip" data-r="${r}">${ROLE_ZH[r]}</span>`).join("")}</dd>
+      <dt>距离</dt><dd>${RANGE_ZH[c.range]}</dd>
+      <dt>护甲</dt><dd>${esc(c.armor)}</dd>
+      <dt>资源</dt><dd>${esc(c.resource)}</dd>
+      <dt>上手</dt><dd>${diffDots(c.difficulty)}</dd>
+    </dl>
+    <div class="cpc"><div class="good"><h4>优点</h4><ul>${c.pros.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div><div class="bad"><h4>要注意</h4><ul>${c.cons.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div></div>
+  </section>`;
+}
 function renderClass(fromSlider) {
   const cls = route.cls || D.specs[state.sel].cls; route.cls = cls; skill.tab = cls;
   const el = document.getElementById("classPage"), L = state.level, specs = specsOf(cls);
@@ -1510,11 +1685,13 @@ function renderClass(fromSlider) {
       <div><h2>${CLS[cls].cn} <span class="en">${cls}</span></h2>
       <p class="lede2">${specs.map((s) => `${s.cn}（${(MODEL.specRoles[cls][s.spec] || []).map((r) => ROLE_CN[r]).join("、")}）`).join(" · ")}</p></div>
     </header>
+    ${classIntro(cls)}
     <div class="specgrid">${specs.map((s, k) => {
       const p = PER()[s.i], idx = p.lv[L - 1], tier = p.lvT[L - 1];
       const ends = (MODEL.specRoles[cls][s.spec] || []).map((role) => { const e = endEntry(role, s.i); return `<span class="et2" style="--q:var(--q-${e.tier})"><b>${e.tier}</b>60 级${ROLE_CN[role]}</span>`; }).join("");
       return `<article class="speccard" style="--cc:${s.color};--q:var(--q-${tier})">
         <div class="sch">${specBadge(s, true)}<div><h3>${s.cn}</h3><span class="en">${s.treeEn} · 曲线${dashes[k]}</span></div><div class="badge"><span class="t">${tier}</span><span class="v">${idx.toFixed(1)}</span></div></div>
+        ${NB && NB.specs[s.k] ? `<p class="sline">${esc(NB.specs[s.k].line)}</p>` : ""}
         <p class="scs">${L} 级升级 ${tier} 档 · 天赋让升级提速 ${p.gain[L - 1] >= 0 ? "+" : ""}${p.gain[L - 1]}%</p>
         <div class="ets">${ends}</div>
         <div class="jumps"><a class="jump" href="#/tiers" data-sel="${s.i}">看天梯和最佳加点</a><a class="jump primary" href="${simHash(cls, bestLvOrder(s.i, L))}" data-simcls="${cls}" data-simspec="${s.spec}" data-simi="${s.i}">在模拟器打开</a></div>
@@ -1596,6 +1773,112 @@ document.getElementById("legacyPage").addEventListener("click", (e) => {
   announce(`${p.nameZh || p.name} ${r}/${p.max}`);
 });
 
+// ===================== 新手入门 =====================
+const QUIZ = [
+  { k: "role", q: "组队的时候，你想做什么？", opts: [["any", "还不确定", "先看看都有什么"], ["dps", "打伤害", "负责把怪打死"], ["tank", "当坦克", "站最前面让怪打自己"], ["heal", "当治疗", "在后面给队友加血"]] },
+  { k: "range", q: "喜欢贴身打，还是站远处？", opts: [["any", "都行", "不挑"], ["melee", "近战", "拿武器冲上去"], ["ranged", "远程", "放法术、射箭"]] },
+  { k: "goal", q: "你最看重什么？", opts: [["easy", "容易上手", "第一次玩，别太复杂"], ["level", "一个人升级快", "少死、少休息"], ["group", "满级在队伍里强", "以后想打团本"]] },
+];
+const quiz = { ...{ role: "any", range: "any", goal: "easy" }, ...store.get("forever-quiz", {}) };
+const avg = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;
+function quizPicks() {
+  let list = D.specs.map((s, i) => ({ s, i, roles: MODEL.specRoles[s.cls][s.spec] || [], range: (NB.specs[s.k] || {}).range, diff: (NB.classes[s.cls] || {}).difficulty || 2 }));
+  if (quiz.role !== "any") list = list.filter((x) => x.roles.includes(quiz.role));
+  let relaxed = false;
+  if (quiz.range !== "any") { const f = list.filter((x) => x.range === quiz.range); if (f.length) list = f; else relaxed = true; }
+  for (const x of list) {
+    x.lvAvg = avg(PER()[x.i].lv.slice(9));
+    x.end = (quiz.role === "any" ? x.roles : [quiz.role]).map((r) => ({ r, e: endEntry(r, x.i) })).filter((o) => o.e).sort((a, b) => b.e.index - a.e.index)[0];
+  }
+  const by = { easy: (a, b) => a.diff - b.diff || b.lvAvg - a.lvAvg, level: (a, b) => b.lvAvg - a.lvAvg, group: (a, b) => (b.end ? b.end.e.index : 0) - (a.end ? a.end.e.index : 0) || b.lvAvg - a.lvAvg };
+  list.sort(by[quiz.goal]);
+  // 每个职业只推荐一个专精，方便新手先定职业
+  const seen = new Set(), out = [];
+  for (const x of list) { if (seen.has(x.s.cls)) continue; seen.add(x.s.cls); out.push(x); if (out.length === 3) break; }
+  return { out, relaxed };
+}
+function renderQuiz() {
+  const el = document.getElementById("quizBody"); if (!el) return;
+  const { out, relaxed } = quizPicks();
+  const why = { easy: "按上手难度排，同样难度的看升级快慢", level: "按 1–60 级一个人升级的平均速度排", group: "按满级 60 级在队伍里的强度排" }[quiz.goal];
+  el.innerHTML = `
+    <div class="qgrid">${QUIZ.map((q, n) => `<div class="qq" role="group" aria-label="${q.q}"><p><span>${n + 1}</span>${q.q}</p><div class="qopts">${q.opts.map(([v, t, d]) => `<button data-q="${q.k}" data-v="${v}" aria-pressed="${quiz[q.k] === v}">${t}<small>${d}</small></button>`).join("")}</div></div>`).join("")}</div>
+    <p class="qres-h" aria-live="polite">${relaxed ? `没有${RANGE_ZH[quiz.range]}的${ROLE_ZH[quiz.role]}专精，先不看距离。` : ""}推荐给你（${why}）：</p>
+    <div class="qres">${out.map((x, k) => {
+      const s = x.s, c = NB.classes[s.cls], lt = tierOf(x.lvAvg);
+      return `<article class="qcard${k ? "" : " top"}" style="--cc:${s.color}">
+        <div class="qh"><img alt="" src="${ico(s.icon)}"><div><b>${s.cn} · ${s.clsCn}</b><span>${esc(c.tagline)}</span></div><span class="qrank">#${k + 1}</span></div>
+        <p>${esc(NB.specs[s.k].line)}</p>
+        <div class="qwhy"><span style="--q:var(--q-${lt})">升级 <em>${lt}</em> 档</span>${x.end ? `<span style="--q:var(--q-${x.end.e.tier})">满级${ROLE_ZH[x.end.r]} <em>${x.end.e.tier}</em> 档</span>` : ""}<span>${RANGE_ZH[x.range]}</span><span>${["", "容易上手", "上手中等", "上手要多花时间"][x.diff]}</span></div>
+        <div class="jumps"><a class="jump" href="#/class/${s.cls}">${s.clsCn}怎么玩</a><a class="jump primary" href="${simHash(s.cls, bestLvOrder(x.i, state.level))}" data-simcls="${s.cls}" data-simspec="${s.spec}" data-simi="${x.i}">看它怎么加天赋</a></div>
+      </article>`;
+    }).join("")}</div>
+    <p class="hint">档位是本站按天赋数据估算的，不是实测。三个都不喜欢也没关系，往下看全部 9 个职业。</p>`;
+}
+function renderStart(fromSlider) {
+  const el = document.getElementById("startPage");
+  if (!NB) { el.innerHTML = `<p class="note">新手资料还没有生成。</p>`; return; }
+  if (fromSlider && el.dataset.built) return renderQuiz();
+  const G = D.guide || {};
+  el.innerHTML = `
+    <div class="start">
+      <section class="st-intro">
+        <p class="st-kicker">没玩过魔兽？从这里开始</p>
+        <h2>三分钟看懂《魔兽世界：无限》</h2>
+        <p class="lede2">${esc(NB.intro)}</p>
+        <div class="st-facts">${NB.facts.map((f) => `<div class="st-fact"><span>${esc(f.k)}</span><b>${esc(f.v)}</b><small>${esc(f.sub)}</small></div>`).join("")}</div>
+        <div class="jumps"><button class="jump primary" data-quiz="1">帮我挑一个职业 ↓</button><a class="jump" href="#/guide">看完整的游戏介绍 →</a></div>
+      </section>
+      <section>
+        <h3 class="sth">魔兽的基本玩法</h3>
+        <p class="stsub">先弄懂这四件事，后面的页面就都看得懂了。</p>
+        <div class="st-basics">${NB.basics.map((b, k) => `<div class="st-basic"><span class="n">${k + 1}</span><h4>${esc(b.title)}</h4><p>${esc(b.body)}</p></div>`).join("")}</div>
+      </section>
+      <section class="quiz" id="quiz">
+        <h3 class="sth">不知道玩什么？回答三个问题</h3>
+        <p class="stsub">点一下就换答案，下面马上给出最合适的 3 个职业。</p>
+        <div id="quizBody"></div>
+      </section>
+      <section>
+        <h3 class="sth">9 个职业，一句话介绍</h3>
+        <p class="stsub">点进去看怎么玩、优缺点、能选的种族和每一级学的技能。</p>
+        <div class="st-classes">${CLS_ORDER.map((cls) => {
+          const c = NB.classes[cls], roles = [...new Set(specsOf(cls).flatMap((s) => MODEL.specRoles[cls][s.spec] || []))];
+          return `<a class="st-cls" href="#/class/${cls}" style="--cc:${CLS[cls].color}">${crestC(cls) ? `<img alt="" src="${crestC(cls)}">` : ""}<b>${CLS[cls].cn}</b><span class="tg">${esc(c.tagline)}</span><span class="meta2">${roles.map((r) => `<span class="rolechip" data-r="${r}">${ROLE_ZH[r]}</span>`).join("")}<span class="rolechip" data-r="range">${RANGE_ZH[c.range]}</span>${diffDots(c.difficulty)}</span></a>`;
+        }).join("")}</div>
+      </section>
+      <section>
+        <h3 class="sth">这个网站怎么用</h3>
+        <p class="stsub">挑好职业以后，按这个顺序看。</p>
+        <div class="st-steps">${NB.howto.map((h) => `<a class="st-step" href="${h.route}"><b>${esc(h.title)} →</b><span>${esc(h.body)}</span></a>`).join("")}</div>
+      </section>
+      ${(G.glossary || []).length ? `<section><h3 class="sth">常见名词</h3><p class="stsub">第一次玩魔兽会碰到的说法。</p><dl class="gloss">${G.glossary.map((g) => `<div><dt>${esc(g.term)}${g.en ? ` <span class="en">${esc(g.en)}</span>` : ""}</dt><dd>${esc(g.body)}</dd></div>`).join("")}</dl></section>` : ""}
+    </div>`;
+  el.dataset.built = "1";
+  renderQuiz();
+}
+let pendingQuiz = false;
+const scrollToQuiz = () => document.getElementById("quiz")?.scrollIntoView({ behavior: motionOK() ? "smooth" : "auto", block: "start" });
+document.addEventListener("click", (e) => {
+  const q = e.target.closest("[data-quiz]"); if (!q) return;
+  if (route.name === "start") { e.preventDefault(); scrollToQuiz(); } else pendingQuiz = true;
+});
+document.getElementById("startPage").addEventListener("click", (e) => {
+  const b = e.target.closest(".qopts button");
+  if (b) { quiz[b.dataset.q] = b.dataset.v; store.set("forever-quiz", quiz); renderQuiz(); document.querySelector(`.qopts button[data-q="${b.dataset.q}"][data-v="${b.dataset.v}"]`)?.focus({ preventScroll: true }); return; }
+  const a = e.target.closest("a[data-simcls]"); if (a) { sim.cls = a.dataset.simcls; sim.spec = a.dataset.simspec; sim.builds[sim.cls] = bestLvOrder(+a.dataset.simi, state.level); store.set("forever-sim", sim.builds); }
+});
+
+// 显示选项: 点外面收起，summary 上显示开了几个
+(() => {
+  const opts = document.getElementById("opts"), n = document.getElementById("optsN");
+  const count = () => { const k = ["showEn", "cmpClassic", "talented"].filter((id) => document.getElementById(id).checked).length; n.hidden = !k; n.textContent = k; };
+  opts.addEventListener("change", count);
+  document.addEventListener("click", (e) => { if (opts.open && !opts.contains(e.target)) opts.open = false; });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && opts.open) { opts.open = false; opts.querySelector("summary").focus(); } });
+  window.addEventListener("load", count); count();
+})();
+
 // ===================== 游戏机制 =====================
 const G_STATUS = { confirmed: ["已确认", "暴雪官方或试玩原文"], reported: ["据报道", "媒体和 Wowhead 现场报道"], unverified: ["待确认", "社区说法或推断，beta 前可能变化"] };
 const guideState = { off: new Set(store.get("forever-guide-off", [])), observer: null };
@@ -1615,7 +1898,7 @@ function renderGuide(fromSlider) {
       </aside>
       <article class="gbody">
         <header class="ghead">
-          <h2>游戏机制</h2>
+          <h2>游戏介绍</h2>
           <p class="lede2">${esc(G.intro)}</p>
           <p class="gmeta">资料整理于 ${esc(G.updated)} · 每一条都标了可靠程度和出处，beta（9 月 17 日开始）以后会有变化。</p>
           ${(G.conflicts || []).length ? `<details class="card gconf"><summary>资料之间有 ${G.conflicts.length} 处说法不一致</summary><ul>${G.conflicts.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></details>` : ""}
@@ -1670,8 +1953,10 @@ document.getElementById("guidePage").addEventListener("click", (e) => {
 // ===================== 启动 =====================
 window.addEventListener("hashchange", () => {
   applyHash(); renderRoute();
+  document.getElementById("opts").open = false;
   const bar = document.getElementById("appbar");
   if (window.scrollY > bar.offsetTop) window.scrollTo({ top: bar.offsetTop, behavior: "instant" });
+  if (pendingQuiz && route.name === "start") { pendingQuiz = false; requestAnimationFrame(scrollToQuiz); }
 });
 applyHash();
 store.set("forever-legacy", legacyRanks);
