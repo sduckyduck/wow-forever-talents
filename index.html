@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forever 专精天梯</title>
+<meta name="description" content="魔兽世界 Forever 27 个专精 1–60 级天梯与最佳加点（非官方）">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/forever-logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap">
+<style>
+:root{
+  --ground:#E9EDF1; --surface:#FFFFFF; --sunken:#F3F5F8; --ink:#141C25; --muted:#586472; --faint:#8C97A3; --line:#D3DAE2;
+  --accent:#A7801A; --accent-soft:rgba(167,128,26,.14);
+  --q-S:#C75F00; --q-A:#8A2BD0; --q-B:#0063C2; --q-C:#23851A; --q-D:#7C8288;
+  --maxed:#B8860B; --partial:#23851A;
+  --chart-line:rgba(20,28,37,.13);
+  --f-display:"Noto Serif SC","Songti SC","SimSun",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --f-num:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0C1117; --surface:#141B24; --sunken:#10161E; --ink:#E4EAF0; --muted:#95A1AE; --faint:#66727F; --line:#243040;
+    --accent:#FFD100; --accent-soft:rgba(255,209,0,.12);
+    --q-S:#FF8000; --q-A:#B865FF; --q-B:#3D9BFF; --q-C:#3FD62A; --q-D:#9D9D9D;
+    --maxed:#FFD100; --partial:#3FD62A;
+    --chart-line:rgba(228,234,240,.12);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0C1117; --surface:#141B24; --sunken:#10161E; --ink:#E4EAF0; --muted:#95A1AE; --faint:#66727F; --line:#243040;
+  --accent:#FFD100; --accent-soft:rgba(255,209,0,.12);
+  --q-S:#FF8000; --q-A:#B865FF; --q-B:#3D9BFF; --q-C:#3FD62A; --q-D:#9D9D9D;
+  --maxed:#FFD100; --partial:#3FD62A;
+  --chart-line:rgba(228,234,240,.12);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1280px;margin:0 auto}
+button,input{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header.top{display:grid;grid-template-columns:1fr auto;gap:8px 32px;align-items:end;padding-block:36px 20px;border-bottom:1px solid var(--line)}
+h1{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,4.4vw,44px);line-height:1.1;margin:0;letter-spacing:.02em;text-wrap:balance}
+.lede{grid-column:1;margin:0;max-width:62ch;color:var(--muted)}
+.meta{grid-row:1/3;grid-column:2;text-align:right;color:var(--faint);font-size:12px;line-height:1.7}
+.meta b{color:var(--muted);font-weight:500}
+
+.controls{position:sticky;top:0;z-index:5;background:var(--ground);display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;padding-block:14px;border-bottom:1px solid var(--line)}
+.seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--sunken);border:1px solid var(--line);border-radius:8px;padding:3px}
+.seg button{border:0;background:none;padding:5px 12px;border-radius:6px;cursor:pointer;color:var(--muted);font-size:13px;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12);font-weight:500}
+.seg .sep{width:1px;background:var(--line);margin:4px 2px}
+.level{display:flex;align-items:center;gap:14px;flex:1;min-width:260px}
+.lvnum{font-family:var(--f-num);font-weight:700;font-size:40px;line-height:1;min-width:2.2ch;text-align:right;font-variant-numeric:tabular-nums}
+.lvnum small{font-size:14px;font-weight:600;color:var(--faint);margin-left:2px}
+.slider{flex:1;min-width:160px}
+.slider input{width:100%;accent-color:var(--accent)}
+.ticks{position:relative;height:14px;font-family:var(--f-num);font-size:12px;color:var(--faint)}
+.ticks span{position:absolute;transform:translateX(-50%)}
+.lvinfo{font-size:12px;color:var(--muted);line-height:1.5;min-width:9em}
+.lvinfo b{font-family:var(--f-num);font-size:15px;color:var(--ink);font-weight:600}
+.level[aria-disabled="true"] .slider{opacity:.35;pointer-events:none}
+.toggle{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;line-height:1.2;user-select:none}
+.toggle input{position:absolute;opacity:0;width:1px;height:1px}
+.toggle .sw{width:34px;height:20px;border-radius:999px;background:var(--line);position:relative;transition:background .15s;flex:none}
+.toggle .sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+.toggle input:checked + .sw{background:var(--accent)}
+.toggle input:checked + .sw::after{transform:translateX(14px)}
+.toggle input:focus-visible + .sw{outline:2px solid var(--accent);outline-offset:2px}
+.toggle small{display:block;font-size:11px;color:var(--faint)}
+.toggle[aria-disabled="true"]{opacity:.4;pointer-events:none}
+.en{color:var(--faint);font-size:.85em;font-weight:400;margin-left:4px}
+.orig{display:block;color:var(--faint);font-size:12px;margin-top:2px}
+.orig > span{display:inline-block;font-size:10px;line-height:1.4;padding:0 4px;margin-right:6px;border:1px solid var(--line);border-radius:3px;vertical-align:1px}
+body.hide-en .en,body.hide-en .orig{display:none}
+.src-b{display:inline-block;font-size:10px;line-height:1.5;padding:0 5px;margin-left:6px;border-radius:3px;vertical-align:1px;font-weight:400;white-space:nowrap}
+.src-b.ok{background:color-mix(in srgb,var(--q-C) 16%,transparent);color:var(--q-C)}
+.src-b.later{background:color-mix(in srgb,var(--q-B) 16%,transparent);color:var(--q-B)}
+.src-b.prov{background:color-mix(in srgb,var(--q-S) 16%,transparent);color:var(--q-S)}
+.ab .txt{display:block;color:var(--muted)}
+
+main{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,1fr);gap:24px;padding-top:20px;align-items:start}
+.note{margin:0 0 12px;padding:8px 12px;border-radius:6px;background:var(--accent-soft);font-size:13px;color:var(--ink)}
+.hint{margin:10px 0 0;font-size:12px;color:var(--faint)}
+
+.board{display:flex;flex-direction:column;gap:6px}
+.row{display:grid;grid-template-columns:64px 1fr;background:var(--surface);border:1px solid var(--line);border-radius:8px;min-height:60px}
+.tier{display:flex;align-items:center;justify-content:center;font-family:var(--f-num);font-weight:700;font-size:40px;color:var(--q);border-right:1px solid var(--line);background:linear-gradient(90deg,color-mix(in srgb,var(--q) 14%,transparent),transparent)}
+.row[data-t="S"]{--q:var(--q-S)} .row[data-t="A"]{--q:var(--q-A)} .row[data-t="B"]{--q:var(--q-B)} .row[data-t="C"]{--q:var(--q-C)} .row[data-t="D"]{--q:var(--q-D)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px}
+.chips:empty::after{content:"—";color:var(--faint);align-self:center;padding-left:6px}
+.chip{display:flex;align-items:center;gap:8px;padding:4px 10px 4px 4px;border:1px solid var(--line);border-radius:6px;background:var(--sunken);cursor:pointer;text-align:left;transition:border-color .15s}
+.chip:hover{border-color:var(--faint)}
+.chip[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:var(--accent-soft)}
+.chip img{width:28px;height:28px;border-radius:4px;display:block;box-shadow:0 0 0 2px var(--cc)}
+.chip .nm{display:flex;flex-direction:column;line-height:1.2}
+.chip .sp{font-weight:500;font-size:13px}
+.chip .cl{font-size:11px;color:var(--muted)}
+.chip .ix{font-family:var(--f-num);font-weight:600;font-size:17px;font-variant-numeric:tabular-nums;margin-left:4px;color:var(--muted)}
+
+aside.detail{position:sticky;top:96px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:18px;max-height:calc(100vh - 110px);overflow:auto}
+.dh{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center}
+.dh img{width:48px;height:48px;border-radius:6px;box-shadow:0 0 0 2px var(--cc)}
+.dh h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:22px;line-height:1.2}
+.dh .en{font-size:12px;color:var(--faint)}
+.badge{display:flex;flex-direction:column;align-items:center;line-height:1}
+.badge .t{font-family:var(--f-num);font-weight:700;font-size:38px;color:var(--q)}
+.badge .v{font-family:var(--f-num);font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+h3{margin:0 0 8px;font-size:12px;font-weight:500;letter-spacing:.08em;color:var(--faint)}
+svg.chart{width:100%;height:auto;display:block}
+svg.chart text{font-family:var(--f-num);font-size:11px;fill:var(--faint)}
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px}
+.kv div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding-bottom:3px}
+.kv span{color:var(--muted);font-size:13px}
+.kv b{font-family:var(--f-num);font-weight:600;font-size:16px;font-variant-numeric:tabular-nums}
+
+/* 最佳加点 */
+.build-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px;margin-bottom:10px}
+.build-head .split{font-family:var(--f-num);font-weight:700;font-size:26px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.build-head .split span{color:var(--faint);font-weight:500;margin:0 2px}
+.build-head .cap{font-size:12px;color:var(--muted)}
+.whlink{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--sunken)}
+.whlink:hover{border-color:var(--accent)}
+.trees3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tcol h4{margin:0 0 6px;font-size:12px;font-weight:500;display:flex;justify-content:space-between;gap:4px;color:var(--muted)}
+.tcol.main h4{color:var(--ink)}
+.tcol h4 b{font-family:var(--f-num);font-size:15px;font-weight:600}
+.tcol.main h4 b{color:var(--maxed)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:6px;border-radius:6px;background:var(--sunken);border:1px solid var(--line)}
+.tcol.main .grid{border-color:color-mix(in srgb,var(--maxed) 55%,var(--line))}
+.cell{position:relative;aspect-ratio:1;max-width:100%;border:0;padding:0;border-radius:4px;background:transparent;cursor:pointer}
+.cell img{width:100%;height:100%;display:block;border-radius:4px;filter:grayscale(1) brightness(.75);opacity:.45;box-shadow:0 0 0 1px var(--line)}
+.cell[data-s="part"] img{filter:none;opacity:1;box-shadow:0 0 0 2px var(--partial)}
+.cell[data-s="max"] img{filter:none;opacity:1;box-shadow:0 0 0 2px var(--maxed)}
+.cell .rk{position:absolute;right:-3px;bottom:-4px;font-family:var(--f-num);font-weight:700;font-size:10px;line-height:1;padding:1px 2px;border-radius:3px;background:var(--surface);color:var(--muted);border:1px solid var(--line)}
+.cell[data-s="part"] .rk{color:var(--partial)} .cell[data-s="max"] .rk{color:var(--maxed)}
+.cell[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:2px}
+.cell.gap{cursor:default;pointer-events:none}
+.tinfo{margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--sunken);display:grid;grid-template-columns:36px 1fr;gap:4px 10px;font-size:13px}
+.tinfo img{width:36px;height:36px;border-radius:4px}
+.tinfo .nm{font-weight:700}
+.tinfo .nm .r{font-family:var(--f-num);font-weight:600;color:var(--muted);margin-left:6px}
+.tinfo .sub{font-size:12px;color:var(--faint)}
+.tinfo p{grid-column:1/-1;margin:0}
+.tinfo .est{color:var(--muted);font-size:12px}
+.flag{display:inline-block;font-size:11px;padding:0 5px;border-radius:3px;margin-left:6px;border:1px solid currentColor;vertical-align:1px;font-weight:400}
+.flag.low{color:var(--q-S)} .flag.ext{color:var(--faint)}
+
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.tl li{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:center;font-size:13px}
+.tl img{width:22px;height:22px;border-radius:3px}
+.tl .r{font-family:var(--f-num);color:var(--muted);font-size:14px;margin-left:6px}
+.tl .val{font-family:var(--f-num);font-weight:600;font-size:15px;text-align:right;font-variant-numeric:tabular-nums}
+.unc{font-size:12px;color:var(--muted)}
+.meter{height:6px;border-radius:3px;background:var(--sunken);border:1px solid var(--line);overflow:hidden;margin-top:4px}
+.meter i{display:block;height:100%;background:var(--q-S)}
+details summary{cursor:pointer;color:var(--muted);font-size:13px}
+.order{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:3px;font-size:13px}
+.order li{display:grid;grid-template-columns:4.6em 20px 1fr auto;gap:8px;align-items:center}
+.order .lv{font-family:var(--f-num);font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.order img{width:20px;height:20px;border-radius:3px}
+.order .r{font-family:var(--f-num);color:var(--muted)}
+
+section.block{margin-top:40px;border-top:1px solid var(--line);padding-top:24px}
+section.block > h2{margin:0 0 6px;font-family:var(--f-display);font-weight:900;font-size:24px}
+section.block > p.sub{margin:0 0 16px;color:var(--muted);max-width:72ch}
+.method{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.method h3{font-size:14px;letter-spacing:0;color:var(--ink);font-weight:700;margin:0 0 6px}
+.method p,.method li{margin:0;color:var(--muted);font-size:13px;max-width:62ch}
+.method ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.formula{font-family:ui-monospace,Consolas,monospace;font-size:12px;background:var(--sunken);border:1px solid var(--line);border-radius:6px;padding:10px;overflow-x:auto;white-space:pre;color:var(--ink);margin-top:6px}
+.xwrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table.x{border-collapse:collapse;width:100%;min-width:620px;font-size:13px}
+table.x th,table.x td{padding:7px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+table.x th{font-size:12px;font-weight:500;color:var(--faint);background:var(--sunken)}
+table.x td.t{font-family:var(--f-num);font-weight:700;font-size:17px}
+table.x td.t[data-t="S"]{color:var(--q-S)} table.x td.t[data-t="A"]{color:var(--q-A)} table.x td.t[data-t="B"]{color:var(--q-B)} table.x td.t[data-t="C"]{color:var(--q-C)} table.x td.t[data-t="D"]{color:var(--q-D)}
+table.x td.t span{font-family:var(--f-body);font-weight:400;font-size:12px;color:var(--faint);margin-left:6px}
+table.x td.v{white-space:normal;color:var(--muted);min-width:14em}
+.ok{color:var(--q-C)} .near{color:var(--q-B)} .off{color:var(--q-S)}
+.xnotes{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:13px;display:grid;gap:4px;max-width:80ch}
+
+/* 技能 · 种族 · Legacy */
+.skilltabs{margin-bottom:16px}
+.skilltabs button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cc);margin-right:6px;box-shadow:0 0 0 1px var(--line)}
+.jump{align-self:flex-start;font-size:12px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--sunken);cursor:pointer}
+.jump:hover{border-color:var(--accent)}
+.sumrow{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;margin-bottom:14px}
+.sumrow h3{margin:0;font-family:var(--f-display);font-weight:900;font-size:20px;letter-spacing:0;color:var(--ink)}
+.stat{display:flex;flex-direction:column;line-height:1.2}
+.stat b{font-family:var(--f-num);font-weight:700;font-size:24px;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--faint)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.filters button{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--muted)}
+.filters button[aria-pressed="true"]{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.changes{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-bottom:18px}
+.change{display:grid;grid-template-columns:32px 1fr;gap:4px 10px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:13px}
+.change img,.change .noimg{width:32px;height:32px;border-radius:4px;background:var(--sunken)}
+.change .nm{font-weight:700}
+.change .nm small{font-weight:400;color:var(--faint);margin-left:6px}
+.change p{grid-column:1/-1;margin:0;color:var(--muted);font-size:12px}
+.pill{display:inline-block;font-size:11px;line-height:1.5;padding:0 7px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill[data-s="seen"]{color:var(--q-C)} .pill[data-s="renamed"]{color:var(--q-B)} .pill[data-s="earlier"]{color:var(--q-B)} .pill[data-s="missing"]{color:var(--q-S)}
+.pill[data-s="unverified"],.pill[data-s="racial"]{color:var(--faint)} .pill[data-s="talent"],.pill[data-s="new"]{color:var(--q-A)} .pill[data-s="mentioned"]{color:var(--muted)}
+.skwrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table.sk{border-collapse:collapse;width:100%;min-width:720px;font-size:13px}
+table.sk th{font-size:12px;font-weight:500;color:var(--faint);background:var(--sunken);text-align:left;padding:7px 10px;border-bottom:1px solid var(--line)}
+table.sk td{padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.sk tr.grp td{background:var(--sunken);font-size:12px;color:var(--muted);font-weight:500;padding:5px 10px}
+table.sk tr.sp{cursor:pointer}
+table.sk tr.sp:hover td{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+table.sk tr.sp[data-later="1"] td{color:var(--faint)}
+table.sk tr.sp[data-later="1"] img{opacity:.45;filter:grayscale(1)}
+table.sk .nmc{display:flex;align-items:center;gap:8px;min-width:12em}
+table.sk .nmc img{width:24px;height:24px;border-radius:3px}
+table.sk .lvls{display:flex;flex-wrap:wrap;gap:3px;max-width:340px}
+table.sk .lv{font-family:var(--f-num);font-weight:600;font-size:12px;min-width:22px;text-align:center;padding:0 3px;border-radius:3px;border:1px solid var(--line);color:var(--faint);font-variant-numeric:tabular-nums}
+table.sk .lv.got{background:var(--sunken);color:var(--ink);border-color:var(--faint)}
+table.sk .lv.now{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+table.sk .num{font-family:var(--f-num);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.sk tr.more td{background:var(--sunken);font-size:12px;color:var(--muted);white-space:normal}
+table.sk tr.more .hd{color:var(--faint)}
+table.sk tr.more p{margin:4px 0 0;max-width:80ch;color:var(--ink)}
+.coin{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.coin .g{color:#C9A227} .coin .s{color:#9AA4AE} .coin .c{color:#B87333}
+.racegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.racecol h3{font-family:var(--f-display);font-size:18px;font-weight:900;letter-spacing:0;color:var(--ink);margin:0 0 10px}
+.racecards{display:grid;gap:10px}
+.race{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:12px}
+.race[data-dim="1"]{opacity:.45}
+.race .rh{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.race .rh img{width:36px;height:36px;border-radius:4px}
+.race .rh b{font-size:15px}
+.race .cls{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto;justify-content:flex-end}
+.race .cls i{font-style:normal;font-size:11px;padding:0 6px;border-radius:3px;border:1px solid var(--line);color:var(--muted)}
+.race .cls i::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--cc);margin-right:4px;vertical-align:1px}
+.ab{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ab li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:13px;align-items:start}
+.ab img{width:22px;height:22px;border-radius:3px;margin-top:1px}
+.ab b{font-weight:600;margin-right:6px}
+.ab span{color:var(--muted)}
+.legacy{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ltree{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:12px}
+.ltree h3{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-size:17px;font-weight:900;letter-spacing:0;color:var(--ink);margin:0 0 10px}
+.ltree h3 img{width:28px;height:28px;border-radius:4px}
+.perk{display:grid;grid-template-columns:30px 1fr;gap:3px 10px;padding:8px 0;border-top:1px dashed var(--line);font-size:13px}
+.perk:first-of-type{border-top:0}
+.perk img{width:30px;height:30px;border-radius:4px}
+.perk .pn{font-weight:700}
+.perk .pn .mx{font-family:var(--f-num);font-weight:600;color:var(--muted);margin-left:6px}
+.perk p{grid-column:2;margin:0;color:var(--muted)}
+.perk .src{grid-column:2;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px}
+.perk .src .pill.ok2{color:var(--q-C)} .perk .src .pill.only{color:var(--q-S)}
+.callout{margin:0 0 16px;padding:10px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);font-size:13px;color:var(--muted);max-width:90ch}
+.callout b{color:var(--ink)}
+
+@media (max-width:980px){
+  .racegrid,.legacy{grid-template-columns:1fr}
+  main{grid-template-columns:1fr}
+  aside.detail{position:static;max-height:none}
+  .method{grid-template-columns:1fr}
+  header.top{grid-template-columns:1fr}
+  .meta{grid-row:auto;grid-column:1;text-align:left}
+}
+@media (max-width:700px){
+  .controls{position:static}
+  aside.detail{top:auto}
+}
+@media (max-width:480px){
+  .row{grid-template-columns:44px 1fr}
+  .tier{font-size:30px}
+  .kv{grid-template-columns:1fr}
+  .trees3{gap:6px}
+  .grid{gap:3px;padding:4px}
+}
+.cw{position:relative;display:block;flex:none;width:34px;height:34px}
+.chip .cw img.cr,.dh .cw img.cr{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.chip .cw img.sb,.dh .cw img.sb{position:absolute;right:-5px;bottom:-4px;width:17px;height:17px;border-radius:3px;box-shadow:0 0 0 1.5px var(--cc),0 0 0 3px var(--surface)}
+.dh .cw.big{width:58px;height:58px}
+.dh .cw.big img.sb{width:24px;height:24px;right:-6px;bottom:-5px}
+.dh:has(.cw.big){grid-template-columns:58px 1fr auto}
+.tabcrest{width:20px;height:20px;object-fit:contain;margin-right:5px;vertical-align:-5px}
+.race .rh img.crest{width:52px;height:52px;object-fit:contain;border-radius:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.race .cls i.hc::before{display:none}
+.race .cls i.hc img{width:14px;height:14px;object-fit:contain;vertical-align:-3px;margin-right:3px}
+.hcrest{width:34px;height:34px;object-fit:contain;vertical-align:-9px;margin-right:8px}
+.icrest{width:18px;height:18px;object-fit:contain;vertical-align:-4px;margin:0 2px}
+
+/* ---- 网站版: Forever 品牌 ---- */
+:root{--accent:#94672A;--accent-soft:rgba(148,103,42,.14);--arcane:#1F7FB0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--accent:#E3B872;--accent-soft:rgba(227,184,114,.13);--arcane:#4FB6E3}}
+:root[data-theme="dark"]{--accent:#E3B872;--accent-soft:rgba(227,184,114,.13);--arcane:#4FB6E3}
+body{overflow-x:clip}
+section.block,#tiers{scroll-margin-top:96px}
+.brand{position:relative;isolation:isolate;overflow:hidden;margin-inline:calc(50% - 50vw);padding-inline:calc(50vw - 50% + 16px);color:#F4ECDD;background:#0A121C}
+.brand-art{position:absolute;inset:0;z-index:-2}
+.brand-art i{position:absolute;top:0;bottom:0;width:62%;background-size:cover;display:block}
+.brand-art .horde{left:0;background-image:url(assets/keyart-horde.webp);background-position:18% 38%;-webkit-mask-image:linear-gradient(90deg,#000 55%,transparent);mask-image:linear-gradient(90deg,#000 55%,transparent)}
+.brand-art .alliance{right:0;background-image:url(assets/keyart-alliance.webp);background-position:85% 32%;-webkit-mask-image:linear-gradient(270deg,#000 55%,transparent);mask-image:linear-gradient(270deg,#000 55%,transparent)}
+.brand::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,14,24,.15) 0%,rgba(8,14,24,.72) 24%,rgba(8,14,24,.62) 70%,rgba(8,14,24,.2) 100%),linear-gradient(180deg,transparent 55%,var(--ground) 100%)}
+.brand-in{display:grid;grid-template-columns:auto 1fr;gap:12px 36px;align-items:center;padding-block:34px 44px;max-width:1280px;margin:0 auto}
+.brand .logo{width:clamp(150px,19vw,240px);height:auto;display:block;filter:drop-shadow(0 10px 24px rgba(0,0,0,.55))}
+.brand .kicker{font-size:12px;letter-spacing:.14em;color:#E3B872;text-transform:uppercase}
+.brand h1{color:#FFF7E8;font-size:clamp(30px,4.6vw,50px);margin:6px 0 10px;text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.brand .lede{color:#D7DEE6;max-width:60ch;margin:0;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.brand .facts{display:flex;flex-wrap:wrap;gap:6px 18px;margin:14px 0 0;padding:0;list-style:none;font-size:12px;color:#BFC8D2}
+.brand .facts b{font-family:var(--f-num);font-size:20px;font-weight:700;color:#FFF7E8;margin-right:4px;font-variant-numeric:tabular-nums}
+.brand nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.brand nav a{font-size:13px;text-decoration:none;color:#F4ECDD;padding:5px 14px;border-radius:999px;border:1px solid rgba(227,184,114,.45);background:rgba(10,18,28,.55);backdrop-filter:blur(4px)}
+.brand nav a:hover,.brand nav a:focus-visible{border-color:#E3B872;background:rgba(227,184,114,.2)}
+.site-foot{margin-top:48px;padding-block:22px 8px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:12px;color:var(--faint)}
+.site-foot img{width:64px;height:auto;opacity:.9}
+.site-foot p{margin:0;max-width:90ch}
+@media (max-width:700px){.brand-in{grid-template-columns:1fr;justify-items:start;padding-block:24px 34px}.brand .logo{width:150px}.brand-art i{width:100%}.brand-art .alliance{display:none}.brand-art .horde{-webkit-mask-image:none;mask-image:none}}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<script src="data.js"></script>
+<div class="wrap">
+  <header class="brand">
+    <div class="brand-art" aria-hidden="true"><i class="horde"></i><i class="alliance"></i></div>
+    <div class="brand-in">
+      <img class="logo" src="assets/forever-logo.webp" width="240" height="196" alt="World of Warcraft Forever">
+      <div>
+        <div class="kicker">非官方粉丝工具 · BlizzCon 2026 试玩数据 · 模型生成 2026-09-14</div>
+        <h1>专精天梯 · 天赋模拟器</h1>
+        <p class="lede">九职业 27 个专精，1 到 60 级每一级的强弱排名和最佳加点。按 Wowhead 天赋计算器的规则逐级模拟，附职业技能、种族天赋和 Legacy 传承，中文译名保留英文原文。</p>
+        <ul class="facts"><li><b>27</b>专精</li><li><b>470</b>天赋</li><li><b>382</b>职业技能</li><li><b>10</b>种族</li><li><b>19</b>Legacy 传承</li></ul>
+        <nav aria-label="页面导航"><a href="#tiers">专精天梯</a><a href="#skills">技能 · 种族 · Legacy</a><a href="#xcheck">网上榜单对照</a><a href="#method">算法说明</a></nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="controls" id="tiers">
+    <div class="seg" role="group" aria-label="榜单">
+      <button id="v-lv" data-view="lv">升级综合</button>
+      <button id="v-tal" data-view="tal">纯天赋提升</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button id="v-dps" data-view="dps">60 级输出</button>
+      <button id="v-tank" data-view="tank">坦克</button>
+      <button id="v-heal" data-view="heal">治疗</button>
+    </div>
+    <div class="level" id="levelBox">
+      <div class="lvnum" id="lvnum">40<small>级</small></div>
+      <div class="slider">
+        <input type="range" id="lv" min="1" max="60" value="40" aria-label="角色等级">
+        <div class="ticks" id="ticks"></div>
+      </div>
+      <div class="lvinfo" id="lvinfo"></div>
+    </div>
+    <label class="toggle" for="showEn" title="在中文下面显示英文原文，方便核对"><input type="checkbox" id="showEn" checked><span class="sw" aria-hidden="true"></span><span>英文原文<small>中英对照核查</small></span></label>
+    <label class="toggle" for="talented" title="Legacy 传承「Talented」点满：9 级开始拿天赋点，上限仍是 51"><input type="checkbox" id="talented"><span class="sw" aria-hidden="true"></span><span>Legacy Talented<small>9 级起有天赋点</small></span></label>
+  </div>
+
+  <main>
+    <div>
+      <p class="note" id="note" hidden></p>
+      <div class="board" id="board"></div>
+      <p class="hint">点任意专精，右边显示它的最佳加点；点天赋图标看说明和估值依据。</p>
+    </div>
+    <aside class="detail" id="detail" aria-live="polite"></aside>
+  </main>
+
+  <section class="block" id="skills">
+    <h2>技能 · 种族 · Legacy</h2>
+    <p class="sub">学习等级和训练费来自 Wowhead Forever 技能库。它目前还是 Classic 数据的镜像，Wowhead 说要等 beta 拆包才更新，所以每个技能都用 BlizzCon 试玩 38 级技能书核对了一遍。等级跟着上面的滑条走。</p>
+    <div class="seg skilltabs" id="skillTabs" role="group" aria-label="技能表"></div>
+    <div id="skillBody"></div>
+  </section>
+
+  <section class="block" id="xcheck">
+    <h2>和网上榜单对照</h2>
+    <p class="sub">截至 2026-09-14，网上还没有基于实测的 Forever 榜单（Icy Veins 仍是 Coming Soon）。能找到的只有 AOEAH 和 FrostyBoost 当天发的文章，都是看天赋说明写的，没有数值，仅作参考。</p>
+    <div class="xwrap"><table class="x" id="xtable"></table></div>
+    <ul class="xnotes">
+      <li><b>一致：</b>单刷升级猎人最好；法系输出火法、恶魔术靠前；治疗恢复萨、牧师靠前；刺杀贼、战斗贼在第一梯队。</li>
+      <li><b>仍有分歧：</b>增强萨和元素萨，对方都放在 S/A。本模型把先祖之怒按 3 分钟冷却、漩涡武器按低触发估，这两个数值试玩里都没见过。痛苦术、生存猎也比对方低一档。</li>
+      <li><b>坦克：</b>FrostyBoost 推圣骑士（愤怒圣印带吸收盾），本模型防护战第一、防护骑第二。</li>
+      <li><b>已做的修正：</b>60 级输出的职业底子原本参考 Classic（82–108），现已压到 95–105，让天赋本身决定排名。修正后暗影牧、野性德升到 A，增强萨从 D 升到 C。</li>
+    </ul>
+  </section>
+
+  <section class="block" id="method">
+    <h2>这个排名是怎么算出来的</h2>
+    <div class="method">
+    <div>
+      <h3>1 · 加点规则（来自 Wowhead）</h3>
+      <p>照抄 Wowhead Forever 计算器源码的规则：10 级开始每级 1 点（打开 Legacy Talented 开关则从 9 级开始），60 级一共 51 点；每系第 N 行要先在该系投 5×(N−1) 点，共 7 行，所以第 7 行的 31 点天赋最早 40 级才能点；前置天赋要点满指定点数。</p>
+    </div>
+    <div>
+      <h3>2 · 天赋估值</h3>
+      <p>470 个天赋按同一把尺子逐个估值：升级击杀速度、休息时间、生存、便利，以及 60 级输出、坦克、治疗的百分比收益。比如“全部伤害 +10%”记 10，“法术暴击 +1%”记 0.5。修改高等级技能的天赋，在学会那个技能之前不算分。</p>
+    </div>
+    <div>
+      <h3>3 · 最佳加点怎么来</h3>
+      <p>每个专精从 10 级开始，每升一级拿 1 点，点在“每一点换来分数最多”的地方（会算上凑行需要的填充点和前置）。主系点数始终不少于任何副系。60 级输出、坦克、治疗榜单是按该定位从零重新加满 51 点。每套加点都能直接在 Wowhead 打开。</p>
+    </div>
+    <div>
+      <h3>4 · 升级评分公式</h3>
+      <div class="formula">战斗时间 = 100 / (基础击杀 × (1 + 击杀加成))
+休息时间 = 战斗时间 × 休息比 × (1 − 续航) × (1 − 0.4×生存)
+升级分   = 100 / (战斗 + 休息)
+         × (安全度 × (1 + 生存))^0.3 × (1 + 0.008×便利)</div>
+    </div>
+    <div>
+      <h3>5 · 几种榜单</h3>
+      <p><b>升级综合</b>把职业本身的强度（猎人有宠物、战士要吃饭）也算进去。<b>纯天赋提升</b>只看天赋树让这个职业快了多少。60 级榜单 = 职业底子 × (1 + 天赋提升)，输出底子限制在 95–105。指数 = 分数 ÷ 同榜平均 × 100；S ≥ 112，A ≥ 104，B ≥ 96，C ≥ 88，其余 D。</p>
+    </div>
+    <div>
+      <h3>6 · 靠不住的地方</h3>
+      <ul>
+        <li>试玩最高 38 级，很多天赋只见过 1 级，后面的等级是推算的。</li>
+        <li>职业底子和天赋估值都是人工判断，不是实测。</li>
+        <li>没算装备、种族、组队和 AOE 刷怪。</li>
+        <li>详情里的“不确定度”表示分数有多少来自低置信估值或推算等级。</li>
+      </ul>
+    </div>
+    </div>
+  </section>
+  <footer class="site-foot">
+    <img src="assets/forever-logo.webp" alt="" width="64" height="52">
+    <p>非官方粉丝工具，与暴雪娱乐无关，仅供个人研究使用。《魔兽世界：Forever》徽标与主视觉版权归 Blizzard Entertainment，取自 BlizzCon 2026 官方媒体包。天赋与技能数据来自 Wowhead Forever 天赋计算器和技能库、BlizzCon 2026 试玩；强弱排名是模型估算，不是实测。</p>
+  </footer>
+</div>
+
+<script>
+const D = window.FOREVER_DATA;
+const TIERS = ["S","A","B","C","D"];
+const VIEW_NAME = {lv:"升级综合", tal:"纯天赋提升", dps:"60 级输出", tank:"60 级坦克", heal:"60 级治疗"};
+const byKey = Object.fromEntries(D.specs.map((s,i)=>[s.k,i]));
+const treeCn = (cls, tree) => { const i = byKey[cls+":"+tree]; return i==null ? tree : D.specs[i].cn; };
+const firstLv = () => state.talented ? 9 : 10;
+const pts = L => Math.max(0, Math.min(51, L - firstLv() + 1));
+const PER = () => state.talented ? D.perT : D.per;
+const ico = n => n>=0 ? D.icons[n] : "";
+const RENAMED_ZH = {"Bane of Agony":["痛苦灾难","later"], "Bane of Doom":["末日灾难","later"], "Subjugate Demon":["奴役恶魔","provisional"], "Fire Nova":["火焰新星","later"], "Call Owl":["召唤猫头鹰","provisional"]};
+const SRC = {classic:["国服译名","ok"], later:["沿用后续版本译名","later"], provisional:["暂译","prov"]};
+const srcBadge = k => k && SRC[k] ? `<span class="src-b ${SRC[k][1]}">${SRC[k][0]}</span>` : "";
+const bi = (zh, en) => zh && zh !== en ? `${esc(zh)} <span class="en">${esc(en)}</span>` : esc(en);
+const tn = t => t[12] || t[0];
+const CREST = window.FOREVER_CRESTS || null;
+const crestC = cls => CREST && CREST.class[cls];
+const crestR = race => CREST && CREST.race[race];
+// 职业徽记 + 右下角专精小图标；没有徽记时回退专精图标
+const specBadge = (s, big) => crestC(s.cls) ? `<span class="cw${big?" big":""}"><img class="cr" alt="" src="${crestC(s.cls)}"><img class="sb" alt="" src="${ico(s.icon)}"></span>` : `<img alt="" src="${ico(s.icon)}">`;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+let state = {view:"lv", level:40, sel:null, talent:null, talented:false};
+try { const s = JSON.parse(localStorage.getItem("forever-tiers")||"{}"); if (VIEW_NAME[s.view]) state.view = s.view; if (s.level>=1 && s.level<=60) state.level = s.level; state.talented = !!s.talented; } catch(e) {}
+const save = () => { try { localStorage.setItem("forever-tiers", JSON.stringify({view:state.view, level:state.level, talented:state.talented})); } catch(e) {} };
+
+const genEl = document.getElementById("gen"); if (genEl) genEl.textContent = D.generated.slice(0,10);
+const ticks = document.getElementById("ticks");
+[1,10,20,30,40,50,60].forEach(v => { const s = document.createElement("span"); s.style.left = ((v-1)/59*100)+"%"; s.textContent = v; ticks.appendChild(s); });
+
+const isLevelView = () => state.view === "lv" || state.view === "tal";
+
+function entries() {
+  const v = state.view, L = state.level;
+  if (isLevelView()) return PER().map((p,i)=>({i, index: v==="lv" ? p.lv[L-1] : p.tal[L-1], tier: (v==="lv" ? p.lvT : p.talT)[L-1], gain: p.gain[L-1]})).sort((a,b)=>b.index-a.index);
+  return D.end[v].map(e=>({i:e.s, index:e.index, tier:e.tier, e})).sort((a,b)=>b.index-a.index);
+}
+
+function renderBoard() {
+  const list = entries();
+  if (state.sel == null || !list.some(x=>x.i===state.sel)) { state.sel = list[0].i; state.talent = null; }
+  const board = document.getElementById("board");
+  board.textContent = "";
+  for (const t of TIERS) {
+    const row = document.createElement("div"); row.className = "row"; row.dataset.t = t;
+    const tl = document.createElement("div"); tl.className = "tier"; tl.textContent = t;
+    const chips = document.createElement("div"); chips.className = "chips";
+    for (const x of list.filter(x=>x.tier===t)) {
+      const s = D.specs[x.i];
+      const b = document.createElement("button"); b.className = "chip"; b.id = "chip-"+x.i;
+      b.style.setProperty("--cc", s.color);
+      b.setAttribute("aria-pressed", x.i===state.sel);
+      const val = state.view==="tal" ? (x.gain>=0?"+":"")+Math.round(x.gain)+"%" : x.index.toFixed(0);
+      b.innerHTML = `${specBadge(s)}<span class="nm"><span class="sp">${s.cn}</span><span class="cl">${s.clsCn}</span></span><span class="ix">${val}</span>`;
+      b.title = `${s.cn} ${s.clsCn} · 指数 ${x.index} · 点击看最佳加点`;
+      b.onclick = () => { if (state.sel !== x.i) state.talent = null; state.sel = x.i; renderBoard(); renderDetail(); if (matchMedia("(max-width:980px)").matches) document.getElementById("detail").scrollIntoView({behavior:"smooth", block:"start"}); };
+      chips.appendChild(b);
+    }
+    row.append(tl, chips); board.appendChild(row);
+  }
+  const note = document.getElementById("note");
+  if (isLevelView() && state.level < firstLv()) { note.hidden = false; note.textContent = state.view==="tal" ? `${firstLv()} 级之前没有天赋点，纯天赋榜全部持平。` : `${firstLv()} 级之前没有天赋点，同职业三个专精完全一样，这里只是职业底子的排名。`; }
+  else if (!isLevelView()) { note.hidden = false; note.textContent = `${VIEW_NAME[state.view]}：按这个定位从零加满 51 点后的排名，指数以本榜平均为 100。`; }
+  else note.hidden = true;
+
+  const L = state.level, p = pts(L), end = !isLevelView();
+  document.getElementById("lvnum").innerHTML = end ? `60<small>级</small>` : `${L}<small>级</small>`;
+  const rows = Math.min(7, Math.floor(p/5)+1);
+  document.getElementById("lvinfo").innerHTML = end ? `<b>51</b> 天赋点<br>满级加点` : `<b>${p}</b> / 51 天赋点<br>${p? `最深可点第 <b>${rows}</b> 行` : "还没有天赋"}`;
+  document.getElementById("levelBox").setAttribute("aria-disabled", end);
+  document.querySelector(".toggle").setAttribute("aria-disabled", end);
+  document.getElementById("talented").checked = state.talented;
+  document.getElementById("lv").value = L;
+  document.querySelectorAll(".controls .seg button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.view===state.view));
+}
+
+function readable(color) {
+  const root = document.documentElement.dataset.theme;
+  const dark = root==="dark" || (!root && matchMedia("(prefers-color-scheme: dark)").matches);
+  const n = parseInt(color.slice(1),16), lum = (0.299*(n>>16)+0.587*(n>>8&255)+0.114*(n&255))/255;
+  return (!dark && lum>0.72) ? "var(--ink)" : color;
+}
+
+function chart(i) {
+  const W=340,H=180,l=30,r=22,t=10,b=24, key = state.view==="lv" ? "lv" : "tal";
+  const y0=60,y1=150, X=L=>l+(L-1)/59*(W-l-r), Y=v=>t+(1-(Math.max(y0,Math.min(y1,v))-y0)/(y1-y0))*(H-t-b);
+  const path = arr => arr.map((v,k)=>(k?"L":"M")+X(k+1).toFixed(1)+" "+Y(v).toFixed(1)).join("");
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${D.specs[i].cn}${D.specs[i].clsCn} 1 到 60 级指数曲线">`;
+  for (const [v,tn] of [[112,"S"],[104,"A"],[96,"B"],[88,"C"]]) s += `<line x1="${l}" x2="${W-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--q-${tn})" stroke-opacity=".5" stroke-dasharray="3 3"/><text x="${W-r+4}" y="${Y(v)-3}" style="fill:var(--q-${tn})">${tn}</text>`;
+  s += `<text x="${W-r+4}" y="${Y(84)}" style="fill:var(--q-D)">D</text>`;
+  for (const v of [60,100,140]) s += `<text x="${l-6}" y="${Y(v)+4}" text-anchor="end">${v}</text>`;
+  for (const v of [1,10,20,30,40,50,60]) s += `<text x="${X(v)}" y="${H-6}" text-anchor="middle">${v}</text>`;
+  s += `<line x1="${X(firstLv())}" x2="${X(firstLv())}" y1="${t}" y2="${H-b}" stroke="var(--line)"/>`;
+  for (let k=0;k<PER().length;k++) if (k!==i) s += `<path d="${path(PER()[k][key])}" fill="none" stroke="var(--chart-line)" stroke-width="1"/>`;
+  const L = state.level, v = PER()[i][key][L-1], c = readable(D.specs[i].color);
+  s += `<line x1="${X(L)}" x2="${X(L)}" y1="${t}" y2="${H-b}" stroke="var(--accent)" stroke-width="1.5"/>`;
+  s += `<path d="${path(PER()[i][key])}" fill="none" stroke="${c}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  s += `<circle cx="${X(L)}" cy="${Y(v)}" r="4.5" fill="${c}" stroke="var(--surface)" stroke-width="2"/>`;
+  return s + "</svg>";
+}
+
+// 三系天赋树
+function treesView(s, ranks, tp, valueOf) {
+  let h = `<div class="trees3">`;
+  s.trees.forEach((tr) => {
+    const ids = Object.keys(D.talents).filter(id => D.talents[id][11]===s.cls && D.talents[id][1]===tr);
+    const cells = {}; for (const id of ids) { const t = D.talents[id]; cells[t[2]+","+t[3]] = id; }
+    const spent = ids.reduce((a,id)=>a+(ranks[id]||0),0);
+    h += `<div class="tcol${tr===s.spec?" main":""}"><h4><span>${treeCn(s.cls,tr)}</span><b>${spent}</b></h4><div class="grid">`;
+    for (let row=0; row<7; row++) for (let col=0; col<4; col++) {
+      const id = cells[row+","+col];
+      if (!id) { h += `<span class="cell gap" aria-hidden="true"></span>`; continue; }
+      const t = D.talents[id], r = ranks[id]||0, st = r===0 ? "none" : r>=t[4] ? "max" : "part";
+      h += `<button class="cell" id="cell-${id}" data-id="${id}" data-s="${st}" aria-pressed="${state.talent==id}" title="${esc(tn(t))} · ${esc(t[0])} ${r}/${t[4]}"><img alt="${esc(tn(t))}" src="${ico(t[8])}">${r?`<span class="rk">${r}/${t[4]}</span>`:""}</button>`;
+    }
+    h += `</div></div>`;
+  });
+  h += `</div>`;
+  const sel = state.talent && D.talents[state.talent] && D.talents[state.talent][1] && s.trees.includes(D.talents[state.talent][1]) ? state.talent : null;
+  if (sel) {
+    const t = D.talents[sel], r = ranks[sel]||0, ri = Math.max(0,r-1), desc = t[9][ri] || t[9][0] || "", descZh = (t[14]||[])[ri] || (t[14]||[])[0] || "";
+    const flags = (t[5]==="low"?`<span class="flag low">低置信</span>`:"") + (Math.max(r,1)>t[7]?`<span class="flag ext">推算等级</span>`:"");
+    const req = t[10].map(([rid,q])=>`${esc(tn(D.talents[rid]))} ${q} 点`).join("、");
+    const val = valueOf(sel);
+    h += `<div class="tinfo"><img alt="" src="${ico(t[8])}"><div><div class="nm">${esc(tn(t))}<span class="r">${r}/${t[4]}</span>${srcBadge(t[13])}${flags}</div><div class="sub">${t[12]?`<span class="en">${esc(t[0])}</span> · `:""}${treeCn(s.cls,t[1])} · 第 ${t[2]+1} 行${req?` · 前置 ${req}`:""}</div></div>
+      <p>${r?"":"（未点）第 1 级："}${esc(descZh || desc)}</p>${descZh?`<p class="orig"><span>原文</span>${esc(desc)}</p>`:""}
+      <p class="est">估值：${esc(t[6])}${val!=null?` · 在这套加点里贡献 <b>+${val}</b> 分`:""}</p></div>`;
+  } else {
+    h += `<p class="hint">点图标看天赋说明。金框 = 点满，绿框 = 点了一部分。</p>`;
+  }
+  return h;
+}
+
+function orderRuns(picks, L) {
+  const runs = [];
+  const got = {};
+  for (const [lv,id] of picks) {
+    if (lv > L) break;
+    got[id] = (got[id]||0)+1;
+    const last = runs[runs.length-1];
+    if (last && last.id===id && last.to===lv-1) { last.to = lv; last.rank = got[id]; }
+    else runs.push({id, from:lv, to:lv, rank:got[id]});
+  }
+  return `<ol class="order">` + runs.map(r => { const t = D.talents[r.id]; return `<li><span class="lv">${r.from===r.to?r.from:r.from+"–"+r.to} 级</span><img alt="" src="${ico(t[8])}"><span>${bi(t[12], t[0])}</span><span class="r">→ ${r.rank}/${t[4]}</span></li>`; }).join("") + `</ol>`;
+}
+
+function renderDetail() {
+  const i = state.sel, s = D.specs[i], p = PER()[i], L = state.level, v = state.view;
+  const el = document.getElementById("detail");
+  const list = entries(), me = list.find(x=>x.i===i), rank = list.indexOf(me)+1;
+  let h = `<div class="dh" style="--cc:${s.color}">${specBadge(s, true)}<div><h2>${s.cn} · ${s.clsCn}</h2><div class="en">${s.treeEn} ${s.cls} · ${VIEW_NAME[v]}第 ${rank} / ${list.length}</div></div>
+    <div class="badge" style="--q:var(--q-${me.tier})"><span class="t">${me.tier}</span><span class="v">${me.index.toFixed(1)}</span></div></div>
+    <button class="jump" id="jumpSkills">${s.clsCn}技能表 · 种族 · Legacy ↓</button>`;
+  let ranks = {}, top, unc, tp, wh, total;
+  if (isLevelView()) {
+    for (const [lv,id] of p.picks) if (lv<=L) ranks[id]=(ranks[id]||0)+1;
+    top = p.top[L-1]; unc = p.unc[L-1]; tp = p.tp[L-1]; total = pts(L);
+    wh = `https://www.wowhead.com/forever/talent-calc/${D.slugs[s.cls]}${p.wh[L-1]?"/"+p.wh[L-1]:""}`;
+  } else {
+    const e = me.e; ranks = e.ranks; top = e.top; unc = e.unc; tp = e.tp; wh = e.wh; total = 51;
+  }
+  const valueOf = id => { const f = top.find(x=>x[0]==id); return f ? f[2] : null; };
+  const split = s.trees.map(tr => Object.entries(ranks).filter(([id])=>D.talents[id][1]===tr).reduce((a,[,r])=>a+r,0));
+
+  if (total) {
+    const cap = isLevelView() ? `${L} 级升级最佳加点 · ${total} 点` : `${VIEW_NAME[v]}最佳加点 · 51 点`;
+    h += `<div><h3>最佳加点</h3><div class="build-head"><div><div class="split">${split.join("<span>/</span>")}</div><div class="cap">${cap}</div></div><a class="whlink" href="${wh}" target="_blank" rel="noopener">在 Wowhead 打开 ↗</a></div>${treesView(s, ranks, tp, valueOf)}</div>`;
+  } else {
+    h += `<p class="note">${L} 级还没有天赋点，拖到 ${firstLv()} 级以上看加点。</p>`;
+  }
+  if (isLevelView()) {
+    const d = p.dims[L-1];
+    h += `<div><h3>1–60 级指数（${VIEW_NAME[v]}）</h3>${chart(i)}</div>`;
+    if (total) h += `<div><h3>${L} 级天赋带来的</h3><div class="kv"><div><span>击杀速度</span><b>+${d[0]}%</b></div><div><span>休息减少</span><b>${d[1]}%</b></div><div><span>生存</span><b>+${d[2]}%</b></div><div><span>便利</span><b>${d[3]}</b></div><div><span>升级总提速</span><b>${p.gain[L-1]>=0?"+":""}${p.gain[L-1]}%</b></div><div><span>天赋点</span><b>${total}</b></div></div></div>`;
+  } else {
+    const dimName = {dps:"输出提升",tank:"坦克能力提升",heal:"治疗能力提升"}[v];
+    h += `<div class="kv"><div><span>天赋${dimName}</span><b>+${me.e.dim}%</b></div><div><span>天赋点</span><b>51</b></div></div>`;
+  }
+  if (total) {
+    h += `<div><h3>贡献最大的天赋</h3><ol class="tl">` + top.slice(0,6).map(([id,r,val]) => { const t = D.talents[id]; return `<li><img alt="" src="${ico(t[8])}"><span>${bi(t[12], t[0])}<span class="r">${r}/${t[4]}</span>${t[5]==="low"?`<span class="flag low">低置信</span>`:""}</span><span class="val">+${val}</span></li>`; }).join("") + `</ol></div>`;
+    h += `<div class="unc">不确定度 ${Math.round(unc*100)}%：分数里来自低置信估值或推算等级的比例<div class="meter"><i style="width:${unc*100}%"></i></div></div>`;
+    if (isLevelView()) h += `<details><summary>${firstLv()}–${L} 级逐级加点顺序</summary>${orderRuns(p.picks, L)}</details>`;
+  }
+  el.innerHTML = h;
+  el.querySelectorAll(".cell[data-id]").forEach(c => c.onclick = () => { state.talent = state.talent===c.dataset.id ? null : c.dataset.id; const sc = el.scrollTop; renderDetail(); el.scrollTop = sc; });
+}
+
+// 网上榜单对照（AOEAH 2026-09-14）
+const EXT = [
+  ["Shaman:Enhancement","S","S"], ["Warlock:Summoning","S","S"], ["Warlock:Curses","S","–"], ["Hunter:BeastMastery","B","S"],
+  ["Rogue:Assassination","A","A"], ["Rogue:Combat","A","–"], ["Mage:Fire","A","–"], ["Mage:Arcane","A","A"],
+  ["Druid:FeralCombat","A","A"], ["Shaman:ElementalCombat","A","A"], ["Hunter:Survival","A","–"], ["Warrior:Fury","B","A"],
+  ["Warrior:Arms","B","–"], ["Priest:Shadow","B","B"], ["Druid:Balance","B","B"], ["Paladin:Combat","B","B"],
+  ["Warlock:Destruction","B","–"], ["Hunter:Marksmanship","B","–"], ["Mage:Frost","–","–"], ["Rogue:Subtlety","–","–"],
+];
+function renderXcheck() {
+  const ours = Object.fromEntries(D.end.dps.map(e=>[D.specs[e.s].k, e]));
+  const ord = {S:0,A:1,B:2,C:3,D:3};
+  let h = `<thead><tr><th>专精</th><th>本模型 60 级输出</th><th>AOEAH PvE 输出</th><th>AOEAH 综合</th><th>对比</th></tr></thead><tbody>`;
+  for (const [k,pve,all] of EXT.sort((a,b)=>ours[b[0]].index-ours[a[0]].index)) {
+    const s = D.specs[byKey[k]], o = ours[k];
+    const ref = pve!=="–" ? pve : all;
+    let verdict = `<span class="near">对方未排</span>`;
+    if (ref!=="–") { const d = Math.abs(ord[o.tier]-ord[ref]); verdict = d===0 ? `<span class="ok">一致</span>` : d===1 ? `<span class="near">差一档</span>` : `<span class="off">分歧</span>`; }
+    h += `<tr><td>${s.cn} · ${s.clsCn}</td><td class="t" data-t="${o.tier}">${o.tier}<span>${o.index.toFixed(1)}</span></td><td class="t" data-t="${pve}">${pve}</td><td class="t" data-t="${all}">${all}</td><td>${verdict}</td></tr>`;
+  }
+  h += `</tbody>`;
+  document.getElementById("xtable").innerHTML = h;
+}
+
+// ---------- 技能 · 种族 · Legacy ----------
+const SK = D.skills;
+const CLS_ORDER = ["Warrior","Paladin","Hunter","Rogue","Priest","Shaman","Mage","Warlock","Druid"];
+const CLS = Object.fromEntries(D.specs.map(s => [s.cls, {cn:s.clsCn, color:s.color}]));
+const ST_LABEL = {renamed:"Forever 改名", seen:"试玩确认", earlier:"Forever 提前", missing:"试玩没看到", unverified:"未验证", talent:"Forever 天赋", racial:"种族限定", new:"Forever 新增", mentioned:"天赋里提到"};
+const skill = {tab: null, filter: "all", open: null};
+const coin = c => { if (!c) return `<span class="coin">免费</span>`; const g=Math.floor(c/10000), s=Math.floor(c%10000/100), cu=c%100; return `<span class="coin">${g?`${g}<span class="g">金</span> `:""}${s?`${s}<span class="s">银</span> `:""}${cu?`${cu}<span class="c">铜</span>`:""}</span>`; };
+const img = (n, cls="") => n>=0 ? `<img alt="" class="${cls}" src="${ico(n)}">` : `<span class="noimg"></span>`;
+
+function renderSkillTabs() {
+  if (!skill.tab) skill.tab = D.specs[state.sel].cls;
+  const el = document.getElementById("skillTabs");
+  el.innerHTML = CLS_ORDER.map(c => `<button id="sk-${c}" data-sk="${c}" aria-pressed="${skill.tab===c}" style="--cc:${CLS[c].color}">${crestC(c)?`<img class="tabcrest" alt="" src="${crestC(c)}">`:`<span class="dot"></span>`}${CLS[c].cn}</button>`).join("") +
+    `<span class="sep" aria-hidden="true"></span><button id="sk-race" data-sk="race" aria-pressed="${skill.tab==="race"}">种族天赋</button><button id="sk-legacy" data-sk="legacy" aria-pressed="${skill.tab==="legacy"}">Legacy 传承</button>`;
+  el.querySelectorAll("button").forEach(b => b.onclick = () => { skill.tab = b.dataset.sk; skill.open = null; renderSkillTabs(); renderSkills(); });
+}
+
+function renderSkills() {
+  const body = document.getElementById("skillBody");
+  if (skill.tab === "race") return body.innerHTML = raceView();
+  if (skill.tab === "legacy") return body.innerHTML = legacyView();
+  const cls = skill.tab, C = SK.classes[cls], L = isLevelView() ? state.level : 60;
+  const learnedAt = s => s[2].filter(r => r[0] <= L);
+  const got = C.spells.filter(s => learnedAt(s).length);
+  const nowList = C.spells.filter(s => s[2].some(r => r[0] === L));
+  const spent = C.spells.reduce((a,s) => a + learnedAt(s).reduce((b,r)=>b+r[1],0), 0);
+  const nextLv = Math.min(...C.spells.flatMap(s => s[2].map(r=>r[0]).filter(v => v > L)), Infinity);
+  const nextList = isFinite(nextLv) ? C.spells.filter(s => s[2].some(r => r[0] === nextLv)) : [];
+  const nextCost = nextList.reduce((a,s)=>a+s[2].filter(r=>r[0]===nextLv).reduce((b,r)=>b+r[1],0),0);
+
+  let h = `<div class="sumrow"><h3>${crestC(cls)?`<img class="hcrest" alt="" src="${crestC(cls)}">`:""}${CLS[cls].cn} · ${L} 级</h3>
+    <div class="stat"><b>${got.length}</b><span>已能学的技能</span></div>
+    <div class="stat"><b>${nowList.length}</b><span>${L} 级新学</span></div>
+    <div class="stat"><b>${coin(spent)}</b><span>到 ${L} 级累计训练费</span></div>
+    <div class="stat"><b>${isFinite(nextLv) ? nextLv+" 级" : "—"}</b><span>${isFinite(nextLv) ? `下次训练 · ${nextList.length} 个 · ${coin(nextCost)}` : "已学完"}</span></div></div>`;
+
+  const changes = [
+    ...C.extra.map(e => ({zh:e[6], name:e[0], src:e[7], sub:[e[1], e[2]].filter(Boolean).join(" · "), icon:e[3], s:e[4], note:e[5], noteZh:e[8]})),
+    ...C.spells.filter(s => ["renamed","earlier","missing","talent"].includes(s[6])).map(s => { const nn = /改名为 (.+?)。/.exec(s[7]); const fz = nn && RENAMED_ZH[nn[1]]; return {zh: s[8] ? (nn ? `${s[8]} → ${fz ? fz[0] : nn[1]}` : s[8]) : null, name: nn ? `${s[0]} → ${nn[1]}` : s[0], src: fz ? fz[1] : (s[8] ? "classic" : null), sub:s[1], icon:s[3], s:s[6], note:s[7], noteZh:s[11]}; }),
+  ];
+  h += `<h3>Forever 和 Classic 不一样的地方（试玩角色：${crestR(C.race)?`<img class="icrest" alt="" src="${crestR(C.race)}">`:""}${C.raceZh || C.race} ${C.bookLevel} 级${C.missingTabs.length?` · 没打开 ${C.missingTabs.join("、")} 页`:""}）</h3>
+    <div class="changes">${changes.map(c => `<div class="change">${img(c.icon)}<div><div class="nm">${esc(c.zh || c.name)}<small>${esc(c.sub)}</small></div>${c.zh?`<div class="en">${esc(c.name)}</div>`:""}<span class="pill" data-s="${c.s}">${ST_LABEL[c.s]}</span>${srcBadge(c.src)}</div><p>${esc(c.noteZh || c.note)}</p>${c.noteZh?`<p class="orig"><span>原文</span>${esc(c.note)}</p>`:""}</div>`).join("")}</div>`;
+
+  const F = {all:["全部", () => true], got:[`${L} 级前能学`, s => learnedAt(s).length], now:[`${L} 级新学`, s => s[2].some(r=>r[0]===L)], changed:["和 Classic 不同", s => ["renamed","earlier","missing","talent","racial"].includes(s[6])]};
+  h += `<div class="filters">${Object.entries(F).map(([k,[t]]) => `<button id="skf-${k}" data-f="${k}" aria-pressed="${skill.filter===k}">${t}</button>`).join("")}</div>`;
+  const list = C.spells.filter(F[skill.filter][1]);
+  const groups = []; for (const s of list.slice().sort((a,b)=>a[2][0][0]-b[2][0][0])) { let g = groups.find(x=>x.t===s[1]); if (!g) groups.push(g = {t:s[1], rows:[]}); g.rows.push(s); }
+  h += `<div class="skwrap"><table class="sk"><thead><tr><th>技能</th><th>学习等级（Classic 训练师）</th><th>当前等级</th><th>下一级训练费</th><th>试玩核对</th></tr></thead><tbody>`;
+  if (!list.length) h += `<tr><td colspan="5">这个筛选下没有技能。</td></tr>`;
+  for (const g of groups) {
+    h += `<tr class="grp"><td colspan="5">${esc(g.t)} · ${g.rows.length}</td></tr>`;
+    for (const s of g.rows) {
+      const levels = [...new Set(s[2].map(r=>r[0]))], have = levels.filter(v=>v<=L).length;
+      const next = s[2].find(r => r[0] > L);
+      const key = cls+"|"+s[0];
+      h += `<tr class="sp" data-key="${esc(key)}" data-later="${have?0:1}"><td><div class="nmc">${img(s[3])}<span>${bi(s[8], s[0])}</span></div></td>
+        <td><div class="lvls">${levels.map(v=>`<span class="lv${v<=L?" got":""}${v===L?" now":""}">${v}</span>`).join("")}</div></td>
+        <td class="num">${have}/${levels.length}</td><td>${next?coin(next[1]):"—"}</td><td><span class="pill" data-s="${s[6]}">${ST_LABEL[s[6]]}</span></td></tr>`;
+      if (skill.open === key) h += `<tr class="more"><td colspan="5"><span class="hd">Classic 满级：${esc(s[9] || s[4])}</span><p>${esc(s[10] || s[5]) || "（Wowhead 没有说明）"}</p>${s[10]?`<p class="orig"><span>原文</span>${esc(s[4])} · ${esc(s[5])}</p>`:""}${s[7]?`<p>${esc(s[11] || s[7])}</p>`:""}${s[11]?`<p class="orig"><span>原文</span>${esc(s[7])}</p>`:""}</td></tr>`;
+    }
+  }
+  h += `</tbody></table></div><p class="hint">点一行看 Classic 满级说明和核对依据。灰色 = 这个等级还学不到；金色格 = 刚好这一级学。</p>`;
+  body.innerHTML = h;
+  body.querySelectorAll(".filters button").forEach(b => b.onclick = () => { skill.filter = b.dataset.f; renderSkills(); });
+  body.querySelectorAll("tr.sp").forEach(r => r.onclick = () => { skill.open = skill.open === r.dataset.key ? null : r.dataset.key; renderSkills(); });
+}
+
+function raceView() {
+  const cls = D.specs[state.sel].cls;
+  let h = `<p class="callout">每个种族 2 个主动 + 2 个被动。职业标签是这个种族能选的职业；当前选中的是 <b>${CLS[cls].cn}</b>，不能玩${CLS[cls].cn}的种族会变淡。</p><div class="racegrid">`;
+  for (const [fac, list] of Object.entries(SK.races)) {
+    h += `<div class="racecol"><h3>${fac==="Horde"?"部落":"联盟"}</h3><div class="racecards">`;
+    for (const r of list) {
+      h += `<div class="race" data-dim="${r.classes.includes(cls)?0:1}"><div class="rh">${crestR(r.race)?`<img class="crest" alt="" src="${crestR(r.race)}">`:img(r.icon)}<b>${bi(r.raceZh, r.race)}</b>${srcBadge(r.raceSrc==="provisional"?"provisional":null)}<div class="cls">${r.classes.map(c=>`<i style="--cc:${CLS[c].color}"${crestC(c)?` class="hc"`:""}>${crestC(c)?`<img alt="" src="${crestC(c)}">`:""}${CLS[c].cn}</i>`).join("")}</div></div>
+        <ul class="ab">${r.abilities.map(a=>`<li>${img(a[2])}<div><b>${bi(a[3], a[0])}</b>${srcBadge(a[4])}<span class="txt">${esc(a[5] || a[1])}</span>${a[5]?`<span class="orig"><span>原文</span>${esc(a[1])}</span>`:""}</div></li>`).join("")}</ul></div>`;
+    }
+    h += `</div></div>`;
+  }
+  h += `</div>`;
+  const pr = SK.classes.Priest.classRacials;
+  if (pr) {
+    h += `<h3 style="margin-top:22px">牧师种族专属法术</h3><p class="callout">${esc(pr.noteZh || pr.note)}${pr.noteZh?`<span class="orig"><span>原文</span>${esc(pr.note)}</span>`:""}</p><div class="changes">`;
+    for (const [race, arr] of Object.entries(pr.races)) for (const a of arr) h += `<div class="change">${img(a[2])}<div><div class="nm">${esc(a[3] || a[0])}<small>${esc(a[6] || race)}</small></div>${a[3]?`<div class="en">${esc(a[0])}</div>`:""}${srcBadge(a[4])}</div><p>${esc(a[5] || a[1])}</p>${a[5]?`<p class="orig"><span>原文</span>${esc(a[1])}</p>`:""}</div>`;
+    h += `</div>`;
+  }
+  return h;
+}
+
+function legacyView() {
+  const lg = SK.legacy;
+  let h = `<p class="callout"><b>怎么拿点：</b>完成 Legacy 挑战（${lg.challenges.join("、")}），每个挑战 1 点，全账号共享；每个角色各自在三棵树里花。${esc(lg.rewards)}</p>
+    <p class="callout"><b>和天梯的关系：</b>「Talented」点满后 9 级就开始拿天赋点（上限仍是 51）。顶部的「Legacy Talented」开关打开后，升级榜和加点会按 9 级开始重新计算。</p><div class="legacy">`;
+  for (const t of lg.trees) {
+    h += `<div class="ltree"><h3>${img(t.icon)}${bi(t.nameZh, t.name)}</h3>`;
+    for (const p of t.perks) h += `<div class="perk">${img(p.icon)}<div class="pn">${bi(p.nameZh, p.name)}<span class="mx">0/${p.max}</span>${srcBadge(p.nameSrc)}</div><p>${esc(p.textZh || p.text)}</p>${p.textZh?`<p class="orig"><span>原文</span>${esc(p.text)}</p>`:""}<div class="src"><span class="pill ${p.confirmed?"ok2":"only"}">${esc(p.src)}</span>${p.diff?`<span>${esc(p.diff)}</span>`:""}</div></div>`;
+    h += `</div>`;
+  }
+  return h + `</div>`;
+}
+
+document.querySelectorAll(".controls .seg button").forEach(b => b.onclick = () => { state.view = b.dataset.view; save(); renderBoard(); renderDetail(); renderSkills(); });
+document.getElementById("showEn").addEventListener("change", e => { document.body.classList.toggle("hide-en", !e.target.checked); try { localStorage.setItem("forever-tiers-en", e.target.checked ? "1" : "0"); } catch(_) {} });
+try { if (localStorage.getItem("forever-tiers-en") === "0") { document.getElementById("showEn").checked = false; document.body.classList.add("hide-en"); } } catch(_) {}
+document.getElementById("talented").addEventListener("change", e => { state.talented = e.target.checked; state.talent = null; save(); renderBoard(); renderDetail(); });
+document.getElementById("lv").addEventListener("input", e => { state.level = +e.target.value; save(); renderBoard(); renderDetail(); renderSkills(); });
+document.getElementById("detail").addEventListener("click", e => { const j = e.target.closest("#jumpSkills"); if (!j) return; skill.tab = D.specs[state.sel].cls; skill.open = null; renderSkillTabs(); renderSkills(); document.getElementById("skills").scrollIntoView({behavior:"smooth"}); });
+function start(){ renderBoard(); renderDetail(); renderXcheck(); renderSkillTabs(); renderSkills(); }
+start();
+</script>
+</body>
+</html>
