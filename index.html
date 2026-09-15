@@ -1148,6 +1148,7 @@ html.detail-open{overflow:hidden}
     <div>
       <h3>2 · 天赋估值</h3>
       <p>470 个天赋按同一把尺子逐个估值：升级击杀速度、休息时间、生存、便利，以及 60 级输出、坦克、治疗的百分比收益。比如“全部伤害 +10%”记 10，“法术暴击 +1%”记 0.5。修改高等级技能的天赋，在学会那个技能之前不算分。</p>
+      <p><b>60 级输出用模拟器校准过：</b>用社区开源模拟器 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a>（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT 协议，非官方）在 17 个输出专精的 25 套加点上逐个去掉或加满天赋，实测输出变化，再和人工估值各取一半（带团队增益的只取四分之一）。给技能的天赋、打法核心天赋、模拟器没实现或数值和 Wowhead 对不上的天赋不参与校准。升级、坦克、治疗仍是人工估值。天赋说明的「估值依据」里注明了每一项校准前后的数。</p>
     </div>
     <div>
       <h3>3 · 最佳加点怎么来</h3>
@@ -1168,7 +1169,7 @@ html.detail-open{overflow:hidden}
       <h3>6 · 靠不住的地方</h3>
       <ul>
         <li>试玩最高 38 级，很多天赋只见过 1 级，后面的等级是推算的。</li>
-        <li>职业底子和天赋估值都是人工判断，不是实测。</li>
+        <li>职业底子和大部分天赋估值是人工判断。60 级输出有一部分按模拟器校准，但模拟器本身也用的是试玩画面上的天赋数值和 Classic 的装备，不是游戏客户端实测。</li>
         <li>没算装备、种族、组队和 AOE 刷怪。</li>
         <li>详情里的“不确定度”表示分数有多少来自低置信估值或推算等级。</li>
       </ul>
@@ -1178,7 +1179,7 @@ html.detail-open{overflow:hidden}
   </div>
   <footer class="site-foot">
     <img src="assets/forever-logo.webp" alt="" width="64" height="52" loading="lazy">
-    <p>非官方粉丝工具，与暴雪娱乐无关，仅供个人研究使用。《魔兽世界：Forever》徽标与主视觉版权归 Blizzard Entertainment，取自 BlizzCon 2026 官方媒体包。天赋与技能数据来自 Wowhead Forever 天赋计算器和技能库、BlizzCon 2026 试玩；强弱排名是模型估算，不是实测。</p>
+    <p>非官方粉丝工具，与暴雪娱乐无关，仅供个人研究使用。《魔兽世界：Forever》徽标与主视觉版权归 Blizzard Entertainment，取自 BlizzCon 2026 官方媒体包。天赋与技能数据来自 Wowhead Forever 天赋计算器和技能库、BlizzCon 2026 试玩；强弱排名是模型估算，不是实测；60 级输出估值用 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a> 模拟器（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT）校准。</p>
   </footer>
 </div>
 
