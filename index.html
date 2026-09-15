@@ -152,6 +152,7 @@ svg.chart text{font-family:var(--f-num);font-size:11px;fill:var(--faint)}
 .tinfo .sub{font-size:12px;color:var(--faint)}
 .tinfo p{grid-column:1/-1;margin:0}
 .tinfo .est{color:var(--muted);font-size:12px}
+.tinfo .cost{font-size:12px;color:var(--muted)}
 .flag{display:inline-block;font-size:11px;padding:0 5px;border-radius:3px;margin-left:6px;border:1px solid currentColor;vertical-align:1px;font-weight:400}
 .flag.low{color:var(--q-S)} .flag.ext{color:var(--faint)}
 
@@ -824,7 +825,7 @@ html.detail-open{overflow:hidden}
         <p class="kick">《魔兽世界：无限》中文资料站</p>
         <h1>专精天梯 · 天赋模拟器</h1>
         <p class="lede">没玩过魔兽也能看懂：先弄清楚这是什么游戏，再挑一个适合自己的职业，最后看它每一级怎么加天赋。九个职业 27 个专精，1 到 60 级的强弱排名和加点都在这里。</p>
-        <p class="byline">非官方粉丝工具 · 数据来自 BlizzCon 2026 试玩 · 模型生成于 2026-09-14</p>
+        <p class="byline">非官方粉丝工具 · 数据来自 BlizzCon 2026 试玩 · 模型生成于 2026-09-15</p>
         <nav aria-label="快速入口"><a class="primary" href="#/start">我是新手，从这里开始</a><a href="#/tiers">看专精强弱排名</a><a href="#/sim">打开天赋模拟器</a></nav>
       </div>
     </div>
@@ -1252,6 +1253,8 @@ const diffDots = (n) => `<span class="dif" title="上手难度（本站主观判
 
 // ---------- Classic 老天赋对比 ----------
 const CMP = { new: ["新", "Forever 新增"], changed: ["改", "相对 Classic 有改动"], moved: ["移", "只是换了位置"], same: ["", "和 Classic 一样"] };
+// 主动天赋的消耗、射程、施法和冷却，像游戏鼠标提示那样放在说明上面
+function costLine(t) { const c = t[17]; return c ? `<p class="cost" title="${esc(c[0])}">${esc(c[1] || c[0])}</p>` : ""; }
 function cmpBadge(t) { const c = t[15]; return c && c[0] !== "same" ? `<span class="cmp" data-c="${c[0]}" aria-hidden="true">${CMP[c[0]][0]}</span>` : ""; }
 const CLASSIC_TREE = { Affliction: "Curses", Demonology: "Summoning", Retribution: "Combat", "Shadow Magic": "Shadow" };
 const classicTreeCn = (cls, name) => treeCn(cls, CLASSIC_TREE[name] || String(name).replace(/s+/g, ""));
@@ -1671,7 +1674,7 @@ function renderSimInfo(S = simState(), box = document.getElementById("simInfo"))
     delta = `<p class="delta${d > 0.05 ? " up" : ""}">加这一点：${spec.cn} ${L} 级指数 <b>${d >= 0 ? "+" : ""}${d.toFixed(2)}</b>${ANN[id] && ANN[id][1] > L ? `（要到 ${ANN[id][1]} 级学会相关技能才生效）` : ""}</p>`;
   }
   box.innerHTML = `<div class="tinfo sinfo"><img alt="" src="${ico(t[8])}"><div><div class="nm">${esc(tn(t))}<span class="r">${r}/${t[4]}</span>${srcBadge(t[13])}${t[5] === "low" ? '<span class="flag low">低置信</span>' : ""}</div>
-      <div class="sub">${t[12] ? `<span class="en">${esc(t[0])}</span> · ` : ""}${treeCn(cls, t[1])}系 · 第 ${t[2] + 1} 行</div></div>
+      <div class="sub">${t[12] ? `<span class="en">${esc(t[0])}</span> · ` : ""}${treeCn(cls, t[1])}系 · 第 ${t[2] + 1} 行</div></div>${costLine(t)}
     ${cur ? `<p><b class="lbl">当前</b>${esc(cur)}</p>${t[14] && t[14][r - 1] ? `<p class="orig"><span>原文</span>${esc(curEn)}</p>` : ""}` : ""}
     ${nxt ? `<p><b class="lbl">${r ? "下一级" : "第 1 级"}</b>${esc(nxt)}</p>${t[14] && t[14][r] ? `<p class="orig"><span>原文</span>${esc(nxtEn)}</p>` : ""}` : ""}
     <p class="${add.ok ? "can" : "cant"}">${add.ok ? "可以加点" : esc(add.why)}</p>${delta}
@@ -1781,7 +1784,7 @@ function closeTalentDetail(restore = true) {
 }
 function readTalentHTML(id, r) {
   const t = D.talents[id], desc = n => esc(t[14]?.[n] || t[9][n] || "");
-  return `<div class="tinfo sinfo"><img alt="" src="${ico(t[8])}"><div><div class="nm">${esc(tn(t))}<span class="r">${r}/${t[4]}</span></div><div class="sub">${treeCn(t[11],t[1])} · 第 ${t[2]+1} 行</div></div>
+  return `<div class="tinfo sinfo"><img alt="" src="${ico(t[8])}"><div><div class="nm">${esc(tn(t))}<span class="r">${r}/${t[4]}</span></div><div class="sub">${treeCn(t[11],t[1])} · 第 ${t[2]+1} 行</div></div>${costLine(t)}
     ${r ? `<p><b class="lbl">当前</b>${desc(r-1)}</p>` : ""}${r < t[4] ? `<p><b class="lbl">${r ? "下一级" : "第 1 级"}</b>${desc(r)}</p>` : ""}
     ${t[10].length ? `<p>前置：${t[10].map(([rid,q])=>`${esc(tn(D.talents[rid]))} ${q} 点`).join("、")}</p>` : ""}${classicBlock(t)}${verifyBlock(t)}</div>`;
 }
