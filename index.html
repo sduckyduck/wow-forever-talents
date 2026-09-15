@@ -474,26 +474,77 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .pips i.on{background:var(--accent)}
 .lperk.full .pips i.on{background:var(--maxed)}
 
-/* ---------- 游戏机制 ---------- */
-.guide{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;align-items:start}
-.gtoc{position:sticky;top:132px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 150px);overflow:auto;padding-right:4px}
-.gtoc-h{margin:0;font-size:12px;color:var(--faint);letter-spacing:.06em}
-.gtoc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
-.gtoc a{display:flex;justify-content:space-between;gap:8px;padding:6px 10px;border-radius:6px;text-decoration:none;color:var(--muted);font-size:13px;border-left:2px solid transparent;transition:background .2s,color .2s,border-color .2s}
+/* ---------- 游戏介绍 ---------- */
+.guide{display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:start}
+.gtoc{position:sticky;top:64px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 80px);overflow:auto;padding-right:4px;scrollbar-width:thin}
+.gtoc-card{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:10px}
+.gtoc-h{margin:2px 8px 8px;font-size:12px;color:var(--faint);letter-spacing:.06em}
+.gtoc ol,.gtoc ul{list-style:none;margin:0;padding:0;display:grid;gap:1px}
+.gtoc a{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;text-decoration:none;color:var(--muted);font-size:13px;line-height:1.45;border-left:2px solid transparent;transition:background .2s,color .2s,border-color .2s}
 .gtoc a span{font-family:var(--f-num);color:var(--faint);font-variant-numeric:tabular-nums}
-.gtoc a:hover{background:var(--surface);color:var(--ink)}
-.gtoc a[aria-current="true"]{color:var(--ink);background:var(--surface);border-left-color:var(--accent)}
+.gtoc a:hover{background:var(--sunken);color:var(--ink)}
+.gtoc a[aria-current="true"]{color:var(--ink);background:var(--accent-soft);border-left-color:var(--accent);font-weight:500}
+.gtoc .gsub{display:none;margin:2px 0 6px 14px;border-left:1px solid var(--line)}
+.gtoc li[data-open] > .gsub{display:grid}
+.gtoc .gsub a{font-size:12px;padding:4px 10px;border-left:0;border-radius:0 6px 6px 0;font-weight:400}
+.gtoc .gsub a[aria-current="true"]{background:none;color:var(--accent);font-weight:500}
+.grel a span{font-family:inherit}
 .gfilter{display:grid;gap:4px}
 .gfilter button{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface);font-size:12px;color:var(--ink);cursor:pointer;text-align:left}
 .gfilter button b{margin-left:auto;font-family:var(--f-num);font-weight:600;color:var(--muted)}
 .gfilter button[aria-pressed="false"]{background:none;color:var(--faint);text-decoration:line-through}
 .gdot{display:inline-block;flex:none;width:8px;height:8px;border-radius:50%}
 .gdot[data-st="confirmed"]{background:var(--q-C)} .gdot[data-st="reported"]{background:var(--q-B)} .gdot[data-st="unverified"]{background:var(--q-S)}
-.gbody{max-width:880px}
-.ghead h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(28px,3.8vw,40px)}
-.ghead .lede2{font-size:15px;line-height:1.75;color:var(--ink);max-width:66ch;margin-top:8px}
-.gmeta{margin:8px 0 0;font-size:12px;color:var(--faint)}
-.gsec{padding-top:36px;scroll-margin-top:132px}
+.gbody{max-width:900px;min-width:0}
+
+/* 页头、倒计时、关键日期、预告片 */
+.ghero{position:relative;isolation:isolate;overflow:hidden;border-radius:12px;min-height:clamp(200px,24vw,290px);display:flex;align-items:flex-end;background:#0A121C var(--hero) center 42%/cover no-repeat;color:#F4ECDD}
+.ghero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(8,14,24,0) 25%,rgba(8,14,24,.85) 100%),linear-gradient(90deg,rgba(8,14,24,.5),transparent 60%)}
+.ghero-in{padding:22px 26px}
+.ghero-k{margin:0 0 4px;font-size:13px;letter-spacing:.08em;color:#E3B872;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.ghero h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(26px,3.6vw,40px);line-height:1.15;color:#FFF7E8;text-shadow:0 2px 14px rgba(0,0,0,.55);text-wrap:balance}
+.ghero-by{margin:8px 0 0;font-size:12px;color:#D7DEE6;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.gbody > .lede2{font-size:15px;line-height:1.8;max-width:70ch;margin:18px 0 0;color:var(--ink)}
+.gcount{margin-top:18px;display:grid;grid-template-columns:150px minmax(0,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.gcount img{grid-row:1/3;width:100%;height:100%;object-fit:contain;padding:12px 18px;background:radial-gradient(circle at 50% 40%,#1E4A73,#0A1626)}
+.gcount-main{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding:14px 20px}
+.gcount-t{margin:0;font-weight:700;font-size:16px}
+.gcount-n{display:flex;gap:18px;min-height:32px}
+.gcount-n span{display:flex;align-items:baseline;gap:4px;font-size:12px;color:var(--muted)}
+.gcount-n b{font-family:var(--f-num);font-weight:700;font-size:34px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.gcount-foot{display:flex;flex-wrap:wrap;align-items:center;gap:2px 14px;padding:8px 20px;border-top:1px solid var(--line);font-size:13px;background:var(--sunken)}
+.gcount-foot span:first-child{font-weight:500}
+.gcount-sub{color:var(--faint);font-size:12px}
+.gcount-foot a{margin-left:auto;text-decoration:none;font-weight:500}
+.gcount-foot a:hover{color:var(--accent)}
+.gdates{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
+.gdates li{position:relative;padding:24px 10px 0 0;display:flex;flex-direction:column;gap:1px;min-width:0}
+.gdates li::after{content:"";position:absolute;top:7px;left:16px;right:2px;height:2px;background:var(--line)}
+.gdates li:last-child::after{display:none}
+.gdates li::before{content:"";position:absolute;top:1px;left:0;width:14px;height:14px;border-radius:50%;background:var(--ground);border:2px solid var(--line)}
+.gdates li[data-state="past"]::before{background:var(--faint);border-color:var(--faint)}
+.gdates li[data-state="past"]::after{background:var(--faint)}
+.gdates li[data-state="next"]::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.gdates b{font-family:var(--f-num);font-size:20px;font-weight:700;line-height:1.1}
+.gdates li[data-state="next"] b{color:var(--accent)}
+.gd-t{font-size:13px;font-weight:500}
+.gd-n{font-size:12px;color:var(--faint);line-height:1.45}
+.gvideos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}
+.gvideo{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.gvideo button,.gvideo iframe{display:block;width:100%;aspect-ratio:16/9;border:0;padding:0}
+.gvideo button{position:relative;cursor:pointer;background:#0A121C var(--poster) center/cover no-repeat}
+.gvideo button::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.4));transition:opacity .3s}
+.gvideo button:hover::after{opacity:.5}
+.gplay{position:absolute;z-index:1;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(255,255,255,.94);box-shadow:0 6px 24px rgba(0,0,0,.35);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.gplay::before{content:"";position:absolute;left:25px;top:20px;border-style:solid;border-width:12px 0 12px 19px;border-color:transparent transparent transparent #141C25}
+.gvideo button:hover .gplay,.gvideo button:focus-visible .gplay{transform:scale(1.08)}
+.gvideo figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:10px 14px;font-size:13px}
+.gvideo figcaption .en{margin-left:0}
+.gvideo figcaption a{margin-left:auto;font-size:12px;color:var(--muted);text-decoration:none}
+.gvideo figcaption a:hover{color:var(--accent)}
+
+/* 小节 */
+.gsec{padding-top:40px;scroll-margin-top:64px}
 .gart{margin:0 0 16px;border-radius:10px;overflow:hidden;aspect-ratio:21/8;max-width:100%;background:var(--sunken)}
 .gart img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
 .gsec:hover .gart img{transform:scale(1.02)}
@@ -501,16 +552,18 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .gsh h3{margin:0;font-family:var(--f-display);font-weight:900;font-size:24px;letter-spacing:0;color:var(--ink)}
 .glede{margin:6px 0 14px;color:var(--muted);max-width:66ch}
 .gitems{display:grid;gap:0;border-top:1px solid var(--line)}
-.gitem{padding:14px 0;border-bottom:1px solid var(--line)}
+.gitem{padding:14px 0;border-bottom:1px solid var(--line);scroll-margin-top:64px}
 .git{display:flex;align-items:center;gap:10px}
 .git h4{margin:0;font-size:15px;font-weight:700;line-height:1.4}
-.gst{margin-left:auto;flex:none;font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
+.gst{flex:none;font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.git .gst{margin-left:auto}
 .gst[data-st="confirmed"]{color:var(--q-C)} .gst[data-st="reported"]{color:var(--q-B)} .gst[data-st="unverified"]{color:var(--q-S)}
 .gitem > p{margin:6px 0 0 18px;max-width:68ch;line-height:1.75}
 .gitem > p.gsrc{font-size:12px;color:var(--faint)}
+.gsrc{font-size:12px;color:var(--faint);margin:8px 0 0}
 .gsrc a{color:var(--muted);text-underline-offset:2px}
 .gsrc a:hover{color:var(--accent)}
-.gconf{margin-top:14px;font-size:13px}
+.gconf{margin-top:18px;font-size:13px}
 .gconf summary{cursor:pointer;color:var(--ink);font-weight:500}
 .gconf ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px;color:var(--muted)}
 .gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin:0}
@@ -518,15 +571,72 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .gloss dt{font-weight:700}
 .gloss dd{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.65}
 
+/* 副本一览：等级表、卡片、团本表、战场 */
+.gblock{margin:0 0 26px;scroll-margin-top:64px}
+.gbh{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:10px}
+.gbh h4{margin:0;font-size:17px;font-weight:700}
+.gkind button{min-height:32px}
+.dchart{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:4px 14px 6px}
+.dc-axis,.dc-row{display:grid;grid-template-columns:minmax(150px,32%) minmax(0,1fr);gap:14px;align-items:center}
+.dc-scale{position:relative;height:24px;font-family:var(--f-num);font-size:12px;color:var(--faint)}
+.dc-scale i{position:absolute;top:5px;transform:translateX(-50%);font-style:normal}
+.dc-scale i:first-child{transform:none} .dc-scale i:last-child{transform:translateX(-100%)}
+.dc-row{padding:6px 0;border-top:1px solid var(--line)}
+.dc-name{display:flex;flex-wrap:wrap;align-items:center;gap:0 6px;min-width:0;font-size:13px;line-height:1.4}
+.dc-name b{font-weight:500}
+.dc-row[data-kind="new"] .dc-name b{font-weight:700}
+.dc-where{flex-basis:100%;font-size:12px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dc-new{flex:none;font-size:10px;line-height:1;padding:3px 5px;border-radius:3px;background:var(--accent);color:var(--surface);font-weight:700}
+.dc-track{position:relative;height:28px}
+.dc-track i{position:absolute;top:0;bottom:0;width:1px;background:var(--chart-line)}
+.dc-bar{position:absolute;top:9px;height:10px;border-radius:5px;background:color-mix(in srgb,var(--faint) 50%,transparent)}
+.dc-row[data-kind="new"] .dc-bar{background:var(--accent)}
+.dc-lv{position:absolute;top:4px;margin-left:6px;font-family:var(--f-num);font-size:14px;font-weight:600;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.dc-lv.before{transform:translateX(-100%);margin-left:-6px}
+.dc-row[data-kind="new"] .dc-lv{color:var(--ink)}
+.gnote{margin:8px 0 0;font-size:12px;color:var(--faint);line-height:1.6}
+.gkey{display:inline-block;width:14px;height:8px;border-radius:4px;margin-right:4px;vertical-align:1px}
+.gkey.new{background:var(--accent)} .gkey.classic{background:color-mix(in srgb,var(--faint) 50%,transparent);margin-left:8px}
+.gcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:14px}
+.gcard{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+.gcard img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--sunken)}
+.gcard-b{padding:10px 14px 14px}
+.gcard-h{display:flex;align-items:center;gap:8px}
+.gcard h5,.gbg h5{margin:0;font-size:15px;font-weight:700}
+.glv{margin-left:auto;flex:none;font-family:var(--f-num);font-size:15px;font-weight:600;color:var(--accent);white-space:nowrap}
+.gcard-m{margin:2px 0 6px;font-size:12px;color:var(--faint)}
+.gcard-m .en{margin-left:0}
+.gcard-b > p:last-child,.gbg p:last-child{margin:0;font-size:13px;line-height:1.7;color:var(--muted)}
+.gtable-wrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.gtable{width:100%;border-collapse:collapse;font-size:13px}
+.gtable th{text-align:left;font-weight:500;font-size:12px;color:var(--faint);padding:8px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--sunken)}
+.gtable td{padding:8px 12px;border-top:1px solid var(--line);vertical-align:top}
+.gtable tbody tr:first-child td{border-top:0}
+.gtable td:nth-child(2),.gtable td:nth-child(4){white-space:nowrap}
+.gtd-note{display:block;margin-top:3px;font-size:12px;color:var(--faint)}
+.gbgs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gbg{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:12px 14px}
+.gbg.has-img{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:16px;padding:0;overflow:hidden;align-items:center}
+.gbg.has-img img{width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.gbg.has-img > div{padding:12px 16px 12px 0}
+.gbg p{margin:2px 0 0}
+
 @media (max-width:980px){
-  .guide{grid-template-columns:1fr;gap:12px}
-  .gtoc{position:static;max-height:none;flex-direction:column}
-  .gtoc ol{grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
-  .gtoc ol::-webkit-scrollbar{display:none}
+  .guide{grid-template-columns:minmax(0,1fr);gap:12px}
+  .gtoc{position:static;max-height:none;overflow:visible;padding:0;min-width:0}
+  .gtoc-card{min-width:0}
+  .gtoc-card{padding:6px;border-radius:8px}
+  .gtoc .gtoc-h{display:none}
+  .gtoc-card > ol{grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+  .gtoc-card > ol::-webkit-scrollbar{display:none}
+  .gtoc li[data-open] > .gsub{display:none}
   .gtoc a{border-left:0;border-bottom:2px solid transparent;border-radius:6px 6px 0 0}
   .gtoc a[aria-current="true"]{border-bottom-color:var(--accent)}
+  .grel{display:none}
+  .gfilter-card{padding:0;border:0;background:none}
   .gfilter{grid-auto-flow:column;grid-auto-columns:1fr}
   .gart{aspect-ratio:16/8}
+  .gdates{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(124px,1fr);overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
 }
 @media (max-width:980px){
   .simgrid{grid-template-columns:1fr}
@@ -809,6 +919,22 @@ html.detail-open{overflow:hidden}
   .opts-panel{position:static;width:100%;max-width:none;box-shadow:none;margin-top:8px}.opts[open]{width:100%}
   .trees3{grid-template-columns:1fr;overflow:visible}.trees3 .grid{max-width:340px;margin:auto;gap:10px}
   .gfilter{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gvideos{grid-template-columns:1fr}
+  .ghero-in{padding:16px}
+  .gcount{grid-template-columns:84px minmax(0,1fr)}
+  .gcount img{grid-row:auto;padding:8px 10px}
+  .gcount-main{padding:10px 14px}
+  .gcount-n{gap:12px}
+  .gcount-n b{font-size:26px}
+  .gcount-foot{grid-column:1/-1;padding:8px 14px}
+  .dc-axis,.dc-row{grid-template-columns:minmax(0,1fr);gap:2px}
+  .dc-axis > span{display:none}
+  .dc-where{flex-basis:auto}
+  .gbgs{grid-template-columns:minmax(0,1fr)}
+  .gbg.has-img{grid-template-columns:minmax(0,1fr);gap:0}
+  .gbg.has-img > div{padding:10px 14px 12px}
+  .gtable th:nth-child(3),.gtable td:nth-child(3){display:none}
+  .gsec,.gblock,.gitem{scroll-margin-top:104px}
   .warn button{white-space:normal;text-align:left}.simempty{font-size:13px}
   .route{padding-top:14px}
 }
@@ -2099,67 +2225,220 @@ document.getElementById("startPage").addEventListener("click", (e) => {
   window.addEventListener("load", count); count();
 })();
 
-// ===================== 游戏机制 =====================
-const G_STATUS = { confirmed: ["已确认", "暴雪官方或试玩原文"], reported: ["据报道", "媒体和 Wowhead 现场报道"], unverified: ["待确认", "社区说法或推断，beta 前可能变化"] };
-const guideState = { off: new Set(store.get("forever-guide-off", [])), observer: null };
+// ===================== 游戏介绍 =====================
+const G_STATUS = { confirmed: ["已确认", "暴雪官方或试玩原文"], reported: ["据报道", "媒体和 Wowhead 现场报道"], unverified: ["待确认", "社区说法、数据库推断，beta 前可能变化"] };
+const guideState = { off: new Set(store.get("forever-guide-off", [])), observer: null, kind: store.get("forever-guide-kind", "all"), timer: 0 };
+const G_RELATED = [["#/start", "新手入门"], ["#/class", "职业介绍"], ["#/tiers", "专精天梯"], ["#/sim", "天赋模拟器"], ["#/race", "种族天赋"], ["#/legacy", "传承（Legacy）"]];
+const gImg = (name, suffix = "") => (window.FOREVER_GUIDE_IMG || {})[name + suffix] || null;
+const gEntries = (s) => [...s.items, ...(s.dungeons || []), ...(s.raids || []), ...(s.bgs || [])];
+const gOff = (x) => guideState.off.has(x.status);
+const gSrc = (list) => (list || []).length ? `<p class="gsrc">出处：${list.map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>`).join("、")}</p>` : "";
+const gBadge = (st) => `<span class="gst" data-st="${st}" title="${G_STATUS[st][1]}">${G_STATUS[st][0]}</span>`;
+// 小节里的二级目录：普通条目 + 副本一览的几块表
+function gSubs(s) {
+  const subs = [];
+  if (s.dungeons) subs.push([`g-${s.id}-dungeons`, "地下城等级表"]);
+  if (s.raids) subs.push([`g-${s.id}-raids`, "团本"]);
+  if (s.bgs) subs.push([`g-${s.id}-bgs`, "战场"]);
+  s.items.forEach((it, i) => { if (!gOff(it)) subs.push([`g-${s.id}-${i}`, it.title.split("：")[0]]); });
+  return subs;
+}
+function gCountdown() {
+  const G = D.guide, box = document.querySelector("#guidePage .gcount-n");
+  if (!G?.launch || !box) { clearInterval(guideState.timer); guideState.timer = 0; return; }
+  const ms = new Date(G.launch.at) - Date.now();
+  if (ms <= 0) { box.innerHTML = `<b>已经上线</b>`; clearInterval(guideState.timer); return; }
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
+  box.innerHTML = [[d, "天"], [h, "小时"], [m, "分钟"]].map(([n, u]) => `<span><b>${n}</b>${u}</span>`).join("");
+  box.setAttribute("aria-label", `距离上线还有 ${d} 天 ${h} 小时 ${m} 分钟`);
+}
+function gDungeonChart(s) {
+  const kind = guideState.kind, rows = s.dungeons.filter((x) => (kind === "all" || x.kind === kind) && !gOff(x));
+  const pos = (lv) => ((lv - 10) / 50) * 100;
+  const ticks = [10, 20, 30, 40, 50, 60];
+  return `
+    <div class="gblock" id="g-${s.id}-dungeons">
+      <div class="gbh"><h4>地下城等级表</h4>
+        <div class="seg gkind" role="group" aria-label="筛选地下城">${[["all", `全部 ${s.dungeons.length}`], ["new", `新地下城 ${s.dungeons.filter((x) => x.kind === "new").length}`], ["classic", `原版 ${s.dungeons.filter((x) => x.kind === "classic").length}`]].map(([k, n]) => `<button data-kind="${k}" aria-pressed="${kind === k}">${n}</button>`).join("")}</div>
+      </div>
+      <div class="dchart" role="table" aria-label="地下城按等级排列">
+        <div class="dc-axis" aria-hidden="true"><span></span><div class="dc-scale">${ticks.map((t) => `<i style="left:${pos(t)}%">${t}</i>`).join("")}</div></div>
+        ${rows.map((x) => `
+        <div class="dc-row" role="row" data-kind="${x.kind}">
+          <div class="dc-name" role="cell"><b>${esc(x.name)}</b>${x.kind === "new" ? `<span class="dc-new">新</span>` : ""}<span class="dc-where">${esc(x.where)}${x.side ? ` · ${esc(x.side)}` : ""}</span></div>
+          <div class="dc-track" role="cell" aria-label="${x.min}–${x.max} 级">${ticks.map((t) => `<i style="left:${pos(t)}%"></i>`).join("")}<span class="dc-bar" style="left:${pos(x.min)}%;width:${Math.max(pos(x.max) - pos(x.min), 1.5)}%"></span><span class="dc-lv${x.max >= 50 ? " before" : ""}" style="left:${x.max >= 50 ? pos(x.min) : pos(x.max)}%">${x.min}–${x.max}</span></div>
+        </div>`).join("") || `<p class="hint">当前筛选下没有地下城。</p>`}
+      </div>
+      <p class="gnote"><i class="gkey new"></i>新地下城 <i class="gkey classic"></i>原版地下城 · ${esc(s.chartNote || "")}</p>
+      ${gSrc(s.chartSources)}
+      ${kind !== "classic" ? `<div class="gcards">${s.dungeons.filter((x) => x.kind === "new" && !gOff(x)).map((x) => `
+        <article class="gcard">
+          ${gImg(x.image, "-card") ? `<img src="${gImg(x.image, "-card")}" alt="" loading="lazy" decoding="async" width="800" height="450">` : ""}
+          <div class="gcard-b"><div class="gcard-h"><h5>${esc(x.name)}</h5><span class="glv">${x.min}–${x.max} 级</span></div>
+          <p class="gcard-m"><span class="en">${esc(x.en)} · </span>${esc(x.where)}${x.side ? ` · ${esc(x.side)}` : ""}</p>
+          <p>${esc(x.desc)}</p></div>
+        </article>`).join("")}</div>` : ""}
+    </div>`;
+}
+function gRaids(s) {
+  const list = s.raids.filter((x) => !gOff(x));
+  return `
+    <div class="gblock" id="g-${s.id}-raids">
+      <div class="gbh"><h4>团本</h4></div>
+      <div class="gcards">${list.filter((x) => x.image).map((x) => `
+        <article class="gcard">
+          ${gImg(x.image, "-card") ? `<img src="${gImg(x.image, "-card")}" alt="" loading="lazy" decoding="async" width="800" height="450">` : ""}
+          <div class="gcard-b"><div class="gcard-h"><h5>${esc(x.name)}</h5><span class="glv">${esc(x.size)}</span></div>
+          <p class="gcard-m"><span class="en">${esc(x.en)} · </span>${esc(x.where)} · ${esc(x.when)}开放</p>
+          <p>${esc(x.desc)}</p></div>
+        </article>`).join("")}</div>
+      <div class="gtable-wrap"><table class="gtable"><thead><tr><th>团本</th><th>人数</th><th>位置</th><th>开放</th><th>情况</th></tr></thead><tbody>${list.filter((x) => !x.image).map((x) => `
+        <tr><td><b>${esc(x.name)}</b> <span class="en">${esc(x.en)}</span></td><td>${esc(x.size)}</td><td>${esc(x.where)}</td><td>${esc(x.when)}</td><td>${gBadge(x.status)} <span class="gtd-note">${esc(x.desc)}</span></td></tr>`).join("")}</tbody></table></div>
+      ${gSrc([...new Map(list.flatMap((x) => x.sources).map((x) => [x.url, x])).values()])}
+    </div>`;
+}
+function gBgs(s) {
+  const list = s.bgs.filter((x) => !gOff(x));
+  return `
+    <div class="gblock" id="g-${s.id}-bgs">
+      <div class="gbh"><h4>战场</h4></div>
+      <div class="gbgs">${list.map((x) => `
+        <div class="gbg${x.image ? " has-img" : ""}">
+          ${x.image && gImg(x.image, "-card") ? `<img src="${gImg(x.image, "-card")}" alt="" loading="lazy" decoding="async" width="800" height="450">` : ""}
+          <div><div class="gcard-h"><h5>${esc(x.name)}</h5>${x.kind === "new" ? `<span class="dc-new">新</span>` : ""}<span class="glv">${esc(x.size)}</span></div>
+          <p class="gcard-m"><span class="en">${esc(x.en)}</span></p><p>${esc(x.desc)}</p></div>
+        </div>`).join("")}</div>
+      ${gSrc([...new Map(list.flatMap((x) => x.sources).map((x) => [x.url, x])).values()])}
+    </div>`;
+}
 function renderGuide(fromSlider) {
   const el = document.getElementById("guidePage"), G = D.guide;
-  if (!G) { el.innerHTML = `<p class="note">机制资料还没有生成。</p>`; return; }
+  if (!G) { el.innerHTML = `<p class="note">游戏介绍资料还没有生成。</p>`; return; }
   if (fromSlider && el.dataset.built) return; // 等级变化不影响这一页
-  const IMG = window.FOREVER_GUIDE_IMG || {};
-  const count = (sec) => sec.items.filter((it) => !guideState.off.has(it.status)).length;
-  const totals = Object.fromEntries(Object.keys(G_STATUS).map((k) => [k, G.sections.reduce((a, s) => a + s.items.filter((it) => it.status === k).length, 0)]));
+  const count = (sec) => gEntries(sec).filter((x) => !gOff(x)).length;
+  const all = G.sections.flatMap(gEntries);
+  const totals = Object.fromEntries(Object.keys(G_STATUS).map((k) => [k, all.filter((x) => x.status === k).length]));
+  const now = Date.now(), nextIdx = (G.dates || []).findIndex((x) => x.at && new Date(x.at + "T23:59:59+08:00") >= now);
+  const hero = G.hero && gImg(G.hero.image, "-hero");
   el.innerHTML = `
     <div class="guide">
       <aside class="gtoc" aria-label="本页目录">
-        <p class="gtoc-h">目录</p>
-        <ol>${G.sections.map((s) => `<li><a href="#g-${s.id}" data-g="${s.id}">${esc(s.title)}<span>${count(s)}</span></a></li>`).join("")}<li><a href="#g-glossary" data-g="glossary">新手名词<span>${(G.glossary || []).length}</span></a></li></ol>
-        <div class="gfilter" role="group" aria-label="按可靠程度筛选">${Object.entries(G_STATUS).map(([k, [n, d]]) => `<button data-st="${k}" aria-pressed="${!guideState.off.has(k)}" title="${d}"><i class="gdot" data-st="${k}"></i>${n}<b>${totals[k]}</b></button>`).join("")}</div>
+        <div class="gtoc-card">
+          <p class="gtoc-h">攻略目录</p>
+          <ol>${G.sections.map((s) => `<li data-g="${s.id}"><a href="#g-${s.id}" data-g="${s.id}">${esc(s.title.split("：")[0])}<span>${count(s)}</span></a>
+            <ol class="gsub">${gSubs(s).map(([id, t]) => `<li><a href="#${id}" data-sub="${id}">${esc(t)}</a></li>`).join("")}</ol></li>`).join("")}
+            <li data-g="glossary"><a href="#g-glossary" data-g="glossary">新手名词<span>${(G.glossary || []).length}</span></a></li></ol>
+        </div>
+        <div class="gtoc-card gfilter-card">
+          <p class="gtoc-h">按可靠程度筛选</p>
+          <div class="gfilter" role="group" aria-label="按可靠程度筛选">${Object.entries(G_STATUS).map(([k, [n, d]]) => `<button data-st="${k}" aria-pressed="${!guideState.off.has(k)}" title="${d}"><i class="gdot" data-st="${k}"></i>${n}<b>${totals[k]}</b></button>`).join("")}</div>
+        </div>
+        <div class="gtoc-card grel">
+          <p class="gtoc-h">本站其他页面</p>
+          <ul>${G_RELATED.map(([h, t]) => `<li><a href="${h}">${t}<span aria-hidden="true">↗</span></a></li>`).join("")}</ul>
+        </div>
       </aside>
       <article class="gbody">
-        <header class="ghead">
-          <h2>游戏介绍</h2>
-          <p class="lede2">${esc(G.intro)}</p>
-          <p class="gmeta">资料整理于 ${esc(G.updated)} · 每一条都标了可靠程度和出处，beta（9 月 17 日开始）以后会有变化。</p>
-          ${(G.conflicts || []).length ? `<details class="card gconf"><summary>资料之间有 ${G.conflicts.length} 处说法不一致</summary><ul>${G.conflicts.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></details>` : ""}
+        <header class="ghero"${hero ? ` style="--hero:url('${hero}')"` : ""}>
+          <div class="ghero-in">
+            <p class="ghero-k">${esc(G.hero?.kicker || "游戏介绍")}</p>
+            <h2>${esc(G.hero?.title || "游戏介绍")}</h2>
+            <p class="ghero-by">本站整理 · 更新于 ${esc(G.updated)} · ${all.length} 条资料，每条标了可靠程度和出处</p>
+          </div>
         </header>
+        <p class="lede2">${esc(G.intro)}</p>
+        ${G.launch ? `
+        <section class="gcount" aria-label="上线倒计时">
+          <img src="assets/forever-logo.webp" alt="" width="120" height="98">
+          <div class="gcount-main"><p class="gcount-t">《魔兽世界：无限》上线</p><div class="gcount-n" role="timer"></div></div>
+          <div class="gcount-foot"><span>${esc(G.launch.label)}</span><span class="gcount-sub">${esc(G.launch.sub)}</span><a href="#g-release" data-sub="g-release">版本路线 →</a></div>
+        </section>` : ""}
+        ${(G.dates || []).length ? `
+        <ol class="gdates" aria-label="关键日期">${G.dates.map((x, i) => `<li data-state="${!x.at ? "later" : i < nextIdx || nextIdx < 0 ? "past" : i === nextIdx ? "next" : "later"}"><b>${esc(x.md)}</b><span class="gd-t">${esc(x.title)}</span><span class="gd-n">${esc(x.note)}</span></li>`).join("")}</ol>` : ""}
+        ${(G.videos || []).length ? `
+        <div class="gvideos">${G.videos.map((v) => `
+          <figure class="gvideo">
+            <button type="button" data-yt="${esc(v.id)}" aria-label="播放：${esc(v.title)}"${gImg(v.poster, "-poster") ? ` style="--poster:url('${gImg(v.poster, "-poster")}')"` : ""}><span class="gplay" aria-hidden="true"></span></button>
+            <figcaption><b>${esc(v.title)}</b><span class="en">${esc(v.en)}</span><a href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></figcaption>
+          </figure>`).join("")}</div>` : ""}
+        ${(G.conflicts || []).length ? `<details class="card gconf"><summary>资料之间有 ${G.conflicts.length} 处说法不一致</summary><ul>${G.conflicts.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></details>` : ""}
         ${G.sections.map((s) => `
         <section class="gsec" id="g-${s.id}" data-g="${s.id}">
-          ${s.image && IMG[s.image] ? `<figure class="gart"><img src="${IMG[s.image]}" alt="" loading="lazy" decoding="async"></figure>` : ""}
+          ${s.image && gImg(s.image) ? `<figure class="gart"><img src="${gImg(s.image)}" alt="" loading="lazy" decoding="async"></figure>` : ""}
           <div class="gsh"><h3>${esc(s.title)}</h3>${s.link && s.link.route ? `<a class="jump" href="${s.link.route}">${esc(s.link.label)} →</a>` : ""}</div>
           ${s.lede ? `<p class="glede">${esc(s.lede)}</p>` : ""}
-          <div class="gitems">${s.items.map((it) => `
-            <div class="gitem" data-st="${it.status}"${guideState.off.has(it.status) ? " hidden" : ""}>
-              <div class="git"><i class="gdot" data-st="${it.status}" title="${G_STATUS[it.status][1]}"></i><h4>${esc(it.title)}</h4><span class="gst" data-st="${it.status}">${G_STATUS[it.status][0]}</span></div>
+          ${s.dungeons ? gDungeonChart(s) : ""}${s.raids ? gRaids(s) : ""}${s.bgs ? gBgs(s) : ""}
+          ${s.items.length ? `<div class="gitems">${s.items.map((it, i) => `
+            <div class="gitem" id="g-${s.id}-${i}" data-st="${it.status}"${gOff(it) ? " hidden" : ""}>
+              <div class="git"><i class="gdot" data-st="${it.status}" title="${G_STATUS[it.status][1]}"></i><h4>${esc(it.title)}</h4>${gBadge(it.status)}</div>
               <p>${esc(it.body)}</p>
-              ${(it.sources || []).length ? `<p class="gsrc">出处：${it.sources.map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>`).join("、")}</p>` : ""}
-            </div>`).join("")}</div>
+              ${gSrc(it.sources)}
+            </div>`).join("")}</div>` : ""}
         </section>`).join("")}
         ${(G.glossary || []).length ? `<section class="gsec" id="g-glossary" data-g="glossary"><div class="gsh"><h3>新手名词</h3></div><p class="glede">第一次玩魔兽会碰到的说法。</p>
           <dl class="gloss">${G.glossary.map((g) => `<div><dt>${esc(g.term)}${g.en ? ` <span class="en">${esc(g.en)}</span>` : ""}</dt><dd>${esc(g.body)}</dd></div>`).join("")}</dl></section>` : ""}
       </article>
     </div>`;
   el.dataset.built = "1";
-  // 目录高亮当前小节
+  gCountdown();
+  if (!guideState.timer && G.launch) guideState.timer = setInterval(gCountdown, 20000);
+  // 目录高亮当前小节，并展开它的二级目录
   if (guideState.observer) guideState.observer.disconnect();
-  const links = Object.fromEntries([...el.querySelectorAll(".gtoc a")].map((a) => [a.dataset.g, a]));
+  const secLi = Object.fromEntries([...el.querySelectorAll(".gtoc-card > ol > li")].map((li) => [li.dataset.g, li]));
+  const subA = Object.fromEntries([...el.querySelectorAll(".gsub a")].map((a) => [a.dataset.sub, a]));
   guideState.observer = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) { Object.values(links).forEach((a) => a.removeAttribute("aria-current")); links[e.target.dataset.g]?.setAttribute("aria-current", "true"); }
-  }, { rootMargin: "-140px 0px -65% 0px" });
-  el.querySelectorAll(".gsec").forEach((s) => guideState.observer.observe(s));
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const t = e.target;
+      if (t.classList.contains("gsec")) {
+        Object.values(secLi).forEach((li) => { li.removeAttribute("data-open"); li.firstElementChild.removeAttribute("aria-current"); });
+        secLi[t.dataset.g]?.setAttribute("data-open", "");
+        secLi[t.dataset.g]?.firstElementChild.setAttribute("aria-current", "true");
+      } else if (subA[t.id]) {
+        Object.values(subA).forEach((a) => a.removeAttribute("aria-current"));
+        subA[t.id].setAttribute("aria-current", "true");
+      }
+    }
+  }, { rootMargin: "-80px 0px -60% 0px" });
+  el.querySelectorAll(".gsec, .gblock, .gitem").forEach((s) => guideState.observer.observe(s));
+}
+function guideRerender(note) {
+  const el = document.getElementById("guidePage"), y = window.scrollY;
+  el.dataset.built = ""; renderGuide(); window.scrollTo(0, y);
+  if (note) announce(note);
 }
 document.getElementById("guidePage").addEventListener("click", (e) => {
-  const a = e.target.closest(".gtoc a");
-  if (a) { e.preventDefault(); document.getElementById("g-" + a.dataset.g)?.scrollIntoView({ behavior: motionOK() ? "smooth" : "auto", block: "start" }); return; }
+  const a = e.target.closest(".gtoc a[data-g], .gtoc a[data-sub], .gcount a[data-sub]");
+  if (a) {
+    e.preventDefault();
+    const id = a.dataset.sub || "g-" + a.dataset.g;
+    document.getElementById(id)?.scrollIntoView({ behavior: motionOK() ? "smooth" : "auto", block: "start" });
+    return;
+  }
   const f = e.target.closest(".gfilter button");
   if (f) {
     const k = f.dataset.st;
     if (guideState.off.has(k)) guideState.off.delete(k); else guideState.off.add(k);
     if (guideState.off.size === 3) guideState.off.delete(k); // 至少留一种
     store.set("forever-guide-off", [...guideState.off]);
-    document.getElementById("guidePage").dataset.built = "";
-    const y = window.scrollY; renderGuide(); window.scrollTo(0, y);
-    announce(`已${guideState.off.has(k) ? "隐藏" : "显示"}${G_STATUS[k][0]}的条目`);
+    guideRerender(`已${guideState.off.has(k) ? "隐藏" : "显示"}${G_STATUS[k][0]}的条目`);
+    return;
+  }
+  const kb = e.target.closest(".gkind button");
+  if (kb) {
+    guideState.kind = kb.dataset.kind; store.set("forever-guide-kind", guideState.kind);
+    guideRerender(kb.textContent.trim());
+    document.querySelector(`.gkind button[data-kind="${guideState.kind}"]`)?.focus({ preventScroll: true });
+    return;
+  }
+  const yt = e.target.closest("button[data-yt]");
+  if (yt) {
+    const f2 = document.createElement("iframe");
+    f2.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(yt.dataset.yt)}?autoplay=1&rel=0`;
+    f2.title = yt.getAttribute("aria-label").replace("播放：", "");
+    f2.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+    f2.allowFullscreen = true;
+    yt.replaceWith(f2);
   }
 });
 
