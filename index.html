@@ -839,6 +839,38 @@ body.cmp-on .cmpsum{display:flex}
 .qwhy span em{font-style:normal;font-family:var(--f-num);font-weight:700;color:var(--q)}
 .qcard .jumps{margin-top:auto}
 
+.qrace{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.qrace-h{flex-basis:100%;font-size:12px;color:var(--faint)}
+.frace{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 3px;border:1px solid var(--line);border-radius:999px;background:var(--sunken);text-decoration:none;color:var(--ink);font-size:13px;line-height:1.25;min-height:36px}
+.frace:hover{border-color:var(--accent)}
+.frace img{width:28px;height:28px;border-radius:50%}
+.frace small{display:block;font-size:11px;color:var(--faint);font-family:var(--f-body)}
+.frace.none{padding:3px 10px;color:var(--faint);font-size:12px}
+.st-races{display:grid;border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.st-rh,.st-rrow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:8px 12px;align-items:center;padding:8px 14px}
+.st-rh{font-size:12px;color:var(--faint);background:var(--sunken);padding-block:6px}
+.st-rrow{border-top:1px solid var(--line)}
+.st-rcls{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);border-left:3px solid var(--cc);padding-left:8px;min-width:0}
+.st-rcls img{width:28px;height:28px;border-radius:6px}
+.st-rcls small{margin-left:auto;font-size:11px;color:var(--faint);white-space:nowrap}
+.st-races + .jumps{margin-top:12px}
+.st-rcell{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0}
+.st-rcell > small{font-size:11px;color:var(--faint);padding-left:6px}
+.fitrecs{margin-top:16px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.fitrecs h4{margin:0 0 4px;font-size:15px}
+.fitrecs .hint{margin:0 0 8px}
+.fitrecs b.same,.fitrecs span.same{color:var(--accent);font-weight:700}
+.fitrecs ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.fitrecs li{display:grid;grid-template-columns:minmax(110px,auto) minmax(0,1fr) minmax(0,1fr);gap:2px 12px;padding:8px 0;border-top:1px solid var(--line);font-size:13px;align-items:baseline}
+.fitrecs li a{color:var(--ink);font-weight:500;text-underline-offset:2px}
+.fitrecs li small{grid-column:2/-1;font-size:12px;color:var(--faint)}
+.fitrecs .none{color:var(--faint)}
+@media (max-width:700px){.fitrecs li{grid-template-columns:minmax(0,1fr)}.fitrecs li small{grid-column:auto}}
+@media (max-width:700px){
+  .st-rh{display:none}
+  .st-rrow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .st-rcls{grid-column:1/-1}
+}
 .st-classes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
 .st-cls{display:grid;grid-template-columns:48px 1fr;gap:4px 12px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink);transition:border-color .2s,transform .3s cubic-bezier(.16,1,.3,1)}
 .st-cls:hover{border-color:var(--cc);transform:translateY(-2px)}
@@ -2259,6 +2291,7 @@ function renderFit() {
         <h3>${CLS[cls].cn}最适合什么种族</h3>
         <div class="fitclspick">${CLS_ORDER.map((c) => `<button type="button" data-fitcls="${c}" aria-pressed="${c === cls}" style="--cc:${CLS[c].color}">${crestC(c) ? `<img alt="" src="${crestC(c)}">` : ""}<span>${CLS[c].cn}</span></button>`).join("")}</div>
         ${clsTable}
+        ${fitRecs(cls)}
       </section>
     </div>
     <details class="card fitref">
@@ -2266,6 +2299,18 @@ function renderFit() {
       <ul class="fitassume">${RF.assumptions.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
       <div class="fitracials">${FIT_RACES.map((r) => `<div><h4>${esc(raceCn(r.race))}</h4><ul>${(raceInfo(r.race)?.abilities || []).map((a) => { const x = RF.racials[a[0]]; return `<li><b>${esc(a[3] || a[0])}</b><span class="gst" data-st="${{ high: "confirmed", med: "reported", low: "unverified" }[x?.[0]] || "unverified"}">${{ high: "数值明确", med: "有假设", low: "多为假设" }[x?.[0]] || "未估值"}</span><span>${esc(x?.[1] || "")}</span></li>`; }).join("")}</ul></div>`).join("")}</div>
     </details>`;
+}
+// 其他网站怎么推荐（guide/race_recs.json），和本站满级首选一致的种族标出来
+function fitRecs(cls) {
+  const RR = D.raceRecs, list = RR && RR.classes[cls];
+  if (!list) return "";
+  const pick = { Horde: fitClassPick(cls, "Horde"), Alliance: fitClassPick(cls, "Alliance") };
+  const mine = { Horde: pick.Horde?.end.r.race, Alliance: pick.Alliance?.end.r.race };
+  const anyRole = (f) => new Set(Object.values(pick[f]?.byRole || {}).map((x) => x.r.race));
+  const names = (arr, f) => arr.length ? arr.map((r, k) => `<span class="${anyRole(f).has(r) ? "same" : ""}">${esc(raceCn(r))}</span>`).join(" > ") : `<span class="none">没写</span>`;
+  return `<div class="fitrecs"><h4>其他网站怎么推荐</h4>
+    <p class="hint">只收引用了无限新种族天赋的攻略，${esc(RR.checked)} 查的。<b class="same">金色</b>是和本站满级首选一致的种族（${esc(ROLE_CN[classMainRole(cls)])}：部落${esc(raceCn(mine.Horde || "-"))}、联盟${esc(raceCn(mine.Alliance || "-"))}${Object.keys(pick.Horde?.byRole || pick.Alliance?.byRole || {}).filter((r) => r !== classMainRole(cls)).map((r) => `；${ROLE_CN[r]}：部落${esc(raceCn(pick.Horde?.byRole[r]?.r.race || "-"))}、联盟${esc(raceCn(pick.Alliance?.byRole[r]?.r.race || "-"))}`).join("")}）。各站互相也有分歧，而且都基于 BlizzCon 试玩数值。</p>
+    <ul>${list.map((x) => { const s = RR.sources[x.src]; return `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a><span>部落 ${names(x.Horde, "Horde")}</span><span>联盟 ${names(x.Alliance, "Alliance")}</span><small>${esc(x.note)}</small></li>`; }).join("")}</ul></div>`;
 }
 document.getElementById("fitPage").addEventListener("click", (e) => {
   const b = e.target.closest("button[data-fitmetric],button[data-fitfaction],button[data-fitrace],button[data-fitcls]");
@@ -2284,6 +2329,30 @@ document.getElementById("fitPage").addEventListener("click", (e) => {
   document.querySelector(`#fitPage button${key}`)?.focus({ preventScroll: true });
 });
 // 种族页、职业页用的小结
+// 职业在某阵营里：满级团队价值最高的种族，以及升级最快的种族（取三个专精里最高的）
+// 职业的主要定位：专精里最多的定位，一样多时算输出
+function classMainRole(cls) {
+  const n = {};
+  for (const s of specsOf(cls)) for (const r of MODEL.specRoles[cls][s.spec] || []) n[r] = (n[r] || 0) + 1;
+  return Object.entries(n).sort((a, b) => b[1] - a[1] || (a[0] === "dps" ? -1 : b[0] === "dps" ? 1 : 0))[0][0];
+}
+// 职业在某阵营里：每个定位满级最合适的种族（end 是主要定位），以及升级最快的种族
+function fitClassPick(cls, f) {
+  if (!RF) return null;
+  const rs = FIT_RACES.filter((r) => r.f === f && r.classes.includes(cls));
+  if (!rs.length) return null;
+  const roles = [...new Set(specsOf(cls).flatMap((s) => MODEL.specRoles[cls][s.spec] || []))];
+  const byRole = Object.fromEntries(roles.map((role) => [role, rs.map((r) => ({ r, v: Math.max(...specsOf(cls).filter((s) => (MODEL.specRoles[cls][s.spec] || []).includes(role)).map((s) => RF.fit[`${r.race}|${s.k}`].end[role] ?? 0)) })).sort((a, b) => b.v - a.v)[0]]));
+  const lv = rs.map((r) => ({ r, v: Math.max(...specsOf(cls).map((s) => RF.fit[`${r.race}|${s.k}`].lv)) })).sort((a, b) => b.v - a.v)[0];
+  const main = classMainRole(cls);
+  return { end: byRole[main], main, byRole, lv, only: rs.length === 1 };
+}
+// 某专精在部落、联盟里各自加成最大的种族；role 为空时用升级口径
+function fitBestRaces(s, role) {
+  if (!RF) return [];
+  return ["Horde", "Alliance"].map((f) => FIT_RACES.filter((r) => r.f === f && r.classes.includes(s.cls)).map((r) => { const x = RF.fit[`${r.race}|${s.k}`]; return { r, v: role ? x.end[role] ?? 0 : x.lv }; }).sort((a, b) => b.v - a.v)[0]).filter(Boolean);
+}
+const fitRaceChip = (x, cls) => `<a class="frace" href="#/fit/${slugOf(x.r.race)}/${cls}">${crestR(x.r.race) ? `<img alt="" src="${crestR(x.r.race)}">` : ""}<span>${esc(raceCn(x.r.race))}<small>${x.r.f === "Horde" ? "部落" : "联盟"} · ${fitPct(x.v)}</small></span></a>`;
 function fitTopForRace(race, n) {
   if (!RF) return [];
   const r = FIT_RACES.find((x) => x.race === race); if (!r) return [];
@@ -2371,6 +2440,7 @@ function renderQuiz() {
         <div class="qh"><img alt="" src="${ico(s.icon)}"><div><b>${s.cn} · ${s.clsCn}</b><span>${esc(c.tagline)}</span></div><span class="qrank">#${k + 1}</span></div>
         <p>${esc(NB.specs[s.k].line)}</p>
         <div class="qwhy"><span style="--q:var(--q-${lt})">升级 <em>${lt}</em> 档</span>${x.end ? `<span style="--q:var(--q-${x.end.e.tier})">满级${ROLE_ZH[x.end.r]} <em>${x.end.e.tier}</em> 档</span>` : ""}<span>${RANGE_ZH[x.range]}</span><span>${["", "容易上手", "上手中等", "上手要多花时间"][x.diff]}</span></div>
+        ${RF ? `<div class="qrace"><span class="qrace-h">${s.cn}选什么种族（按满级${ROLE_CN[x.end ? x.end.r : (MODEL.specRoles[s.cls][s.spec] || ["dps"])[0]]}）</span>${fitBestRaces(s, x.end ? x.end.r : (MODEL.specRoles[s.cls][s.spec] || ["dps"])[0]).map((y) => fitRaceChip(y, s.cls)).join("")}</div>` : ""}
         <div class="jumps"><a class="jump" href="#/class/${s.cls}">${s.clsCn}怎么玩</a><a class="jump primary" href="${simHash(s.cls, bestLvOrder(x.i, state.level))}" data-simcls="${s.cls}" data-simspec="${s.spec}" data-simi="${x.i}">看它怎么加天赋</a></div>
       </article>`;
     }).join("")}</div>
@@ -2408,6 +2478,21 @@ function renderStart(fromSlider) {
           return `<a class="st-cls" href="#/class/${cls}" style="--cc:${CLS[cls].color}">${crestC(cls) ? `<img alt="" src="${crestC(cls)}">` : ""}<b>${CLS[cls].cn}</b><span class="tg">${esc(c.tagline)}</span><span class="meta2">${roles.map((r) => `<span class="rolechip" data-r="${r}">${ROLE_ZH[r]}</span>`).join("")}<span class="rolechip" data-r="range">${RANGE_ZH[c.range]}</span>${diffDots(c.difficulty)}</span></a>`;
         }).join("")}</div>
       </section>
+      ${RF ? `<section>
+        <h3 class="sth">选好职业，再挑种族</h3>
+        <p class="stsub">种族决定阵营（部落还是联盟），还带 4 个种族天赋。按种族天赋算，同一个职业换种族，满级强 0–3%，升级快 1–5%，比职业之间的差距小得多，所以先跟朋友定阵营、再挑喜欢的样子就好。下面是每个职业在两个阵营里满级最合适的种族；一个人升级最快的种族不一样时，写在下面。</p>
+        <div class="st-races"><div class="st-rh" aria-hidden="true"><span>职业</span><span>部落选（满级）</span><span>联盟选（满级）</span></div>${CLS_ORDER.map((cls) => {
+          const cell = (f) => {
+            const pk = fitClassPick(cls, f);
+            if (!pk) return `<div class="st-rcell"><span class="frace none">没有能选的种族</span></div>`;
+            const extra = Object.entries(pk.byRole).filter(([role, x]) => role !== pk.main && x.r.race !== pk.end.r.race).map(([role, x]) => `${ROLE_CN[role]}：${esc(raceCn(x.r.race))}`);
+            if (pk.only) extra.length = 0, extra.push("唯一能选的种族"); else extra.push(pk.lv.r.race !== pk.end.r.race ? `升级最快：${esc(raceCn(pk.lv.r.race))}` : "升级也最快");
+            return `<div class="st-rcell">${fitRaceChip(pk.end, cls)}<small>${extra.join(" · ")}</small></div>`;
+          };
+          return `<div class="st-rrow" style="--cc:${CLS[cls].color}"><a class="st-rcls" href="#/fit/-/${cls}">${crestC(cls) ? `<img alt="" src="${crestC(cls)}">` : ""}<b>${CLS[cls].cn}</b><small>按${ROLE_CN[classMainRole(cls)]} · 看细节 →</small></a>${cell("Horde")}${cell("Alliance")}</div>`;
+        }).join("")}</div>
+        <div class="jumps"><a class="jump primary" href="#/fit">看完整的种族搭配 →</a></div>
+      </section>` : ""}
       <section>
         <h3 class="sth">这个网站怎么用</h3>
         <p class="stsub">挑好职业以后，按这个顺序看。</p>
