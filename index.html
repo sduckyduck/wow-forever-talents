@@ -474,6 +474,80 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .pips i.on{background:var(--accent)}
 .lperk.full .pips i.on{background:var(--maxed)}
 
+/* ---------- 种族搭配 ---------- */
+.fithead{margin-bottom:18px}
+.fithead h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(26px,3.4vw,36px)}
+.fithead .lede2{max-width:70ch;margin:8px 0 12px}
+.fitctl{display:flex;flex-wrap:wrap;gap:10px 16px}
+.fit-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.fitm{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
+.fitm thead th{padding:10px 4px 8px;font-weight:500;color:var(--muted);vertical-align:bottom;border-bottom:1px solid var(--line)}
+.fitm thead th img{display:block;width:26px;height:26px;margin:0 auto 4px;border-radius:6px}
+.fitm thead th span{display:block;font-size:12px;white-space:nowrap}
+.fitm tbody th{padding:4px 8px;text-align:left;border-top:1px solid var(--line);white-space:nowrap;width:1%;position:sticky;left:0;z-index:1;background:var(--surface)}
+.fitm thead th:first-child{position:sticky;left:0;z-index:1;background:var(--surface)}
+.fitm tbody th button{display:flex;align-items:center;gap:8px;border:0;background:none;padding:4px 6px;border-radius:6px;cursor:pointer;color:var(--ink);text-align:left;font-size:13px}
+.fitm tbody th button[aria-pressed="true"]{background:var(--accent-soft)}
+.fitm tbody th img{width:28px;height:28px;border-radius:50%}
+.fitm tbody th small{display:block;font-size:11px;color:var(--faint)}
+.fitm td{padding:3px;border-top:1px solid var(--line);text-align:center}
+.fitm td.na{color:var(--faint)}
+.fcell{width:100%;min-height:44px;border:1px solid transparent;border-radius:6px;cursor:pointer;color:var(--ink);background:color-mix(in srgb,var(--accent) calc(var(--h) * .42),transparent);box-shadow:inset 3px 0 0 color-mix(in srgb,var(--accent) var(--h),transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:4px 2px;transition:border-color .2s}
+.fcell b{font-family:var(--f-num);font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
+.fcell small{font-size:11px;color:var(--muted);line-height:1.2}
+.fcell:hover,.fcell[aria-pressed="true"]{border-color:var(--ink)}
+.fitcols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:24px;align-items:start;margin-top:8px}
+.fitpanel > h3{font-family:var(--f-display);font-size:20px;font-weight:900;letter-spacing:0;color:var(--ink);margin:0 0 10px}
+.flist{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.flist li{display:grid;grid-template-columns:22px minmax(0,1fr) minmax(60px,34%) 58px;gap:4px 10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.frank{font-family:var(--f-num);font-weight:600;color:var(--faint);text-align:right}
+.fname{min-width:0;border-left:3px solid var(--cc);padding-left:8px;line-height:1.35}
+.fname a{text-decoration:none;color:var(--ink)} .fname a:hover b{text-decoration:underline}
+.fname small{display:block;font-size:11px;color:var(--faint)}
+.fbar{height:8px;border-radius:4px;background:var(--sunken);overflow:hidden}
+.fbar i{display:block;height:100%;border-radius:4px;background:var(--accent)}
+.fval{font-family:var(--f-num);font-weight:600;font-size:16px;text-align:right;font-variant-numeric:tabular-nums}
+.flist .fparts{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:4px 6px}
+.fpart{font-size:12px;color:var(--muted);padding:1px 8px;border-radius:999px;background:var(--sunken);border:1px solid var(--line);white-space:nowrap}
+.fpart b{font-family:var(--f-num);font-weight:600;color:var(--ink)}
+.fmini li{grid-template-columns:22px minmax(0,1fr) auto}
+.fmini .fval{font-size:14px}
+.fitclspick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.fitclspick button{display:flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border:1px solid var(--line);border-radius:999px;background:var(--surface);cursor:pointer;font-size:13px;color:var(--ink);min-height:36px}
+.fitclspick button img{width:26px;height:26px;border-radius:50%}
+.fitclspick button[aria-pressed="true"]{border-color:var(--cc);box-shadow:inset 0 0 0 1px var(--cc);font-weight:500}
+.fitc{width:100%;border-collapse:collapse;font-size:13px}
+.fitc th,.fitc td{padding:8px 10px;border-top:1px solid var(--line);text-align:right;white-space:nowrap}
+.fitc thead th{border-top:0;font-weight:500;font-size:12px;color:var(--faint);background:var(--sunken)}
+.fitc thead th:first-child,.fitc tbody th{text-align:left}
+.fitc tbody th{display:flex;align-items:center;gap:8px;font-weight:500}
+.fitc tbody th img{width:24px;height:24px;border-radius:50%}
+.fitc tbody th a{color:var(--ink);text-decoration:none} .fitc tbody th a:hover{text-decoration:underline}
+.fitc tbody th small{font-size:11px;color:var(--faint);font-weight:400}
+.fitc td{font-family:var(--f-num);font-size:15px;font-variant-numeric:tabular-nums}
+.fitc td small{display:block;font-family:var(--f-body);font-size:10px;color:var(--faint)}
+.fitc td.top{color:var(--accent);font-weight:700}
+.fitc td.fparts{font-family:var(--f-body);text-align:left;white-space:normal}
+.fitc td.fparts .fpart{display:inline-block;margin:1px 2px}
+.fitref{margin-top:18px}
+.fitref summary{cursor:pointer;font-weight:500}
+.fitassume{margin:10px 0;padding-left:18px;color:var(--muted);font-size:13px;display:grid;gap:4px}
+.fitracials{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.fitracials h4{margin:0 0 6px;font-size:14px}
+.fitracials ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:12px;color:var(--muted)}
+.fitracials li b{color:var(--ink);margin-right:6px}
+.fitracials li .gst{margin-right:6px}
+.fitracials li span:last-child{display:block;margin-top:2px}
+@media (max-width:980px){
+  .fitcols{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:700px){
+  .flist li{grid-template-columns:20px minmax(0,1fr) 54px}
+  .flist li .fbar{grid-column:2/-1;grid-row:2}
+  .flist .fparts{grid-row:3}
+  .fitc td.fparts,.fitc th:last-child{display:none}
+}
+
 /* ---------- 游戏介绍 ---------- */
 .guide{display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:start}
 .gtoc{position:sticky;top:64px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 80px);overflow:auto;padding-right:4px;scrollbar-width:thin}
@@ -887,7 +961,7 @@ html.detail-open{overflow:hidden}
 @media (pointer:coarse){.touch-help{display:inline}.mouse-help{display:none}}
 @media (max-width:700px){
   body{margin:0;padding-inline:12px;font-size:15px}
-  .appnav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;margin-inline:0;overflow:visible;padding:4px 0}
+  .appnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;margin-inline:0;overflow:visible;padding:4px 0}
   .appnav a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:6px 2px;font-size:12px;border-radius:6px;text-align:center;white-space:normal}
   .appnav a[aria-current="page"]{background:var(--accent-soft)}
   .appnav a::after{left:12px;right:12px;bottom:0}
@@ -965,6 +1039,7 @@ html.detail-open{overflow:hidden}
     <a href="#/tiers" data-route="tiers">专精天梯</a>
     <a href="#/sim" data-route="sim">天赋模拟器</a>
     <a href="#/race" data-route="race">种族</a>
+    <a href="#/fit" data-route="fit">种族搭配</a>
     <a href="#/legacy" data-route="legacy">Legacy 传承</a>
     <a href="#/about" data-route="about">排名怎么算</a>
   </nav>
@@ -1015,6 +1090,7 @@ html.detail-open{overflow:hidden}
   <div class="route" data-page="sim" id="sim" hidden></div>
   <div class="route" data-page="class" id="classPage" hidden></div>
   <div class="route" data-page="race" id="racePage" hidden></div>
+  <div class="route" data-page="fit" id="fitPage" hidden></div>
   <div class="route" data-page="legacy" id="legacyPage" hidden></div>
 
   <div class="route" data-page="about" hidden>
@@ -1552,7 +1628,7 @@ function applyHash() {
   // 没有 hash（直接打开首页）进新手入门
   if (!raw.startsWith("#/")) { const old = { "#xcheck": "about", "#method": "about", "#skills": "class", "#tiers": "tiers" }[raw]; route.name = old || "start"; return; }
   const p = raw.slice(2).split("/");
-  route.name = ["start", "tiers", "guide", "sim", "class", "race", "legacy", "about"].includes(p[0]) ? p[0] : "start";
+  route.name = ["start", "tiers", "guide", "sim", "class", "race", "fit", "legacy", "about"].includes(p[0]) ? p[0] : "start";
   if (route.name === "sim" && CT[p[1]]) {
     sim.cls = p[1];
     if (p[2]) { const L = Math.max(1, Math.min(60, +p[2] || state.level)); state.level = L; }
@@ -1565,6 +1641,7 @@ function applyHash() {
   }
   if (route.name === "class") route.cls = CT[p[1]] ? p[1] : route.cls;
   if (route.name === "race") route.race = p[1] || route.race;
+  if (route.name === "fit") { if (p[1]) fitState.race = p[1]; if (CT[p[2]]) fitState.cls = p[2]; }
 }
 function replaceHash(h) { try { history.replaceState(null, "", h); } catch (_) {} }
 
@@ -1591,12 +1668,13 @@ function renderRoute(fromSlider) {
   document.querySelectorAll("#appnav a").forEach((a) => { if (a.dataset.route === route.name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   document.getElementById("viewSeg").hidden = route.name !== "tiers";
   // 新手入门和游戏介绍用不到等级条和显示选项
-  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide";
+  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide" || route.name === "fit";
   if (route.name === "tiers") { renderBoard(); renderDetail(); } else updateLevelBar();
   if (route.name === "start") renderStart(fromSlider);
   if (route.name === "sim") renderSim(fromSlider);
   if (route.name === "class") renderClass(fromSlider);
   if (route.name === "race") renderRace();
+  if (route.name === "fit") renderFit();
   if (route.name === "legacy") renderLegacy();
   if (route.name === "guide") renderGuide(fromSlider);
   if (route.name === "about" && !xDone) { renderXcheck(); xDone = true; }
@@ -2044,7 +2122,7 @@ function renderClass(fromSlider) {
       </article>`;
     }).join("")}</div>
     <section class="cblock"><h3>三个专精 1–60 级升级指数</h3>${classChart(cls, fromSlider)}</section>
-    <section class="cblock"><h3>能选${CLS[cls].cn}的种族</h3><div class="racechips">${races.map((r) => `<a href="#/race/${slugOf(r.race)}" class="rchip">${crestR(r.race) ? `<img alt="" src="${crestR(r.race)}">` : img(r.icon)}<span>${esc(r.raceZh || r.race)}<small>${r.f === "Horde" ? "部落" : "联盟"}</small></span></a>`).join("")}</div></section>
+    <section class="cblock"><h3>能选${CLS[cls].cn}的种族 · 按种族天赋的升级加成排</h3><div class="racechips">${races.sort((x, y) => (fitBestForClass(cls)[y.race] || 0) - (fitBestForClass(cls)[x.race] || 0)).map((r) => `<a href="#/race/${slugOf(r.race)}" class="rchip">${crestR(r.race) ? `<img alt="" src="${crestR(r.race)}">` : img(r.icon)}<span>${esc(r.raceZh || r.race)}<small>${r.f === "Horde" ? "部落" : "联盟"}${fitBestForClass(cls)[r.race] != null ? ` · 升级 ${fitPct(fitBestForClass(cls)[r.race])}` : ""}</small></span></a>`).join("")}</div><p class="hint"><a class="jump" href="#/fit/-/${cls}">看${CLS[cls].cn}的种族搭配 →</a></p></section>
     <section class="cblock"><h3>职业技能 · 按 ${L} 级</h3><p class="hint">学习等级和训练费是 Wowhead Forever 技能库里的 Classic 数据，每个技能都用 BlizzCon 试玩 38 级技能书核对过。</p><div id="classSkills"></div></section>`;
   renderSkills();
 }
@@ -2073,10 +2151,147 @@ function renderRace() {
       <header class="chead rhead">${crestR(r.race) ? `<img class="ccrest" alt="" src="${crestR(r.race)}">` : img(r.icon)}<div><h2>${esc(r.raceZh || r.race)} <span class="en">${esc(r.race)}</span>${srcBadge(r.raceSrc === "provisional" ? "provisional" : null)}</h2><p class="lede2">${r.f === "Horde" ? "部落" : "联盟"} · 可选 ${r.classes.length} 个职业</p></div></header>
       <div class="rcols">
         <section class="cblock"><h3>种族天赋</h3><ul class="ab rab">${r.abilities.map((a) => `<li>${img(a[2])}<div><b>${bi(a[3], a[0])}</b>${srcBadge(a[4])}<span class="txt">${esc(a[5] || a[1])}</span>${a[5] ? `<span class="orig"><span>原文</span>${esc(a[1])}</span>` : ""}</div></li>`).join("")}</ul></section>
+        <section class="cblock"><h3>种族天赋最适合的专精</h3><ol class="flist fmini">${fitTopForRace(r.race, 5).map((x, k) => `<li style="--cc:${x.s.color}"><span class="frank">${k + 1}</span><div class="fname"><b>${CLS[x.s.cls].cn}</b> ${esc(x.s.cn)}</div><span class="fval">升级 ${fitPct(x.lv)}</span></li>`).join("")}</ol><p class="hint"><a class="jump" href="#/fit/${slugOf(r.race)}">看完整的种族搭配 →</a></p></section>
         <section class="cblock"><h3>能选的职业 · ${L} 级升级档位</h3><div class="rclasses">${classes}</div><p class="hint">点职业进入职业总览。档位是专精在当前等级的升级综合排名，没有算种族天赋的加成。</p></section>
       </div>
       ${priestSpells}
     </div>`;
+}
+
+// ===================== 种族搭配 =====================
+const RF = D.raceFit;
+const fitState = { metric: store.get("forever-fit-metric", "lv"), faction: store.get("forever-fit-faction", "all"), race: null, cls: null };
+const FIT_RACES = RF ? RF.races : [];
+const raceInfo = (race) => Object.entries(SK.races).flatMap(([f, l]) => l.map((r) => ({ ...r, f }))).find((r) => r.race === race);
+const raceCn = (race) => raceInfo(race)?.raceZh || race;
+function racialCn(race, en) {
+  const a = raceInfo(race)?.abilities.find((x) => x[0] === en);
+  return a?.[3] || RF.racials[en]?.[2] || en;
+}
+// 一个专精在当前口径下的数：升级提速，或 60 级（取这个专精的主要定位，野性取输出和坦克里高的）
+function fitVal(race, s) {
+  const f = RF.fit[`${race}|${s.k}`];
+  if (!f) return null;
+  if (fitState.metric === "lv") return { v: f.lv, role: null, f };
+  const roles = MODEL.specRoles[s.cls][s.spec] || [];
+  const best = roles.map((role) => [role, f.end[role] ?? 0]).sort((a, b) => b[1] - a[1])[0];
+  return { v: best[1], role: best[0], f };
+}
+const fitPct = (v) => `${v >= 0.05 ? "+" : ""}${v.toFixed(1)}%`;
+function fitParts(race, s, role, n = 3) {
+  const f = RF.fit[`${race}|${s.k}`];
+  return f.parts.map(([en, lv, end]) => [en, fitState.metric === "lv" ? lv : end[role] ?? 0]).filter((x) => x[1] >= 0.05).sort((a, b) => b[1] - a[1]).slice(0, n)
+    .map(([en, v]) => `<span class="fpart" title="${esc(RF.racials[en]?.[1] || "")}">${esc(racialCn(race, en))} <b>${fitPct(v)}</b></span>`).join("");
+}
+function renderFit() {
+  const el = document.getElementById("fitPage");
+  if (!RF) { el.innerHTML = `<p class="note">种族搭配数据还没有生成（node race_model.cjs）。</p>`; return; }
+  const races = FIT_RACES.filter((r) => fitState.faction === "all" || r.f === fitState.faction);
+  if (!fitState.race || !FIT_RACES.some((r) => slugOf(r.race) === fitState.race)) fitState.race = slugOf(races[0].race);
+  if (!fitState.cls || !CT[fitState.cls]) fitState.cls = CLS_ORDER[0];
+  const race = FIT_RACES.find((r) => slugOf(r.race) === fitState.race);
+  const metricName = fitState.metric === "lv" ? "升级提速" : "60 级团队价值";
+  // 矩阵：每格是这个职业里种族加成最大的专精
+  const cellOf = (r, cls) => {
+    if (!r.classes.includes(cls)) return null;
+    return specsOf(cls).map((s) => ({ s, ...fitVal(r.race, s) })).sort((a, b) => b.v - a.v)[0];
+  };
+  const cells = races.flatMap((r) => CLS_ORDER.map((c) => cellOf(r, c)).filter(Boolean));
+  const max = Math.max(...cells.map((c) => c.v), 0.1);
+  const matrix = `
+    <div class="fit-wrap"><table class="fitm">
+      <thead><tr><th scope="col"><span class="sr">种族</span></th>${CLS_ORDER.map((c) => `<th scope="col" style="--cc:${CLS[c].color}">${crestC(c) ? `<img alt="" src="${crestC(c)}">` : ""}<span>${CLS[c].cn}</span></th>`).join("")}</tr></thead>
+      <tbody>${races.map((r) => `<tr><th scope="row"><button type="button" data-fitrace="${slugOf(r.race)}"${slugOf(r.race) === fitState.race ? ' aria-pressed="true"' : ""}>${crestR(r.race) ? `<img alt="" src="${crestR(r.race)}">` : ""}<span>${esc(raceCn(r.race))}<small>${r.f === "Horde" ? "部落" : "联盟"}</small></span></button></th>${CLS_ORDER.map((c) => {
+        const x = cellOf(r, c);
+        if (!x) return `<td class="na" aria-label="不能选"><span aria-hidden="true">—</span></td>`;
+        const hot = Math.max(0, x.v / max);
+        return `<td><button type="button" class="fcell" data-fitrace="${slugOf(r.race)}" data-fitcls="${c}" style="--h:${(hot * 100).toFixed(0)}%" aria-label="${esc(raceCn(r.race))}${CLS[c].cn}，最佳${x.s.cn}${metricName}${fitPct(x.v)}"${slugOf(r.race) === fitState.race && c === fitState.cls ? ' aria-pressed="true"' : ""}><b>${fitPct(x.v)}</b><small>${esc(x.s.cn)}</small></button></td>`;
+      }).join("")}</tr>`).join("")}</tbody>
+    </table></div>`;
+  // 按种族挑职业
+  const byRace = race.classes.flatMap((c) => specsOf(c)).map((s) => ({ s, ...fitVal(race.race, s) })).sort((a, b) => b.v - a.v);
+  const rmax = Math.max(...byRace.map((x) => x.v), 0.1);
+  const raceList = byRace.map((x, k) => `
+    <li style="--cc:${x.s.color}">
+      <span class="frank">${k + 1}</span>
+      <div class="fname"><a href="#/class/${x.s.cls}"><b>${CLS[x.s.cls].cn}</b> ${esc(x.s.cn)}</a>${x.role ? `<small>${ROLE_CN[x.role]}</small>` : ""}</div>
+      <div class="fbar"><i style="width:${Math.max(2, (x.v / rmax) * 100).toFixed(0)}%"></i></div>
+      <span class="fval">${fitPct(x.v)}</span>
+      <div class="fparts">${fitParts(race.race, x.s, x.role)}</div>
+    </li>`).join("");
+  // 按职业挑种族
+  const cls = fitState.cls;
+  const cSpecs = specsOf(cls);
+  const byCls = FIT_RACES.filter((r) => r.classes.includes(cls)).map((r) => {
+    const per = cSpecs.map((s) => ({ s, ...fitVal(r.race, s) }));
+    return { r, per, best: per.slice().sort((a, b) => b.v - a.v)[0] };
+  }).sort((a, b) => b.best.v - a.best.v);
+  const clsTable = `
+    <div class="fit-wrap"><table class="fitc">
+      <thead><tr><th scope="col">种族</th>${cSpecs.map((s) => `<th scope="col">${esc(s.cn)}</th>`).join("")}<th scope="col">加成主要来自</th></tr></thead>
+      <tbody>${byCls.map(({ r, per, best }, k) => {
+        const colMax = (s) => Math.max(...byCls.map((x) => x.per.find((p) => p.s.k === s.k).v));
+        return `<tr><th scope="row"><span class="frank">${k + 1}</span>${crestR(r.race) ? `<img alt="" src="${crestR(r.race)}">` : ""}<a href="#/race/${slugOf(r.race)}">${esc(raceCn(r.race))}</a><small>${r.f === "Horde" ? "部落" : "联盟"}</small></th>${per.map((p) => `<td class="${p.v === colMax(p.s) && p.v > 0 ? "top" : ""}">${fitPct(p.v)}${p.role && (MODEL.specRoles[cls][p.s.spec] || []).length > 1 ? `<small>${ROLE_CN[p.role]}</small>` : ""}</td>`).join("")}<td class="fparts">${fitParts(r.race, best.s, best.role, 2)}</td></tr>`;
+      }).join("")}</tbody>
+    </table></div>`;
+  const refRaces = FIT_RACES.filter((r) => slugOf(r.race) === fitState.race);
+  el.innerHTML = `
+    <header class="fithead">
+      <h2>种族 × 职业搭配</h2>
+      <p class="lede2">同一个专精，换个种族能快多少、强多少？把每个种族天赋的被动和主动技能按天赋估值的同一把尺子折算，套进升级和 60 级公式算出来。</p>
+      <p class="warn">数字普遍不大：升级提速 1–5%，60 级团队价值 0–3%。职业和专精之间的差距比这大得多，种族可以放心按喜好和阵营挑。</p>
+      <div class="fitctl">
+        <div class="seg" role="group" aria-label="口径">${[["lv", "升级提速"], ["end", "60 级团队价值"]].map(([k, n]) => `<button data-fitmetric="${k}" aria-pressed="${fitState.metric === k}">${n}</button>`).join("")}</div>
+        <div class="seg" role="group" aria-label="阵营">${[["all", "全部"], ["Horde", "部落"], ["Alliance", "联盟"]].map(([k, n]) => `<button data-fitfaction="${k}" aria-pressed="${fitState.faction === k}">${n}</button>`).join("")}</div>
+      </div>
+    </header>
+    <section class="cblock">
+      <h3>一张表看全部 · ${metricName}</h3>
+      <p class="hint">每格是这个种族玩这个职业时，加成最大的那个专精。颜色越深加成越大；点种族或格子，下面会切过去。</p>
+      ${matrix}
+    </section>
+    <div class="fitcols">
+      <section class="cblock fitpanel" id="fitRace">
+        <h3>${esc(raceCn(race.race))}最适合什么职业</h3>
+        <ol class="flist">${raceList}</ol>
+      </section>
+      <section class="cblock fitpanel" id="fitCls">
+        <h3>${CLS[cls].cn}最适合什么种族</h3>
+        <div class="fitclspick">${CLS_ORDER.map((c) => `<button type="button" data-fitcls="${c}" aria-pressed="${c === cls}" style="--cc:${CLS[c].color}">${crestC(c) ? `<img alt="" src="${crestC(c)}">` : ""}<span>${CLS[c].cn}</span></button>`).join("")}</div>
+        ${clsTable}
+      </section>
+    </div>
+    <details class="card fitref">
+      <summary>每个种族天赋怎么算的</summary>
+      <ul class="fitassume">${RF.assumptions.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
+      <div class="fitracials">${FIT_RACES.map((r) => `<div><h4>${esc(raceCn(r.race))}</h4><ul>${(raceInfo(r.race)?.abilities || []).map((a) => { const x = RF.racials[a[0]]; return `<li><b>${esc(a[3] || a[0])}</b><span class="gst" data-st="${{ high: "confirmed", med: "reported", low: "unverified" }[x?.[0]] || "unverified"}">${{ high: "数值明确", med: "有假设", low: "多为假设" }[x?.[0]] || "未估值"}</span><span>${esc(x?.[1] || "")}</span></li>`; }).join("")}</ul></div>`).join("")}</div>
+    </details>`;
+}
+document.getElementById("fitPage").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-fitmetric],button[data-fitfaction],button[data-fitrace],button[data-fitcls]");
+  if (!b) return;
+  const d = b.dataset;
+  if (d.fitmetric) { fitState.metric = d.fitmetric; store.set("forever-fit-metric", d.fitmetric); }
+  if (d.fitfaction) { fitState.faction = d.fitfaction; store.set("forever-fit-faction", d.fitfaction); }
+  if (d.fitrace) fitState.race = d.fitrace;
+  if (d.fitcls) fitState.cls = d.fitcls;
+  const y = window.scrollY;
+  renderFit();
+  replaceHash(`#/fit/${fitState.race}/${fitState.cls}`);
+  window.scrollTo(0, y);
+  if (b.classList.contains("fcell") && matchMedia("(max-width:980px)").matches) document.getElementById("fitRace")?.scrollIntoView({ behavior: motionOK() ? "smooth" : "auto" });
+  const key = Object.entries(d).map(([k, v]) => `[data-${k.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase())}="${v}"]`).join("");
+  document.querySelector(`#fitPage button${key}`)?.focus({ preventScroll: true });
+});
+// 种族页、职业页用的小结
+function fitTopForRace(race, n) {
+  if (!RF) return [];
+  const r = FIT_RACES.find((x) => x.race === race); if (!r) return [];
+  return r.classes.flatMap((c) => specsOf(c)).map((s) => ({ s, lv: RF.fit[`${race}|${s.k}`].lv })).sort((a, b) => b.lv - a.lv).slice(0, n);
+}
+function fitBestForClass(cls) {
+  if (!RF) return {};
+  return Object.fromEntries(FIT_RACES.filter((r) => r.classes.includes(cls)).map((r) => [r.race, Math.max(...specsOf(cls).map((s) => RF.fit[`${r.race}|${s.k}`].lv))]));
 }
 
 // ===================== Legacy =====================
