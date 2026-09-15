@@ -9,13 +9,13 @@
 <link rel="apple-touch-icon" href="assets/forever-logo-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap">
 <style>
 :root{
   --ground:#E9EDF1; --surface:#FFFFFF; --sunken:#F3F5F8; --ink:#141C25; --muted:#4B5563; --faint:#5F6A78; --line:#D3DAE2;
   --accent:#8A5F24; --accent-soft:rgba(138,95,36,.13);
-  --q-S:#A84F00; --q-A:#8A2BD0; --q-B:#0063C2; --q-C:#1F7A17; --q-D:#656B73;
-  --maxed:#A87B12; --partial:#1F7A17;
+  --q-S:#874000; --q-A:#8A2BD0; --q-B:#0063C2; --q-C:#196212; --q-D:#656B73;
+  --maxed:#86610B; --partial:#196212;
   --chart-line:rgba(20,28,37,.13);
   --f-display:"Noto Serif SC","Songti SC","SimSun",serif;
   --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
@@ -725,6 +725,92 @@ section.block{scroll-margin-top:130px}
 .site-foot p{margin:0;max-width:90ch}
 @media (max-width:700px){.brand-in{grid-template-columns:auto 1fr;gap:10px 14px;padding-block:18px 26px}.brand .logo{width:92px}.brand h1{font-size:26px;margin:0}.brand .lede{grid-column:1/-1;font-size:13px}.brand .byline{grid-column:1/-1;margin-top:6px}.brand .kick{grid-column:1/-1;order:-1;font-size:12px;margin:0}.brand nav{grid-column:1/-1;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:12px}.brand nav::-webkit-scrollbar{display:none}.brand-in > div{display:contents}.brand-art i{width:100%}.brand-art .alliance{display:none}.brand-art .horde{-webkit-mask-image:none;mask-image:none}}
 
+/* Interaction layers: navigation 7, tooltip 20, status 30; dialogs use the top layer. */
+:root{--layer-tip:20;--layer-status:30}
+button,a,input,select,summary{touch-action:manipulation}
+.simgrid > *,.simwork,.simside,.simsum,.simact{min-width:0}
+.simact select{max-width:100%;font:inherit}
+.src-b,.flag,.vbadge,.cell .rk{font-size:12px}
+.sspec{margin-bottom:14px}
+.trees3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.cell:not(.gap){min-width:44px;min-height:44px;scroll-margin-top:180px}
+.level .lvnum{display:none}
+#levelValue{width:64px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-family:var(--f-num);font-size:26px;font-weight:700;text-align:center;padding:2px;color:var(--ink)}
+.level-entry{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted)}
+.simact button,.simact select,.simact .whlink,.treereset,.pm button,.lstep button,.opts > summary,.seg button,.filters button,.jump,.gfilter button,.rgroup a{min-height:44px}
+.lstep button{min-width:44px}
+.simact .whlink,.jump{display:inline-flex;align-items:center;justify-content:center}
+.treereset{font-size:12px;margin-top:4px}
+.scell{min-width:44px;min-height:44px}
+.scell .rk{font-size:12px;min-width:26px;text-align:center}
+.scell[data-s="lock"] img{opacity:.72;filter:grayscale(.8) brightness(.82)}
+.talent-dialog .src-b,.talent-dialog .flag,.talent-dialog .vbadge,.talent-dialog .lbl,.talent-tip .src-b,.talent-tip .lbl{font-size:12px}
+.scell{scroll-margin-top:184px}
+.scell:active{transform:scale(.96)}
+.tree-tabs{display:none}
+.sim-instruction{margin:0 0 12px;color:var(--muted);font-size:13px}
+.touch-help{display:none}
+.talent-tip{position:fixed;z-index:var(--layer-tip);width:360px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain;padding:16px;border:1px solid var(--accent);border-radius:10px;background:var(--surface);color:var(--ink);box-shadow:0 12px 32px #0004;font-size:14px;line-height:1.65}
+.talent-tip .tinfo{margin:0;padding:0;background:none;border:0}.talent-tip .cmpblock{display:none}
+.talent-dialog{width:min(520px,calc(100% - 32px));max-height:85dvh;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);box-shadow:0 16px 60px #0005;overflow:hidden}
+.talent-dialog[open]{display:flex;flex-direction:column}
+.talent-dialog::backdrop{background:#060c1699}
+.talent-dialog > header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 12px 8px 20px;border-bottom:1px solid var(--line);flex-shrink:0}
+.talent-dialog h2{font-family:var(--f-body);font-size:16px;margin:0}
+.detail-close{width:44px;height:44px;flex-shrink:0;background:var(--sunken);border:1px solid var(--line);border-radius:8px;font-size:24px;cursor:pointer}
+.talent-detail-body{padding:16px 20px 0;overflow:auto;overscroll-behavior:contain;min-height:0}
+.talent-detail-body .tinfo{margin:0;padding:0;background:none;border:0;font-size:15px;gap:6px 10px}
+.talent-dialog .pm{position:sticky;bottom:0;background:var(--surface);padding:12px 0;margin-top:8px;border-top:1px solid var(--line)}
+.talent-dialog .pm button{font-size:16px;min-height:48px}
+.pm button[data-act="add"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.detail-status{min-height:24px;font-size:13px;color:var(--muted);margin:0;padding:4px 20px max(12px,env(safe-area-inset-bottom));flex-shrink:0}
+html.detail-open{overflow:hidden}
+#announce{position:fixed;z-index:var(--layer-status);left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%);width:max-content;max-width:calc(100vw - 32px);height:auto;margin:0;padding:10px 16px;border-radius:8px;background:var(--ink);color:var(--surface);font-size:14px;white-space:normal;clip:auto;overflow:visible;opacity:0;pointer-events:none;transition:opacity .15s}
+#announce.visible{opacity:1}
+.level .slider{min-width:0}
+.slider input{min-height:32px;margin-inline:0}
+.opts-panel{max-width:calc(100vw - 32px)}
+.toggle{min-height:44px}
+.tinfo p,.tinfo .nm,.card,.warn{overflow-wrap:anywhere}
+@media (max-width:1100px){.simgrid{grid-template-columns:1fr}.simside{position:static;max-height:none;overflow:visible}.simside{display:grid;grid-template-columns:1fr 1fr}.simside > details{grid-column:1/-1}.sgrid{max-width:300px;margin:auto}}
+@media (pointer:coarse){.touch-help{display:inline}.mouse-help{display:none}}
+@media (max-width:700px){
+  body{margin:0;padding-inline:12px;font-size:15px}
+  .appnav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;margin-inline:0;overflow:visible;padding:4px 0}
+  .appnav a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:6px 2px;font-size:12px;border-radius:6px;text-align:center;white-space:normal}
+  .appnav a[aria-current="page"]{background:var(--accent-soft)}
+  .appnav a::after{left:12px;right:12px;bottom:0}
+  .brand{margin-inline:-12px;padding-inline:12px}
+  body[data-route="sim"] .brand .lede,body[data-route="sim"] .brand .byline,body[data-route="sim"] .brand nav{display:none}
+  body[data-route="sim"] .brand-in{padding-block:12px;gap:6px 12px}
+  body[data-route="sim"] .brand .logo{width:56px}
+  body[data-route="sim"] .brand h1{font-size:22px}
+  .level{gap:8px}.lvinfo{font-size:11px;flex-shrink:0}.lvnum{font-size:30px}
+  .simbar{gap:12px}.simsum{gap:6px 12px;width:100%}.spts b{font-size:28px}
+  .sspec{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.sspec button{white-space:normal;font-size:13px}
+  .simact{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}
+  .simact .sel{grid-column:1/-1}.simact select{width:100%;font-size:16px}
+  .simact > :last-child{font-size:12px;text-align:center}
+  #sim .clspick{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;overflow:visible}
+  #sim .clspick a{min-width:0;padding:6px 2px;font-size:12px;min-height:60px}
+  #sim .clspick a img{width:28px;height:28px}
+  .tree-tabs{position:sticky;top:100px;z-index:4;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;background:var(--ground);padding:8px 0;margin-bottom:8px}
+  .tree-tabs button{display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;min-height:56px;padding:6px 2px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:15px;cursor:pointer}
+  .tree-tabs button span{font-family:var(--f-num);font-size:13px;color:var(--muted)}
+  .tree-tabs button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+  .simtrees{display:block;overflow:visible;padding:0}.stree[data-active="false"]{display:none}.stree{padding:14px}
+  .stree header{grid-template-columns:30px 1fr auto auto}.treereset{grid-column:auto;margin:0;padding-inline:8px}
+  .sgrid{max-width:340px;gap:12px;padding:6px}.sgrid .arrows{inset:6px;width:calc(100% - 12px);height:calc(100% - 12px)}
+  .simside{display:flex}.simside #simInfo{display:none}.touch-help{display:inline}.mouse-help{display:none}
+  .sim-instruction{font-size:13px}.simhelp{font-size:13px}
+  .talent-dialog{width:100%;max-width:none;max-height:80dvh;margin:auto 0 0;border-radius:16px 16px 0 0;border-bottom:0}
+  .talent-detail-body{padding:14px 16px 0;font-size:15px}.talent-dialog .sinfo p{line-height:1.75}
+  .opts-panel{position:static;width:100%;max-width:none;box-shadow:none;margin-top:8px}.opts[open]{width:100%}
+  .trees3{grid-template-columns:1fr;overflow:visible}.trees3 .grid{max-width:340px;margin:auto;gap:10px}
+  .gfilter{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .warn button{white-space:normal;text-align:left}.simempty{font-size:13px}
+  .route{padding-top:14px}
+}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -766,6 +852,7 @@ section.block{scroll-margin-top:130px}
     </div>
     <div class="level" id="levelBox">
       <div class="lvnum" id="lvnum">40<small>级</small></div>
+      <label class="level-entry"><input id="levelValue" type="number" min="1" max="60" value="40" inputmode="numeric" aria-label="输入角色等级">级</label>
       <div class="slider">
         <input type="range" id="lv" min="1" max="60" value="40" aria-label="角色等级">
         <div class="ticks" id="ticks"></div>
@@ -807,7 +894,7 @@ section.block{scroll-margin-top:130px}
   <section class="block" id="xcheck">
     <h2>和网上榜单对照</h2>
     <p class="sub">截至 2026-09-14，网上还没有基于实测的 Forever 榜单（Icy Veins 仍是 Coming Soon）。能找到的只有 AOEAH 和 FrostyBoost 当天发的文章，都是看天赋说明写的，没有数值，仅作参考。</p>
-    <div class="xwrap"><table class="x" id="xtable"></table></div>
+    <div class="xwrap" tabindex="0" role="region" aria-label="榜单对照，可横向滚动"><table class="x" id="xtable"></table></div>
     <ul class="xnotes">
       <li><b>一致：</b>单刷升级猎人最好；法系输出火法、恶魔术靠前；治疗恢复萨、牧师靠前；刺杀贼、战斗贼在第一梯队。</li>
       <li><b>仍有分歧：</b>增强萨和元素萨，对方都放在 S/A。本模型把先祖之怒按 3 分钟冷却、漩涡武器按低触发估，这两个数值试玩里都没见过。痛苦术、生存猎也比对方低一档。</li>
@@ -935,6 +1022,8 @@ function renderBoard() {
   document.querySelector('label[for="talented"]').setAttribute("aria-disabled", end && route.name === "tiers");
   document.getElementById("talented").checked = state.talented;
   document.getElementById("lv").value = L;
+  document.getElementById("levelValue").value = end ? 60 : L;
+  document.getElementById("levelValue").disabled = end && route.name === "tiers";
   document.querySelectorAll(".controls .seg button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.view===state.view));
 }
 
@@ -1046,7 +1135,15 @@ function renderDetail() {
     if (isLevelView()) h += `<details><summary>${firstLv()}–${L} 级逐级加点顺序</summary>${orderRuns(p.picks, L)}</details>`;
   }
   el.innerHTML = h;
-  el.querySelectorAll(".cell[data-id]").forEach(c => c.onclick = () => { state.talent = state.talent===c.dataset.id ? null : c.dataset.id; const sc = el.scrollTop; renderDetail(); el.scrollTop = sc; });
+  el.querySelectorAll(".cell[data-id]").forEach(c => {
+    c.removeAttribute("title");
+    const html = () => readTalentHTML(c.dataset.id, ranks[c.dataset.id] || 0);
+    c.onclick = () => openTalentDetail(c.dataset.id, html());
+    c.onpointerenter = e => { if(e.pointerType === "mouse") showTalentTip(c, html()); };
+    c.onpointerleave = scheduleTipHide;
+    c.onfocus = () => showTalentTip(c, html());
+    c.onblur = hideTalentTip;
+  });
 }
 
 // 网上榜单对照（AOEAH 2026-09-14）
@@ -1110,7 +1207,7 @@ function renderSkills() {
   h += `<div class="filters">${Object.entries(F).map(([k,[t]]) => `<button id="skf-${k}" data-f="${k}" aria-pressed="${skill.filter===k}">${t}</button>`).join("")}</div>`;
   const list = C.spells.filter(F[skill.filter][1]);
   const groups = []; for (const s of list.slice().sort((a,b)=>a[2][0][0]-b[2][0][0])) { let g = groups.find(x=>x.t===s[1]); if (!g) groups.push(g = {t:s[1], rows:[]}); g.rows.push(s); }
-  h += `<div class="skwrap"><table class="sk"><thead><tr><th>技能</th><th>学习等级（Classic 训练师）</th><th>当前等级</th><th>下一级训练费</th><th>试玩核对</th></tr></thead><tbody>`;
+  h += `<div class="skwrap" tabindex="0" role="region" aria-label="技能列表，可横向滚动"><table class="sk"><thead><tr><th>技能</th><th>学习等级（Classic 训练师）</th><th>当前等级</th><th>下一级训练费</th><th>试玩核对</th></tr></thead><tbody>`;
   if (!list.length) h += `<tr><td colspan="5">这个筛选下没有技能。</td></tr>`;
   for (const g of groups) {
     h += `<tr class="grp"><td colspan="5">${esc(g.t)} · ${g.rows.length}</td></tr>`;
@@ -1137,6 +1234,13 @@ document.getElementById("showEn").addEventListener("change", e => { document.bod
 document.getElementById("talented").addEventListener("change", e => { setTalented(e.target.checked); });
 let lvFrame = 0;
 document.getElementById("lv").addEventListener("input", e => { state.level = +e.target.value; if (lvFrame) return; lvFrame = requestAnimationFrame(() => { lvFrame = 0; save(); renderRoute(true); }); });
+document.getElementById("levelValue").addEventListener("change", e => {
+  const v = e.target.valueAsNumber;
+  if (!Number.isFinite(v)) { e.target.value = state.level; return; }
+  const slider = document.getElementById("lv");
+  slider.value = Math.max(1, Math.min(60, Math.round(v)));
+  slider.dispatchEvent(new Event("input", {bubbles:true}));
+});
 // ===================== 路由 · 天赋模拟器 · 职业 · 种族 · Legacy · 动效 =====================
 // 这个文件由 build_page.cjs / build_site.cjs 内联进页面脚本末尾，可直接使用上面定义的 D、state、PER 等
 
@@ -1300,11 +1404,16 @@ function tween(root) {
     requestAnimationFrame(step);
   });
 }
-const announce = (msg) => { document.getElementById("announce").textContent = msg; };
+let noticeTimer;
+const announce = (msg) => {
+  const box = document.getElementById("announce");
+  box.textContent = msg; box.classList.add("visible");
+  clearTimeout(noticeTimer); noticeTimer = setTimeout(() => box.classList.remove("visible"), 3000);
+};
 
 // ---------- 路由 ----------
 const route = { name: "tiers", cls: null, race: null };
-const sim = { builds: store.get("forever-sim", {}), cls: null, spec: "auto", hist: [], focus: null, prev: {} };
+const sim = { builds: store.get("forever-sim", {}), cls: null, spec: "auto", hist: [], focus: null, prev: {}, tree: 0, historyClass: null };
 const legacyRanks = store.get("forever-legacy", {});
 const TALENTED_MAX = (SK.legacy.trees.flatMap((t) => t.perks).find((p) => p.name === "Talented") || { max: 5 }).max;
 if ("Talented" in legacyRanks) state.talented = legacyRanks.Talented >= TALENTED_MAX; else legacyRanks.Talented = state.talented ? TALENTED_MAX : 0;
@@ -1319,7 +1428,11 @@ function applyHash() {
     sim.cls = p[1];
     if (p[2]) { const L = Math.max(1, Math.min(60, +p[2] || state.level)); state.level = L; }
     if (p[3] === "0" || p[3] === "1") { state.talented = p[3] === "1"; legacyRanks.Talented = state.talented ? TALENTED_MAX : 0; }
-    if (p[4] != null) sim.builds[p[1]] = normalizeOrder(p[1], decodeOrder(p[1], p[4]));
+    if (p[4] != null) {
+      const incoming = normalizeOrder(p[1], decodeOrder(p[1], p[4]));
+      if (JSON.stringify(incoming) !== JSON.stringify(sim.builds[p[1]] || [])) sim.hist = [];
+      sim.builds[p[1]] = incoming;
+    }
   }
   if (route.name === "class") route.cls = CT[p[1]] ? p[1] : route.cls;
   if (route.name === "race") route.race = p[1] || route.race;
@@ -1334,10 +1447,14 @@ function updateLevelBar() {
   document.querySelector('label[for="talented"]').setAttribute("aria-disabled", "false");
   document.getElementById("talented").checked = state.talented;
   document.getElementById("lv").value = L;
+  document.getElementById("levelValue").value = L;
+  document.getElementById("levelValue").disabled = false;
 }
 
 let xDone = false;
 function renderRoute(fromSlider) {
+  document.body.dataset.route = route.name;
+  closeTalentDetail(false);
   document.querySelectorAll(".route").forEach((el) => {
     const on = el.dataset.page === route.name;
     if (el.hidden === on) { el.hidden = !on; if (on && !fromSlider) enter(el); }
@@ -1420,7 +1537,10 @@ const clsPicker = (current, hrefOf, label) => `<nav class="clspick" aria-label="
 
 // ===================== 天赋模拟器 =====================
 function simState() {
-  const cls = sim.cls || D.specs[state.sel].cls; sim.cls = cls;
+  const cls = sim.cls || D.specs[state.sel]?.cls || CLS_ORDER[0]; sim.cls = cls;
+  if (sim.historyClass !== cls) {
+    sim.hist = []; sim.focus = null; sim.tree = 0; sim.spec = "auto"; sim.historyClass = cls;
+  }
   const order = sim.builds[cls] || [];
   const ranks = ranksFromOrder(order), total = order.length, avail = pts(state.level);
   const specs = specsOf(cls);
@@ -1445,6 +1565,7 @@ function simScores(S) {
 }
 
 function renderSim(fromSlider) {
+  hideTalentTip();
   const el = document.getElementById("sim");
   const S = simState(), { cls, order, ranks, total, avail, specs, split, spec } = S;
   const over = total - avail, L = state.level;
@@ -1466,7 +1587,7 @@ function renderSim(fromSlider) {
         arrows += `<line x1="${rt[3] + 0.5}" y1="${rt[2] + 0.5}" x2="${col + 0.5}" y2="${row + 0.5}" class="${met ? "met" : ""}" />`;
       }
     }
-    return `<section class="stree${sp.i === spec.i ? " main" : ""}" style="--cc:${sp.color}">
+    return `<section id="sim-tree-${k}" class="stree${sp.i === spec.i ? " main" : ""}" data-active="${sim.tree === k}" aria-label="${sp.cn}天赋" style="--cc:${sp.color}">
       <header><img alt="" src="${ico(sp.icon)}"><div><b>${sp.cn}</b><span class="en">${sp.treeEn}</span></div><em data-tween="${split[k]}" data-from="${prev["t" + k] ?? split[k]}">${split[k]}</em>
         <button class="treereset" data-tree="${tr}"${split[k] ? "" : " disabled"}>清空此系</button></header>
       <div class="sgrid"><svg class="arrows" viewBox="0 0 4 7" preserveAspectRatio="none" aria-hidden="true">${arrows}</svg>${cells}</div>
@@ -1503,7 +1624,6 @@ function renderSim(fromSlider) {
         <span class="spts${over > 0 ? " over" : ""}"><b data-tween="${total}" data-from="${prev.total ?? total}">${total}</b> / ${avail} 点</span>
         <span class="ssplit">${split.join(" / ")}</span>
         ${cmpSummary(cls)}
-        <div class="seg sspec" role="group" aria-label="按哪个专精评分"><button data-spec="auto" aria-pressed="${sim.spec === "auto"}">自动（${S.auto.cn}）</button>${specs.map((s) => `<button data-spec="${s.spec}" aria-pressed="${sim.spec === s.spec}">${s.cn}</button>`).join("")}</div>
       </div>
       <div class="simact">
         <label class="sel"><span class="sr">套用模型加点</span><select id="applyBest"><option value="">套用模型加点…</option>${bestOpts}</select></label>
@@ -1513,26 +1633,27 @@ function renderSim(fromSlider) {
         <a class="whlink" href="${whLink(cls, ranks)}" target="_blank" rel="noopener">在 Wowhead 打开 ↗</a>
       </div>
     </div>
-    ${!total && avail ? `<p class="warn simempty"><span>还没有加点，所以分数很低。<b>第一次用？</b>先套用模型推荐的加点，再按自己的想法改。</span><button id="simQuick" class="primary">一键套用${spec.cn} ${L} 级推荐加点</button></p>` : ""}
+    ${!total && avail ? `<p class="warn simempty"><span>从天赋树开始加点，或先试试推荐方案。</span><button id="simQuick" class="primary">套用${spec.cn} ${L} 级推荐</button></p>` : ""}
     ${over > 0 ? `<p class="warn">${L} 级只有 ${avail} 点，这套加点用了 ${total} 点，多出 ${over} 点（下方加点顺序里标红）。<button id="simTrim">撤回多出的 ${over} 点</button></p>` : ""}
     <div class="simgrid">
-      <div><div class="simtrees">${CT[cls].trees.map(treePanel).join("")}</div>${removedList(cls)}</div>
+      <div class="simwork"><div class="tree-tabs" role="group" aria-label="切换天赋系">${CT[cls].trees.map((tr, k) => `<button data-tree-tab="${k}" aria-pressed="${sim.tree === k}" aria-controls="sim-tree-${k}">${treeCn(cls, tr)}<span>${split[k]} 点</span></button>`).join("")}</div><p class="sim-instruction"><span class="touch-help">点天赋看说明，再用「加一点」「减一点」调整。</span><span class="mouse-help">悬停看说明，左键加点，右键减点；按 Enter 打开详情。</span></p><div class="simtrees">${CT[cls].trees.map(treePanel).join("")}</div>${removedList(cls)}</div>
       <aside class="simside">
-        <div class="card">${lvCard}${endCard ? `<div class="ends">${endCard}${total < 51 ? `<p class="hint">60 级分数按这套加点现有的 ${total} 点计算，点满 51 点才公平。</p>` : ""}</div>` : ""}</div>
+        <div class="card"><div class="seg sspec" role="group" aria-label="按哪个专精评分"><button data-spec="auto" aria-pressed="${sim.spec === "auto"}">自动（${S.auto.cn}）</button>${specs.map((s) => `<button data-spec="${s.spec}" aria-pressed="${sim.spec === s.spec}">${s.cn}</button>`).join("")}</div>${lvCard}${endCard ? `<div class="ends">${endCard}${total < 51 ? `<p class="hint">60 级分数按这套加点现有的 ${total} 点计算，点满 51 点才公平。</p>` : ""}</div>` : ""}</div>
         <div class="card" id="simInfo"></div>
         <details class="card" open><summary>加点顺序 · 第 N 点在 ${firstLv()}+N−1 级拿到</summary>${orderList}</details>
       </aside>
     </div>
-    <p class="hint simhelp">左键加点 · 右键或 Shift+左键减点 · 手机长按减点 · 键盘选中天赋后按 + / − 。加点规则和 Wowhead 计算器一致：每系第 N 行要先投 5×(N−1) 点，前置天赋要点够。</p>`;
+    <p class="hint simhelp">键盘选中天赋后按 + / − 加减点。每系第 N 行要先投 5×(N−1) 点，前置天赋要点够。改错了可以撤销。</p>`;
 
   sim.prev[cls + spec.spec] = { idx: sc.lv ? sc.lv.idx.toFixed(1) : undefined, pct: sc.lv ? sc.lv.pct.toFixed(0) : undefined, total, t0: split[0], t1: split[1], t2: split[2] };
   tween(el);
   renderSimInfo(S);
-  if (!fromSlider && route.name === "sim") replaceHash(simHash(cls, order));
+  refreshTalentDetail();
+  if (route.name === "sim") replaceHash(simHash(cls, order));
 }
 
-function renderSimInfo(S = simState()) {
-  const box = document.getElementById("simInfo"); if (!box) return;
+function renderSimInfo(S = simState(), box = document.getElementById("simInfo")) {
+  if (!box) return;
   const { cls, ranks, avail, spec } = S, id = sim.focus;
   if (!id || D.talents[id][11] !== cls) {
     box.innerHTML = `<h3>天赋说明</h3><p class="hint">把鼠标移到天赋上，或者用 Tab 键选中，这里显示说明、解锁条件和加这一点能提升多少。</p>`;
@@ -1569,7 +1690,7 @@ function simAdd(id) {
   const c = document.querySelector(`.scell[data-id="${id}"]`);
   pop(c, r === t[4]);
   if (r === t[4] && c && motionOK()) c.classList.add("justmax");
-  c && c.focus({ preventScroll: true });
+  if (!talentDialog.open) c && c.focus({ preventScroll: true });
   announce(`${tn(t)} ${r}/${t[4]}`);
 }
 function simRemove(id) {
@@ -1580,7 +1701,7 @@ function simRemove(id) {
   const k = S.order.lastIndexOf(id), next = S.order.slice(); next.splice(k, 1);
   sim.builds[S.cls] = normalizeOrder(S.cls, next); store.set("forever-sim", sim.builds);
   sim.focus = id; renderSim();
-  const c = document.querySelector(`.scell[data-id="${id}"]`); c && c.focus({ preventScroll: true });
+  const c = document.querySelector(`.scell[data-id="${id}"]`); if (!talentDialog.open) c && c.focus({ preventScroll: true });
   announce(`${tn(D.talents[id])} ${(S.ranks[id] || 1) - 1}/${D.talents[id][4]}`);
 }
 function simSet(order, note) {
@@ -1590,13 +1711,105 @@ function simSet(order, note) {
   if (motionOK()) document.querySelectorAll("#sim .scell[data-s='max'], #sim .scell[data-s='part']").forEach((c, k) => c.animate([{ opacity: 0.3, transform: "scale(.85)" }, { opacity: 1, transform: "none" }], { duration: 300, delay: Math.min(k * 12, 400), easing: EASE, fill: "backwards" }));
 }
 
+// 详情脱离天赋树的滚动容器；手机使用原生 dialog 管理焦点与返回键。
+const talentTip = document.createElement("div");
+talentTip.id = "talent-tip"; talentTip.className = "talent-tip";
+talentTip.setAttribute("role", "tooltip"); talentTip.hidden = true;
+document.body.append(talentTip);
+const talentDialog = document.createElement("dialog");
+talentDialog.className = "talent-dialog";
+talentDialog.setAttribute("aria-labelledby", "talent-dialog-title");
+talentDialog.innerHTML = `<header><h2 id="talent-dialog-title">天赋详情</h2><button type="button" class="detail-close" aria-label="关闭天赋详情" autofocus>×</button></header><div class="talent-detail-body"></div><p class="detail-status" role="status" aria-live="polite"></p>`;
+document.body.append(talentDialog);
+let tipTimer, tipAnchor, detailOrigin, detailReadOnly = false;
+function hideTalentTip() {
+  clearTimeout(tipTimer); talentTip.hidden = true;
+  if (tipAnchor) tipAnchor.removeAttribute("aria-describedby");
+  tipAnchor = null;
+}
+function scheduleTipHide() { clearTimeout(tipTimer); tipTimer = setTimeout(hideTalentTip, 160); }
+function showTalentTip(cell, html) {
+  if (matchMedia("(max-width:700px)").matches || talentDialog.open) return;
+  hideTalentTip(); tipAnchor = cell;
+  if (html) talentTip.innerHTML = html; else renderSimInfo(simState(), talentTip);
+  talentTip.querySelectorAll(".pm,.est,.verify,.classic").forEach(el => el.remove());
+  talentTip.hidden = false; cell.setAttribute("aria-describedby", talentTip.id);
+  positionTalentTip(cell);
+}
+function positionTalentTip(cell) {
+  const rect = cell.getBoundingClientRect(), w = talentTip.offsetWidth, h = talentTip.offsetHeight;
+  if (rect.bottom < 0 || rect.top > innerHeight) { hideTalentTip(); return; }
+  const left = rect.right + 12 + w <= innerWidth - 12 ? rect.right + 12 : rect.left - w - 12;
+  talentTip.style.left = Math.max(12, Math.min(innerWidth - w - 12, left)) + "px";
+  talentTip.style.top = Math.max(12, Math.min(innerHeight - h - 12, rect.top)) + "px";
+}
+talentTip.addEventListener("pointerenter", () => clearTimeout(tipTimer));
+talentTip.addEventListener("pointerleave", scheduleTipHide);
+window.addEventListener("scroll", e => { if (tipAnchor && !talentTip.contains(e.target)) positionTalentTip(tipAnchor); }, true);
+window.addEventListener("resize", hideTalentTip);
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  hideTalentTip();
+  if (talentDialog.open) { e.preventDefault(); closeTalentDetail(); }
+});
+function refreshTalentDetail() {
+  if (!talentDialog.open || detailReadOnly) return;
+  const act = document.activeElement?.dataset.act;
+  const body = talentDialog.querySelector(".talent-detail-body"), scroll = body.scrollTop;
+  renderSimInfo(simState(), body);
+  body.scrollTop = scroll;
+  if (act) {
+    const button = body.querySelector(`[data-act="${act}"]`);
+    if (button && !button.disabled) button.focus({ preventScroll: true });
+    else talentDialog.querySelector(".detail-close").focus({ preventScroll: true });
+  }
+}
+function openTalentDetail(id, html) {
+  hideTalentTip(); detailReadOnly = !!html; detailOrigin = `${html ? '.cell' : '.scell'}[data-id="${id}"]`;
+  if (html) talentDialog.querySelector(".talent-detail-body").innerHTML = html;
+  else { sim.focus = id; renderSimInfo(); }
+  talentDialog.querySelector(".detail-status").textContent = "";
+  talentDialog.showModal(); document.documentElement.classList.add("detail-open");
+  refreshTalentDetail();
+  talentDialog.querySelector(".talent-detail-body").scrollTop = 0;
+}
+function closeTalentDetail(restore = true) {
+  hideTalentTip();
+  if (!talentDialog.open) return;
+  talentDialog.close(); document.documentElement.classList.remove("detail-open");
+  if (restore && detailOrigin) document.querySelector(detailOrigin)?.focus({preventScroll:true});
+}
+function readTalentHTML(id, r) {
+  const t = D.talents[id], desc = n => esc(t[14]?.[n] || t[9][n] || "");
+  return `<div class="tinfo sinfo"><img alt="" src="${ico(t[8])}"><div><div class="nm">${esc(tn(t))}<span class="r">${r}/${t[4]}</span></div><div class="sub">${treeCn(t[11],t[1])} · 第 ${t[2]+1} 行</div></div>
+    ${r ? `<p><b class="lbl">当前</b>${desc(r-1)}</p>` : ""}${r < t[4] ? `<p><b class="lbl">${r ? "下一级" : "第 1 级"}</b>${desc(r)}</p>` : ""}
+    ${t[10].length ? `<p>前置：${t[10].map(([rid,q])=>`${esc(tn(D.talents[rid]))} ${q} 点`).join("、")}</p>` : ""}${classicBlock(t)}${verifyBlock(t)}</div>`;
+}
+talentDialog.querySelector(".detail-close").onclick = () => closeTalentDetail();
+talentDialog.addEventListener("cancel", e => { e.preventDefault(); closeTalentDetail(); });
+talentDialog.addEventListener("click", e => {
+  if (e.target === talentDialog) {
+    const r = talentDialog.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closeTalentDetail();
+  }
+  const button = e.target.closest(".pm button"); if (!button || button.disabled) return;
+  button.dataset.act === "add" ? simAdd(button.dataset.id) : simRemove(button.dataset.id);
+  const S = simState(), t = D.talents[sim.focus];
+  talentDialog.querySelector(".detail-status").textContent = `${tn(t)} ${(S.ranks[sim.focus] || 0)}/${t[4]} · 剩余 ${Math.max(0, S.avail - S.total)} 点`;
+});
+
 // 模拟器事件（委托，只绑一次）
 (() => {
   const el = document.getElementById("sim");
-  let press = null, suppressClick = false;
+  let pointerType = "mouse";
   el.addEventListener("click", (e) => {
     const cell = e.target.closest(".scell");
-    if (cell) { if (suppressClick) { suppressClick = false; return; } return e.shiftKey ? simRemove(cell.dataset.id) : simAdd(cell.dataset.id); }
+    if (cell) {
+      if (e.detail === 0 || (e.pointerType || pointerType) !== "mouse" || matchMedia("(max-width:700px)").matches) return openTalentDetail(cell.dataset.id);
+      return e.shiftKey ? simRemove(cell.dataset.id) : simAdd(cell.dataset.id);
+    }
+    const tab = e.target.closest("[data-tree-tab]");
+    if (tab) { sim.tree = +tab.dataset.treeTab; hideTalentTip(); renderSim(); document.querySelector(`[data-tree-tab="${sim.tree}"]`).focus({preventScroll:true}); return; }
     const pm = e.target.closest(".pm button"); if (pm) return pm.dataset.act === "add" ? simAdd(pm.dataset.id) : simRemove(pm.dataset.id);
     const sp = e.target.closest(".sspec button"); if (sp) { sim.spec = sp.dataset.spec; return renderSim(); }
     const tr = e.target.closest(".treereset");
@@ -1618,15 +1831,19 @@ function simSet(order, note) {
     if (kind === "lv") { const s = D.specs[+a]; sim.spec = s.spec; simSet(bestLvOrder(+a, state.level), `已套用${s.cn} ${state.level} 级升级最佳加点`); }
     else { const s = D.specs[+b]; sim.spec = s.spec; state.level = 60; save(); updateLevelBar(); simSet(orderFromRanks(S.cls, endEntry(a, +b).ranks), `已套用${s.cn} 60 级${ROLE_CN[a]}最佳加点，等级调到 60`); }
   });
-  el.addEventListener("contextmenu", (e) => { const cell = e.target.closest(".scell"); if (!cell) return; e.preventDefault(); simRemove(cell.dataset.id); });
+  el.addEventListener("contextmenu", (e) => { const cell = e.target.closest(".scell"); if (!cell) return; e.preventDefault(); if (pointerType === "mouse") simRemove(cell.dataset.id); });
   el.addEventListener("pointerdown", (e) => {
-    const cell = e.target.closest(".scell"); if (!cell || e.pointerType === "mouse") return;
-    press = setTimeout(() => { suppressClick = true; simRemove(cell.dataset.id); if (navigator.vibrate) navigator.vibrate(12); }, 480);
+    pointerType = e.pointerType;
   });
-  ["pointerup", "pointercancel", "pointerleave"].forEach((ev) => el.addEventListener(ev, () => clearTimeout(press)));
-  const focusCell = (e) => { const cell = e.target.closest(".scell"); if (!cell || sim.focus === cell.dataset.id) return; sim.focus = cell.dataset.id; renderSimInfo(); };
+  const focusCell = (e) => {
+    const cell = e.target.closest(".scell"); if (!cell || (e.type === "pointerover" && e.pointerType !== "mouse")) return;
+    sim.focus = cell.dataset.id; renderSimInfo();
+    if (!talentDialog.open) showTalentTip(cell);
+  };
   el.addEventListener("pointerover", focusCell);
   el.addEventListener("focusin", focusCell);
+  el.addEventListener("pointerout", (e) => { const cell = e.target.closest(".scell"); if (cell && !cell.contains(e.relatedTarget) && !talentTip.contains(e.relatedTarget)) scheduleTipHide(); });
+  el.addEventListener("focusout", (e) => { if (e.target.closest(".scell")) hideTalentTip(); });
   el.addEventListener("keydown", (e) => {
     const cell = e.target.closest(".scell"); if (!cell) return;
     if (e.key === "+" || e.key === "=") { e.preventDefault(); simAdd(cell.dataset.id); }
@@ -1674,7 +1891,7 @@ function classIntro(cls) {
   </section>`;
 }
 function renderClass(fromSlider) {
-  const cls = route.cls || D.specs[state.sel].cls; route.cls = cls; skill.tab = cls;
+  const cls = route.cls || D.specs[state.sel]?.cls || CLS_ORDER[0]; route.cls = cls; skill.tab = cls;
   const el = document.getElementById("classPage"), L = state.level, specs = specsOf(cls);
   const races = Object.entries(SK.races).flatMap(([f, list]) => list.filter((r) => r.classes.includes(cls)).map((r) => ({ ...r, f })));
   const dashes = ["实线", "虚线", "点线"];
