@@ -452,6 +452,16 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .dm-jumps a{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;white-space:nowrap}
 .dm-jumps a:hover,.dm-jumps a:focus-visible,.dm-jumps a[aria-current]{border-color:var(--accent);background:var(--accent-soft)}
 .dm-stack{display:grid;gap:14px}
+.dm-group{margin:18px 0 0}
+.dm-group h4{margin:0 0 6px;font-size:16px;display:flex;align-items:baseline;gap:6px}
+.dm-count{margin-left:4px;padding:0 7px;border-radius:999px;background:var(--sunken);border:1px solid var(--line);font-size:11px;font-weight:500;color:var(--faint)}
+.dm-gdesc{margin:0 0 8px;font-size:13px;color:var(--muted);max-width:75ch}
+.dm-gallery{columns:4 200px;column-gap:10px}
+.dm-gallery.is-wide{columns:2 420px}
+.dm-thumb{break-inside:avoid;margin:0 0 10px;border-radius:8px;border-width:1px}
+.dm-thumb img{display:block;width:100%;height:auto}
+.dm-thumb:hover{border-color:var(--accent)}
+@media (max-width:700px){.dm-gallery{columns:2}.dm-gallery.is-wide{columns:1}}
 .dm-tent{margin-left:6px;padding:1px 6px;border-radius:4px;border:1px dashed var(--line);font-size:11px;color:var(--faint);font-weight:400;white-space:nowrap}
 .dm-table td:first-child{white-space:nowrap;width:1%}
 .gtable.dm-table td:nth-child(2){white-space:normal}
@@ -2476,7 +2486,12 @@ const DMN = window.FOREVER_DATAMINE || null;
 const dmSrc = (src, date) => `<p class="gsrc">来源：<a href="${src.url}" target="_blank" rel="noopener">${esc(src.label)}</a>（${esc(date)}），截图带 Wowhead 水印</p>`;
 function dmSection(sec) {
   const cap = (it) => `${esc(it.name)}${it.tentative ? `<span class="dm-tent">暂译</span>` : ""} <span class="dm-en">${esc(it.en)}</span>`;
-  const body = sec.kind === "table"
+  const gallery = () => sec.groups.map((g) => `<div class="dm-group">
+      ${g.title ? `<h4>${esc(g.title)} <span class="dm-en">${esc(g.en || "")}</span><span class="dm-count">${g.items.length}</span></h4>` : ""}
+      ${g.desc ? `<p class="dm-gdesc">${esc(g.desc)}</p>` : ""}
+      <div class="dm-gallery${sec.wide ? " is-wide" : ""}">${g.items.map((it, k) => `<a class="ts-shot dm-thumb" href="${it.href}" target="_blank" rel="noopener" aria-label="在 Wowhead 打开大图：${esc(sec.title)}${g.title ? ` ${esc(g.title)}` : ""} ${k + 1}"><img src="${it.img.sm}" width="${it.img.w}" height="${it.img.h}" alt="${esc(sec.title)}${g.title ? ` ${esc(g.title)}` : ""} ${k + 1}" loading="lazy" decoding="async"></a>`).join("")}</div>
+    </div>`).join("");
+  const body = sec.kind === "gallery" ? gallery() : sec.kind === "table"
     ? `<div class="gtable-wrap"><table class="gtable dm-table"><thead><tr><th>阵营</th><th>简介</th></tr></thead><tbody>${sec.items.map((it) => `
         <tr><td><b>${esc(it.name)}</b>${it.new ? ` <span class="dc-new">新</span>` : ""}${it.tentative ? `<span class="dm-tent">暂译</span>` : ""}<br><span class="dm-en dm-en-sm">${esc(it.en)}</span></td><td>${esc(it.desc)}</td></tr>`).join("")}</tbody></table></div>`
     : `<div class="${sec.kind === "stack" ? "dm-stack" : "ts-pair"}">${sec.items.map((it) => `<figure class="ts-fig">${tsShot(it.img, `${sec.title}：${it.name}`, sec.kind === "stack" ? "(max-width: 1280px) 100vw, 1248px" : "(max-width: 900px) 100vw, 620px")}<figcaption>${cap(it)}</figcaption></figure>`).join("")}</div>`;
