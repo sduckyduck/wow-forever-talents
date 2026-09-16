@@ -1,0 +1,155 @@
+{
+ "classes": {
+  "Warrior": {
+   "hd": {
+    "id": 1301245,
+    "src": "assets/tiersets/warrior-hd.webp",
+    "w": 1536,
+    "h": 684,
+    "sm": "assets/tiersets/warrior-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301247,
+    "src": "assets/tiersets/warrior-sd.webp",
+    "w": 1536,
+    "h": 674,
+    "sm": "assets/tiersets/warrior-sd-sm.webp"
+   }
+  },
+  "Paladin": {
+   "hd": {
+    "id": 1301244,
+    "src": "assets/tiersets/paladin-hd.webp",
+    "w": 1536,
+    "h": 756,
+    "sm": "assets/tiersets/paladin-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301249,
+    "src": "assets/tiersets/paladin-sd.webp",
+    "w": 1536,
+    "h": 766,
+    "sm": "assets/tiersets/paladin-sd-sm.webp"
+   }
+  },
+  "Hunter": {
+   "hd": {
+    "id": 1301264,
+    "src": "assets/tiersets/hunter-hd.webp",
+    "w": 1536,
+    "h": 693,
+    "sm": "assets/tiersets/hunter-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301265,
+    "src": "assets/tiersets/hunter-sd.webp",
+    "w": 1536,
+    "h": 699,
+    "sm": "assets/tiersets/hunter-sd-sm.webp"
+   }
+  },
+  "Rogue": {
+   "hd": {
+    "id": 1301257,
+    "src": "assets/tiersets/rogue-hd.webp",
+    "w": 1536,
+    "h": 741,
+    "sm": "assets/tiersets/rogue-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301261,
+    "src": "assets/tiersets/rogue-sd.webp",
+    "w": 1536,
+    "h": 672,
+    "sm": "assets/tiersets/rogue-sd-sm.webp"
+   }
+  },
+  "Priest": {
+   "hd": {
+    "id": 1301246,
+    "src": "assets/tiersets/priest-hd.webp",
+    "w": 1536,
+    "h": 675,
+    "sm": "assets/tiersets/priest-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301248,
+    "src": "assets/tiersets/priest-sd.webp",
+    "w": 1536,
+    "h": 677,
+    "sm": "assets/tiersets/priest-sd-sm.webp"
+   }
+  },
+  "Shaman": {
+   "hd": {
+    "id": 1301262,
+    "src": "assets/tiersets/shaman-hd.webp",
+    "w": 1536,
+    "h": 510,
+    "sm": "assets/tiersets/shaman-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301266,
+    "src": "assets/tiersets/shaman-sd.webp",
+    "w": 1536,
+    "h": 504,
+    "sm": "assets/tiersets/shaman-sd-sm.webp"
+   }
+  },
+  "Mage": {
+   "hd": {
+    "id": 1301256,
+    "src": "assets/tiersets/mage-hd.webp",
+    "w": 1536,
+    "h": 782,
+    "sm": "assets/tiersets/mage-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301259,
+    "src": "assets/tiersets/mage-sd.webp",
+    "w": 1536,
+    "h": 771,
+    "sm": "assets/tiersets/mage-sd-sm.webp"
+   }
+  },
+  "Warlock": {
+   "hd": {
+    "id": 1301258,
+    "src": "assets/tiersets/warlock-hd.webp",
+    "w": 1536,
+    "h": 723,
+    "sm": "assets/tiersets/warlock-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301260,
+    "src": "assets/tiersets/warlock-sd.webp",
+    "w": 1536,
+    "h": 718,
+    "sm": "assets/tiersets/warlock-sd-sm.webp"
+   }
+  },
+  "Druid": {
+   "hd": {
+    "id": 1301263,
+    "src": "assets/tiersets/druid-hd.webp",
+    "w": 1536,
+    "h": 724,
+    "sm": "assets/tiersets/druid-hd-sm.webp"
+   },
+   "sd": {
+    "id": 1301267,
+    "src": "assets/tiersets/druid-sd.webp",
+    "w": 1536,
+    "h": 737,
+    "sm": "assets/tiersets/druid-sd-sm.webp"
+   }
+  }
+ },
+ "preview": {
+  "id": 1301253,
+  "src": "assets/tiersets/preview.webp",
+  "w": 1080,
+  "h": 831,
+  "sm": "assets/tiersets/preview-sm.webp"
+ }
+}

@@ -429,6 +429,29 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .et2 b{font-family:var(--f-num);font-size:15px;color:var(--q);min-width:18px;text-align:center}
 .cblock{margin-bottom:22px}
 .cblock > h3{font-size:13px;letter-spacing:.04em}
+.ts-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px}
+.ts-h h3{margin:0}
+.ts-h .jump{margin-left:auto}
+.ts-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.ts-fig{margin:0}
+.ts-fig figcaption{margin-top:6px;font-size:12px;color:var(--muted)}
+.ts-shot{display:block;border-radius:10px;overflow:hidden;background:#141414;border:1px solid var(--line)}
+.ts-shot img{display:block;width:100%;height:auto}
+.ts-shot:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ts-head{margin-bottom:14px}
+.ts-head h2{margin:0 0 6px;font-family:var(--f-display);font-weight:900;font-size:clamp(26px,3.4vw,36px);line-height:1.15}
+.ts-head h2 .en{font-family:var(--f-body);font-size:15px}
+.ts-head .lede2{max-width:75ch}
+.ts-cls{margin:22px 0;padding-top:16px;border-top:1px solid var(--line);scroll-margin-top:130px}
+.ts-cls .ts-h h3{font-size:18px;color:var(--cc,var(--ink))}
+.ts-crest{width:32px;height:32px}
+.ts-preview .ts-shot{max-width:620px}
+
+@media (max-width:900px){.ts-pair{grid-template-columns:1fr}}
+.ts-links{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.ts-links a{padding:3px 9px;border-radius:999px;border:1px solid color-mix(in srgb,var(--cc) 55%,transparent);color:var(--ink);text-decoration:none;white-space:nowrap}
+.ts-links a:hover,.ts-links a:focus-visible{background:color-mix(in srgb,var(--cc) 18%,transparent)}
+.ts-links a.ts-all{border:0;padding:3px 2px 3px 0;color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 .cchart{max-width:900px}
 .cchart.draw .specs{animation:reveal 1.1s cubic-bezier(.16,1,.3,1) both}
 @keyframes reveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
@@ -1153,6 +1176,7 @@ html.detail-open{overflow:hidden}
     <a href="#/start" data-route="start">新手入门</a>
     <a href="#/guide" data-route="guide">游戏介绍</a>
     <a href="#/class" data-route="class">职业</a>
+    <a href="#/sets" data-route="sets">职业套装</a>
     <a href="#/tiers" data-route="tiers">专精天梯</a>
     <a href="#/sim" data-route="sim">天赋模拟器</a>
     <a href="#/race" data-route="race">种族</a>
@@ -1206,6 +1230,7 @@ html.detail-open{overflow:hidden}
   <div class="route" data-page="guide" id="guidePage" hidden></div>
   <div class="route" data-page="sim" id="sim" hidden></div>
   <div class="route" data-page="class" id="classPage" hidden></div>
+  <div class="route" data-page="sets" id="setsPage" hidden></div>
   <div class="route" data-page="race" id="racePage" hidden></div>
   <div class="route" data-page="fit" id="fitPage" hidden></div>
   <div class="route" data-page="legacy" id="legacyPage" hidden></div>
@@ -1925,7 +1950,7 @@ function applyHash() {
   // 没有 hash（直接打开首页）进新手入门
   if (!raw.startsWith("#/")) { const old = { "#xcheck": "about", "#method": "about", "#skills": "class", "#tiers": "tiers" }[raw]; route.name = old || "start"; return; }
   const p = raw.slice(2).split("/");
-  route.name = ["start", "tiers", "guide", "sim", "class", "race", "fit", "legacy", "about"].includes(p[0]) ? p[0] : "start";
+  route.name = ["start", "tiers", "guide", "sim", "class", "sets", "race", "fit", "legacy", "about"].includes(p[0]) ? p[0] : "start";
   if (route.name === "sim" && CT[p[1]]) {
     sim.cls = p[1];
     if (p[2]) { const L = Math.max(1, Math.min(60, +p[2] || state.level)); state.level = L; }
@@ -1937,6 +1962,7 @@ function applyHash() {
     }
   }
   if (route.name === "class") route.cls = CT[p[1]] ? p[1] : route.cls;
+  if (route.name === "sets") route.setCls = CT[p[1]] ? p[1] : null;
   if (route.name === "race") route.race = p[1] || route.race;
   if (route.name === "fit") fitReadRoute(p);
   if (route.name === "legacy" && p[1]) readLegacyHash(p[1]);
@@ -1970,11 +1996,12 @@ function renderRoute(fromSlider) {
   nav.dataset.current = route.name;
   document.getElementById("viewSeg").hidden = route.name !== "tiers";
   // 新手入门和游戏介绍用不到等级条和显示选项
-  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide" || route.name === "fit";
+  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide" || route.name === "fit" || route.name === "sets";
   if (route.name === "tiers") { renderBoard(); renderDetail(); } else updateLevelBar();
   if (route.name === "start") renderStart(fromSlider);
   if (route.name === "sim") renderSim(fromSlider);
   if (route.name === "class") renderClass(fromSlider);
+  if (route.name === "sets") renderSets();
   if (route.name === "race") renderRace();
   if (route.name === "fit") renderFit();
   if (route.name === "legacy") renderLegacy();
@@ -2412,6 +2439,39 @@ function classIntro(cls) {
     <div class="cpc"><div class="good"><h4>优点</h4><ul>${c.pros.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div><div class="bad"><h4>要注意</h4><ul>${c.cons.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div></div>
   </section>`;
 }
+// 海加尔峰套装外观（Wowhead 解包的测试客户端模型）：职业页一块 + 「职业套装」页
+const TS = window.FOREVER_TIERSETS || null;
+const tsShot = (x, alt, sizes) => `<a class="ts-shot" href="${x.src}" target="_blank" rel="noopener" aria-label="打开大图：${alt}"><img src="${x.sm}" srcset="${x.sm} 768w, ${x.src} ${x.w}w" sizes="${sizes}" width="${x.w}" height="${x.h}" alt="${alt}" loading="lazy" decoding="async"></a>`;
+const tsPair = (cls) => {
+  const v = TS.classes[cls];
+  return `<div class="ts-pair">${["hd", "sd"].filter((k) => v[k]).map((k) => `<figure class="ts-fig">${tsShot(v[k], `${CLS[cls].cn}${TS.raid}套装，${TS.variants[k]}，正面、斜侧、侧面、背面`, "(max-width: 900px) 100vw, 620px")}<figcaption>${TS.variants[k]}</figcaption></figure>`).join("")}</div>`;
+};
+const tsSource = () => `<p class="gsrc">来源：<a href="${TS.source.url}" target="_blank" rel="noopener">${esc(TS.source.label)}</a>（${esc(TS.date)}），截图带 Wowhead 水印</p>`;
+function tierSetBlock(cls) {
+  if (!TS || !TS.classes[cls]) return "";
+  return `<section class="cblock"><div class="ts-h"><h3>${esc(TS.raid)}套装外观</h3><a class="jump" href="#/sets/${cls}">九个职业一起看 →</a></div>
+    ${tsPair(cls)}
+    <p class="hint">Wowhead 从 Forever 测试客户端里解包出来的模型，标签是${esc(TS.raid)}（${esc(TS.raidEn)}，20 人团本）。装备和套装效果还没解包出来。</p>
+  </section>`;
+}
+function renderSets() {
+  const el = document.getElementById("setsPage");
+  if (!TS) { el.innerHTML = `<p class="hint">这个版本没有套装外观数据。</p>`; return; }
+  const list = CLS_ORDER.filter((c) => TS.classes[c]), p = TS.preview;
+  el.innerHTML = `
+    <header class="ts-head"><h2>职业套装 <span class="en">${esc(TS.raidEn)} Tier Sets</span></h2>
+      <p class="lede2">九个职业的${esc(TS.raid)}团本套装外观，每套都有两版：${TS.variants.hd}和${TS.variants.sd}。经典模型是给老角色模型穿的，面数略低，看起来差别不大。模型是 Wowhead 从 Forever 测试客户端里解包出来的，都标着${esc(TS.raid)}，也就是第一个 20 人团本。对应的装备还没解包出来，所以套装效果和属性现在还不知道，按惯例应该会有传统的套装加成。</p>
+      ${tsSource()}
+    </header>
+    ${clsPicker(route.setCls, (c) => `#/sets/${c}`, "跳到职业")}
+    ${list.map((c) => `<section class="ts-cls" id="ts-${c}" style="--cc:${CLS[c].color}">
+      <div class="ts-h">${crestC(c) ? `<img class="ts-crest" alt="" src="${crestC(c)}">` : ""}<h3>${CLS[c].cn} <span class="en">${c}</span></h3><a class="jump" href="#/class/${c}">${CLS[c].cn}职业介绍 →</a></div>
+      ${tsPair(c)}
+    </section>`).join("")}
+    ${p ? `<section class="ts-cls ts-preview"><div class="ts-h"><h3>${esc(p.label)}</h3></div><p class="hint">${esc(p.desc)}</p>${tsShot(p, `${p.label}：${TS.raid}套装`, "(max-width: 700px) 100vw, 620px")}</section>` : ""}`;
+  const target = route.setCls && document.getElementById(`ts-${route.setCls}`);
+  if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: "auto", block: "start" }));
+}
 function renderClass(fromSlider) {
   const cls = route.cls || D.specs[state.sel]?.cls || CLS_ORDER[0]; route.cls = cls; skill.tab = cls;
   const el = document.getElementById("classPage"), L = state.level, specs = specsOf(cls);
@@ -2438,6 +2498,7 @@ function renderClass(fromSlider) {
     }).join("")}</div>
     <section class="cblock"><h3>三个专精 1–60 级升级指数</h3>${classChart(cls, fromSlider)}</section>
     ${fitClassSummary(cls)}
+    ${tierSetBlock(cls)}
     <section class="cblock"><h3>职业技能 · 按 ${L} 级</h3><p class="hint">学习等级和训练费是 Wowhead Forever 技能库里的 Classic 数据，每个技能都用 BlizzCon 试玩 38 级技能书核对过。</p><div id="classSkills"></div></section>`;
   renderSkills();
 }
@@ -2970,7 +3031,8 @@ function gRaids(s) {
           ${gImg(x.image, "-card") ? `<img src="${gImg(x.image, "-card")}" alt="" loading="lazy" decoding="async" width="800" height="450">` : ""}
           <div class="gcard-b"><div class="gcard-h"><h5>${esc(x.name)}</h5><span class="glv">${esc(x.size)}</span></div>
           <p class="gcard-m"><span class="en">${esc(x.en)} · </span>${esc(x.where)} · ${esc(x.when)}开放</p>
-          <p>${esc(x.desc)}</p></div>
+          <p>${esc(x.desc)}</p>${TS && x.en === TS.raidEn ? `
+          <p class="ts-links"><a class="ts-all" href="#/sets">职业套装外观 →</a>${CLS_ORDER.filter((c) => TS.classes[c]).map((c) => `<a href="#/sets/${c}" style="--cc:${CLS[c].color}">${CLS[c].cn}</a>`).join("")}</p>` : ""}</div>
         </article>`).join("")}</div>
       <div class="gtable-wrap"><table class="gtable"><thead><tr><th>团本</th><th>人数</th><th>位置</th><th>开放</th><th>情况</th></tr></thead><tbody>${list.filter((x) => !x.image).map((x) => `
         <tr><td><b>${esc(x.name)}</b> <span class="en">${esc(x.en)}</span></td><td>${esc(x.size)}</td><td>${esc(x.where)}</td><td>${esc(x.when)}</td><td>${gBadge(x.status)} <span class="gtd-note">${esc(x.desc)}</span></td></tr>`).join("")}</tbody></table></div>
