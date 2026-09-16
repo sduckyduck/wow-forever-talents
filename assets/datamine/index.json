@@ -1,0 +1,86 @@
+{
+ "loading-kalimdor-1301274.png": {
+  "src": "assets/datamine/loading-kalimdor-1301274.webp",
+  "w": 1536,
+  "h": 590,
+  "sm": "assets/datamine/loading-kalimdor-1301274-sm.webp"
+ },
+ "loading-eastern-kingdoms-1301272.png": {
+  "src": "assets/datamine/loading-eastern-kingdoms-1301272.webp",
+  "w": 1536,
+  "h": 591,
+  "sm": "assets/datamine/loading-eastern-kingdoms-1301272-sm.webp"
+ },
+ "loading-zephras-isle-1301277.png": {
+  "src": "assets/datamine/loading-zephras-isle-1301277.webp",
+  "w": 1536,
+  "h": 591,
+  "sm": "assets/datamine/loading-zephras-isle-1301277-sm.webp"
+ },
+ "loading-dalaran-1301271.png": {
+  "src": "assets/datamine/loading-dalaran-1301271.webp",
+  "w": 1536,
+  "h": 591,
+  "sm": "assets/datamine/loading-dalaran-1301271-sm.webp"
+ },
+ "loading-old-ironforge-1301275.png": {
+  "src": "assets/datamine/loading-old-ironforge-1301275.webp",
+  "w": 1536,
+  "h": 591,
+  "sm": "assets/datamine/loading-old-ironforge-1301275-sm.webp"
+ },
+ "loading-excavation-site-1301273.png": {
+  "src": "assets/datamine/loading-excavation-site-1301273.webp",
+  "w": 1536,
+  "h": 591,
+  "sm": "assets/datamine/loading-excavation-site-1301273-sm.webp"
+ },
+ "loading-ruins-of-lordaeron-1301276.png": {
+  "src": "assets/datamine/loading-ruins-of-lordaeron-1301276.webp",
+  "w": 1536,
+  "h": 591,
+  "sm": "assets/datamine/loading-ruins-of-lordaeron-1301276-sm.webp"
+ },
+ "loading-darkspear-islands-1301270.png": {
+  "src": "assets/datamine/loading-darkspear-islands-1301270.webp",
+  "w": 1536,
+  "h": 590,
+  "sm": "assets/datamine/loading-darkspear-islands-1301270-sm.webp"
+ },
+ "mount-1-1301251.jpg": {
+  "src": "assets/datamine/mount-1-1301251.webp",
+  "w": 1536,
+  "h": 519,
+  "sm": "assets/datamine/mount-1-1301251-sm.webp"
+ },
+ "mount-2-1301250.jpg": {
+  "src": "assets/datamine/mount-2-1301250.webp",
+  "w": 1536,
+  "h": 615,
+  "sm": "assets/datamine/mount-2-1301250-sm.webp"
+ },
+ "totem-1-1301474.jpg": {
+  "src": "assets/datamine/totem-1-1301474.webp",
+  "w": 1536,
+  "h": 473,
+  "sm": "assets/datamine/totem-1-1301474-sm.webp"
+ },
+ "totem-2-1301475.jpg": {
+  "src": "assets/datamine/totem-2-1301475.webp",
+  "w": 1536,
+  "h": 623,
+  "sm": "assets/datamine/totem-2-1301475-sm.webp"
+ },
+ "totem-3-1301476.jpg": {
+  "src": "assets/datamine/totem-3-1301476.webp",
+  "w": 1536,
+  "h": 693,
+  "sm": "assets/datamine/totem-3-1301476-sm.webp"
+ },
+ "totem-4-1301477.jpg": {
+  "src": "assets/datamine/totem-4-1301477.webp",
+  "w": 1536,
+  "h": 622,
+  "sm": "assets/datamine/totem-4-1301477-sm.webp"
+ }
+}

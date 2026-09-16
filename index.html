@@ -443,7 +443,22 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .ts-head h2 .en{font-family:var(--f-body);font-size:15px}
 .ts-head .lede2{max-width:75ch}
 .ts-cls{margin:22px 0;padding-top:16px;border-top:1px solid var(--line);scroll-margin-top:130px}
-.ts-cls .ts-h h3{font-size:18px;color:var(--cc,var(--ink))}
+.ts-cls .ts-h h4{margin:0;font-size:17px;color:var(--cc,var(--ink))}
+.dm-sec{margin:34px 0 0;padding-top:20px;border-top:2px solid var(--line);scroll-margin-top:130px}
+.dm-sec > .ts-h h3{font-size:22px;font-family:var(--f-display);font-weight:900}
+.dm-sec .ts-h .en{font-family:var(--f-body);font-size:13px;font-weight:400}
+.dm-desc{max-width:75ch;margin:0 0 12px;font-size:14px;color:var(--muted)}
+.dm-jumps{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.dm-jumps a{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;white-space:nowrap}
+.dm-jumps a:hover,.dm-jumps a:focus-visible,.dm-jumps a[aria-current]{border-color:var(--accent);background:var(--accent-soft)}
+.dm-stack{display:grid;gap:14px}
+.dm-tent{margin-left:6px;padding:1px 6px;border-radius:4px;border:1px dashed var(--line);font-size:11px;color:var(--faint);font-weight:400;white-space:nowrap}
+.dm-table td:first-child{white-space:nowrap;width:1%}
+.gtable.dm-table td:nth-child(2){white-space:normal}
+@media (max-width:700px){.dm-table{min-width:0}.dm-table td:first-child{white-space:normal;width:38%}}
+.dm-en{color:var(--faint);font-size:.85em;font-weight:400;margin-left:4px}
+.dm-table .dm-en-sm{margin-left:0;font-size:12px}
+.dm-sec .ts-h .dm-en,.ts-head h2 .dm-en{font-family:var(--f-body);font-size:13px}
 .ts-crest{width:32px;height:32px}
 .ts-preview .ts-shot{max-width:620px}
 
@@ -1176,7 +1191,7 @@ html.detail-open{overflow:hidden}
     <a href="#/start" data-route="start">新手入门</a>
     <a href="#/guide" data-route="guide">游戏介绍</a>
     <a href="#/class" data-route="class">职业</a>
-    <a href="#/sets" data-route="sets">职业套装</a>
+    <a href="#/datamine" data-route="datamine">数据挖掘</a>
     <a href="#/tiers" data-route="tiers">专精天梯</a>
     <a href="#/sim" data-route="sim">天赋模拟器</a>
     <a href="#/race" data-route="race">种族</a>
@@ -1230,7 +1245,7 @@ html.detail-open{overflow:hidden}
   <div class="route" data-page="guide" id="guidePage" hidden></div>
   <div class="route" data-page="sim" id="sim" hidden></div>
   <div class="route" data-page="class" id="classPage" hidden></div>
-  <div class="route" data-page="sets" id="setsPage" hidden></div>
+  <div class="route" data-page="datamine" id="dataminePage" hidden></div>
   <div class="route" data-page="race" id="racePage" hidden></div>
   <div class="route" data-page="fit" id="fitPage" hidden></div>
   <div class="route" data-page="legacy" id="legacyPage" hidden></div>
@@ -1950,7 +1965,7 @@ function applyHash() {
   // 没有 hash（直接打开首页）进新手入门
   if (!raw.startsWith("#/")) { const old = { "#xcheck": "about", "#method": "about", "#skills": "class", "#tiers": "tiers" }[raw]; route.name = old || "start"; return; }
   const p = raw.slice(2).split("/");
-  route.name = ["start", "tiers", "guide", "sim", "class", "sets", "race", "fit", "legacy", "about"].includes(p[0]) ? p[0] : "start";
+  route.name = ["start", "tiers", "guide", "sim", "class", "datamine", "sets", "race", "fit", "legacy", "about"].includes(p[0]) ? p[0] : "start";
   if (route.name === "sim" && CT[p[1]]) {
     sim.cls = p[1];
     if (p[2]) { const L = Math.max(1, Math.min(60, +p[2] || state.level)); state.level = L; }
@@ -1962,7 +1977,9 @@ function applyHash() {
     }
   }
   if (route.name === "class") route.cls = CT[p[1]] ? p[1] : route.cls;
-  if (route.name === "sets") route.setCls = CT[p[1]] ? p[1] : null;
+  // 旧「职业套装」链接 #/sets/<职业> 并入数据挖掘页
+  if (route.name === "sets") { route.name = "datamine"; if (!p[1]) p[1] = "sets"; }
+  if (route.name === "datamine") route.dmTarget = p[1] || null;
   if (route.name === "race") route.race = p[1] || route.race;
   if (route.name === "fit") fitReadRoute(p);
   if (route.name === "legacy" && p[1]) readLegacyHash(p[1]);
@@ -1996,12 +2013,12 @@ function renderRoute(fromSlider) {
   nav.dataset.current = route.name;
   document.getElementById("viewSeg").hidden = route.name !== "tiers";
   // 新手入门和游戏介绍用不到等级条和显示选项
-  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide" || route.name === "fit" || route.name === "sets";
+  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide" || route.name === "fit" || route.name === "datamine";
   if (route.name === "tiers") { renderBoard(); renderDetail(); } else updateLevelBar();
   if (route.name === "start") renderStart(fromSlider);
   if (route.name === "sim") renderSim(fromSlider);
   if (route.name === "class") renderClass(fromSlider);
-  if (route.name === "sets") renderSets();
+  if (route.name === "datamine") renderDatamine();
   if (route.name === "race") renderRace();
   if (route.name === "fit") renderFit();
   if (route.name === "legacy") renderLegacy();
@@ -2449,28 +2466,52 @@ const tsPair = (cls) => {
 const tsSource = () => `<p class="gsrc">来源：<a href="${TS.source.url}" target="_blank" rel="noopener">${esc(TS.source.label)}</a>（${esc(TS.date)}），截图带 Wowhead 水印</p>`;
 function tierSetBlock(cls) {
   if (!TS || !TS.classes[cls]) return "";
-  return `<section class="cblock"><div class="ts-h"><h3>${esc(TS.raid)}套装外观</h3><a class="jump" href="#/sets/${cls}">九个职业一起看 →</a></div>
+  return `<section class="cblock"><div class="ts-h"><h3>${esc(TS.raid)}套装外观</h3><a class="jump" href="#/datamine/${cls}">九个职业一起看 →</a></div>
     ${tsPair(cls)}
     <p class="hint">Wowhead 从 Forever 测试客户端里解包出来的模型，标签是${esc(TS.raid)}（${esc(TS.raidEn)}，20 人团本）。装备和套装效果还没解包出来。</p>
   </section>`;
 }
-function renderSets() {
-  const el = document.getElementById("setsPage");
-  if (!TS) { el.innerHTML = `<p class="hint">这个版本没有套装外观数据。</p>`; return; }
-  const list = CLS_ORDER.filter((c) => TS.classes[c]), p = TS.preview;
+// 「数据挖掘」页：套装在最前，其余小节来自 guide/datamine.json
+const DMN = window.FOREVER_DATAMINE || null;
+const dmSrc = (src, date) => `<p class="gsrc">来源：<a href="${src.url}" target="_blank" rel="noopener">${esc(src.label)}</a>（${esc(date)}），截图带 Wowhead 水印</p>`;
+function dmSection(sec) {
+  const cap = (it) => `${esc(it.name)}${it.tentative ? `<span class="dm-tent">暂译</span>` : ""} <span class="dm-en">${esc(it.en)}</span>`;
+  const body = sec.kind === "table"
+    ? `<div class="gtable-wrap"><table class="gtable dm-table"><thead><tr><th>阵营</th><th>简介</th></tr></thead><tbody>${sec.items.map((it) => `
+        <tr><td><b>${esc(it.name)}</b>${it.new ? ` <span class="dc-new">新</span>` : ""}${it.tentative ? `<span class="dm-tent">暂译</span>` : ""}<br><span class="dm-en dm-en-sm">${esc(it.en)}</span></td><td>${esc(it.desc)}</td></tr>`).join("")}</tbody></table></div>`
+    : `<div class="${sec.kind === "stack" ? "dm-stack" : "ts-pair"}">${sec.items.map((it) => `<figure class="ts-fig">${tsShot(it.img, `${sec.title}：${it.name}`, sec.kind === "stack" ? "(max-width: 1280px) 100vw, 1248px" : "(max-width: 900px) 100vw, 620px")}<figcaption>${cap(it)}</figcaption></figure>`).join("")}</div>`;
+  return `<section class="dm-sec" id="dm-${sec.id}">
+    <div class="ts-h"><h3>${esc(sec.title)} <span class="dm-en">${esc(sec.en)}</span></h3></div>
+    <p class="dm-desc">${esc(sec.desc)}</p>
+    ${body}
+    ${dmSrc(sec.source, DMN.date)}
+  </section>`;
+}
+function renderDatamine() {
+  const el = document.getElementById("dataminePage");
+  const secs = DMN ? DMN.sections : [], list = TS ? CLS_ORDER.filter((c) => TS.classes[c]) : [], p = TS && TS.preview;
+  const jumps = [...(TS ? [["sets", "团本套装"]] : []), ...secs.map((x) => [x.id, x.title])];
+  const t = route.dmTarget, setCls = CT[t] ? t : null;
   el.innerHTML = `
-    <header class="ts-head"><h2>职业套装 <span class="en">${esc(TS.raidEn)} Tier Sets</span></h2>
-      <p class="lede2">九个职业的${esc(TS.raid)}团本套装外观，每套都有两版：${TS.variants.hd}和${TS.variants.sd}。经典模型是给老角色模型穿的，面数略低，看起来差别不大。模型是 Wowhead 从 Forever 测试客户端里解包出来的，都标着${esc(TS.raid)}，也就是第一个 20 人团本。对应的装备还没解包出来，所以套装效果和属性现在还不知道，按惯例应该会有传统的套装加成。</p>
-      ${tsSource()}
+    <header class="ts-head"><h2>数据挖掘 <span class="dm-en">Datamining</span></h2>
+      <p class="lede2">${esc(DMN ? DMN.intro : "")}这一页收集 Wowhead 挖出来的内容，每一节都附了原文链接。</p>
+      <nav class="dm-jumps" aria-label="跳到小节">${jumps.map(([id, label]) => `<a href="#/datamine/${id}"${t === id ? ' aria-current="true"' : ""}>${esc(label)}</a>`).join("")}</nav>
     </header>
-    ${clsPicker(route.setCls, (c) => `#/sets/${c}`, "跳到职业")}
-    ${list.map((c) => `<section class="ts-cls" id="ts-${c}" style="--cc:${CLS[c].color}">
-      <div class="ts-h">${crestC(c) ? `<img class="ts-crest" alt="" src="${crestC(c)}">` : ""}<h3>${CLS[c].cn} <span class="en">${c}</span></h3><a class="jump" href="#/class/${c}">${CLS[c].cn}职业介绍 →</a></div>
-      ${tsPair(c)}
-    </section>`).join("")}
-    ${p ? `<section class="ts-cls ts-preview"><div class="ts-h"><h3>${esc(p.label)}</h3></div><p class="hint">${esc(p.desc)}</p>${tsShot(p, `${p.label}：${TS.raid}套装`, "(max-width: 700px) 100vw, 620px")}</section>` : ""}`;
-  const target = route.setCls && document.getElementById(`ts-${route.setCls}`);
-  if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: "auto", block: "start" }));
+    ${TS ? `<section class="dm-sec" id="dm-sets">
+      <div class="ts-h"><h3>${esc(TS.raid)}团本套装 <span class="dm-en">${esc(TS.raidEn)} Tier Sets</span></h3></div>
+      <p class="dm-desc">九个职业的${esc(TS.raid)}团本套装外观，每套都有两版：${TS.variants.hd}和${TS.variants.sd}。经典模型是给老角色模型穿的，面数略低，看起来差别不大。模型都标着${esc(TS.raid)}，也就是第一个 20 人团本。对应的装备还没解包出来，套装效果和属性现在还不知道，按惯例应该会有传统的套装加成。</p>
+      ${tsSource()}
+      ${clsPicker(setCls, (c) => `#/datamine/${c}`, "跳到职业")}
+      ${list.map((c) => `<div class="ts-cls" id="ts-${c}" style="--cc:${CLS[c].color}">
+        <div class="ts-h">${crestC(c) ? `<img class="ts-crest" alt="" src="${crestC(c)}">` : ""}<h4>${CLS[c].cn} <span class="dm-en">${c}</span></h4><a class="jump" href="#/class/${c}">${CLS[c].cn}职业介绍 →</a></div>
+        ${tsPair(c)}
+      </div>`).join("")}
+      ${p ? `<div class="ts-cls ts-preview"><div class="ts-h"><h4>${esc(p.label)}</h4></div><p class="hint">${esc(p.desc)}</p>${tsShot(p, `${p.label}：${TS.raid}套装`, "(max-width: 700px) 100vw, 620px")}</div>` : ""}
+    </section>` : ""}
+    ${secs.map(dmSection).join("")}
+    ${!TS && !secs.length ? `<p class="hint">这个版本没有数据挖掘内容。</p>` : ""}`;
+  const target = document.getElementById(setCls ? `ts-${setCls}` : `dm-${t}`);
+  if (t && target) requestAnimationFrame(() => target.scrollIntoView({ behavior: "auto", block: "start" }));
 }
 function renderClass(fromSlider) {
   const cls = route.cls || D.specs[state.sel]?.cls || CLS_ORDER[0]; route.cls = cls; skill.tab = cls;
@@ -3032,7 +3073,7 @@ function gRaids(s) {
           <div class="gcard-b"><div class="gcard-h"><h5>${esc(x.name)}</h5><span class="glv">${esc(x.size)}</span></div>
           <p class="gcard-m"><span class="en">${esc(x.en)} · </span>${esc(x.where)} · ${esc(x.when)}开放</p>
           <p>${esc(x.desc)}</p>${TS && x.en === TS.raidEn ? `
-          <p class="ts-links"><a class="ts-all" href="#/sets">职业套装外观 →</a>${CLS_ORDER.filter((c) => TS.classes[c]).map((c) => `<a href="#/sets/${c}" style="--cc:${CLS[c].color}">${CLS[c].cn}</a>`).join("")}</p>` : ""}</div>
+          <p class="ts-links"><a class="ts-all" href="#/datamine/sets">职业套装外观 →</a>${CLS_ORDER.filter((c) => TS.classes[c]).map((c) => `<a href="#/datamine/${c}" style="--cc:${CLS[c].color}">${CLS[c].cn}</a>`).join("")}</p>` : ""}</div>
         </article>`).join("")}</div>
       <div class="gtable-wrap"><table class="gtable"><thead><tr><th>团本</th><th>人数</th><th>位置</th><th>开放</th><th>情况</th></tr></thead><tbody>${list.filter((x) => !x.image).map((x) => `
         <tr><td><b>${esc(x.name)}</b> <span class="en">${esc(x.en)}</span></td><td>${esc(x.size)}</td><td>${esc(x.where)}</td><td>${esc(x.when)}</td><td>${gBadge(x.status)} <span class="gtd-note">${esc(x.desc)}</span></td></tr>`).join("")}</tbody></table></div>
