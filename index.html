@@ -123,7 +123,7 @@ svg.chart text{font-family:var(--f-num);font-size:11px;fill:var(--faint)}
 .kv span{color:var(--muted);font-size:13px}
 .kv b{font-family:var(--f-num);font-weight:600;font-size:16px;font-variant-numeric:tabular-nums}
 
-/* 最佳加点 */
+/* 推荐加点 */
 .build-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px;margin-bottom:10px}
 .build-head .split{font-family:var(--f-num);font-weight:700;font-size:26px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .build-head .split span{color:var(--faint);font-weight:500;margin:0 2px}
@@ -476,6 +476,27 @@ button:disabled{opacity:.45;cursor:not-allowed}
 
 /* ---------- 种族搭配 ---------- */
 .fithead{margin-bottom:18px}
+.fit-controls{padding:18px;margin-bottom:24px}
+.fit-fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.fit-field{display:grid;gap:6px;min-width:0;font-size:13px;font-weight:600}
+.fit-field select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;min-height:44px;width:100%}
+.fit-options{margin-top:16px}.fit-options summary{cursor:pointer;min-height:32px}.fit-options .fit-fields{margin-top:12px}
+.fit-candidates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.fit-candidate{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px;min-width:0}
+.fit-candidate.selected{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.fit-candidate-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fit-candidate-head img{width:40px;height:40px;object-fit:contain}.fit-candidate-head h4{margin:0;font-size:18px}
+.fit-candidate-head span{font-size:12px;color:var(--muted)}.fit-value{margin-left:auto;font-size:17px;color:var(--accent)}
+.fit-candidate p{font-size:14px;line-height:1.7}.fit-candidate button{min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--ground);color:var(--ink);padding:8px 12px;cursor:pointer;font:inherit;font-size:13px}
+.fit-detail{margin-top:26px;padding:20px;border:1px solid var(--line);border-radius:12px;scroll-margin-top:100px}
+.fit-estimate{font-size:24px;font-weight:700;color:var(--accent)}.fit-estimate span{font-size:13px;color:var(--muted);font-weight:400;display:block}
+.fit-parts,.fit-traits,.fit-race-links{list-style:none;margin:12px 0;padding:0;display:grid;gap:12px}
+.fit-parts li{border-bottom:1px solid var(--line);padding-bottom:8px}.fit-parts li>span{float:right;font-variant-numeric:tabular-nums}.fit-parts p{font-size:13px;color:var(--muted);margin:6px 0}
+.fit-race-links li{display:grid;gap:4px}.fit-race-links span{font-size:12px;color:var(--muted)}
+.fit-sources{padding-left:20px}.fit-sources p{margin:4px 0}.fitref{padding:16px}
+.fit-overview-link{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px;color:var(--accent)}.fitm th small{display:block}
+.fit-pending{grid-column:1/-1;font-size:13px;color:var(--muted);margin:6px 0}
+@media(max-width:700px){.fit-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.fit-candidates{grid-template-columns:minmax(0,1fr)}.fit-controls,.fit-detail,.fit-candidate{padding:14px}.fit-value{font-size:15px}.fit-candidate-head img{width:32px;height:32px}}
 .fithead h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(26px,3.4vw,36px)}
 .fithead .lede2{max-width:70ch;margin:8px 0 12px}
 .fitctl{display:flex;flex-wrap:wrap;gap:10px 16px}
@@ -1045,6 +1066,70 @@ html.detail-open{overflow:hidden}
   .route{padding-top:14px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+/* Racial timings and tier evidence use the same contrast tokens in both themes. */
+.racial-time{color:var(--ink);font-size:13px;line-height:1.65;margin:6px 0}
+.racial-source{font-size:12px;line-height:1.65;color:var(--muted);margin-top:4px}
+.racial-source summary{cursor:pointer;color:var(--muted)}
+.racial-source p{margin:6px 0;overflow-wrap:anywhere}
+.tier-evidence{padding:12px 14px;border:1px solid var(--line);border-radius:8px;line-height:1.65;font-size:13px;background:var(--surface)}
+.tier-evidence p{margin:4px 0}
+.tier-evidence details{margin-top:8px}
+.tier-evidence summary{cursor:pointer;color:var(--ink)}
+.tier-evidence ul{padding-left:20px;margin:8px 0}
+.tier-evidence li+li{margin-top:8px}
+
+/* Compact calculators: fixed 44px targets, 36px icons, and inspect-on-demand details. */
+.legacy-rank-option{display:grid;gap:8px;padding:8px 0;font-size:14px}.legacy-rank-option select{min-height:40px;font-size:14px}.legacy-rank-option small{color:var(--muted);line-height:1.5}
+.sgrid{grid-template-columns:repeat(4,44px);grid-template-rows:repeat(7,44px);gap:12px 16px;width:max-content;max-width:none;padding:6px;margin:auto}
+.scell{width:44px;height:44px;display:grid;place-items:center;background:transparent}
+.scell img{width:36px;height:36px;border-radius:3px}.scell .rk{right:0;bottom:0;font-size:11px;min-width:24px;padding:1px 2px;border-radius:2px}
+.sgrid .arrows{inset:6px;width:calc(100% - 12px);height:calc(100% - 12px)}
+.stree{min-width:0}.stree header{grid-template-columns:24px 1fr auto}.stree header img{width:24px;height:24px}.stree header em{font-size:20px}
+.lg-compact-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px}.lg-compact-head h2{font-size:24px;margin:0}.lg-compact-head p{margin:0;font-size:14px;white-space:nowrap;color:var(--muted)}.lg-compact-head b{color:var(--ink)}
+.lg-toolbar{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}.lg-toolbar button,.lg-toolbar a{min-height:40px;padding:8px 12px;font-size:13px}.lg-tabs{display:none}
+.lg-layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:18px;align-items:start}.lg-forest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.lg-tree{border:1px solid var(--line);background:var(--surface);border-radius:8px;overflow:hidden;min-width:0}
+.lg-tree header{display:flex;justify-content:space-between;gap:8px;padding:10px 12px;align-items:center}.lg-tree h3{font-size:15px;margin:0}.lg-tree header span{display:block;font-size:11px;color:var(--muted);margin-top:4px}.lg-tree header b{font-family:var(--f-num);font-size:18px;white-space:nowrap}.lg-tree header small{font-size:12px;color:var(--muted)}
+.lg-grid{display:grid;position:relative;grid-template-columns:repeat(4,44px);grid-template-rows:repeat(4,44px);gap:18px 16px;padding:10px 6px;width:max-content;margin:auto}
+.lg-grid .arrows{position:absolute;inset:10px 6px;width:calc(100% - 12px);height:calc(100% - 20px);pointer-events:none}.lg-grid line{stroke:var(--muted);stroke-width:2}.lg-grid line.met{stroke:var(--accent)}
+.lgnode{position:relative;display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;background:transparent;cursor:pointer;touch-action:manipulation;border-radius:3px}
+.lgnode img{width:36px;height:36px;border-radius:3px;box-shadow:0 0 0 1px var(--faint)}.lgnode .rk{position:absolute;bottom:0;right:0;padding:1px 3px;background:var(--surface);border:1px solid var(--line);font-size:11px;font-weight:700;line-height:1.1;min-width:24px;text-align:center}
+.lgnode[data-s="lock"] img{filter:grayscale(1);opacity:.6}.lgnode[data-s="part"] img{box-shadow:0 0 0 2px var(--partial)}.lgnode[data-s="max"] img{box-shadow:0 0 0 2px var(--maxed)}.lgnode[data-s="part"] .rk{color:var(--partial)}.lgnode[data-s="max"] .rk{color:var(--maxed)}.lgnode[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:2px}
+.lg-tree-reset{width:calc(100% - 20px);min-height:40px;margin:6px 10px 10px;font-size:12px}.lg-info{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;overflow-wrap:anywhere}.lginfo-head{display:flex;align-items:center;gap:10px}.lginfo-head img{width:36px;height:36px;border-radius:3px}.lginfo-head b{font-size:16px;display:block}.lginfo-head span{font-size:12px;color:var(--muted)}.lg-info p{margin:10px 0}
+.lg-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;border-block:1px solid var(--line);padding:10px 0;margin:12px 0}.lg-actions button{min-height:44px;padding:8px 12px;white-space:nowrap}.lg-actions span{font-family:var(--f-num);font-weight:700;white-space:nowrap}.lg-requirement{color:var(--q-S)}
+.lg-source summary,.lg-rules summary,.lg-migration summary{cursor:pointer;color:var(--muted);font-size:12px}.lg-rules,.lg-sync{font-size:13px;line-height:1.65;margin-top:16px}.lg-sync a{white-space:nowrap}.lg-migration{margin-bottom:12px;font-size:13px}
+#legacyPage button:not(.lgnode){font-family:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:7px;cursor:pointer;min-height:44px}
+#legacyPage button:not(.lgnode):hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+#legacyPage button:disabled{opacity:.45;cursor:default}
+#legacyPage .lg-tabs button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+@media(max-width:1250px){.lg-layout{grid-template-columns:minmax(0,1fr)}.lg-info{max-width:680px}.simgrid{grid-template-columns:minmax(0,1fr)}.simside{position:static;max-height:none}}
+@media(max-width:850px) and (min-width:701px){.sgrid{column-gap:8px}.lg-grid{column-gap:8px}}
+@media(max-width:700px){
+ body:is([data-route="sim"],[data-route="legacy"]) .brand .lede,body:is([data-route="sim"],[data-route="legacy"]) .brand .byline,body:is([data-route="sim"],[data-route="legacy"]) .brand nav,body:is([data-route="sim"],[data-route="legacy"]) .brand .kick{display:none}
+ body:is([data-route="sim"],[data-route="legacy"]) .brand-in{padding-block:8px;gap:8px}.brand-in{min-width:0}
+ body:is([data-route="sim"],[data-route="legacy"]) .brand .logo{width:36px}body:is([data-route="sim"],[data-route="legacy"]) .brand h1{font-size:18px}
+ body:is([data-route="sim"],[data-route="legacy"]) .appnav{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:4px;padding:2px 0;scrollbar-width:none}
+ body:is([data-route="sim"],[data-route="legacy"]) .appnav a{flex:0 0 auto;white-space:nowrap;padding:6px 10px;min-height:44px}
+ body[data-route="legacy"] #levelBox{display:none}body[data-route="legacy"] .controls{padding-block:4px;justify-content:flex-end}
+ body[data-route="sim"] .controls{padding-block:6px;gap:6px}body[data-route="sim"] #levelValue{min-height:38px;font-size:22px;width:50px}body[data-route="sim"] .ticks{display:none}
+ body[data-route="sim"] .controls .level{flex:1;min-width:0}body[data-route="sim"] .opts>summary{min-height:38px;padding:8px;font-size:11px}
+ #sim .clspick{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:4px;margin-bottom:10px;scrollbar-width:none}#sim .clspick a{flex:0 0 44px;min-height:44px;padding:3px;font-size:10px;gap:2px}#sim .clspick a img{width:22px;height:22px}
+ .simbar{gap:6px;margin-bottom:8px}.simsum{gap:6px 12px}.spts,.ssplit{font-size:14px}.spts b{font-size:20px}.simsum .cmpsum{display:none}
+ .simact{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.simact .sel{grid-column:1/-1}.simact select{min-height:36px;padding:5px 8px;font-size:14px}.simact button,.simact>.whlink{min-height:40px;font-size:11px;padding:5px 3px;white-space:normal;line-height:1.25}
+ .simempty{padding:6px 0;margin:4px 0 8px;background:transparent;border:0;gap:6px}.simempty>span{display:none}.simempty button{min-height:36px;font-size:12px;padding:6px 10px}
+ .tree-tabs{position:static;gap:4px;padding:4px 0;margin-bottom:4px}.tree-tabs button{min-height:40px;flex-direction:row;gap:6px;font-size:13px;padding:5px}.tree-tabs button span{font-size:11px}
+ .sim-instruction{font-size:11px;margin:4px 0 8px}.stree{padding:10px}.stree header{grid-template-columns:24px 1fr auto auto;margin-bottom:8px}.stree header b{font-size:13px}.stree header .en{display:none}.stree header em{font-size:18px}.treereset{font-size:11px;min-height:32px;padding:5px 7px}
+ .sgrid{max-width:none;grid-template-columns:repeat(4,44px);grid-template-rows:repeat(7,44px);gap:8px 16px;padding:6px}.scell{width:44px;height:44px}.scell img{width:36px;height:36px}.scell{scroll-margin-top:110px}
+ .simside{gap:10px;margin-top:4px}.simside .card{padding:10px 12px}.simside .sbig{font-size:24px}
+ .lg-compact-head{gap:8px;flex-wrap:wrap;margin:2px 0 10px}.lg-compact-head h2{font-size:19px}.lg-compact-head p{font-size:12px}.lg-toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:8px}.lg-toolbar button,.lg-toolbar a{font-size:11px;min-height:40px;text-align:center;padding:6px 3px}
+ .lg-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}.lg-tabs button{display:flex;align-items:center;justify-content:center;gap:6px;min-height:40px;font-size:13px}.lg-tabs span{font-size:11px;color:var(--muted)}.lg-tabs button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+ .lg-forest{display:block}.lg-tree[data-active="false"]{display:none}.lg-layout{gap:10px}.lg-grid{gap:14px 24px;padding:10px 6px}.lg-info{padding:12px}.lg-sync{margin-top:12px}.lg-rules{margin-top:10px}
+ .talent-detail-body{font-size:14px;padding:12px 14px 0}.talent-dialog .sinfo p{line-height:1.6}
+}
+.sim-tree-art{background-size:cover;background-position:center;border-radius:5px;padding:8px 0;background-color:#10151b}
+.sim-tree-art .scell .rk{background:#10151b;color:#ccd5df;border-color:#546170}
+.sim-tree-art .scell[data-s="part"] .rk{color:#71ed66}.sim-tree-art .scell[data-s="max"] .rk{color:#ffe35b}
+.sim-tree-art .arrows line{stroke:#aab5c2;stroke-width:.035}.sim-tree-art .arrows line.met{stroke:#e6c171}
+@media(max-width:700px){.sim-tree-art{padding:4px 0}.sim-instruction{line-height:1.4}body[data-route="legacy"] .controls{display:none}}
 </style>
 </head>
 <body>
@@ -1057,7 +1142,7 @@ html.detail-open{overflow:hidden}
         <p class="kick">《魔兽世界：无限》中文资料站</p>
         <h1>专精天梯 · 天赋模拟器</h1>
         <p class="lede">没玩过魔兽也能看懂：先弄清楚这是什么游戏，再挑一个适合自己的职业，最后看它每一级怎么加天赋。九个职业 27 个专精，1 到 60 级的强弱排名和加点都在这里。</p>
-        <p class="byline">非官方粉丝工具 · 数据来自 BlizzCon 2026 试玩 · 模型生成于 2026-09-15</p>
+        <p class="byline">非官方粉丝工具 · 数据来自 BlizzCon 2026 试玩 · 模型生成于 2026-09-16</p>
         <nav aria-label="快速入口"><a class="primary" href="#/start">我是新手，从这里开始</a><a href="#/tiers">看专精强弱排名</a><a href="#/sim">打开天赋模拟器</a></nav>
       </div>
     </div>
@@ -1098,7 +1183,7 @@ html.detail-open{overflow:hidden}
       <div class="opts-panel">
         <label class="toggle" for="showEn" title="在中文下面显示英文原文，方便核对"><input type="checkbox" id="showEn"><span class="sw" aria-hidden="true"></span><span>显示英文原名<small>中文译名下面附上英文，方便对照外网资料</small></span></label>
         <label class="toggle" for="cmpClassic" title="在天赋树上标出 Forever 相对 Classic 新增、改动、移位的天赋"><input type="checkbox" id="cmpClassic"><span class="sw" aria-hidden="true"></span><span>标出和怀旧服不同的天赋<small>玩过怀旧服（Classic）的人看：新增、改动、移位</small></span></label>
-        <label class="toggle" for="talented" title="Legacy 传承「Talented」点满：9 级开始拿天赋点，上限仍是 51"><input type="checkbox" id="talented"><span class="sw" aria-hidden="true"></span><span>已点满传承「天赋异禀」<small>老玩家的账号奖励，9 级就开始有天赋点。新号不用开</small></span></label>
+        <label class="legacy-rank-option" for="talented"><span>模拟「天赋异禀」等级</span><select id="talented"><option value="0">0 点 · 10 级起</option><option value="1">1 点 · 9 级起</option><option value="2">2 点 · 8 级起</option><option value="3">3 点 · 7 级起</option><option value="4">4 点 · 6 级起</option><option value="5">5 点 · 5 级起</option></select><small>天赋总上限 51 点；Legacy 加点会同步此项。</small></label>
       </div>
     </details>
   </div>
@@ -1111,9 +1196,9 @@ html.detail-open{overflow:hidden}
       <details class="explain" id="explain" open><summary>怎么看这张榜</summary><div id="explainBody"></div></details>
       <p class="note" id="note" hidden></p>
       <div class="board" id="board"></div>
-      <p class="hint">点任意专精，右边显示它的最佳加点；点天赋图标看说明和估值依据。</p>
+      <p class="hint">点任意专精，右边显示它的推荐加点；点天赋图标看说明和估值依据。</p>
     </div>
-    <aside class="detail" id="detail" aria-label="专精详情与最佳加点"></aside>
+    <aside class="detail" id="detail" aria-label="专精详情与推荐加点"></aside>
   </main>
   </div>
 
@@ -1132,9 +1217,9 @@ html.detail-open{overflow:hidden}
     <div class="xwrap" tabindex="0" role="region" aria-label="榜单对照，可横向滚动"><table class="x" id="xtable"></table></div>
     <ul class="xnotes">
       <li><b>一致：</b>单刷升级猎人最好；法系输出火法、恶魔术靠前；治疗恢复萨、牧师靠前；刺杀贼、战斗贼在第一梯队。</li>
-      <li><b>仍有分歧：</b>增强萨和元素萨，对方都放在 S/A。本模型把先祖之怒按 3 分钟冷却、漩涡武器按低触发估，这两个数值试玩里都没见过。痛苦术、生存猎也比对方低一档。</li>
+      <li><b>仍有分歧：</b>增强萨和元素萨，对方都放在 S/A。本模型对未确认的冷却和触发仍含假设，第三方榜单也未统一装备与战斗条件。痛苦术、生存猎也比对方低一档。</li>
       <li><b>坦克：</b>FrostyBoost 推圣骑士（愤怒圣印带吸收盾），本模型防护战第一、防护骑第二。</li>
-      <li><b>已做的修正：</b>60 级输出的职业底子原本参考 Classic（82–108），现已压到 95–105，让天赋本身决定排名。修正后暗影牧、野性德升到 A，增强萨从 D 升到 C。</li>
+      <li><b>已做的修正：</b>60 级输出的职业底子原本参考 Classic（82–108），现已压到 95–105，让天赋本身决定排名。2026-09-16 又剥离了明确混入输出的团队光环、治疗及纯防御加分，档位随重算更新。</li>
     </ul>
   </section>
 
@@ -1143,16 +1228,16 @@ html.detail-open{overflow:hidden}
     <div class="method">
     <div>
       <h3>1 · 加点规则（来自 Wowhead）</h3>
-      <p>照抄 Wowhead Forever 计算器源码的规则：10 级开始每级 1 点（打开 Legacy Talented 开关则从 9 级开始），60 级一共 51 点；每系第 N 行要先在该系投 5×(N−1) 点，共 7 行，所以第 7 行的 31 点天赋最早 40 级才能点；前置天赋要点满指定点数。</p>
+      <p>照抄 Wowhead Forever 计算器源码的规则：10 级开始每级 1 点（Legacy 天赋异禀 1–5 点则分别从 9–5 级开始），60 级一共 51 点；每系第 N 行要先在该系投 5×(N−1) 点，共 7 行，所以第 7 行的 31 点天赋最早 40 级才能点；前置天赋要点满指定点数。</p>
     </div>
     <div>
       <h3>2 · 天赋估值</h3>
       <p>470 个天赋按同一把尺子逐个估值：升级击杀速度、休息时间、生存、便利，以及 60 级输出、坦克、治疗的百分比收益。比如“全部伤害 +10%”记 10，“法术暴击 +1%”记 0.5。修改高等级技能的天赋，在学会那个技能之前不算分。</p>
-      <p><b>60 级输出用模拟器校准过：</b>用社区开源模拟器 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a>（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT 协议，非官方）在 17 个输出专精的 25 套加点上逐个去掉或加满天赋，实测输出变化，再和人工估值各取一半（带团队增益的只取四分之一）。给技能的天赋、打法核心天赋、模拟器没实现或数值和 Wowhead 对不上的天赋不参与校准。升级、坦克、治疗仍是人工估值。天赋说明的「估值依据」里注明了每一项校准前后的数。</p>
+      <p><b>60 级输出用模拟器校准过：</b>用社区开源模拟器 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a>（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT 协议，非官方）在 17 个输出专精的 25 套加点上逐个去掉或加满天赋，记录模拟输出变化，再和人工估值各取一半（带团队增益的只取四分之一）。给技能的天赋、打法核心天赋、模拟器没实现或数值和 Wowhead 对不上的天赋不参与校准。升级、坦克、治疗仍是人工估值。天赋说明的「估值依据」里注明了每一项校准前后的数。</p>
     </div>
     <div>
-      <h3>3 · 最佳加点怎么来</h3>
-      <p>每个专精从 10 级开始，每升一级拿 1 点，点在“每一点换来分数最多”的地方（会算上凑行需要的填充点和前置）。主系点数始终不少于任何副系。60 级输出、坦克、治疗榜单是按该定位从零重新加满 51 点。每套加点都能直接在 Wowhead 打开。</p>
+      <h3>3 · 推荐加点怎么来</h3>
+      <p>每个专精从 10 级开始，每升一级拿 1 点，点在“每一点换来分数最多”的地方（会算上凑行需要的填充点和前置）。主系点数始终不少于任何副系。60 级输出、坦克、治疗榜单是按该定位从零重新加满 51 点。逐点选择不保证找到全局最优；推荐加点可作为起点，保命和团队工具按实际战斗调整。每套加点都能直接在 Wowhead 打开。</p>
     </div>
     <div>
       <h3>4 · 升级评分公式</h3>
@@ -1171,7 +1256,7 @@ html.detail-open{overflow:hidden}
         <li>试玩最高 38 级，很多天赋只见过 1 级，后面的等级是推算的。</li>
         <li>职业底子和大部分天赋估值是人工判断。60 级输出有一部分按模拟器校准，但模拟器本身也用的是试玩画面上的天赋数值和 Classic 的装备，不是游戏客户端实测。</li>
         <li>没算装备、种族、组队和 AOE 刷怪。</li>
-        <li>详情里的“不确定度”表示分数有多少来自低置信估值或推算等级。</li>
+        <li>详情里的“低证据贡献占比”只统计低置信估值和推算等级；不包含职业基线、装备与循环的误差。</li>
       </ul>
     </div>
     </div>
@@ -1179,7 +1264,7 @@ html.detail-open{overflow:hidden}
   </div>
   <footer class="site-foot">
     <img src="assets/forever-logo.webp" alt="" width="64" height="52" loading="lazy">
-    <p>非官方粉丝工具，与暴雪娱乐无关，仅供个人研究使用。《魔兽世界：Forever》徽标与主视觉版权归 Blizzard Entertainment，取自 BlizzCon 2026 官方媒体包。天赋与技能数据来自 Wowhead Forever 天赋计算器和技能库、BlizzCon 2026 试玩；强弱排名是模型估算，不是实测；60 级输出估值用 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a> 模拟器（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT）校准。</p>
+    <p>非官方粉丝工具，与暴雪娱乐无关，仅供个人研究使用。《魔兽世界：Forever》徽标与主视觉版权归 Blizzard Entertainment，取自 BlizzCon 2026 官方媒体包。天赋与技能数据来自 Wowhead Forever 天赋计算器和技能库、BlizzCon 2026 试玩；强弱排名是模型估算，不是实测；职业天赋的部分 60 级输出估值用 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a> 模拟器（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT）校准；种族推荐为独立场景估算，含未验证机制。</p>
   </footer>
 </div>
 
@@ -1187,12 +1272,12 @@ html.detail-open{overflow:hidden}
 <script>
 const D = window.FOREVER_DATA;
 const TIERS = ["S","A","B","C","D"];
-const VIEW_NAME = {lv:"升级综合", tal:"纯天赋提升", dps:"60 级输出", tank:"60 级坦克", heal:"60 级治疗"};
+const VIEW_NAME = {lv:"升级综合", tal:"纯天赋提升", dps:"60 级输出估算", tank:"60 级坦克", heal:"60 级治疗"};
 const byKey = Object.fromEntries(D.specs.map((s,i)=>[s.k,i]));
 const treeCn = (cls, tree) => { const i = byKey[cls+":"+tree]; return i==null ? tree : D.specs[i].cn; };
-const firstLv = () => state.talented ? 9 : 10;
+const firstLv = () => 10 - Number(state.talented || 0);
 const pts = L => Math.max(0, Math.min(51, L - firstLv() + 1));
-const PER = () => state.talented ? D.perT : D.per;
+const PER = () => D.perLegacy[state.talented] || (state.talented ? D.perT : D.per);
 const ico = n => n>=0 ? D.icons[n] : "";
 const RENAMED_ZH = {"Bane of Agony":["痛苦灾难","later"], "Bane of Doom":["末日灾难","later"], "Subjugate Demon":["奴役恶魔","provisional"], "Fire Nova":["火焰新星","later"], "Call Owl":["召唤猫头鹰","provisional"]};
 const SRC = {classic:["国服译名","ok"], later:["沿用后续版本译名","later"], provisional:["暂译","prov"]};
@@ -1208,7 +1293,7 @@ const specBadge = (s, big) => `<img alt="" src="${ico(s.icon)}">`;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 let state = {view:"lv", level:40, sel:null, talent:null, talented:false};
-try { const s = JSON.parse(localStorage.getItem("forever-tiers")||"{}"); if (VIEW_NAME[s.view]) state.view = s.view; if (s.level>=1 && s.level<=60) state.level = s.level; state.talented = !!s.talented; } catch(e) {}
+try { const s = JSON.parse(localStorage.getItem("forever-tiers")||"{}"); if (VIEW_NAME[s.view]) state.view = s.view; if (s.level>=1 && s.level<=60) state.level = s.level; state.talented = Math.max(0, Math.min(5, Math.floor(Number(s.talented) || 0))); } catch(e) {}
 const save = () => { try { localStorage.setItem("forever-tiers", JSON.stringify({view:state.view, level:state.level, talented:state.talented})); } catch(e) {} };
 
 const genEl = document.getElementById("gen"); if (genEl) genEl.textContent = D.generated.slice(0,10);
@@ -1239,8 +1324,8 @@ function renderBoard() {
       b.style.setProperty("--cc", s.color);
       b.setAttribute("aria-pressed", x.i===state.sel);
       const val = state.view==="tal" ? (x.gain>=0?"+":"")+Math.round(x.gain)+"%" : x.index.toFixed(0);
-      b.innerHTML = `${specBadge(s)}<span class="nm"><span class="sp">${s.cn}</span><span class="cl">${s.clsCn}<span class="rl"> · ${(D.model.specRoles[s.cls][s.spec]||[]).map(r=>({dps:"输出",tank:"坦克",heal:"治疗"})[r]).join("/")}</span></span></span><span class="ix">${val}</span>`;
-      b.title = `${s.cn} ${s.clsCn} · 指数 ${x.index} · 点击看最佳加点`;
+      b.innerHTML = `${specBadge(s)}<span class="nm"><span class="sp">${s.cn}</span><span class="cl">${s.clsCn}<span class="rl"> · ${(isLevelView() ? (D.model.specRoles[s.cls][s.spec]||[]) : [state.view]).map(r=>({dps:"输出",tank:"坦克",heal:"治疗"})[r]).join("/")}</span></span></span><span class="ix">${val}</span>`;
+      b.title = `${s.cn} ${s.clsCn} · 指数 ${x.index} · 点击看推荐加点`;
       b.onclick = () => { if (state.sel !== x.i) state.talent = null; state.sel = x.i; renderBoard(); renderDetail(); document.getElementById("announce").textContent = `已选择 ${s.cn}${s.clsCn}，${x.tier} 档，指数 ${x.index}`; if (matchMedia("(max-width:980px)").matches) document.getElementById("detail").scrollIntoView({behavior:"smooth", block:"start"}); };
       chips.appendChild(b);
     }
@@ -1256,8 +1341,9 @@ function renderBoard() {
   document.getElementById("lvinfo").innerHTML = end ? `<b>51</b> 天赋点<br>满级加点` : `<b>${p}</b> / 51 天赋点<br>${p? `最深可点第 <b>${rows}</b> 行` : "还没有天赋"}`;
   document.getElementById("levelBox").setAttribute("aria-disabled", end && route.name === "tiers");
   document.querySelector('label[for="talented"]').setAttribute("aria-disabled", end && route.name === "tiers");
-  document.getElementById("talented").checked = state.talented;
-  document.getElementById("lv").value = L;
+  document.getElementById("talented").value = Number(state.talented);
+  document.getElementById("lv").value = end ? 60 : L;
+  document.getElementById("lv").disabled = end && route.name === "tiers";
   document.getElementById("levelValue").value = end ? 60 : L;
   document.getElementById("levelValue").disabled = end && route.name === "tiers";
   document.querySelectorAll(".controls .seg button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.view===state.view));
@@ -1351,9 +1437,10 @@ function renderDetail() {
   const valueOf = id => { const f = top.find(x=>x[0]==id); return f ? f[2] : null; };
   const split = s.trees.map(tr => Object.entries(ranks).filter(([id])=>D.talents[id][1]===tr).reduce((a,[,r])=>a+r,0));
 
+  if (!isLevelView()) h += endgameEvidenceHTML(me.e, v);
   if (total) {
-    const cap = isLevelView() ? `${L} 级升级最佳加点 · ${total} 点` : `${VIEW_NAME[v]}最佳加点 · 51 点`;
-    h += `<div><h3>最佳加点</h3><div class="build-head"><div><div class="split">${split.join("<span>/</span>")}</div><div class="cap">${cap}</div></div><a class="whlink" href="${wh}" target="_blank" rel="noopener">在 Wowhead 打开 ↗</a></div>${treesView(s, ranks, tp, valueOf)}</div>`;
+    const cap = isLevelView() ? `${L} 级升级推荐加点 · ${total} 点` : `${VIEW_NAME[v]}推荐加点 · 51 点`;
+    h += `<div><h3>推荐加点</h3><div class="build-head"><div><div class="split">${split.join("<span>/</span>")}</div><div class="cap">${cap}</div></div><a class="whlink" href="${wh}" target="_blank" rel="noopener">在 Wowhead 打开 ↗</a></div>${treesView(s, ranks, tp, valueOf)}</div>`;
   } else {
     h += `<p class="note">${L} 级还没有天赋点，拖到 ${firstLv()} 级以上看加点。</p>`;
   }
@@ -1362,12 +1449,12 @@ function renderDetail() {
     h += `<div><h3>1–60 级指数（${VIEW_NAME[v]}）</h3>${chart(i)}</div>`;
     if (total) h += `<div><h3>${L} 级天赋带来的</h3><div class="kv"><div><span>击杀速度</span><b>+${d[0]}%</b></div><div><span>休息减少</span><b>${d[1]}%</b></div><div><span>生存</span><b>+${d[2]}%</b></div><div><span>便利</span><b>${d[3]}</b></div><div><span>升级总提速</span><b>${p.gain[L-1]>=0?"+":""}${p.gain[L-1]}%</b></div><div><span>天赋点</span><b>${total}</b></div></div></div>`;
   } else {
-    const dimName = {dps:"输出提升",tank:"坦克能力提升",heal:"治疗能力提升"}[v];
+    const dimName = {dps:"输出估值",tank:"坦克能力估值",heal:"治疗能力估值"}[v];
     h += `<div class="kv"><div><span>天赋${dimName}</span><b>+${me.e.dim}%</b></div><div><span>天赋点</span><b>51</b></div></div>`;
   }
   if (total) {
     h += `<div><h3>贡献最大的天赋</h3><ol class="tl">` + top.slice(0,6).map(([id,r,val]) => { const t = D.talents[id]; return `<li><img alt="" src="${ico(t[8])}"><span>${bi(t[12], t[0])}<span class="r">${r}/${t[4]}</span>${t[5]==="low"?`<span class="flag low">低置信</span>`:""}</span><span class="val">+${val}</span></li>`; }).join("") + `</ol></div>`;
-    h += `<div class="unc">不确定度 ${Math.round(unc*100)}%：分数里来自低置信估值或推算等级的比例<div class="meter"><i style="width:${unc*100}%"></i></div></div>`;
+    h += `<div class="unc">低证据贡献占比 ${Math.round(unc*100)}%：低置信估值或推算等级在天赋贡献中的比例；0% 也不代表实测准确<div class="meter"><i style="width:${unc*100}%"></i></div></div>`;
     if (isLevelView()) h += `<details><summary>${firstLv()}–${L} 级逐级加点顺序</summary>${orderRuns(p.picks, L)}</details>`;
   }
   el.innerHTML = h;
@@ -1467,7 +1554,7 @@ document.querySelectorAll("#viewSeg button").forEach(b => b.onclick = () => { st
 document.getElementById("showEn").addEventListener("change", e => { document.body.classList.toggle("hide-en", !e.target.checked); try { localStorage.setItem("forever-tiers-en", e.target.checked ? "1" : "0"); } catch(_) {} });
 // 英文原名默认隐藏（新手不需要），打开过的人记住选择
 (() => { let on = false; try { on = localStorage.getItem("forever-tiers-en") === "1"; } catch(_) {} document.getElementById("showEn").checked = on; document.body.classList.toggle("hide-en", !on); })();
-document.getElementById("talented").addEventListener("change", e => { setTalented(e.target.checked); });
+document.getElementById("talented").addEventListener("change", e => { setTalented(+e.target.value); });
 let lvFrame = 0;
 document.getElementById("lv").addEventListener("input", e => { state.level = +e.target.value; if (lvFrame) return; lvFrame = requestAnimationFrame(() => { lvFrame = 0; save(); renderRoute(true); }); });
 document.getElementById("levelValue").addEventListener("change", e => {
@@ -1477,6 +1564,167 @@ document.getElementById("levelValue").addEventListener("change", e => {
   slider.value = Math.max(1, Math.min(60, Math.round(v)));
   slider.dispatchEvent(new Event("input", {bubbles:true}));
 });
+// Pure shared evaluator: used by the build, all recommendation views, and Node tests.
+// Ranges are sensitivity envelopes for assumptions, never statistical confidence intervals.
+const RaceRecommendations = (() => {
+  const modes = ['dps', 'tank', 'heal', 'lv', 'pvp'];
+  const durations = [15, 60, 180, 300];
+  const weaponTypes = { 'Axe Specialization': 'axe', 'Sword Specialization': 'sword', 'Mace Specialization': 'mace' };
+  const active = new Set(['Blood Fury', 'Berserking', "Elune's Light", 'Stoneform']);
+  const recovery = new Set(['Cannibalize', 'Rapid Regeneration', 'Regeneration', 'Touch of the Grave', 'Read Ley Line']);
+  const sum = (parts) => parts.reduce((a, p) => { for (const [k, v] of Object.entries(p)) a[k] = (a[k] || 0) + v; return a; }, {});
+  const round = (n) => Math.round(n * 1000) / 1000;
+  function normalize(options = {}) {
+    return { mode: modes.includes(options.mode) ? options.mode : 'dps',
+      faction: ['all', 'Horde', 'Alliance'].includes(options.faction) ? options.faction : 'all',
+      weapon: ['auto', 'axe', 'sword', 'mace', 'other'].includes(options.weapon) ? options.weapon : 'auto',
+      duration: durations.includes(+options.duration) ? +options.duration : 180,
+      hit: options.hit === 'capped' ? 'capped' : 'needed',
+      target: ['other', 'beast', 'elemental'].includes(options.target) ? options.target : 'other',
+      recovery: [0.25, 0.5, 1].includes(+options.recovery) ? +options.recovery : 0.5 };
+  }
+  function uptime(duration, cooldown, fight) {
+    let covered = 0;
+    for (let at = 0; at < fight; at += cooldown) covered += Math.min(duration, fight - at);
+    return covered / fight;
+  }
+  function levelScore(b, extra) {
+    const s = sum([b.dims, extra]);
+    // Damage is relative to the current build, not to an untalented character.
+    s.lv_dmg = ((1 + (b.dims.lv_dmg || 0) / 100) * (1 + (extra.lv_dmg || 0) / 100) - 1) * 100;
+    const fight = 100 / (b.kill * (1 + s.lv_dmg / 100));
+    const rest = b.rest / (1 - b.rest) * fight * (1 - Math.min(0.7, (s.lv_eff || 0) / 100)) * (1 - Math.min(0.5, 0.4 * (s.lv_surv || 0) / 100));
+    return 100 / (fight + rest) * Math.pow(b.safe / 100 * (1 + (s.lv_surv || 0) / 100), 0.3) * (1 + 0.008 * (s.lv_util || 0));
+  }
+  function value(profile, dims, mode) {
+    if (mode !== 'lv') return dims['g_' + mode] || 0;
+    return profile.levels.reduce((n, b) => n + (levelScore(b, dims) / levelScore(b, {}) - 1) * 100, 0) / profile.levels.length;
+  }
+  function evaluate(data, race, specKey, options = {}) {
+    const context = normalize(options), profile = data.profiles[specKey];
+    const input = data.fit[race + '|' + specKey];
+    if (!input || !profile || !['lv', 'pvp', ...profile.roles].includes(context.mode)) return null;
+    const parts = input.inputs.map(({ name, dims }) => {
+      const d = { ...dims }, weapon = weaponTypes[name];
+      if (weapon && context.weapon !== 'auto') {
+        const oldWeight = profile.wep[weapon] || 0;
+        const factor = context.weapon === weapon && oldWeight ? 1 / oldWeight : 0;
+        for (const k of Object.keys(d)) d[k] *= factor;
+      }
+      if (active.has(name)) {
+        const t = data.timing[name], duration = t.durationSeconds, cooldown = t.cooldownSeconds ?? t.modelCooldownSeconds;
+        const factor = uptime(duration, cooldown, context.duration) / (duration / cooldown);
+        for (const k of ['g_dps', 'g_heal', 'g_tank']) if (d[k]) d[k] *= factor;
+        if (name === 'Stoneform' && profile.tank) d.g_tank = 0.3 + 10 * uptime(duration, cooldown, context.duration);
+      }
+      if (name === 'Eureka!') {
+        const t = data.timing[name], cooldown = t.cooldownSeconds ?? t.modelCooldownSeconds;
+        const share = ['melee', 'ranged'].includes(profile.kind) ? 0.15 : 0.075;
+        const factor = Math.min(1 / share, Math.ceil(context.duration / cooldown) * cooldown / context.duration);
+        for (const k of ['g_dps', 'g_heal', 'g_tank']) if (d[k]) d[k] *= factor;
+      }
+      if (name === 'Endurance' && context.hit === 'capped') { d.g_dps = 0; if (d.g_tank) d.g_tank = Math.max(0, d.g_tank - 0.5); }
+      if (['Beast Slaying', 'Big Game Hunter', 'Elemental Insight'].includes(name)) {
+        const applies = context.target === (name === 'Elemental Insight' ? 'elemental' : 'beast');
+        d.g_dps = applies && profile.kind !== 'healer' ? 5 * (1 - profile.pet) : 0;
+        d.g_tank = applies && profile.tank ? 2.5 * (1 - profile.pet) : 0;
+      }
+      if (recovery.has(name)) for (const k of ['lv_eff', 'lv_surv']) if (d[k]) d[k] *= context.recovery;
+      // Verified tooltip != verified conversion into performance. Even high quality traits
+      // retain a sensitivity margin; low quality cooldown/recovery estimates include zero.
+      const confidence = data.racials[name]?.[0] || 'low';
+      const range = { high: [0.8, 1.2], med: [0.5, 1.5], low: [0, 2] }[confidence];
+      if (weapon && context.weapon === 'auto') {
+        range[0] = 0;
+        range[1] = Math.max(range[1], 1 / (profile.wep[weapon] || 1));
+      }
+      const low = Object.fromEntries(Object.entries(d).map(([k, v]) => [k, v * range[0]]));
+      const high = Object.fromEntries(Object.entries(d).map(([k, v]) => [k, v * range[1]]));
+      return { name, dims: d, low, high, confidence, v: context.mode === 'pvp' ? null : round(value(profile, d, context.mode)) };
+    });
+    const missing = (input.missing || []).filter(x => x.modes.includes(context.mode));
+    if (context.mode === 'pvp') return { race, specKey, context, v: null, range: null, parts, missing, band: '对局候选' };
+    const score = (key) => round(value(profile, sum(parts.map(p => p[key])), context.mode));
+    return { race, specKey, context, v: score('dims'), range: [score('low'), score('high')], parts, missing };
+  }
+  function rank(data, specKey, options = {}) {
+    const c = normalize(options);
+    const rows = data.races.filter(r => c.faction === 'all' || r.f === c.faction)
+      .map(r => { const score = evaluate(data, r.race, specKey, c); return score && { ...score, r }; }).filter(Boolean);
+    if (c.mode === 'pvp') return rows;
+    const floor = Math.max(0, ...rows.filter(r => !r.missing.length).map(r => r.range[0]));
+    for (const r of rows) r.band = r.missing.length ? '待验证' : r.range[1] >= floor && r.v > 0 ? '优先候选' : '条件候选';
+    // No asserted ordinal ranks: overlapping sensitivity ranges remain candidates.
+    return rows.sort((a, b) => Number(!!a.missing.length) - Number(!!b.missing.length) || b.v - a.v || a.race.localeCompare(b.race));
+  }
+  return { normalize, uptime, evaluate, rank, modes, durations };
+})();
+if (typeof module !== 'undefined' && module.exports) module.exports = RaceRecommendations;
+
+// Shared Legacy rules; mirrors the public Wowhead calculator's cap,
+// spent-in-tree thresholds, prerequisites and reachable-build validation.
+const LegacyModel = (() => {
+  const nodes = data => data.trees.flatMap(t => t.nodes);
+  const spent = (data, ranks) => nodes(data).reduce((sum, n) => sum + (ranks[n.name] || 0), 0);
+  const treeSpent = (tree, ranks) => tree.nodes.reduce((sum, n) => sum + (ranks[n.name] || 0), 0);
+  function blocked(data, ranks, tree, node) {
+    if (node.locked) return '后续版本开放';
+    if (treeSpent(tree, ranks) < node.requiredSpent) return `需要在${tree.nameZh}投入 ${node.requiredSpent} 点`;
+    const byId = Object.fromEntries(tree.nodes.map(n => [n.id, n]));
+    const incoming = tree.edges.filter(e => e.to === node.id);
+    const any = incoming.filter(e => e.type !== 3), all = incoming.filter(e => e.type === 3);
+    if ((any.length && !any.some(e => ranks[byId[e.from].name] > 0)) || all.some(e => !(ranks[byId[e.from].name] > 0))) return '需要先学习连线前置技能';
+    return '';
+  }
+  function normalize(data, target) {
+    const ranks = {};
+    let changed = true;
+    while (changed && spent(data, ranks) < data.cap) {
+      changed = false;
+      for (const tree of data.trees) for (const n of tree.nodes) {
+        const wanted = Math.max(0, Math.min(n.maxRanks, Number.isInteger(target[n.name]) ? target[n.name] : 0));
+        while ((ranks[n.name] || 0) < wanted && spent(data, ranks) < data.cap && !blocked(data, ranks, tree, n)) {
+          ranks[n.name] = (ranks[n.name] || 0) + 1; changed = true;
+        }
+      }
+    }
+    return ranks;
+  }
+  function change(data, ranks, id, delta) {
+    const tree = data.trees.find(t => t.nodes.some(n => n.id === +id)), node = tree?.nodes.find(n => n.id === +id);
+    if (!node || node.locked) return { error: '后续版本开放' };
+    const current = ranks[node.name] || 0, next = current + delta;
+    if (next < 0 || next > node.maxRanks) return { error: next < 0 ? '尚未投入点数' : '已点满' };
+    if (delta > 0) {
+      const reason = blocked(data, ranks, tree, node);
+      if (reason) return { error: reason };
+      if (spent(data, ranks) + delta > data.cap) return { error: `最多可花 ${data.cap} 点` };
+    }
+    const result = { ...ranks, [node.name]: next }, reachable = normalize(data, result);
+    if (nodes(data).some(n => (result[n.name] || 0) !== (reachable[n.name] || 0))) return { error: '后续技能依赖这些点数，请先撤回后续技能' };
+    return { ranks: result };
+  }
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+  function encode(data, ranks) {
+    return 'A' + nodes(data).map(n => alphabet[ranks[n.name] || 0]).join('').replace(/A+$/, '');
+  }
+  function decode(data, code) {
+    const list = nodes(data);
+    if (!/^A[A-Za-z0-9_-]*$/.test(code || '') || code.length > list.length + 1) return null;
+    const ranks = {};
+    for (let i = 1; i < code.length; i++) {
+      const n = list[i - 1], r = alphabet.indexOf(code[i]);
+      if (r > n.maxRanks || (r && n.locked)) return null;
+      if (!n.locked) ranks[n.name] = r;
+    }
+    if (spent(data, ranks) > data.cap) return null;
+    const legal = normalize(data, ranks);
+    return list.some(n => (ranks[n.name] || 0) !== (legal[n.name] || 0)) ? null : legal;
+  }
+  return { nodes, spent, treeSpent, blocked, normalize, change, encode, decode };
+})();
+if (typeof module !== 'undefined' && module.exports) module.exports = LegacyModel;
+
 // ===================== 路由 · 天赋模拟器 · 职业 · 种族 · Legacy · 动效 =====================
 // 这个文件由 build_page.cjs / build_site.cjs 内联进页面脚本末尾，可直接使用上面定义的 D、state、PER 等
 
@@ -1490,6 +1738,19 @@ const diffDots = (n) => `<span class="dif" title="上手难度（本站主观判
 const CMP = { new: ["新", "Forever 新增"], changed: ["改", "相对 Classic 有改动"], moved: ["移", "只是换了位置"], same: ["", "和 Classic 一样"] };
 // 主动天赋的消耗、射程、施法和冷却，像游戏鼠标提示那样放在说明上面
 function costLine(t) { const c = t[17]; return c ? `<p class="cost" title="${esc(c[0])}">${esc(c[1] || c[0])}</p>` : ""; }
+function racialTimingHTML(name) {
+  const meta = SK.racialTiming, t = meta?.traits[name];
+  if (!t) return '<p class="racial-time">技能资料待核实</p>';
+  if (t.kind === 'passive') return `<p class="racial-time">被动 · 无需主动使用${t.effect ? ` · <a href="${esc(t.source)}" target="_blank" rel="noopener">Wowhead 依据 ↗</a>` : ''}</p>`;
+  const seconds = n => n >= 60 && n % 60 === 0 ? `${n / 60} 分钟` : `${n} 秒`;
+  const kind = { active: '主动', proc: '被动触发', toggle: '追踪', unknown: '启用方式待确认' }[t.kind];
+  const duration = t.durationSeconds ? `持续 ${seconds(t.durationSeconds)}` : t.durationText || (t.kind === 'proc' ? '' : '持续时间待确认');
+  const cooldown = t.kind === 'proc' ? '内置冷却待确认' : t.cooldownSeconds != null ? `冷却 ${seconds(t.cooldownSeconds)}` : t.record ? `冷却 ${seconds(t.record.cooldownSeconds)}（数据库记录，Forever 待确认）` : '冷却待确认';
+  return `<div class="racial-timing"><p class="racial-time">${esc([kind, duration, cooldown].filter(Boolean).join(' · '))}</p>
+    <details class="racial-source"><summary>来源与使用条件</summary><p>${esc(t.note || t.record?.note || '指南未提供完整时间信息。')}</p>
+      <p><a href="${esc(t.source)}" target="_blank" rel="noopener">Wowhead Forever 种族指南 ↗</a>${t.record ? ` · <a href="${esc(t.record.url)}" target="_blank" rel="noopener">技能数据库记录 ↗</a>` : ''} · 核对于 ${esc(t.checked)}</p>
+      ${t.modelCooldownSeconds ? `<p>推荐模型暂按 ${seconds(t.modelCooldownSeconds)} 冷却估算；这是计算假设，新版冷却尚未确认。</p>` : ''}</details></div>`;
+}
 function cmpBadge(t) { const c = t[15]; return c && c[0] !== "same" ? `<span class="cmp" data-c="${c[0]}" aria-hidden="true">${CMP[c[0]][0]}</span>` : ""; }
 const CLASSIC_TREE = { Affliction: "Curses", Demonology: "Summoning", Retribution: "Combat", "Shadow Magic": "Shadow" };
 const classicTreeCn = (cls, name) => treeCn(cls, CLASSIC_TREE[name] || String(name).replace(/s+/g, ""));
@@ -1622,7 +1883,7 @@ const endEntry = (role, i) => D.end[role].find((e) => e.s === i);
 const B62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const encodeOrder = (cls, order) => order.map((id) => B62[CT[cls].index[id]]).join("");
 const decodeOrder = (cls, code) => [...(code || "")].map((ch) => CT[cls].ids[B62.indexOf(ch)]).filter(Boolean);
-const simHash = (cls, order, L = state.level) => `#/sim/${cls}/${L}/${state.talented ? 1 : 0}/${encodeOrder(cls, order)}`;
+const simHash = (cls, order, L = state.level) => `#/sim/${cls}/${L}/${Number(state.talented || 0)}/${encodeOrder(cls, order)}`;
 function whLink(cls, ranks) {
   const hash = CT[cls].trees.map((tr) => CT[cls].ids.filter((id) => D.talents[id][1] === tr).map((id) => ranks[id] || 0).join("").replace(/0+$/, "")).join("-").replace(/-+$/, "");
   return `https://www.wowhead.com/forever/talent-calc/${D.slugs[cls]}${hash ? "/" + hash : ""}`;
@@ -1652,9 +1913,12 @@ const announce = (msg) => {
 // ---------- 路由 ----------
 const route = { name: "tiers", cls: null, race: null };
 const sim = { builds: store.get("forever-sim", {}), cls: null, spec: "auto", hist: [], focus: null, prev: {}, tree: 0, historyClass: null };
-const legacyRanks = store.get("forever-legacy", {});
+const legacyOriginal = store.get("forever-legacy", {});
+const legacyRanks = LegacyModel.normalize(SK.legacyCalc, legacyOriginal);
+const legacyMigrated = Object.keys(legacyOriginal).some(k => (legacyOriginal[k] || 0) !== (legacyRanks[k] || 0));
+if (legacyMigrated && !store.get("forever-legacy-before-20260916", null)) store.set("forever-legacy-before-20260916", legacyOriginal);
 const TALENTED_MAX = (SK.legacy.trees.flatMap((t) => t.perks).find((p) => p.name === "Talented") || { max: 5 }).max;
-if ("Talented" in legacyRanks) state.talented = legacyRanks.Talented >= TALENTED_MAX; else legacyRanks.Talented = state.talented ? TALENTED_MAX : 0;
+
 
 function applyHash() {
   const raw = location.hash || "";
@@ -1665,7 +1929,7 @@ function applyHash() {
   if (route.name === "sim" && CT[p[1]]) {
     sim.cls = p[1];
     if (p[2]) { const L = Math.max(1, Math.min(60, +p[2] || state.level)); state.level = L; }
-    if (p[3] === "0" || p[3] === "1") { state.talented = p[3] === "1"; legacyRanks.Talented = state.talented ? TALENTED_MAX : 0; }
+    if (/^[0-5]$/.test(p[3] || "")) state.talented = +p[3];
     if (p[4] != null) {
       const incoming = normalizeOrder(p[1], decodeOrder(p[1], p[4]));
       if (JSON.stringify(incoming) !== JSON.stringify(sim.builds[p[1]] || [])) sim.hist = [];
@@ -1674,7 +1938,8 @@ function applyHash() {
   }
   if (route.name === "class") route.cls = CT[p[1]] ? p[1] : route.cls;
   if (route.name === "race") route.race = p[1] || route.race;
-  if (route.name === "fit") { if (p[1]) fitState.race = p[1]; if (CT[p[2]]) fitState.cls = p[2]; }
+  if (route.name === "fit") fitReadRoute(p);
+  if (route.name === "legacy" && p[1]) readLegacyHash(p[1]);
 }
 function replaceHash(h) { try { history.replaceState(null, "", h); } catch (_) {} }
 
@@ -1684,8 +1949,9 @@ function updateLevelBar() {
   document.getElementById("lvinfo").innerHTML = `<b>${p}</b> / 51 天赋点<br>${p ? `最深可点第 <b>${rows}</b> 行` : "还没有天赋"}`;
   document.getElementById("levelBox").setAttribute("aria-disabled", "false");
   document.querySelector('label[for="talented"]').setAttribute("aria-disabled", "false");
-  document.getElementById("talented").checked = state.talented;
+  document.getElementById("talented").value = Number(state.talented);
   document.getElementById("lv").value = L;
+  document.getElementById("lv").disabled = false;
   document.getElementById("levelValue").value = L;
   document.getElementById("levelValue").disabled = false;
 }
@@ -1699,6 +1965,9 @@ function renderRoute(fromSlider) {
     if (el.hidden === on) { el.hidden = !on; if (on && !fromSlider) enter(el); }
   });
   document.querySelectorAll("#appnav a").forEach((a) => { if (a.dataset.route === route.name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  const activeNav = document.querySelector('#appnav a[aria-current="page"]'), nav = document.getElementById('appnav');
+  if (nav.dataset.current !== route.name && activeNav && matchMedia('(max-width:700px)').matches && ['sim','legacy'].includes(route.name)) nav.scrollLeft = activeNav.offsetLeft - nav.offsetWidth / 2 + activeNav.offsetWidth / 2;
+  nav.dataset.current = route.name;
   document.getElementById("viewSeg").hidden = route.name !== "tiers";
   // 新手入门和游戏介绍用不到等级条和显示选项
   document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide" || route.name === "fit";
@@ -1712,12 +1981,11 @@ function renderRoute(fromSlider) {
   if (route.name === "guide") renderGuide(fromSlider);
   if (route.name === "about" && !xDone) { renderXcheck(); xDone = true; }
 }
-function setTalented(on, fromLegacy) {
-  state.talented = on; state.talent = null;
-  if (!fromLegacy) { legacyRanks.Talented = on ? TALENTED_MAX : 0; store.set("forever-legacy", legacyRanks); }
+function setTalented(rank) {
+  state.talented = Math.max(0, Math.min(5, Math.floor(Number(rank) || 0))); state.talent = null;
   save(); renderRoute(true);
   if (route.name === "sim") replaceHash(simHash(sim.cls, sim.builds[sim.cls] || []));
-  announce(on ? "Legacy Talented 已生效：9 级开始有天赋点" : "Legacy Talented 已关闭：10 级开始有天赋点");
+  announce(`天赋异禀 ${state.talented} 点：${firstLv()} 级开始获得天赋点，上限 51 点`);
 }
 
 // 天梯: 档位变化时专精卡片平滑移动（FLIP），切换专精时详情淡入
@@ -1748,7 +2016,11 @@ renderDetail = function () {
     a.onclick = () => { sim.builds[s.cls] = order; sim.cls = s.cls; sim.spec = s.spec; store.set("forever-sim", sim.builds); };
   }
   const nb = NB && NB.specs[s.k], dh = document.querySelector("#detail .dh");
-  if (nb && dh) dh.insertAdjacentHTML("afterend", `<p class="dnew">${roleChips(s)} ${esc(nb.line)}</p>`);
+  if (nb && dh) {
+    const role = isLevelView() ? roleChips(s) : `<span class="rolechip" data-r="${state.view}">${ROLE_ZH[state.view]}</span>`;
+    const line = s.spec === 'FeralCombat' && !isLevelView() ? state.view === 'tank' ? '按熊形态的坦克用途推荐加点。' : '按猎豹形态的输出用途推荐加点。' : nb.line;
+    dh.insertAdjacentHTML("afterend", `<p class="dnew">${role} ${esc(line)}</p>`);
+  }
   if (lastSel !== null && lastSel !== state.sel && motionOK()) document.getElementById("detail").animate([{ opacity: 0.2, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: EASE });
   lastSel = state.sel;
 };
@@ -1757,19 +2029,29 @@ renderDetail = function () {
 const EXPLAIN = {
   lv: (L) => `一个人从 1 级打怪升到 60 级，<b>${L} 级</b>这个时候谁升得最快、最不容易死。算上了职业本身的强弱，比如猎人有宠物帮忙扛怪。拖动上面的等级条可以换等级。`,
   tal: (L) => `只看天赋在 <b>${L} 级</b>让这个专精升级快了多少，数字是提速百分比。适合比较同一个职业的三个专精该走哪条路。`,
-  dps: () => `满级 60 级、点满 51 个天赋点以后，在队伍里<b>打伤害</b>的能力。`,
+  dps: () => `60 级、51 点天赋的<b>个人输出估算</b>。比较自身伤害收益，队友光环、治疗和保命用途在详情中单列。装备、战斗长度与完整循环尚未统一验证。`,
   tank: () => `满级在队伍里<b>当坦克</b>（站最前面让怪物打自己、保护队友）的能力。`,
   heal: () => `满级在队伍里<b>给队友加血</b>的能力。`,
 };
+function endgameEvidenceHTML(e, role) {
+  const a = e.evidence;
+  if (!a) return '';
+  const calibrated = a.calibratedTalents ? `${a.calibratedTalents}/${a.scoringTalents} 个计分天赋有模拟校准` : '当前计分天赋采用人工估值';
+  return `<section class="tier-evidence" aria-label="估算依据"><p><b>估算依据</b> · ${calibrated}</p>
+    <p>${a.lowConfidenceTalents} 个低置信估值 · ${a.extrapolatedTalents} 个所选等级含推算</p>
+    <details><summary>查看分数怎么算</summary><p>职业基线 ${a.baseline} ×（1 + 天赋${role === 'dps' ? '输出' : ROLE_ZH[role]}估值 ${e.dim}%）≈ 原始分 ${a.score}；再除以同定位平均分，得到指数 ${e.index}。</p>
+      <p>基线来自人工判断。${role === 'dps' ? '模拟校准仅覆盖部分天赋的边际收益，尚未验证相同装备、战斗时长及完整循环下的专精 DPS。' : '坦克和治疗仍采用人工估值，尚未模拟具体承伤、治疗压力和资源消耗。'}加法模型未完整处理天赋联动。</p></details>
+    ${a.utility.length ? `<details class="tier-utility"><summary>组队与保命用途 · 单独考虑</summary><ul>${a.utility.map(u => `<li><b>${esc(tn(D.talents[u.id]))}</b>（${u.selected ? '本加点已选' : '按需求替换天赋'}）：${esc(u.text)}</li>`).join('')}</ul><p>这里的队友收益和纯防御价值不加入个人输出分。</p></details>` : ''}</section>`;
+}
 const explainOpen = store.get("forever-explain", true);
 function renderExplain() {
   const box = document.getElementById("explainBody"); if (!box) return;
   const det = document.getElementById("explain");
   if (!det.dataset.bound) { det.open = explainOpen; det.dataset.bound = "1"; det.addEventListener("toggle", () => store.set("forever-explain", det.open)); }
-  const v = state.view, val = v === "tal" ? "提速百分比" : "指数：100 = 这张榜的平均水平，越高越强";
+  const v = state.view, val = v === "tal" ? "提速百分比" : "模型指数：100 = 这张榜的平均估分；110 不代表实战多打 10% 伤害";
   box.innerHTML = `<p><b>${VIEW_NAME[v]}</b>：${EXPLAIN[v](state.level)}</p>
-    <ul class="exleg">${[["S", "最强"], ["A", "很强"], ["B", "中上"], ["C", "中下"], ["D", "偏弱"]].map(([t, n]) => `<li style="--q:var(--q-${t})"><i>${t}</i>${n}</li>`).join("")}<li>专精后面的数字是${val}</li></ul>
-    <p>排名是按天赋数据估算的，不是实测。差一两档不影响正常升级和打副本，<b>选自己喜欢的职业最重要</b>。还没想好玩什么？<a href="#/start" data-quiz="1">回答三个问题帮你挑</a>。</p>`;
+    <ul class="exleg">${[["S", "估分领先"], ["A", "估分较高"], ["B", "估分中段"], ["C", "估分较低"], ["D", "估分靠后"]].map(([t, n]) => `<li style="--q:var(--q-${t})"><i>${t}</i>${n}</li>`).join("")}<li>专精后面的数字是${val}</li></ul>
+    <p>先按玩法选职业，再参考档位和加点。分数接近时优先考虑操作、组队需求和自己的喜好。<a href="#/start" data-quiz="1">回答三个问题帮你挑</a>。</p>`;
 }
 
 // ---------- 通用: 职业选择条 ----------
@@ -1830,7 +2112,7 @@ function renderSim(fromSlider) {
     return `<section id="sim-tree-${k}" class="stree${sp.i === spec.i ? " main" : ""}" data-active="${sim.tree === k}" aria-label="${sp.cn}天赋" style="--cc:${sp.color}">
       <header><img alt="" src="${ico(sp.icon)}"><div><b>${sp.cn}</b><span class="en">${sp.treeEn}</span></div><em data-tween="${split[k]}" data-from="${prev["t" + k] ?? split[k]}">${split[k]}</em>
         <button class="treereset" data-tree="${tr}"${split[k] ? "" : " disabled"}>清空此系</button></header>
-      <div class="sgrid"><svg class="arrows" viewBox="0 0 4 7" preserveAspectRatio="none" aria-hidden="true">${arrows}</svg>${cells}</div>
+      <div class="sim-tree-art" style="background-image:url('${ico(sp.art)}')"><div class="sgrid"><svg class="arrows" viewBox="0 0 4 7" preserveAspectRatio="none" aria-hidden="true">${arrows}</svg>${cells}</div></div>
     </section>`;
   };
 
@@ -1839,12 +2121,12 @@ function renderSim(fromSlider) {
         <div class="stier">${tierOf(sc.lv.idx)}</div>
         <div><div class="slabel">${L} 级升级（${spec.cn}）</div><div class="sbig"><span data-tween="${sc.lv.idx.toFixed(1)}" data-from="${prev.idx ?? sc.lv.idx.toFixed(1)}" data-dec="1">${sc.lv.idx.toFixed(1)}</span><small>指数</small></div>
         <div class="sbar"><i style="width:${Math.min(100, sc.lv.pct)}%"></i></div>
-        <div class="ssub">达到模型最佳加点的 <b data-tween="${sc.lv.pct.toFixed(0)}" data-from="${prev.pct ?? sc.lv.pct.toFixed(0)}" data-unit="%">${sc.lv.pct.toFixed(0)}%</b> · 升级提速 <b>${sc.lv.gain >= 0 ? "+" : ""}${sc.lv.gain.toFixed(1)}%</b></div></div>
+        <div class="ssub">达到模型推荐加点的 <b data-tween="${sc.lv.pct.toFixed(0)}" data-from="${prev.pct ?? sc.lv.pct.toFixed(0)}" data-unit="%">${sc.lv.pct.toFixed(0)}%</b> · 升级提速 <b>${sc.lv.gain >= 0 ? "+" : ""}${sc.lv.gain.toFixed(1)}%</b></div></div>
       </div>
       <div class="dims">${[["击杀速度", 0, "%"], ["休息减少", 1, "%"], ["生存", 2, "%"], ["便利", 3, ""]].map(([n, k, u]) => {
         const m = sc.lv.mine[k], b = sc.lv.best[k], w = Math.max(m, b, 1);
         return `<div class="dim"><span>${n}</span><div class="dbar"><i class="mine" style="width:${(m / w) * 100}%"></i><i class="best" style="left:${(b / w) * 100}%"></i></div><b>${m.toFixed(1)}${u}</b></div>`;
-      }).join("")}<p class="hint">竖线 = 模型在 ${L} 级的最佳加点</p></div>` : `<p class="note">${L} 级还没有天赋点，把等级拖到 ${firstLv()} 级以上。</p>`;
+      }).join("")}<p class="hint">竖线 = 模型在 ${L} 级的推荐加点</p></div>` : `<p class="note">${L} 级还没有天赋点，把等级拖到 ${firstLv()} 级以上。</p>`;
 
   const endCard = sc.end.map((e) => `<div class="erole" style="--q:var(--q-${tierOf(e.idx)})"><span class="et">${tierOf(e.idx)}</span><div><b>60 级${ROLE_CN[e.role]}</b><span>指数 ${e.idx.toFixed(1)} · 最佳的 ${e.pct.toFixed(0)}% · 天赋${ROLE_CN[e.role]} +${e.dim.toFixed(1)}%</span></div></div>`).join("");
 
@@ -1854,8 +2136,8 @@ function renderSim(fromSlider) {
     return runs.map((r) => { const t = D.talents[r.id]; return `<li${r.k2 >= avail ? ' class="overpt"' : ""}><span class="lv">${r.from === r.to ? r.from : r.from + "–" + r.to} 级</span><img alt="" src="${ico(t[8])}"><span>${bi(t[12], t[0])}</span><span class="r">→ ${r.rank}/${t[4]}</span></li>`; }).join("");
   })()}</ol>` : `<p class="hint">还没有加点。点左边的天赋，或者在上面「套用模型加点」。</p>`;
 
-  const bestOpts = specs.map((s) => `<option value="lv:${s.i}">${s.cn} · ${L} 级升级最佳</option>`).join("") +
-    specs.flatMap((s) => (MODEL.specRoles[cls][s.spec] || []).map((role) => `<option value="end:${role}:${s.i}">${s.cn} · 60 级${ROLE_CN[role]}最佳</option>`)).join("");
+  const bestOpts = specs.map((s) => `<option value="lv:${s.i}">${s.cn} · ${L} 级升级推荐</option>`).join("") +
+    specs.flatMap((s) => (MODEL.specRoles[cls][s.spec] || []).map((role) => `<option value="end:${role}:${s.i}">${s.cn} · 60 级${ROLE_CN[role]}推荐</option>`)).join("");
 
   el.innerHTML = `
     ${clsPicker(cls, (c) => simHash(c, sim.builds[c] || []), "选择职业")}
@@ -2068,8 +2350,8 @@ talentDialog.addEventListener("click", e => {
   el.addEventListener("change", (e) => {
     if (e.target.id !== "applyBest" || !e.target.value) return;
     const [kind, a, b] = e.target.value.split(":"), S = simState();
-    if (kind === "lv") { const s = D.specs[+a]; sim.spec = s.spec; simSet(bestLvOrder(+a, state.level), `已套用${s.cn} ${state.level} 级升级最佳加点`); }
-    else { const s = D.specs[+b]; sim.spec = s.spec; state.level = 60; save(); updateLevelBar(); simSet(orderFromRanks(S.cls, endEntry(a, +b).ranks), `已套用${s.cn} 60 级${ROLE_CN[a]}最佳加点，等级调到 60`); }
+    if (kind === "lv") { const s = D.specs[+a]; sim.spec = s.spec; simSet(bestLvOrder(+a, state.level), `已套用${s.cn} ${state.level} 级升级推荐加点`); }
+    else { const s = D.specs[+b]; sim.spec = s.spec; state.level = 60; save(); updateLevelBar(); simSet(orderFromRanks(S.cls, endEntry(a, +b).ranks), `已套用${s.cn} 60 级${ROLE_CN[a]}推荐加点，等级调到 60`); }
   });
   el.addEventListener("contextmenu", (e) => { const cell = e.target.closest(".scell"); if (!cell) return; e.preventDefault(); if (pointerType === "mouse") simRemove(cell.dataset.id); });
   el.addEventListener("pointerdown", (e) => {
@@ -2151,11 +2433,11 @@ function renderClass(fromSlider) {
         ${NB && NB.specs[s.k] ? `<p class="sline">${esc(NB.specs[s.k].line)}</p>` : ""}
         <p class="scs">${L} 级升级 ${tier} 档 · 天赋让升级提速 ${p.gain[L - 1] >= 0 ? "+" : ""}${p.gain[L - 1]}%</p>
         <div class="ets">${ends}</div>
-        <div class="jumps"><a class="jump" href="#/tiers" data-sel="${s.i}">看天梯和最佳加点</a><a class="jump primary" href="${simHash(cls, bestLvOrder(s.i, L))}" data-simcls="${cls}" data-simspec="${s.spec}" data-simi="${s.i}">在模拟器打开</a></div>
+        <div class="jumps"><a class="jump" href="#/tiers" data-sel="${s.i}">看天梯和推荐加点</a><a class="jump primary" href="${simHash(cls, bestLvOrder(s.i, L))}" data-simcls="${cls}" data-simspec="${s.spec}" data-simi="${s.i}">在模拟器打开</a></div>
       </article>`;
     }).join("")}</div>
     <section class="cblock"><h3>三个专精 1–60 级升级指数</h3>${classChart(cls, fromSlider)}</section>
-    <section class="cblock"><h3>能选${CLS[cls].cn}的种族 · 按种族天赋的升级加成排</h3><div class="racechips">${races.sort((x, y) => (fitBestForClass(cls)[y.race] || 0) - (fitBestForClass(cls)[x.race] || 0)).map((r) => `<a href="#/race/${slugOf(r.race)}" class="rchip">${crestR(r.race) ? `<img alt="" src="${crestR(r.race)}">` : img(r.icon)}<span>${esc(r.raceZh || r.race)}<small>${r.f === "Horde" ? "部落" : "联盟"}${fitBestForClass(cls)[r.race] != null ? ` · 升级 ${fitPct(fitBestForClass(cls)[r.race])}` : ""}</small></span></a>`).join("")}</div><p class="hint"><a class="jump" href="#/fit/-/${cls}">看${CLS[cls].cn}的种族搭配 →</a></p></section>
+    ${fitClassSummary(cls)}
     <section class="cblock"><h3>职业技能 · 按 ${L} 级</h3><p class="hint">学习等级和训练费是 Wowhead Forever 技能库里的 Classic 数据，每个技能都用 BlizzCon 试玩 38 级技能书核对过。</p><div id="classSkills"></div></section>`;
   renderSkills();
 }
@@ -2183,226 +2465,323 @@ function renderRace() {
     <div class="rdetail">
       <header class="chead rhead">${crestR(r.race) ? `<img class="ccrest" alt="" src="${crestR(r.race)}">` : img(r.icon)}<div><h2>${esc(r.raceZh || r.race)} <span class="en">${esc(r.race)}</span>${srcBadge(r.raceSrc === "provisional" ? "provisional" : null)}</h2><p class="lede2">${r.f === "Horde" ? "部落" : "联盟"} · 可选 ${r.classes.length} 个职业</p></div></header>
       <div class="rcols">
-        <section class="cblock"><h3>种族天赋</h3><ul class="ab rab">${r.abilities.map((a) => `<li>${img(a[2])}<div><b>${bi(a[3], a[0])}</b>${srcBadge(a[4])}<span class="txt">${esc(a[5] || a[1])}</span>${a[5] ? `<span class="orig"><span>原文</span>${esc(a[1])}</span>` : ""}</div></li>`).join("")}</ul></section>
-        <section class="cblock"><h3>种族天赋最适合的专精</h3><ol class="flist fmini">${fitTopForRace(r.race, 5).map((x, k) => `<li style="--cc:${x.s.color}"><span class="frank">${k + 1}</span><div class="fname"><b>${CLS[x.s.cls].cn}</b> ${esc(x.s.cn)}</div><span class="fval">升级 ${fitPct(x.lv)}</span></li>`).join("")}</ol><p class="hint"><a class="jump" href="#/fit/${slugOf(r.race)}">看完整的种族搭配 →</a></p></section>
+        <section class="cblock"><h3>种族天赋</h3><ul class="ab rab">${r.abilities.map((a) => `<li>${img(a[2])}<div><b>${bi(a[3], a[0])}</b>${srcBadge(a[4])}<span class="txt">${esc(a[5] || a[1])}</span>${racialTimingHTML(a[0])}${a[5] ? `<span class="orig"><span>原文</span>${esc(a[1])}</span>` : ""}</div></li>`).join("")}</ul></section>
+        ${fitRaceSummary(r.race)}
         <section class="cblock"><h3>能选的职业 · ${L} 级升级档位</h3><div class="rclasses">${classes}</div><p class="hint">点职业进入职业总览。档位是专精在当前等级的升级综合排名，没有算种族天赋的加成。</p></section>
       </div>
       ${priestSpells}
     </div>`;
 }
 
-// ===================== 种族搭配 =====================
+// ===================== 种族搭配：明确玩法、专精和比较条件 =====================
 const RF = D.raceFit;
-const fitState = { metric: store.get("forever-fit-metric", "lv"), faction: store.get("forever-fit-faction", "all"), race: null, cls: null };
 const FIT_RACES = RF ? RF.races : [];
-const raceInfo = (race) => Object.entries(SK.races).flatMap(([f, l]) => l.map((r) => ({ ...r, f }))).find((r) => r.race === race);
+const FIT_MODES = { dps: '满级输出', tank: '满级坦克', heal: '满级治疗', lv: '单人升级', pvp: 'PvP 对局' };
+const FIT_WEAPONS = { auto: '尚未确定武器', axe: '持斧', sword: '持剑', mace: '持锤', other: '其他武器' };
+const fitState = { ...RaceRecommendations.normalize(store.get('forever-fit-v2', {})), cls: 'Warrior', spec: 'Fury', race: null,
+  ...store.get('forever-fit-v2', {}) };
+const raceInfo = (race) => Object.entries(SK.races).flatMap(([f, list]) => list.map(r => ({ ...r, f }))).find(r => r.race === race);
 const raceCn = (race) => raceInfo(race)?.raceZh || race;
-function racialCn(race, en) {
-  const a = raceInfo(race)?.abilities.find((x) => x[0] === en);
-  return a?.[3] || RF.racials[en]?.[2] || en;
-}
-// 一个专精在当前口径下的数：升级提速，或 60 级（取这个专精的主要定位，野性取输出和坦克里高的）
-function fitVal(race, s) {
-  const f = RF.fit[`${race}|${s.k}`];
-  if (!f) return null;
-  if (fitState.metric === "lv") return { v: f.lv, role: null, f };
-  const roles = MODEL.specRoles[s.cls][s.spec] || [];
-  const best = roles.map((role) => [role, f.end[role] ?? 0]).sort((a, b) => b[1] - a[1])[0];
-  return { v: best[1], role: best[0], f };
-}
-const fitPct = (v) => `${v >= 0.05 ? "+" : ""}${v.toFixed(1)}%`;
-function fitParts(race, s, role, n = 3) {
-  const f = RF.fit[`${race}|${s.k}`];
-  return f.parts.map(([en, lv, end]) => [en, fitState.metric === "lv" ? lv : end[role] ?? 0]).filter((x) => x[1] >= 0.05).sort((a, b) => b[1] - a[1]).slice(0, n)
-    .map(([en, v]) => `<span class="fpart" title="${esc(RF.racials[en]?.[1] || "")}">${esc(racialCn(race, en))} <b>${fitPct(v)}</b></span>`).join("");
-}
-function renderFit() {
-  const el = document.getElementById("fitPage");
-  if (!RF) { el.innerHTML = `<p class="note">种族搭配数据还没有生成（node race_model.cjs）。</p>`; return; }
-  const races = FIT_RACES.filter((r) => fitState.faction === "all" || r.f === fitState.faction);
-  if (!fitState.race || !FIT_RACES.some((r) => slugOf(r.race) === fitState.race)) fitState.race = slugOf(races[0].race);
-  if (!fitState.cls || !CT[fitState.cls]) fitState.cls = CLS_ORDER[0];
-  const race = FIT_RACES.find((r) => slugOf(r.race) === fitState.race);
-  const metricName = fitState.metric === "lv" ? "升级提速" : "60 级团队价值";
-  // 矩阵：每格是这个职业里种族加成最大的专精
-  const cellOf = (r, cls) => {
-    if (!r.classes.includes(cls)) return null;
-    return specsOf(cls).map((s) => ({ s, ...fitVal(r.race, s) })).sort((a, b) => b.v - a.v)[0];
-  };
-  const cells = races.flatMap((r) => CLS_ORDER.map((c) => cellOf(r, c)).filter(Boolean));
-  const max = Math.max(...cells.map((c) => c.v), 0.1);
-  const matrix = `
-    <div class="fit-wrap"><table class="fitm">
-      <thead><tr><th scope="col"><span class="sr">种族</span></th>${CLS_ORDER.map((c) => `<th scope="col" style="--cc:${CLS[c].color}">${crestC(c) ? `<img alt="" src="${crestC(c)}">` : ""}<span>${CLS[c].cn}</span></th>`).join("")}</tr></thead>
-      <tbody>${races.map((r) => `<tr><th scope="row"><button type="button" data-fitrace="${slugOf(r.race)}"${slugOf(r.race) === fitState.race ? ' aria-pressed="true"' : ""}>${crestR(r.race) ? `<img alt="" src="${crestR(r.race)}">` : ""}<span>${esc(raceCn(r.race))}<small>${r.f === "Horde" ? "部落" : "联盟"}</small></span></button></th>${CLS_ORDER.map((c) => {
-        const x = cellOf(r, c);
-        if (!x) return `<td class="na" aria-label="不能选"><span aria-hidden="true">—</span></td>`;
-        const hot = Math.max(0, x.v / max);
-        return `<td><button type="button" class="fcell" data-fitrace="${slugOf(r.race)}" data-fitcls="${c}" style="--h:${(hot * 100).toFixed(0)}%" aria-label="${esc(raceCn(r.race))}${CLS[c].cn}，最佳${x.s.cn}${metricName}${fitPct(x.v)}"${slugOf(r.race) === fitState.race && c === fitState.cls ? ' aria-pressed="true"' : ""}><b>${fitPct(x.v)}</b><small>${esc(x.s.cn)}</small></button></td>`;
-      }).join("")}</tr>`).join("")}</tbody>
-    </table></div>`;
-  // 按种族挑职业
-  const byRace = race.classes.flatMap((c) => specsOf(c)).map((s) => ({ s, ...fitVal(race.race, s) })).sort((a, b) => b.v - a.v);
-  const rmax = Math.max(...byRace.map((x) => x.v), 0.1);
-  const raceList = byRace.map((x, k) => `
-    <li style="--cc:${x.s.color}">
-      <span class="frank">${k + 1}</span>
-      <div class="fname"><a href="#/class/${x.s.cls}"><b>${CLS[x.s.cls].cn}</b> ${esc(x.s.cn)}</a>${x.role ? `<small>${ROLE_CN[x.role]}</small>` : ""}</div>
-      <div class="fbar"><i style="width:${Math.max(2, (x.v / rmax) * 100).toFixed(0)}%"></i></div>
-      <span class="fval">${fitPct(x.v)}</span>
-      <div class="fparts">${fitParts(race.race, x.s, x.role)}</div>
-    </li>`).join("");
-  // 按职业挑种族
-  const cls = fitState.cls;
-  const cSpecs = specsOf(cls);
-  const byCls = FIT_RACES.filter((r) => r.classes.includes(cls)).map((r) => {
-    const per = cSpecs.map((s) => ({ s, ...fitVal(r.race, s) }));
-    return { r, per, best: per.slice().sort((a, b) => b.v - a.v)[0] };
-  }).sort((a, b) => b.best.v - a.best.v);
-  const clsTable = `
-    <div class="fit-wrap"><table class="fitc">
-      <thead><tr><th scope="col">种族</th>${cSpecs.map((s) => `<th scope="col">${esc(s.cn)}</th>`).join("")}<th scope="col">加成主要来自</th></tr></thead>
-      <tbody>${byCls.map(({ r, per, best }, k) => {
-        const colMax = (s) => Math.max(...byCls.map((x) => x.per.find((p) => p.s.k === s.k).v));
-        return `<tr><th scope="row"><span class="frank">${k + 1}</span>${crestR(r.race) ? `<img alt="" src="${crestR(r.race)}">` : ""}<a href="#/race/${slugOf(r.race)}">${esc(raceCn(r.race))}</a><small>${r.f === "Horde" ? "部落" : "联盟"}</small></th>${per.map((p) => `<td class="${p.v === colMax(p.s) && p.v > 0 ? "top" : ""}">${fitPct(p.v)}${p.role && (MODEL.specRoles[cls][p.s.spec] || []).length > 1 ? `<small>${ROLE_CN[p.role]}</small>` : ""}</td>`).join("")}<td class="fparts">${fitParts(r.race, best.s, best.role, 2)}</td></tr>`;
-      }).join("")}</tbody>
-    </table></div>`;
-  const refRaces = FIT_RACES.filter((r) => slugOf(r.race) === fitState.race);
-  el.innerHTML = `
-    <header class="fithead">
-      <h2>种族 × 职业搭配</h2>
-      <p class="lede2">同一个专精，换个种族能快多少、强多少？把每个种族天赋的被动和主动技能按天赋估值的同一把尺子折算，套进升级和 60 级公式算出来。</p>
-      <p class="warn">数字普遍不大：升级提速 1–5%，60 级团队价值 0–3%。职业和专精之间的差距比这大得多，种族可以放心按喜好和阵营挑。</p>
-      <div class="fitctl">
-        <div class="seg" role="group" aria-label="口径">${[["lv", "升级提速"], ["end", "60 级团队价值"]].map(([k, n]) => `<button data-fitmetric="${k}" aria-pressed="${fitState.metric === k}">${n}</button>`).join("")}</div>
-        <div class="seg" role="group" aria-label="阵营">${[["all", "全部"], ["Horde", "部落"], ["Alliance", "联盟"]].map(([k, n]) => `<button data-fitfaction="${k}" aria-pressed="${fitState.faction === k}">${n}</button>`).join("")}</div>
-      </div>
-    </header>
-    <section class="cblock">
-      <h3>一张表看全部 · ${metricName}</h3>
-      <p class="hint">每格是这个种族玩这个职业时，加成最大的那个专精。颜色越深加成越大；点种族或格子，下面会切过去。</p>
-      ${matrix}
-    </section>
-    <div class="fitcols">
-      <section class="cblock fitpanel" id="fitRace">
-        <h3>${esc(raceCn(race.race))}最适合什么职业</h3>
-        <ol class="flist">${raceList}</ol>
-      </section>
-      <section class="cblock fitpanel" id="fitCls">
-        <h3>${CLS[cls].cn}最适合什么种族</h3>
-        <div class="fitclspick">${CLS_ORDER.map((c) => `<button type="button" data-fitcls="${c}" aria-pressed="${c === cls}" style="--cc:${CLS[c].color}">${crestC(c) ? `<img alt="" src="${crestC(c)}">` : ""}<span>${CLS[c].cn}</span></button>`).join("")}</div>
-        ${clsTable}
-        ${fitRecs(cls)}
-      </section>
-    </div>
-    <details class="card fitref">
-      <summary>每个种族天赋怎么算的</summary>
-      <ul class="fitassume">${RF.assumptions.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
-      <div class="fitracials">${FIT_RACES.map((r) => `<div><h4>${esc(raceCn(r.race))}</h4><ul>${(raceInfo(r.race)?.abilities || []).map((a) => { const x = RF.racials[a[0]]; return `<li><b>${esc(a[3] || a[0])}</b><span class="gst" data-st="${{ high: "confirmed", med: "reported", low: "unverified" }[x?.[0]] || "unverified"}">${{ high: "数值明确", med: "有假设", low: "多为假设" }[x?.[0]] || "未估值"}</span><span>${esc(x?.[1] || "")}</span></li>`; }).join("")}</ul></div>`).join("")}</div>
-    </details>`;
-}
-// 其他网站怎么推荐（guide/race_recs.json），和本站满级首选一致的种族标出来
-function fitRecs(cls) {
-  const RR = D.raceRecs, list = RR && RR.classes[cls];
-  if (!list) return "";
-  const pick = { Horde: fitClassPick(cls, "Horde"), Alliance: fitClassPick(cls, "Alliance") };
-  const mine = { Horde: pick.Horde?.end.r.race, Alliance: pick.Alliance?.end.r.race };
-  const anyRole = (f) => new Set(Object.values(pick[f]?.byRole || {}).map((x) => x.r.race));
-  const names = (arr, f) => arr.length ? arr.map((r, k) => `<span class="${anyRole(f).has(r) ? "same" : ""}">${esc(raceCn(r))}</span>`).join(" > ") : `<span class="none">没写</span>`;
-  return `<div class="fitrecs"><h4>其他网站怎么推荐</h4>
-    <p class="hint">只收引用了无限新种族天赋的攻略，${esc(RR.checked)} 查的。<b class="same">金色</b>是和本站满级首选一致的种族（${esc(ROLE_CN[classMainRole(cls)])}：部落${esc(raceCn(mine.Horde || "-"))}、联盟${esc(raceCn(mine.Alliance || "-"))}${Object.keys(pick.Horde?.byRole || pick.Alliance?.byRole || {}).filter((r) => r !== classMainRole(cls)).map((r) => `；${ROLE_CN[r]}：部落${esc(raceCn(pick.Horde?.byRole[r]?.r.race || "-"))}、联盟${esc(raceCn(pick.Alliance?.byRole[r]?.r.race || "-"))}`).join("")}）。各站互相也有分歧，而且都基于 BlizzCon 试玩数值。</p>
-    <ul>${list.map((x) => { const s = RR.sources[x.src]; return `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a><span>部落 ${names(x.Horde, "Horde")}</span><span>联盟 ${names(x.Alliance, "Alliance")}</span><small>${esc(x.note)}</small></li>`; }).join("")}</ul></div>`;
-}
-document.getElementById("fitPage").addEventListener("click", (e) => {
-  const b = e.target.closest("button[data-fitmetric],button[data-fitfaction],button[data-fitrace],button[data-fitcls]");
-  if (!b) return;
-  const d = b.dataset;
-  if (d.fitmetric) { fitState.metric = d.fitmetric; store.set("forever-fit-metric", d.fitmetric); }
-  if (d.fitfaction) { fitState.faction = d.fitfaction; store.set("forever-fit-faction", d.fitfaction); }
-  if (d.fitrace) fitState.race = d.fitrace;
-  if (d.fitcls) fitState.cls = d.fitcls;
-  const y = window.scrollY;
-  renderFit();
-  replaceHash(`#/fit/${fitState.race}/${fitState.cls}`);
-  window.scrollTo(0, y);
-  if (b.classList.contains("fcell") && matchMedia("(max-width:980px)").matches) document.getElementById("fitRace")?.scrollIntoView({ behavior: motionOK() ? "smooth" : "auto" });
-  const key = Object.entries(d).map(([k, v]) => `[data-${k.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase())}="${v}"]`).join("");
-  document.querySelector(`#fitPage button${key}`)?.focus({ preventScroll: true });
-});
-// 种族页、职业页用的小结
-// 职业在某阵营里：满级团队价值最高的种族，以及升级最快的种族（取三个专精里最高的）
-// 职业的主要定位：专精里最多的定位，一样多时算输出
+function racialCn(race, en) { return raceInfo(race)?.abilities.find(x => x[0] === en)?.[3] || RF.racials[en]?.[2] || en; }
+const fitPct = (v) => `+${v.toFixed(1)}%`;
+const fitUnit = (mode) => mode === 'lv' || mode === 'dps' ? '%' : ' 分';
+function fitNumber(x) { return x.v == null ? '按对局选择' : x.missing.length && x.v === 0 ? '收益待量化' : `${x.v.toFixed(1)}${fitUnit(x.context.mode)}${x.missing.length ? '（已计部分）' : ''}`; }
+function fitRange(x) { return x.missing.length && x.v === 0 ? '未量化' : x.range ? `${x.range[0].toFixed(1)}–${x.range[1].toFixed(1)}${fitUnit(x.context.mode)}${x.missing.length ? '（仅已计部分）' : ''}` : ''; }
 function classMainRole(cls) {
   const n = {};
   for (const s of specsOf(cls)) for (const r of MODEL.specRoles[cls][s.spec] || []) n[r] = (n[r] || 0) + 1;
-  return Object.entries(n).sort((a, b) => b[1] - a[1] || (a[0] === "dps" ? -1 : b[0] === "dps" ? 1 : 0))[0][0];
+  return Object.entries(n).sort((a, b) => b[1] - a[1] || (a[0] === 'dps' ? -1 : b[0] === 'dps' ? 1 : 0))[0][0];
 }
-// 职业在某阵营里：每个定位满级最合适的种族（end 是主要定位），以及升级最快的种族
-function fitClassPick(cls, f) {
-  if (!RF) return null;
-  const rs = FIT_RACES.filter((r) => r.f === f && r.classes.includes(cls));
-  if (!rs.length) return null;
-  const roles = [...new Set(specsOf(cls).flatMap((s) => MODEL.specRoles[cls][s.spec] || []))];
-  const byRole = Object.fromEntries(roles.map((role) => [role, rs.map((r) => ({ r, v: Math.max(...specsOf(cls).filter((s) => (MODEL.specRoles[cls][s.spec] || []).includes(role)).map((s) => RF.fit[`${r.race}|${s.k}`].end[role] ?? 0)) })).sort((a, b) => b.v - a.v)[0]]));
-  const lv = rs.map((r) => ({ r, v: Math.max(...specsOf(cls).map((s) => RF.fit[`${r.race}|${s.k}`].lv)) })).sort((a, b) => b.v - a.v)[0];
-  const main = classMainRole(cls);
-  return { end: byRole[main], main, byRole, lv, only: rs.length === 1 };
+function fitSpecs(cls, mode) { return specsOf(cls).filter(s => ['lv', 'pvp'].includes(mode) || (MODEL.specRoles[cls][s.spec] || []).includes(mode)); }
+function fitDefaultSpec(cls, mode) {
+  const list = fitSpecs(cls, mode);
+  return list.find(s => cls === 'Warrior' && s.spec === 'Fury') || list[0];
 }
-// 某专精在部落、联盟里各自加成最大的种族；role 为空时用升级口径
+function fitNormalize() {
+  Object.assign(fitState, RaceRecommendations.normalize(fitState));
+  if (!CT[fitState.cls]) fitState.cls = 'Warrior';
+  if (!fitSpecs(fitState.cls, fitState.mode).length) fitState.mode = classMainRole(fitState.cls);
+  if (!fitSpecs(fitState.cls, fitState.mode).some(s => s.spec === fitState.spec)) fitState.spec = fitDefaultSpec(fitState.cls, fitState.mode).spec;
+  const p = RF?.profiles[fitState.cls + ':' + fitState.spec];
+  if (!['auto', 'other'].includes(fitState.weapon) && !p?.wep[fitState.weapon]) fitState.weapon = 'auto';
+}
+function fitHash(race, s, options = {}) {
+  const c = RaceRecommendations.normalize(options);
+  return `#/fit/${race ? slugOf(race) : '-'}/${s.cls}/${s.spec}/${c.mode}/${c.faction}/${c.weapon}/${c.duration}/${c.hit}/${c.target}/${c.recovery}`;
+}
+function fitReadRoute(p) {
+  if (p[1]) fitState.race = p[1];
+  const linkedRace = FIT_RACES.find(r => slugOf(r.race) === p[1]);
+  if (linkedRace && !p[5]) fitState.faction = linkedRace.f;
+  if (CT[p[2]]) fitState.cls = p[2];
+  if (p[3]) fitState.spec = p[3];
+  if (p[4]) Object.assign(fitState, RaceRecommendations.normalize({ mode: p[4], faction: p[5], weapon: p[6], duration: p[7], hit: p[8], target: p[9], recovery: p[10] }));
+  fitNormalize();
+}
+function fitRows(s, options) { return RF ? RaceRecommendations.rank(RF, s.k, options).map(x => ({ ...x, s })) : []; }
+function fitWhy(x) {
+  const c = x.context, name = x.race;
+  const p = RF.profiles[x.s.k];
+  const weaponNote = type => c.weapon === 'auto' ? '实际持' + ({ axe: '斧', sword: '剑', mace: '锤' }[type]) + '时另有暴击收益。' : c.weapon === type ? '当前武器可触发种族暴击加成。' : '当前武器不触发种族武器专精。';
+  const reasons = {
+    Orc: c.mode === 'pvp' ? '坚韧缩短昏迷，血性狂暴提供主动爆发；粉碎诅咒针对诅咒和魔法压力。' : c.mode === 'tank' ? '血性狂暴用于仇恨窗口；粉碎诅咒适合有诅咒或魔法压力的战斗。' : `血性狂暴提供${p.ap ? '攻强' : '法强'}爆发，可安排在关键技能窗口；${p.wep.axe ? weaponNote('axe') : '收益取决于装备和法术构成。'}`,
+    Tauren: c.mode === 'tank' ? '生命上限与战争践踏提供容错；命中收益取决于装备缺口。' : c.mode === 'lv' ? '赶路、血量和战争践踏帮助连续练级；奔跑收益尚有假设。' : '血量和战争践踏偏生存与控制；命中已无收益时，输出加分取消。',
+    Troll: c.mode === 'lv' ? '快速再生减少恢复停顿；收益取决于实际缺血和恢复条件。' : '狂暴适合输出或施法窗口；野兽杀手只在野兽目标生效。',
+    Undead: x.s.cls === 'Warrior' ? '食尸适合需要恢复的升级过程；亡灵意志与战士部分解控重叠，墓穴之触伤害待验证。' : '亡灵意志针对恐惧、魅惑和睡眠；食尸用于恢复，墓穴之触伤害待验证。',
+    Human: c.mode === 'pvp' ? '求生意志提供解晕，感知针对潜行。' : `${p.wep.sword ? weaponNote('sword') : ''}${['caster', 'healer'].includes(p.kind) ? '精神对回蓝及部分治疗构筑有帮助。' : '求生意志可应对昏迷控制。'}`,
+    'Night Elf': c.mode === 'tank' ? '躲闪提供物理防御；艾露恩之光可辅助仇恨窗口。' : '艾露恩之光提供主动暴击窗口，移动与影遁提供额外便利；需留意暴击饱和。',
+    Dwarf: c.mode === 'pvp' || c.mode === 'tank' ? '石像形态针对物理压力与流血、中毒、疾病；持锤和野兽目标另有条件收益。' : '持锤与野兽目标提供条件收益，石像形态提供防御工具。',
+    Gnome: c.mode === 'pvp' ? '逃命专家帮助摆脱定身、减速；灵光乍现适合关键技能窗口。' : '灵光乍现增强接下来的三个技能；资源上限提供蓄池空间，收益仍需验证。',
+    'Skyborne (Windshaper)': '急速提供被动收益，跑速帮助移动；元素增伤需要元素目标。',
+    'Skyborne (High Order)': '急速提供被动收益；魔网恢复依赖使用条件，元素增伤需要元素目标。'
+  };
+  if (c.mode === 'heal') {
+    const healing = {
+      Tauren: '血量和战争践踏提供自保，适合需要容错的治疗场景。',
+      Troll: '狂暴辅助施法窗口，快速再生用于自保；有效治疗仍受法力与过量治疗影响。',
+      Dwarf: '石像形态辅助自保；持锤暴击的收益取决于治疗构筑。',
+      'Night Elf': '艾露恩之光提供治疗暴击窗口；有效收益取决于过量治疗与法力。',
+      'Skyborne (High Order)': '施法急速提供被动收益，魔网恢复取决于使用条件。',
+      'Skyborne (Windshaper)': '施法急速提供被动收益，移动能力方便处理走位。'
+    };
+    if (healing[name]) return healing[name];
+  }
+  if (name === 'Dwarf' && !p.wep.mace && c.mode !== 'pvp') return '野兽目标提供条件增伤，石像形态提供防御工具。';
+  return reasons[name] || '结合种族技能与当前玩法选择。';
+}
+function fitConditions(c) {
+  return `${FIT_MODES[c.mode]} · ${FIT_WEAPONS[c.weapon]}${['lv', 'pvp'].includes(c.mode) ? '' : ` · ${c.duration === 15 ? '开场 15 秒' : c.duration + ' 秒战斗'}`}`;
+}
+function fitRecs(cls) {
+  const RR = D.raceRecs, list = RR?.classes[cls]; if (!list) return '';
+  return `<details class="card fitref"><summary>外部攻略的候选与理由</summary><p class="hint">攻略观点，${esc(RR.checked)} 整理。候选列表不表示严格名次，也未必适用于当前专精与玩法。</p><ul class="fit-sources">${list.map(x => {
+    const source = RR.sources[x.src];
+    const names = ['Horde', 'Alliance'].filter(f => fitState.faction === 'all' || f === fitState.faction).map(f => `${f === 'Horde' ? '部落' : '联盟'}：${x[f].map(raceCn).map(esc).join('、') || '未列出'}`).join('；');
+    return `<li><a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}</a><p>${names}</p><p class="hint">${esc(x.note)}</p></li>`;
+  }).join('')}</ul></details>`;
+}
+function fitSelect(label, key, items, selected) {
+  return `<label class="fit-field"><span>${label}</span><select data-fitfield="${key}">${items.map(([v, name]) => `<option value="${esc(String(v))}"${String(selected) === String(v) ? ' selected' : ''}>${esc(name)}</option>`).join('')}</select></label>`;
+}
+function fitOverview(c, selectedSpec) {
+  const columns = CLS_ORDER.filter(cls => fitSpecs(cls, c.mode).length).map(cls => {
+    const s = cls === selectedSpec.cls ? selectedSpec : fitDefaultSpec(cls, c.mode);
+    const weapon = ['auto', 'other'].includes(c.weapon) || RF.profiles[s.k].wep[c.weapon] ? c.weapon : 'other';
+    return { s, rows: fitRows(s, { ...c, weapon }) };
+  });
+  const races = FIT_RACES.filter(r => c.faction === 'all' || r.f === c.faction);
+  return `<details class="card fitref"><summary>${FIT_MODES[c.mode]} · 职业与种族总览</summary><p class="hint">每列注明比较专精，候选只在该列内比较。点击格子查看该组合；所选武器不适用于该职业时，按其他武器处理。</p>
+    <div class="fit-wrap"><table class="fitm"><thead><tr><th scope="col">种族</th>${columns.map(({ s }) => `<th scope="col">${CLS[s.cls].cn}<small>${s.cn}</small></th>`).join('')}</tr></thead>
+    <tbody>${races.map(r => `<tr><th scope="row">${esc(raceCn(r.race))}</th>${columns.map(({ s, rows }) => { const x = rows.find(x => x.race === r.race); return x ? `<td><a class="fit-overview-link" href="${fitHash(r.race, s, x.context)}">${x.band}</a></td>` : '<td class="na">不可选</td>'; }).join('')}</tr>`).join('')}</tbody></table></div></details>`;
+}
+function renderFit() {
+  const el = document.getElementById('fitPage');
+  if (!RF?.profiles) { el.innerHTML = '<p class="note">种族数据需要重新生成。</p>'; return; }
+  fitNormalize();
+  const s = fitSpecs(fitState.cls, fitState.mode).find(x => x.spec === fitState.spec), c = RaceRecommendations.normalize(fitState);
+  const rows = fitRows(s, c);
+  if (!rows.some(x => slugOf(x.race) === fitState.race)) fitState.race = rows[0] ? slugOf(rows[0].race) : null;
+  const selected = rows.find(x => slugOf(x.race) === fitState.race);
+  const available = Object.entries(FIT_MODES).filter(([mode]) => fitSpecs(s.cls, mode).length);
+  const weapons = Object.entries(FIT_WEAPONS).filter(([weapon]) => ['auto', 'other'].includes(weapon) || RF.profiles[s.k].wep[weapon]);
+  const parts = selected?.parts.filter(p => p.v > 0).sort((a, b) => b.v - a.v) || [];
+  const detail = selected ? `<section class="cblock fit-detail" id="fitRace"><h3>${esc(raceCn(selected.race))} · ${esc(s.cn)}${CLS[s.cls].cn}</h3><p>${fitWhy(selected)}</p>
+    ${c.mode !== 'pvp' ? `<p class="fit-estimate">${fitNumber(selected)} <span>参数敏感性范围 ${fitRange(selected)}</span></p>
+    <ul class="fit-parts">${parts.map(p => `<li><b>${esc(racialCn(selected.race, p.name))}</b><span>${p.v.toFixed(2)}${fitUnit(c.mode)}</span><p>${esc(RF.racials[p.name]?.[1] || '')}</p></li>`).join('') || '<li>当前已建模项目没有可量化加成。</li>'}</ul>` : ''}
+    ${c.mode === 'lv' ? '<p class="hint">各项是单独加入时的收益；恢复与生存会相互影响，合计不直接相加。</p>' : ''}
+    ${selected.missing.length ? `<p class="note">${selected.missing.map(x => esc(x.reason)).join(' ')}</p>` : ''}
+    <details><summary>完整种族技能与适用条件</summary><ul class="fit-traits">${raceInfo(selected.race).abilities.map(a => `<li><b>${esc(a[3] || a[0])}</b> ${esc(a[5] || a[1])}${racialTimingHTML(a[0])}</li>`).join('')}</ul></details>
+    <a class="jump" href="#/race/${slugOf(selected.race)}">查看种族资料 →</a></section>` : '';
+  el.innerHTML = `<header class="fithead"><h2>职业 × 种族推荐</h2><p class="lede2">先选你要玩的专精与玩法，再看种族能帮上什么忙。</p></header>
+    <section class="card fit-controls" aria-label="推荐条件">
+      <div class="fit-fields">${fitSelect('职业', 'cls', CLS_ORDER.map(cls => [cls, CLS[cls].cn]), s.cls)}${fitSelect('玩法', 'mode', available, c.mode)}${fitSelect('专精', 'spec', fitSpecs(s.cls, c.mode).map(sp => [sp.spec, sp.cn + (sp.spec === 'FeralCombat' && c.mode === 'tank' ? ' · 熊' : sp.spec === 'FeralCombat' && c.mode === 'dps' ? ' · 猫' : '')]), s.spec)}${fitSelect('阵营', 'faction', [['all', '全部阵营'], ['Horde', '部落'], ['Alliance', '联盟']], c.faction)}</div>
+      <details class="fit-options"><summary>武器与战斗条件 · ${FIT_WEAPONS[c.weapon]}</summary><div class="fit-fields">
+      ${fitSelect('武器条件', 'weapon', weapons, c.weapon)}
+      ${!['lv', 'pvp'].includes(c.mode) ? fitSelect('战斗长度', 'duration', [[15, '开场 15 秒'], [60, '60 秒'], [180, '180 秒'], [300, '300 秒']], c.duration) + fitSelect('额外命中', 'hit', [['needed', '还有收益'], ['capped', '已无收益']], c.hit) + fitSelect('目标类型', 'target', [['other', '其他目标'], ['beast', '野兽'], ['elemental', '元素']], c.target) : ''}
+      ${c.mode === 'lv' ? fitSelect('额外回血有效比例', 'recovery', [[0.25, '25% · 自疗/补给充足'], [0.5, '50% · 一般恢复需求'], [1, '100% · 经常缺血']], c.recovery) : ''}</div>
+      <p class="hint">${c.mode === 'lv' ? '按 10–60 级六个等级平均估算。已有自疗、食物和补给会减少额外回血价值。' : c.mode === 'pvp' ? '按对手的控制和伤害类型选择；当前没有可靠的统一 PvP 分数。' : '主动技能按开场可用、冷却转好即用估算。冷却、攻击构成和装备影响仍有假设；额外命中“已无收益”指包括白字在内均不再受益。'}</p></details>
+    </section>
+    <section class="cblock" id="fitCls"><h3>${esc(s.cn)}${CLS[s.cls].cn} · ${FIT_MODES[c.mode]}${c.faction === 'all' ? '' : ' · ' + (c.faction === 'Horde' ? '部落' : '联盟')}</h3>
+      <p class="hint">${c.mode === 'pvp' ? '以下按种族列出对局工具，不设统一强弱名次。' : '按当前条件的模型中心值展示。范围重叠的种族同列候选，顺序不代表已证实的强弱；种族收益不等于职业整体排名。'} ${esc(fitConditions(c))}</p>
+      <div class="fit-candidates" aria-live="polite">${rows.map((x, i) => `${c.mode !== 'pvp' && x.missing.length && (i === 0 || !rows[i - 1].missing.length) ? '<p class="fit-pending">以下候选有机制待量化，单独列出，不参与完整收益比较。</p>' : ''}<article class="fit-candidate${x.race === selected?.race ? ' selected' : ''}" data-race="${esc(x.race)}">
+        <div class="fit-candidate-head">${crestR(x.race) ? `<img src="${crestR(x.race)}" alt="">` : ''}<div><h4>${esc(raceCn(x.race))}</h4><span>${x.r.f === 'Horde' ? '部落' : '联盟'} · ${x.band}</span></div><b class="fit-value">${fitNumber(x)}</b></div>
+        <p>${fitWhy(x)}</p>${x.range ? `<p class="hint">敏感性范围 ${fitRange(x)}${x.missing.length ? ' · 另有收益待量化' : ''}</p>` : ''}
+        <button type="button" data-fitrace="${slugOf(x.race)}" aria-pressed="${x.race === selected?.race}">查看${esc(raceCn(x.race))}的${c.mode === 'pvp' ? '技能' : '计算依据'}</button></article>`).join('') || '<p class="note">当前阵营无法选择这个职业。切换阵营查看候选。</p>'}</div>
+    </section>${detail}
+    ${fitOverview(c, s)}${fitRecs(s.cls)}
+    <details class="card fitref"><summary>审核方法与数据来源 · ${RF.audit.reviewed}</summary><ul class="fitassume">${RF.assumptions.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+    <p class="hint">坦克分合并生存与仇恨，治疗分合并治疗与续航，只用于相同定位内参考。范围是人为参数敏感性检查，不是游戏实测区间。</p>
+    <p class="hint">${RF.audit.simulator.eligibleForRaceCalibration ? '社区模拟器需按具体机制审核后使用。' : '社区模拟器的种族实现存在缺失或冲突，本页未用其结果校准种族名次。'}</p>
+    <ul>${RF.audit.sources.filter(x => x.url).map(x => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a></li>`).join('')}</ul></details>`;
+}
+function fitUpdate(key, value) {
+  const optionsOpen = document.querySelector('.fit-options')?.open;
+  fitState[key] = value;
+  fitNormalize();
+  store.set('forever-fit-v2', fitState);
+  renderFit();
+  if (optionsOpen && document.querySelector('.fit-options')) document.querySelector('.fit-options').open = true;
+  const s = fitSpecs(fitState.cls, fitState.mode).find(x => x.spec === fitState.spec);
+  const race = FIT_RACES.find(r => slugOf(r.race) === fitState.race)?.race;
+  replaceHash(fitHash(race, s, fitState));
+}
+document.getElementById('fitPage').addEventListener('change', e => {
+  const key = e.target.dataset.fitfield; if (!key) return;
+  fitUpdate(key, e.target.value);
+  document.querySelector(`#fitPage [data-fitfield="${key}"]`)?.focus({ preventScroll: true });
+});
+document.getElementById('fitPage').addEventListener('click', e => {
+  const b = e.target.closest('button[data-fitrace]'); if (!b) return;
+  fitUpdate('race', b.dataset.fitrace);
+  document.querySelector(`#fitPage [data-fitrace="${b.dataset.fitrace}"]`)?.focus({ preventScroll: true });
+  document.getElementById('fitRace')?.scrollIntoView({ behavior: motionOK() ? 'smooth' : 'auto', block: 'start' });
+});
+function fitClassPick(cls, faction) {
+  if (!RF?.profiles) return null;
+  const roles = [...new Set(specsOf(cls).flatMap(s => MODEL.specRoles[cls][s.spec] || []))];
+  const byRole = Object.fromEntries(roles.map(mode => [mode, fitRows(fitDefaultSpec(cls, mode), { mode, faction })[0]]));
+  const main = classMainRole(cls), end = byRole[main]; if (!end) return null;
+  const lv = fitRows(fitDefaultSpec(cls, 'lv'), { mode: 'lv', faction })[0];
+  return { end, main, byRole, lv, only: FIT_RACES.filter(r => r.f === faction && r.classes.includes(cls)).length === 1 };
+}
 function fitBestRaces(s, role) {
-  if (!RF) return [];
-  return ["Horde", "Alliance"].map((f) => FIT_RACES.filter((r) => r.f === f && r.classes.includes(s.cls)).map((r) => { const x = RF.fit[`${r.race}|${s.k}`]; return { r, v: role ? x.end[role] ?? 0 : x.lv }; }).sort((a, b) => b.v - a.v)[0]).filter(Boolean);
+  return ['Horde', 'Alliance'].flatMap(faction => fitRows(s, { mode: role || 'lv', faction }).slice(0, 2));
 }
-const fitRaceChip = (x, cls) => `<a class="frace" href="#/fit/${slugOf(x.r.race)}/${cls}">${crestR(x.r.race) ? `<img alt="" src="${crestR(x.r.race)}">` : ""}<span>${esc(raceCn(x.r.race))}<small>${x.r.f === "Horde" ? "部落" : "联盟"} · ${fitPct(x.v)}</small></span></a>`;
-function fitTopForRace(race, n) {
-  if (!RF) return [];
-  const r = FIT_RACES.find((x) => x.race === race); if (!r) return [];
-  return r.classes.flatMap((c) => specsOf(c)).map((s) => ({ s, lv: RF.fit[`${race}|${s.k}`].lv })).sort((a, b) => b.lv - a.lv).slice(0, n);
+function fitRaceChip(x, cls) {
+  const s = x.s || fitDefaultSpec(cls, x.context?.mode || classMainRole(cls));
+  return `<a class="frace" href="${fitHash(x.r.race, s, x.context)}">${crestR(x.r.race) ? `<img alt="" src="${crestR(x.r.race)}">` : ''}<span>${esc(raceCn(x.r.race))}<small>${esc(s.cn)} · ${FIT_MODES[x.context.mode]} · ${x.band}</small></span></a>`;
 }
-function fitBestForClass(cls) {
-  if (!RF) return {};
-  return Object.fromEntries(FIT_RACES.filter((r) => r.classes.includes(cls)).map((r) => [r.race, Math.max(...specsOf(cls).map((s) => RF.fit[`${r.race}|${s.k}`].lv))]));
+function fitClassSummary(cls) {
+  const mode = fitState.cls === cls && fitSpecs(cls, fitState.mode).length ? fitState.mode : classMainRole(cls);
+  const s = fitSpecs(cls, mode).find(x => fitState.cls === cls && x.spec === fitState.spec) || fitDefaultSpec(cls, mode);
+  const c = RaceRecommendations.normalize({ ...(fitState.cls === cls ? fitState : {}), mode });
+  const rows = fitRows(s, c);
+  return `<section class="cblock"><h3>${esc(s.cn)}的种族候选 · ${FIT_MODES[mode]}</h3><p class="hint">${esc(fitConditions(c))}；按当前专精与玩法比较。点击进入可切换条件。</p><div class="racechips">${rows.map(x => fitRaceChip(x, cls)).join('') || '当前阵营没有可选种族。'}</div><p><a class="jump" href="${fitHash(null, s, c)}">调整${CLS[cls].cn}的推荐条件 →</a></p></section>`;
+}
+function fitRaceSummary(race) {
+  const r = FIT_RACES.find(x => x.race === race); if (!r) return '';
+  const items = r.classes.map(cls => {
+    const mode = classMainRole(cls), s = fitDefaultSpec(cls, mode), rows = fitRows(s, { mode, faction: r.f });
+    const x = rows.find(row => row.race === race);
+    return `<li><a href="${fitHash(race, s, x.context)}"><b>${CLS[cls].cn} · ${s.cn}</b></a><span>${FIT_MODES[mode]} · ${x.band}</span></li>`;
+  });
+  return `<section class="cblock"><h3>按职业查看种族搭配</h3><p class="hint">每个职业列出一个默认专精与定位，点击后可切换。不按跨职业百分比判断职业强弱。</p><ul class="fit-race-links">${items.join('')}</ul></section>`;
 }
 
+
 // ===================== Legacy =====================
-function renderLegacy() {
-  const lg = SK.legacy, el = document.getElementById("legacyPage");
-  const spent = lg.trees.flatMap((t) => t.perks).reduce((a, p) => a + (legacyRanks[p.name] || 0), 0);
-  const maxAll = lg.trees.flatMap((t) => t.perks).reduce((a, p) => a + p.max, 0);
-  el.innerHTML = `
-    <header class="lghead">
-      <div><h2>Legacy 传承</h2><p class="lede2">完成 Legacy 挑战（${lg.challenges.join("、")}）拿点数，全账号共享，每个角色各自在三棵树里花。点数上限暂时不知道。</p></div>
-      <div class="lgsum"><b data-tween="${spent}" data-from="${sim.prev.legacy ?? spent}">${spent}</b><span>/ ${maxAll} 已花点数</span><button id="lgReset"${spent ? "" : " disabled"}>全部重置</button></div>
-    </header>
-    <p class="callout${state.talented ? " on" : ""}"><b>「${esc((lg.trees.flatMap((t) => t.perks).find((p) => p.name === "Talented") || {}).nameZh || "Talented")}」${state.talented ? "已点满：天梯和模拟器都按 9 级开始有天赋点计算。" : `点满 ${TALENTED_MAX} 点后，天梯和模拟器会按 9 级开始有天赋点计算。`}</b></p>
-    <div class="legacy lgtrees">${lg.trees.map((t) => `
-      <section class="ltree"><h3>${img(t.icon)}${bi(t.nameZh, t.name)}<em>${t.perks.reduce((a, p) => a + (legacyRanks[p.name] || 0), 0)}</em></h3>
-      ${t.perks.map((p) => {
-        const r = Math.min(legacyRanks[p.name] || 0, p.max);
-        return `<div class="perk lperk${r ? " has" : ""}${r === p.max ? " full" : ""}${p.name === "Talented" ? " key" : ""}">${img(p.icon)}
-          <div class="pn">${bi(p.nameZh, p.name)}${srcBadge(p.nameSrc)}</div>
-          <p>${esc(p.textZh || p.text)}</p>${p.textZh ? `<p class="orig"><span>原文</span>${esc(p.text)}</p>` : ""}
-          <div class="src"><span class="pill ${p.confirmed ? "ok2" : "only"}">${esc(p.src)}</span>${p.diff ? `<span>${esc(p.diff)}</span>` : ""}</div>
-          <div class="lstep"><button data-perk="${esc(p.name)}" data-d="-1" aria-label="${esc(p.nameZh || p.name)} 减一点"${r ? "" : " disabled"}>−</button><span class="pips" aria-hidden="true">${Array.from({ length: p.max }, (_, k) => `<i${k < r ? ' class="on"' : ""}></i>`).join("")}</span><b>${r}/${p.max}</b><button data-perk="${esc(p.name)}" data-d="1" aria-label="${esc(p.nameZh || p.name)} 加一点"${r < p.max ? "" : " disabled"}>+</button></div>
-        </div>`;
-      }).join("")}</section>`).join("")}</div>
-    <p class="hint">${esc(lg.rewards)}</p>`;
-  sim.prev.legacy = spent;
-  tween(el);
+const LG = SK.legacyCalc;
+const legacyUI = { tree: 0, selected: null, history: [], invalid: false };
+const legacyNode = id => LG.trees.flatMap(t => t.nodes).find(n => n.id === +id);
+const legacyCode = () => LegacyModel.encode(LG, legacyRanks);
+function readLegacyHash(code) {
+  const incoming = LegacyModel.decode(LG, code);
+  legacyUI.invalid = !incoming;
+  if (!incoming) return;
+  if (legacyCode() !== code) legacyUI.history = [];
+  for (const key of Object.keys(legacyRanks)) delete legacyRanks[key];
+  Object.assign(legacyRanks, incoming);
+  state.talented = legacyRanks.Talented || 0;
+  store.set('forever-legacy', legacyRanks); save();
 }
-document.getElementById("legacyPage").addEventListener("click", (e) => {
-  if (e.target.closest("#lgReset")) { for (const k of Object.keys(legacyRanks)) legacyRanks[k] = 0; store.set("forever-legacy", legacyRanks); if (state.talented) setTalented(false, true); renderLegacy(); announce("Legacy 点数已全部重置"); return; }
-  const b = e.target.closest("button[data-perk]"); if (!b) return;
-  const p = SK.legacy.trees.flatMap((t) => t.perks).find((x) => x.name === b.dataset.perk);
-  const r = Math.max(0, Math.min(p.max, (legacyRanks[p.name] || 0) + +b.dataset.d));
-  legacyRanks[p.name] = r; store.set("forever-legacy", legacyRanks);
-  if (p.name === "Talented" && (r >= TALENTED_MAX) !== state.talented) setTalented(r >= TALENTED_MAX, true);
-  renderLegacy();
-  const again = document.querySelector(`button[data-perk="${CSS.escape(p.name)}"][data-d="${b.dataset.d}"]`);
-  if (again && !again.disabled) again.focus({ preventScroll: true }); else document.querySelector(`button[data-perk="${CSS.escape(p.name)}"]:not([disabled])`)?.focus({ preventScroll: true });
-  pop(again?.closest(".lperk")?.querySelector(".pips i.on:last-of-type"), r === p.max);
-  announce(`${p.nameZh || p.name} ${r}/${p.max}`);
+function legacyCommit(ranks, message, undo = false) {
+  if (!undo) { legacyUI.history.push({ ...legacyRanks }); if (legacyUI.history.length > 50) legacyUI.history.shift(); }
+  for (const key of Object.keys(legacyRanks)) delete legacyRanks[key];
+  Object.assign(legacyRanks, ranks);
+  state.talented = legacyRanks.Talented || 0;
+  store.set('forever-legacy', legacyRanks); save();
+  replaceHash('#/legacy/' + legacyCode());
+  renderLegacy(); updateLevelBar();
+  announce(message);
+}
+function legacyAdjust(id, delta) {
+  const result = LegacyModel.change(LG, legacyRanks, id, delta), node = legacyNode(id);
+  if (result.error) { announce(result.error); return; }
+  legacyCommit(result.ranks, `${node.nameZh} ${result.ranks[node.name]}/${node.maxRanks}`);
+}
+function legacyInfoHTML(node, controls = true) {
+  const rank = legacyRanks[node.name] || 0, tree = LG.trees.find(t => t.nodes.includes(node));
+  const add = LegacyModel.change(LG, legacyRanks, node.id, 1), remove = LegacyModel.change(LG, legacyRanks, node.id, -1);
+  return `<div class="lginfo-head">${img(node.icon)}<div><b>${esc(node.nameZh)}</b><span>${esc(tree.nameZh)} · ${node.locked ? '尚未开放' : `${rank}/${node.maxRanks}`}</span></div></div>
+    ${node.castMs ? `<p class="racial-time">施法 ${node.castMs / 1000} 秒 · 冷却 ${node.cdMs / 3600000} 小时</p>` : ''}
+    ${rank ? `<p><b>当前：</b>${esc(node.ranksZh[rank-1])}</p>` : ''}
+    ${rank < node.maxRanks ? `<p><b>${rank ? '下一级' : '第 1 级'}：</b>${esc(node.ranksZh[rank])}</p>` : ''}
+    ${node.locked ? '<p>后续版本开放</p>' : add.error && rank < node.maxRanks ? `<p class="lg-requirement">${esc(add.error)}</p>` : ''}
+    ${controls && !node.locked ? `<div class="lg-actions"><button data-lgadjust="-1" data-node="${node.id}"${remove.error ? ' disabled' : ''}>− 减一点</button><span>${rank} / ${node.maxRanks}</span><button data-lgadjust="1" data-node="${node.id}"${add.error ? ' disabled' : ''}>+ 加一点</button></div>${rank && remove.error ? `<p class="hint">${esc(remove.error)}</p>` : ''}` : ''}
+    ${controls ? `<details class="lg-source"><summary>英文与数据来源</summary><p>${esc(node.ranks[Math.max(0, rank-1)])}</p><a href="${LG.source}" target="_blank" rel="noopener">Wowhead Legacy 计算器 ↗</a><p class="hint">中文为本站翻译 · 数据核于 ${LG.checked}</p></details>` : ''}`;
+}
+function renderLegacyInfo() {
+  const el = document.getElementById('legacyInfo'), node = legacyNode(legacyUI.selected);
+  if (el) el.innerHTML = node ? legacyInfoHTML(node) : '<p>点一个传承技能查看说明。</p>';
+}
+function renderLegacy() {
+  hideTalentTip();
+  const el = document.getElementById('legacyPage'), spent = LegacyModel.spent(LG, legacyRanks);
+  const tree = LG.trees[legacyUI.tree];
+  if (!tree.nodes.some(n => n.id === legacyUI.selected)) legacyUI.selected = tree.nodes.find(n => !n.locked && !n.requiredSpent).id;
+  const panel = (t, index) => {
+    const links = t.edges.map(e => {
+      const from = t.nodes.find(n => n.id === e.from), to = t.nodes.find(n => n.id === e.to);
+      return `<line x1="${from.col+.5}" y1="${from.row+.5}" x2="${to.col+.5}" y2="${to.row+.5}" class="${legacyRanks[from.name] ? 'met' : ''}"/>`;
+    }).join('');
+    const cells = t.nodes.map(n => {
+      const r = legacyRanks[n.name] || 0, blocked = LegacyModel.blocked(LG, legacyRanks, t, n) || (spent >= LG.cap ? '点数已用完' : '');
+      const state = r === n.maxRanks ? 'max' : r ? 'part' : blocked ? 'lock' : 'open';
+      return `<button class="lgnode" data-node="${n.id}" data-s="${state}" style="grid-column:${n.col+1};grid-row:${n.row+1}" aria-label="${esc(n.nameZh)} ${n.locked ? '尚未开放' : `${r}/${n.maxRanks}`}" aria-pressed="${legacyUI.selected === n.id}">${img(n.icon)}<span class="rk">${n.locked ? '—' : `${r}/${n.maxRanks}`}</span></button>`;
+    }).join('');
+    return `<section class="lg-tree" id="legacy-tree-${index}" data-active="${legacyUI.tree === index}" aria-label="${t.nameZh}传承树"><header><div><h3>${t.nameZh}</h3><span>${t.blurbZh}</span></div><b>${LegacyModel.treeSpent(t, legacyRanks)} <small>/ ${LG.cap}</small></b></header><div class="lg-grid"><svg class="arrows" viewBox="0 0 4 4" preserveAspectRatio="none" aria-hidden="true">${links}</svg>${cells}</div><button class="lg-tree-reset" data-lgreset="${index}"${LegacyModel.treeSpent(t, legacyRanks) ? '' : ' disabled'}>清空此系</button></section>`;
+  };
+  el.innerHTML = `<header class="lg-compact-head"><h2>Legacy 传承模拟器</h2><p><b>${spent}</b> / ${LG.cap} 点 · 剩余 ${LG.cap-spent} 点</p></header>
+    <div class="lg-toolbar"><button id="lgUndo"${legacyUI.history.length ? '' : ' disabled'}>撤销</button><button id="lgReset"${spent ? '' : ' disabled'}>全部重置</button><button id="lgCopy">分享方案</button><a class="whlink" href="${LG.source}/${legacyCode()}" target="_blank" rel="noopener">Wowhead ↗</a></div>
+    ${legacyUI.invalid ? '<p class="note">分享码不合法，保留当前方案。</p>' : ''}
+    ${legacyMigrated ? '<details class="lg-migration"><summary>旧方案已按新版规则调整</summary><p>旧数据保留在本机备份；当前方案按 16 点上限、前置和新版等级上限还原。</p></details>' : ''}
+    <div class="lg-tabs" role="group" aria-label="切换传承树">${LG.trees.map((t, i) => `<button data-lgtab="${i}" aria-pressed="${legacyUI.tree===i}" aria-controls="legacy-tree-${i}">${t.nameZh}<span>${LegacyModel.treeSpent(t, legacyRanks)} 点</span></button>`).join('')}</div>
+    <p class="sim-instruction"><span class="touch-help">点图标看说明，在下方加减点。</span><span class="mouse-help">悬停看说明，左键加点，右键减点。</span></p>
+    <div class="lg-layout"><div class="lg-forest">${LG.trees.map(panel).join('')}</div><aside id="legacyInfo" class="lg-info" aria-label="传承技能详情"></aside></div>
+    <p class="lg-sync">天赋异禀 ${legacyRanks.Talented || 0}/5：角色 ${10-(legacyRanks.Talented || 0)} 级起获得天赋点，总上限 51 点。<a href="${simHash(sim.cls || 'Warrior', sim.builds[sim.cls || 'Warrior'] || [])}">打开天赋模拟器 →</a></p>
+    <details class="lg-rules"><summary>点数规则与挑战奖励</summary><p>三棵树合计可花 ${LG.cap} 点。部分技能需要本树先投入 5 或 10 点，并学习连线前置至少 1 点；未开放节点不可选。</p><p>探索、练级、专业、荣誉、声望及地下城等挑战可获得传承点数。${esc(SK.legacy.rewards)}</p><a href="${LG.source}" target="_blank" rel="noopener">查看 Wowhead 规则来源 ↗</a></details>`;
+  renderLegacyInfo();
+}
+const legacyEl = document.getElementById('legacyPage');
+let legacyPointer = 'mouse';
+legacyEl.addEventListener('pointerdown', e => { legacyPointer = e.pointerType; });
+legacyEl.addEventListener('click', e => {
+  const button = e.target.closest('button'); if (!button) return;
+  if (button.dataset.lgtab != null) { legacyUI.tree = +button.dataset.lgtab; renderLegacy(); document.querySelector(`[data-lgtab="${legacyUI.tree}"]`).focus({ preventScroll: true }); return; }
+  if (button.classList.contains('lgnode')) {
+    legacyUI.selected = +button.dataset.node;
+    legacyUI.tree = LG.trees.findIndex(t => t.nodes.some(n => n.id === legacyUI.selected));
+    legacyEl.querySelectorAll('.lgnode').forEach(n => n.setAttribute('aria-pressed', +n.dataset.node === legacyUI.selected));
+    renderLegacyInfo();
+    if (legacyPointer === 'mouse' && e.detail !== 0) legacyAdjust(button.dataset.node, 1);
+    return;
+  }
+  if (button.dataset.lgadjust) {
+    const delta = button.dataset.lgadjust;
+    legacyAdjust(button.dataset.node, +delta);
+    const target = legacyEl.querySelector(`[data-lgadjust="${delta}"]:not(:disabled)`) || legacyEl.querySelector('.lg-actions button:not(:disabled)');
+    target?.focus({ preventScroll: true }); return;
+  }
+  if (button.id === 'lgUndo') { const previous = legacyUI.history.pop(); if (previous) legacyCommit(previous, '已撤销上一步', true); return; }
+  if (button.id === 'lgReset') { legacyCommit({}, 'Legacy 已全部重置'); return; }
+  if (button.dataset.lgreset != null) {
+    const ranks = { ...legacyRanks }; LG.trees[+button.dataset.lgreset].nodes.forEach(n => { delete ranks[n.name]; });
+    legacyCommit(ranks, '已清空此系'); return;
+  }
+  if (button.id === 'lgCopy') {
+    const url = location.href.split('#')[0] + '#/legacy/' + legacyCode();
+    if (navigator.clipboard?.writeText) navigator.clipboard.writeText(url).then(() => announce('方案链接已复制')).catch(() => prompt('复制方案链接：', url));
+    else prompt('复制方案链接：', url);
+  }
 });
+legacyEl.addEventListener('contextmenu', e => { const node = e.target.closest('.lgnode'); if (!node) return; e.preventDefault(); if (legacyPointer === 'mouse') legacyAdjust(node.dataset.node, -1); });
+legacyEl.addEventListener('keydown', e => {
+  const node = e.target.closest('.lgnode'); if (!node) return;
+  if (['+', '=', '-', 'Subtract'].includes(e.key)) { e.preventDefault(); legacyAdjust(node.dataset.node, ['+', '='].includes(e.key) ? 1 : -1); legacyEl.querySelector(`[data-node="${node.dataset.node}"].lgnode`)?.focus({ preventScroll: true }); }
+});
+legacyEl.addEventListener('pointerover', e => { const node = e.target.closest('.lgnode'); if (node && e.pointerType === 'mouse') showTalentTip(node, legacyInfoHTML(legacyNode(node.dataset.node), false)); });
+legacyEl.addEventListener('pointerout', e => { if (e.target.closest('.lgnode')) scheduleTipHide(); });
+
 
 // ===================== 新手入门 =====================
 const QUIZ = [
@@ -2441,7 +2820,7 @@ function renderQuiz() {
         <div class="qh"><img alt="" src="${ico(s.icon)}"><div><b>${s.cn} · ${s.clsCn}</b><span>${esc(c.tagline)}</span></div><span class="qrank">#${k + 1}</span></div>
         <p>${esc(NB.specs[s.k].line)}</p>
         <div class="qwhy"><span style="--q:var(--q-${lt})">升级 <em>${lt}</em> 档</span>${x.end ? `<span style="--q:var(--q-${x.end.e.tier})">满级${ROLE_ZH[x.end.r]} <em>${x.end.e.tier}</em> 档</span>` : ""}<span>${RANGE_ZH[x.range]}</span><span>${["", "容易上手", "上手中等", "上手要多花时间"][x.diff]}</span></div>
-        ${RF ? `<div class="qrace"><span class="qrace-h">${s.cn}选什么种族（按满级${ROLE_CN[x.end ? x.end.r : (MODEL.specRoles[s.cls][s.spec] || ["dps"])[0]]}）</span>${fitBestRaces(s, x.end ? x.end.r : (MODEL.specRoles[s.cls][s.spec] || ["dps"])[0]).map((y) => fitRaceChip(y, s.cls)).join("")}</div>` : ""}
+        ${RF ? `<div class="qrace"><span class="qrace-h">${s.cn}选什么种族（${quiz.goal === "level" ? "单人升级" : "满级" + ROLE_CN[x.end ? x.end.r : (MODEL.specRoles[s.cls][s.spec] || ["dps"])[0]]}候选）</span>${fitBestRaces(s, quiz.goal === "level" ? null : x.end ? x.end.r : (MODEL.specRoles[s.cls][s.spec] || ["dps"])[0]).map((y) => fitRaceChip(y, s.cls)).join("")}</div>` : ""}
         <div class="jumps"><a class="jump" href="#/class/${s.cls}">${s.clsCn}怎么玩</a><a class="jump primary" href="${simHash(s.cls, bestLvOrder(x.i, state.level))}" data-simcls="${s.cls}" data-simspec="${s.spec}" data-simi="${x.i}">看它怎么加天赋</a></div>
       </article>`;
     }).join("")}</div>
@@ -2481,16 +2860,16 @@ function renderStart(fromSlider) {
       </section>
       ${RF ? `<section>
         <h3 class="sth">选好职业，再挑种族</h3>
-        <p class="stsub">种族决定阵营（部落还是联盟），还带 4 个种族天赋。按种族天赋算，同一个职业换种族，满级强 0–3%，升级快 1–5%，比职业之间的差距小得多，所以先跟朋友定阵营、再挑喜欢的样子就好。下面是每个职业在两个阵营里满级最合适的种族；一个人升级最快的种族不一样时，写在下面。</p>
-        <div class="st-races"><div class="st-rh" aria-hidden="true"><span>职业</span><span>部落选（满级）</span><span>联盟选（满级）</span></div>${CLS_ORDER.map((cls) => {
+        <p class="stsub">先跟朋友确定阵营，再按专精和玩法比较。下面展示默认专精在两个阵营的候选示例，点击可查看同档候选、适用条件与计算依据。</p>
+        <div class="st-races"><div class="st-rh" aria-hidden="true"><span>职业</span><span>部落候选（满级）</span><span>联盟候选（满级）</span></div>${CLS_ORDER.map((cls) => {
           const cell = (f) => {
             const pk = fitClassPick(cls, f);
             if (!pk) return `<div class="st-rcell"><span class="frace none">没有能选的种族</span></div>`;
             const extra = Object.entries(pk.byRole).filter(([role, x]) => role !== pk.main && x.r.race !== pk.end.r.race).map(([role, x]) => `${ROLE_CN[role]}：${esc(raceCn(x.r.race))}`);
-            if (pk.only) extra.length = 0, extra.push("唯一能选的种族"); else extra.push(pk.lv.r.race !== pk.end.r.race ? `升级最快：${esc(raceCn(pk.lv.r.race))}` : "升级也最快");
+            if (pk.only) extra.length = 0, extra.push("唯一能选的种族"); else extra.push(pk.lv.r.race !== pk.end.r.race ? `升级候选：${esc(raceCn(pk.lv.r.race))}` : "也可作为升级候选");
             return `<div class="st-rcell">${fitRaceChip(pk.end, cls)}<small>${extra.join(" · ")}</small></div>`;
           };
-          return `<div class="st-rrow" style="--cc:${CLS[cls].color}"><a class="st-rcls" href="#/fit/-/${cls}">${crestC(cls) ? `<img alt="" src="${crestC(cls)}">` : ""}<b>${CLS[cls].cn}</b><small>按${ROLE_CN[classMainRole(cls)]} · 看细节 →</small></a>${cell("Horde")}${cell("Alliance")}</div>`;
+          return `<div class="st-rrow" style="--cc:${CLS[cls].color}"><a class="st-rcls" href="${fitHash(null, fitDefaultSpec(cls, classMainRole(cls)), {mode: classMainRole(cls)})}">${crestC(cls) ? `<img alt="" src="${crestC(cls)}">` : ""}<b>${CLS[cls].cn}</b><small>按${ROLE_CN[classMainRole(cls)]} · 看细节 →</small></a>${cell("Horde")}${cell("Alliance")}</div>`;
         }).join("")}</div>
         <div class="jumps"><a class="jump primary" href="#/fit">看完整的种族搭配 →</a></div>
       </section>` : ""}
@@ -2519,7 +2898,7 @@ document.getElementById("startPage").addEventListener("click", (e) => {
 // 显示选项: 点外面收起，summary 上显示开了几个
 (() => {
   const opts = document.getElementById("opts"), n = document.getElementById("optsN");
-  const count = () => { const k = ["showEn", "cmpClassic", "talented"].filter((id) => document.getElementById(id).checked).length; n.hidden = !k; n.textContent = k; };
+  const count = () => { const k = ["showEn", "cmpClassic"].filter((id) => document.getElementById(id).checked).length + Number(+document.getElementById("talented").value > 0); n.hidden = !k; n.textContent = k; };
   opts.addEventListener("change", count);
   document.addEventListener("click", (e) => { if (opts.open && !opts.contains(e.target)) opts.open = false; });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && opts.open) { opts.open = false; opts.querySelector("summary").focus(); } });
