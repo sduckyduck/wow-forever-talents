@@ -1062,8 +1062,8 @@ html.detail-open{overflow:hidden}
 @media (pointer:coarse){.touch-help{display:inline}.mouse-help{display:none}}
 @media (max-width:700px){
   body{margin:0;padding-inline:12px;font-size:15px}
-  .appnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;margin-inline:0;overflow:visible;padding:4px 0}
-  .appnav a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:6px 2px;font-size:12px;border-radius:6px;text-align:center;white-space:normal}
+  .appnav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px;margin-inline:0;overflow:visible;padding:4px 0}
+  .appnav a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:6px 0;font-size:11px;letter-spacing:-.02em;border-radius:6px;text-align:center;white-space:normal;word-break:keep-all}
   .appnav a[aria-current="page"]{background:var(--accent-soft)}
   .appnav a::after{left:12px;right:12px;bottom:0}
   .brand{margin-inline:-12px;padding-inline:12px}
@@ -1179,6 +1179,69 @@ html.detail-open{overflow:hidden}
 .sim-tree-art .scell[data-s="part"] .rk{color:#71ed66}.sim-tree-art .scell[data-s="max"] .rk{color:#ffe35b}
 .sim-tree-art .arrows line{stroke:#aab5c2;stroke-width:.035}.sim-tree-art .arrows line.met{stroke:#e6c171}
 @media(max-width:700px){.sim-tree-art{padding:4px 0}.sim-instruction{line-height:1.4}body[data-route="legacy"] .controls{display:none}}
+/* ---- 旅行导航 ---- */
+:root{--tv-a:#2F64B5;--tv-h:#B83A33;--tv-n:#B8862B;--tv-fly:#7A5A2A}
+.tv-layout{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:24px;align-items:start;margin-bottom:28px}
+.tv-side{position:sticky;top:120px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.tv-form{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
+.tv-facseg{justify-self:start}
+.tv-sel{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.tv-sel select{font:inherit;font-size:15px;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-height:44px;width:100%}
+.tv-swap{justify-self:center;width:44px;height:36px;border:1px solid var(--line);border-radius:999px;background:var(--sunken);color:var(--ink);cursor:pointer;font-size:18px;margin:-4px 0}
+.tv-swap:hover{border-color:var(--accent)}
+.tv-chk{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);cursor:pointer}
+.tv-chk input{width:18px;height:18px;accent-color:var(--accent)}
+.tv-result{min-width:0}
+.tv-route{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 14px 6px}
+.tv-route h3{margin:0 0 4px;font-size:16px}
+.tv-sum{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.tv-steps{list-style:none;margin:0;padding:0;counter-reset:tv}
+.tv-step{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.tv-step p{margin:0}.tv-step b{color:var(--ink)}
+.tv-k{display:inline-block;min-width:3.4em;text-align:center;font-size:12px;font-weight:600;color:#fff;background:var(--k);border-radius:5px;padding:2px 6px;align-self:start;margin-top:1px}
+.tv-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--faint);margin-top:3px!important}
+.tv-note{font-size:13px;background:var(--accent-soft);border-radius:8px;padding:8px 10px;margin:0 0 10px}
+.tv-alt{margin-top:10px}.tv-alt summary{cursor:pointer;font-size:13px;color:var(--accent);min-height:36px;display:flex;align-items:center}
+.tv-direct{width:100%;font-size:13px}.tv-direct td,.tv-direct th{padding:5px 8px}
+.tv-link{border:0;background:none;padding:0;color:var(--accent);font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.tv-rides{list-style:none;padding:0;margin:10px 0;display:grid;gap:6px;font-size:13px}.tv-rides li{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tv-maptabs{display:none;margin-bottom:8px}
+.tv-maps{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.tv-fig{margin:0;min-width:0}.tv-fig-zeph{grid-column:1/-1;max-width:420px}
+.tv-fig figcaption{font-family:var(--f-display);font-weight:700;font-size:16px;margin-bottom:4px}.tv-fig figcaption small{font-family:var(--f-body);font-weight:400;font-size:12px;color:var(--faint);margin-left:8px}
+.tv-svgwrap{position:relative;border-radius:8px;overflow:hidden;background:#3a2f22}
+.tv-svg{display:block;width:100%;height:auto}
+.tv-fl{fill:none;stroke:#FFF3D6;stroke-width:2.2;opacity:.55}
+.tv-tr{fill:none;stroke:var(--k);stroke-width:5;stroke-dasharray:14 8;stroke-linecap:round}
+.tv-trbg{fill:none;stroke:rgba(255,248,230,.75);stroke-width:9;stroke-linecap:round}.tv-trbg.is-new{stroke:#FFD86B;stroke-width:13}
+.tv-hibg{fill:none;stroke:#1b1309;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.tv-hi{fill:none;stroke:#FFD34D;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.tv-hi-ride{stroke:#F2C14E;stroke-dasharray:4 12}
+.tv-pt{cursor:pointer;outline:none}
+.tv-pt circle{stroke:#1b1309;stroke-width:2.5}
+.tv-pt.tv-f-A circle{fill:var(--tv-a)}.tv-pt.tv-f-H circle{fill:var(--tv-h)}.tv-pt.tv-f-AH circle{fill:var(--tv-n)}.tv-pt.tv-f-x circle{fill:#888}
+.tv-pt circle.sq{stroke:#fff;stroke-width:3}
+.tv-pt circle.ring{fill:none!important;stroke:#FFE08A;stroke-width:3}
+.tv-pt.is-off{opacity:.38}
+.tv-pt.is-from circle:first-child,.tv-pt.is-to circle:first-child{stroke:#fff;stroke-width:4}
+.tv-pt:hover circle:first-child,.tv-pt:focus-visible circle:first-child{stroke:#FFE08A;stroke-width:4}
+.tv-pt text{font:700 22px var(--f-body);fill:#fff;paint-order:stroke;stroke:#1b1309;stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+.tv-pop{position:absolute;transform:translate(-50%,calc(-100% - 16px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:13px;width:max-content;max-width:240px;z-index:2}
+.tv-pop p{margin:0 0 6px}.tv-zone{color:var(--faint);font-size:12px}
+.tv-popbtn{display:flex;gap:6px;margin:8px 0 0!important}
+.tv-popbtn button{flex:1;min-height:40px;border:1px solid var(--line);border-radius:8px;background:var(--sunken);color:var(--ink);cursor:pointer;font:inherit;font-size:13px;white-space:nowrap;padding:0 10px}
+.tv-popbtn button:hover{border-color:var(--accent)}
+.tv-x{position:absolute;top:2px;right:4px;border:0;background:none;color:var(--faint);font-size:18px;cursor:pointer;width:32px;height:32px}
+.tv-fac{font-size:11px;border-radius:4px;padding:1px 5px;color:#fff;white-space:nowrap}.tv-fac-A{background:var(--tv-a)}.tv-fac-H{background:var(--tv-h)}.tv-fac-AH{background:var(--tv-n)}.tv-fac-x{background:#888}
+.tv-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin:10px 0 0;align-items:center}
+.tv-legend span{display:inline-flex;align-items:center;gap:6px}
+.tv-legend i{display:inline-block;width:22px;height:0;border-top:3px solid #C9B48A}
+.tv-legend i.lg-tr{border-top:3px dashed var(--k)}.tv-legend i.lg-new{border-top:6px solid #F2C14E;opacity:.7}
+.tv-legend i.lg-dot{width:12px;height:12px;border:2px solid #fff;border-radius:50%;background:var(--tv-n);box-shadow:0 0 0 1px #1b1309}
+.tv-legend .tv-chk{margin-left:auto}
+.tv-tips{margin:0 0 10px;padding-left:20px;display:grid;gap:6px;max-width:80ch}
+@media(max-width:1000px){.tv-layout{grid-template-columns:1fr}.tv-side{position:static}.tv-maptabs{display:flex}.tv-maps{grid-template-columns:1fr}.tv-fig{display:none}.tv-fig.is-on{display:block;max-width:none}.tv-fig figcaption{display:none}}
+@media(max-width:700px){.tv-pt text{font-size:30px;stroke-width:7px}.tv-pop{max-width:200px}.tv-legend .tv-chk{margin-left:0}}
 </style>
 </head>
 <body>
@@ -1191,8 +1254,8 @@ html.detail-open{overflow:hidden}
         <p class="kick">《魔兽世界：无限》中文资料站</p>
         <h1>专精天梯 · 天赋模拟器</h1>
         <p class="lede">没玩过魔兽也能看懂：先弄清楚这是什么游戏，再挑一个适合自己的职业，最后看它每一级怎么加天赋。九个职业 27 个专精，1 到 60 级的强弱排名和加点都在这里。</p>
-        <p class="byline">非官方粉丝工具 · 数据来自 BlizzCon 2026 试玩 · 模型生成于 2026-09-17</p>
-        <nav aria-label="快速入口"><a class="primary" href="#/start">我是新手，从这里开始</a><a href="#/tiers">看专精强弱排名</a><a href="#/sim">打开天赋模拟器</a></nav>
+        <p class="byline">非官方粉丝工具 · 天赋数据来自《无限》测试服（Wowhead） · 模型生成于 2026-10-04</p>
+        <nav aria-label="快速入口"><a class="primary" href="#/start">我是新手，从这里开始</a><a href="#/tiers">看专精强弱排名</a><a href="#/sim">打开天赋模拟器</a><a href="#/travel">旅行导航</a></nav>
       </div>
     </div>
   </header>
@@ -1201,6 +1264,7 @@ html.detail-open{overflow:hidden}
   <nav class="appnav" id="appnav" aria-label="主导航">
     <a href="#/start" data-route="start">新手入门</a>
     <a href="#/guide" data-route="guide">游戏介绍</a>
+    <a href="#/travel" data-route="travel">旅行导航</a>
     <a href="#/class" data-route="class">职业</a>
     <a href="#/datamine" data-route="datamine">数据挖掘</a>
     <a href="#/tiers" data-route="tiers">专精天梯</a>
@@ -1254,6 +1318,7 @@ html.detail-open{overflow:hidden}
 
   <div class="route" data-page="start" id="startPage" hidden></div>
   <div class="route" data-page="guide" id="guidePage" hidden></div>
+  <div class="route" data-page="travel" id="travelPage" hidden></div>
   <div class="route" data-page="sim" id="sim" hidden></div>
   <div class="route" data-page="class" id="classPage" hidden></div>
   <div class="route" data-page="datamine" id="dataminePage" hidden></div>
@@ -1283,7 +1348,7 @@ html.detail-open{overflow:hidden}
     </div>
     <div>
       <h3>2 · 天赋估值</h3>
-      <p>470 个天赋按同一把尺子逐个估值：升级击杀速度、休息时间、生存、便利，以及 60 级输出、坦克、治疗的百分比收益。比如“全部伤害 +10%”记 10，“法术暴击 +1%”记 0.5。修改高等级技能的天赋，在学会那个技能之前不算分。</p>
+      <p>466 个天赋按同一把尺子逐个估值：升级击杀速度、休息时间、生存、便利，以及 60 级输出、坦克、治疗的百分比收益。比如“全部伤害 +10%”记 10，“法术暴击 +1%”记 0.5。修改高等级技能的天赋，在学会那个技能之前不算分。</p>
       <p><b>60 级输出用模拟器校准过：</b>用社区开源模拟器 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a>（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT 协议，非官方）在 17 个输出专精的 25 套加点上逐个去掉或加满天赋，记录模拟输出变化，再和人工估值各取一半（带团队增益的只取四分之一）。给技能的天赋、打法核心天赋、模拟器没实现或数值和 Wowhead 对不上的天赋不参与校准。升级、坦克、治疗仍是人工估值。天赋说明的「估值依据」里注明了每一项校准前后的数。</p>
     </div>
     <div>
@@ -1315,7 +1380,7 @@ html.detail-open{overflow:hidden}
   </div>
   <footer class="site-foot">
     <img src="assets/forever-logo.webp" alt="" width="64" height="52" loading="lazy">
-    <p>非官方粉丝工具，与暴雪娱乐无关，仅供个人研究使用。《魔兽世界：Forever》徽标与主视觉版权归 Blizzard Entertainment，取自 BlizzCon 2026 官方媒体包。天赋与技能数据来自 Wowhead Forever 天赋计算器和技能库、BlizzCon 2026 试玩；强弱排名是模型估算，不是实测；职业天赋的部分 60 级输出估值用 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a> 模拟器（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT）校准；种族推荐为独立场景估算，含未验证机制。</p>
+    <p>非官方粉丝工具，与暴雪娱乐无关，仅供个人研究使用。《魔兽世界：Forever》徽标与主视觉版权归 Blizzard Entertainment，取自 BlizzCon 2026 官方媒体包。天赋与技能数据来自 Wowhead Forever 天赋计算器和技能库（《无限》测试服数据）、BlizzCon 2026 试玩；旅行导航的飞行点、航线和地图来自《无限》测试端解包；强弱排名是模型估算，不是实测；职业天赋的部分 60 级输出估值用 <a href="https://github.com/ElliotWood/Forever" target="_blank" rel="noopener">ElliotWood/Forever</a> 模拟器（基于 <a href="https://github.com/wowsims/classic" target="_blank" rel="noopener">wowsims/classic</a>，MIT）校准；种族推荐为独立场景估算，含未验证机制。</p>
   </footer>
 </div>
 
@@ -1931,9 +1996,14 @@ const bestLvOrder = (i, L) => PER()[i].picks.filter((p) => p[0] <= L).map((p) =>
 const endEntry = (role, i) => D.end[role].find((e) => e.s === i);
 
 // 分享码: 每一点 = 该天赋在职业里的序号（base62 一位）
+// 2026-10-04 天赋增删后序号变了：新码以 "_" 开头；不带 "_" 的旧码按 09-17 的天赋顺序（D.shareV1）解
 const B62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const encodeOrder = (cls, order) => order.map((id) => B62[CT[cls].index[id]]).join("");
-const decodeOrder = (cls, code) => [...(code || "")].map((ch) => CT[cls].ids[B62.indexOf(ch)]).filter(Boolean);
+const encodeOrder = (cls, order) => (order.length ? "_" : "") + order.map((id) => B62[CT[cls].index[id]]).join("");
+const decodeOrder = (cls, code) => {
+  code = code || "";
+  const ids = code[0] === "_" ? CT[cls].ids : (D.shareV1 && D.shareV1[cls]) || CT[cls].ids;
+  return [...code.replace(/^_/, "")].map((ch) => ids[B62.indexOf(ch)]).filter((id) => id && D.talents[id]);
+};
 const simHash = (cls, order, L = state.level) => `#/sim/${cls}/${L}/${Number(state.talented || 0)}/${encodeOrder(cls, order)}`;
 function whLink(cls, ranks) {
   const hash = CT[cls].trees.map((tr) => CT[cls].ids.filter((id) => D.talents[id][1] === tr).map((id) => ranks[id] || 0).join("").replace(/0+$/, "")).join("-").replace(/-+$/, "");
@@ -1963,7 +2033,8 @@ const announce = (msg) => {
 
 // ---------- 路由 ----------
 const route = { name: "tiers", cls: null, race: null };
-const sim = { builds: store.get("forever-sim", {}), cls: null, spec: "auto", hist: [], focus: null, prev: {}, tree: 0, historyClass: null };
+// 本地存的加点里如果有 Wowhead 已删除的天赋（如 2026-10-04 删掉的 16 个），去掉它们再按现行规则整理
+const sim = { builds: Object.fromEntries(Object.entries(store.get("forever-sim", {}) || {}).filter(([c, o]) => CT[c] && Array.isArray(o)).map(([c, o]) => [c, normalizeOrder(c, o.map(String).filter((id) => D.talents[id]))])), cls: null, spec: "auto", hist: [], focus: null, prev: {}, tree: 0, historyClass: null };
 const legacyOriginal = store.get("forever-legacy", {});
 const legacyRanks = LegacyModel.normalize(SK.legacyCalc, legacyOriginal);
 const legacyMigrated = Object.keys(legacyOriginal).some(k => (legacyOriginal[k] || 0) !== (legacyRanks[k] || 0));
@@ -1976,7 +2047,7 @@ function applyHash() {
   // 没有 hash（直接打开首页）进新手入门
   if (!raw.startsWith("#/")) { const old = { "#xcheck": "about", "#method": "about", "#skills": "class", "#tiers": "tiers" }[raw]; route.name = old || "start"; return; }
   const p = raw.slice(2).split("/");
-  route.name = ["start", "tiers", "guide", "sim", "class", "datamine", "sets", "race", "fit", "legacy", "about"].includes(p[0]) ? p[0] : "start";
+  route.name = ["start", "tiers", "guide", "travel", "sim", "class", "datamine", "sets", "race", "fit", "legacy", "about"].includes(p[0]) ? p[0] : "start";
   if (route.name === "sim" && CT[p[1]]) {
     sim.cls = p[1];
     if (p[2]) { const L = Math.max(1, Math.min(60, +p[2] || state.level)); state.level = L; }
@@ -1994,6 +2065,7 @@ function applyHash() {
   if (route.name === "race") route.race = p[1] || route.race;
   if (route.name === "fit") fitReadRoute(p);
   if (route.name === "legacy" && p[1]) readLegacyHash(p[1]);
+  if (route.name === "travel") travelReadRoute(p);
 }
 function replaceHash(h) { try { history.replaceState(null, "", h); } catch (_) {} }
 
@@ -2024,7 +2096,7 @@ function renderRoute(fromSlider) {
   nav.dataset.current = route.name;
   document.getElementById("viewSeg").hidden = route.name !== "tiers";
   // 新手入门和游戏介绍用不到等级条和显示选项
-  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide" || route.name === "fit" || route.name === "datamine";
+  document.getElementById("tiers").hidden = route.name === "start" || route.name === "guide" || route.name === "fit" || route.name === "datamine" || route.name === "travel";
   if (route.name === "tiers") { renderBoard(); renderDetail(); } else updateLevelBar();
   if (route.name === "start") renderStart(fromSlider);
   if (route.name === "sim") renderSim(fromSlider);
@@ -2034,6 +2106,7 @@ function renderRoute(fromSlider) {
   if (route.name === "fit") renderFit();
   if (route.name === "legacy") renderLegacy();
   if (route.name === "guide") renderGuide(fromSlider);
+  if (route.name === "travel") renderTravel();
   if (route.name === "about" && !xDone) { renderXcheck(); xDone = true; }
 }
 function setTalented(rank) {
@@ -2900,6 +2973,340 @@ legacyEl.addEventListener('keydown', e => {
 });
 legacyEl.addEventListener('pointerover', e => { const node = e.target.closest('.lgnode'); if (node && e.pointerType === 'mouse') showTalentTip(node, legacyInfoHTML(legacyNode(node.dataset.node), false)); });
 legacyEl.addEventListener('pointerout', e => { if (e.target.closest('.lgnode')) scheduleTipHide(); });
+
+// ===================== 旅行导航（#/travel/<阵营>/<出发>/<目的地>）=====================
+// 数据 site/assets/travel/travel.js 由 talent/travel/build_travel.cjs 从本机无限测试端解包生成，进这一页才加载
+const TV_KIND = {
+  fly: { cn: "飞行", verb: "飞", col: "var(--tv-fly)" },
+  boat: { cn: "船", verb: "坐船", col: "#1C8C8C" },
+  zep: { cn: "飞艇", verb: "坐飞艇", col: "#D07A1C" },
+  sky: { cn: "天空快艇", verb: "坐天空快艇", col: "#8E5AC8" },
+  tram: { cn: "地铁", verb: "坐矿道地铁", col: "#6B4FB8" },
+  portal: { cn: "传送门", verb: "走传送门", col: "#B0479B" },
+  walk: { cn: "步行", verb: "步行", col: "var(--faint)" },
+};
+const TV_FAC = { A: "联盟", H: "部落" };
+const TV_MAP_ORDER = ["kal", "ek", "zeph"];
+const TV_MAJOR = new Set(["fp2", "fp6", "fp11", "fp23", "fp22", "darnassus", "swHarbor", "dalaran", "valanaar"]);
+const tv = { fac: store.get("forever-travel-fac", "A"), from: null, to: null, ff: store.get("forever-travel-ff", false), map: "ek", allLabels: false, pop: null, loading: false, failed: false };
+let TV = null, TVP = null;
+
+function travelReadRoute(p) {
+  if (p[1] === "A" || p[1] === "H") tv.fac = p[1];
+  tv.from = p[2] || null; tv.to = p[3] || null;
+}
+function travelHash() { return `#/travel/${tv.fac}${tv.from || tv.to ? `/${tv.from || "-"}` : ""}${tv.to ? `/${tv.to}` : ""}`; }
+
+function tvLoad() {
+  if (window.FOREVER_TRAVEL) { tvInit(); return true; }
+  if (!tv.loading) {
+    tv.loading = true;
+    const s = document.createElement("script");
+    s.src = "assets/travel/travel.js";
+    s.onload = () => { tvInit(); if (route.name === "travel") renderTravel(); };
+    s.onerror = () => { tv.failed = true; if (route.name === "travel") renderTravel(); };
+    document.head.appendChild(s);
+  }
+  return false;
+}
+function tvInit() {
+  if (TV) return;
+  TV = window.FOREVER_TRAVEL;
+  TVP = Object.fromEntries(TV.places.map((p) => [p.id, p]));
+  // 船、飞艇、天空快艇按线路生成「上船 → 下船」的边；环线可以坐过中间站不下船
+  TV.rides = [];
+  for (const l of TV.lines) {
+    if (!["boat", "zep", "sky"].includes(l.type)) continue;
+    const st = l.stops, n = st.length;
+    if (l.loop) { for (let i = 0; i < n; i++) for (let k = 1; k < n; k++) TV.rides.push({ type: l.type, a: st[i], b: st[(i + k) % n], via: Array.from({ length: k - 1 }, (_, j) => st[(i + j + 1) % n]), fac: l.fac, line: l }); }
+    else for (const [a, b] of [[st[0], st[1]], [st[1], st[0]]]) TV.rides.push({ type: l.type, a, b, via: [], fac: l.fac, line: l });
+  }
+  TV.lineById = Object.fromEntries(TV.lines.map((l) => [l.id, l]));
+  for (const e of TV.edges) if (e.type === "tram" || e.type === "portal") e.line = TV.lineById[e.line];
+}
+// 每段的「代价」只用来挑路线：飞行按估算秒数，船和飞艇每段算 7 分钟（含等船，坐过一站加 2 分钟），地铁 1.5 分钟
+function tvWeight(e) {
+  if (e.type === "fly") return e.t / (tv.ff ? 1.2 : 1) + 20;
+  if (e.type === "walk") return e.t + 30;
+  if (e.type === "tram") return 90;
+  if (e.type === "portal") return 10;
+  return 420 + 120 * e.via.length;
+}
+function tvGraph(f) {
+  const adj = {};
+  for (const e of [...TV.edges.filter((x) => !["boat", "zep", "sky"].includes(x.type)), ...TV.rides]) if (e.fac.includes(f)) (adj[e.a] ||= []).push(e);
+  return adj;
+}
+function tvPlan(from, to, f, banned = new Set()) {
+  const adj = tvGraph(f), dist = { [from]: 0 }, prev = {}, done = new Set();
+  for (;;) {
+    let u = null;
+    for (const k in dist) if (!done.has(k) && (u == null || dist[k] < dist[u])) u = k;
+    if (u == null || u === to) break;
+    done.add(u);
+    for (const e of adj[u] || []) {
+      if (banned.has(e)) continue;
+      const d = dist[u] + tvWeight(e);
+      if (dist[e.b] == null || d < dist[e.b]) { dist[e.b] = d; prev[e.b] = e; }
+    }
+  }
+  if (dist[to] == null) return null;
+  const path = [];
+  for (let k = to; k !== from; k = prev[k].a) path.unshift(prev[k]);
+  return { path, w: dist[to] };
+}
+// 连续的飞行合成一次（飞行管理员会自动经停），其余一段一步
+function tvSteps(path) {
+  const steps = [];
+  for (const e of path) {
+    const last = steps[steps.length - 1];
+    if (e.type === "fly" && last && last.type === "fly") { last.via.push(e.a); last.b = e.b; last.cost += e.cost; last.t += e.t; last.edges.push(e); }
+    else steps.push({ type: e.type, a: e.a, b: e.b, via: e.via ? [...e.via] : [], cost: e.cost || 0, t: e.t || 0, yd: e.yd, line: e.line, edges: [e] });
+  }
+  return steps;
+}
+function tvMoney(c) {
+  c = Math.round(c);
+  if (!c) return "免费";
+  const g = Math.floor(c / 10000), s = Math.floor((c % 10000) / 100), b = c % 100;
+  return [g && `${g}金`, s && `${s}银`, b && `${b}铜`].filter(Boolean).join("");
+}
+const tvMin = (sec) => (sec < 90 ? `${Math.max(1, Math.round(sec / 10) * 10)} 秒` : `${Math.round(sec / 60)} 分钟`);
+const tvName = (id) => esc(TVP[id].name);
+const tvTag = (p) => `<span class="tv-fac tv-fac-${p.fac || "x"}">${p.fac === "AH" ? "两个阵营" : p.fac ? TV_FAC[p.fac] : "暂无航线"}</span>`;
+
+// 目的地是对方阵营的飞行点：先导航到同一张地图上最近的己方地点，再自己过去
+function tvNearestOwn(id, f) {
+  const t = TVP[id];
+  let best = null, bd = Infinity;
+  for (const p of TV.places) {
+    if (p.id === id || p.map !== t.map || !p.fac.includes(f) || p.noRoute) continue;
+    const d = Math.hypot(p.x - t.x, p.y - t.y);
+    if (d < bd) { bd = d; best = p; }
+  }
+  return best;
+}
+
+function tvResult() {
+  if (!tv.from || !tv.to || !TVP[tv.from] || !TVP[tv.to]) return null;
+  const f = tv.fac;
+  if (tv.from === tv.to) return { same: true };
+  let to = tv.to, tail = null;
+  if (!TVP[to].fac.includes(f) || TVP[to].noRoute) {
+    const near = tvNearestOwn(to, f);
+    if (!near) return { none: true };
+    tail = { from: near.id, to }; to = near.id;
+  }
+  let from = tv.from, head = null;
+  if (!TVP[from].fac.includes(f) || TVP[from].noRoute) {
+    const near = tvNearestOwn(from, f);
+    if (!near) return { none: true };
+    head = { from, to: near.id }; from = near.id;
+  }
+  const best = from === to ? { path: [], w: 0 } : tvPlan(from, to, f);
+  if (!best) return { none: true, head, tail };
+  // 另一条路：把最优路线里的非飞行段逐个禁掉重算，取最快且换乘不同的一条
+  let alt = null;
+  const key = (p) => p.path.filter((e) => e.type !== "fly").map((e) => (e.line ? e.line.id : e.type) + e.a).join("|");
+  for (const e of best.path.filter((x) => x.type !== "fly")) {
+    const r = tvPlan(from, to, f, new Set([e]));
+    if (r && key(r) !== key(best) && r.w < best.w * 1.8 + 300 && (!alt || r.w < alt.w)) alt = r;
+  }
+  return { best, alt, head, tail };
+}
+
+function tvStepHtml(s, i) {
+  const k = TV_KIND[s.type], a = tvName(s.a), b = tvName(s.b);
+  let what, meta = [];
+  if (s.type === "fly") {
+    what = `在<b>${a}</b>找飞行管理员，飞到<b>${b}</b>`;
+    if (s.via.length) meta.push(`中途经停 ${s.via.map(tvName).join("、")}`);
+    meta.push(`约 ${tvMin(s.t / (tv.ff ? 1.2 : 1))}`, tvMoney(s.cost * (tv.ff ? 0.5 : 1)));
+  } else if (s.type === "walk") {
+    what = `从<b>${a}</b>步行到<b>${b}</b>`;
+    meta.push(`直线约 ${s.yd} 码`);
+  } else if (s.type === "tram") {
+    what = `在<b>${a}</b>坐矿道地铁到<b>${b}</b>`;
+    meta.push("单程约 1 分钟", "免费");
+  } else if (s.type === "portal") {
+    what = `在<b>${a}</b>走传送门到<b>${b}</b>`;
+    meta.push("免费");
+  } else {
+    what = `在<b>${a}</b>${k.verb}到<b>${b}</b>`;
+    if (s.via.length) meta.push(`中途停 ${s.via.map(tvName).join("、")}，不用下${s.type === "boat" ? "船" : "艇"}`);
+    meta.push("免费", "要等班次");
+    if (s.line.isNew) meta.push("《无限》新航线");
+  }
+  return `<li class="tv-step"><span class="tv-k" style="--k:${k.col}">${k.cn}</span><div><p>${what}</p><p class="tv-meta">${meta.map((m) => `<span>${m}</span>`).join("")}</p></div></li>`;
+}
+function tvRouteHtml(r, title) {
+  const steps = tvSteps(r.path);
+  const fly = steps.filter((s) => s.type === "fly"), ride = steps.filter((s) => ["boat", "zep", "sky"].includes(s.type));
+  const cost = fly.reduce((x, s) => x + s.cost, 0) * (tv.ff ? 0.5 : 1);
+  const t = fly.reduce((x, s) => x + s.t / (tv.ff ? 1.2 : 1), 0);
+  const sum = [`${steps.length} 段`, fly.length ? `飞行费用：${tvMoney(cost)}` : "", t ? `飞行约 ${tvMin(t)}` : "", ride.length ? `另有 ${ride.length} 段${[...new Set(ride.map((s) => TV_KIND[s.type].cn))].join("、")}（等班次的时间不固定，没算进去）` : ""].filter(Boolean);
+  return `<section class="tv-route"><h3>${title}</h3><p class="tv-sum">${sum.join("，")}</p><ol class="tv-steps">${steps.map(tvStepHtml).join("")}</ol></section>`;
+}
+
+function tvResultHtml(res) {
+  if (!tv.from && !tv.to) return `<p class="hint">选好出发地和目的地，或者直接在地图上点地点。</p>`;
+  if (!res) return tv.from ? tvFromHtml(tv.from) : `<p class="hint">再选一个出发地。</p>`;
+  if (res.same) return `<p class="hint">出发地和目的地是同一个地方。</p>`;
+  const extra = (x, last) => x ? `<p class="tv-note">${tvName(x.from)}和${tvName(x.to)}之间没有${TV_FAC[tv.fac]}能用的航线，${last ? `先到${tvName(x.from)}，再骑马过去` : `先从${tvName(x.from)}骑马到${tvName(x.to)}`}（${TVP[x.to].kind === "fp" && !TVP[x.to].fac.includes(tv.fac) ? "对方阵营的地盘，小心守卫" : "地图上看方向"}）。</p>` : "";
+  if (res.none) return `${extra(res.head)}<p class="hint">${TV_FAC[tv.fac]}在客户端数据里找不到能到那里的交通，只能自己跑过去。</p>`;
+  return `${extra(res.head, false)}${res.best.path.length ? tvRouteHtml(res.best, "推荐走法") : ""}${extra(res.tail, true)}${res.alt ? `<details class="tv-alt"><summary>另一种走法</summary>${tvRouteHtml(res.alt, "备选")}</details>` : ""}`;
+}
+// 只选了出发地：从这里能直接去哪
+function tvFromHtml(id) {
+  const p = TVP[id], f = tv.fac;
+  const fly = TV.edges.filter((e) => e.type === "fly" && e.a === id && e.fac.includes(f)).sort((x, y) => x.cost - y.cost);
+  const rides = [...TV.rides, ...TV.edges.filter((e) => ["walk", "tram", "portal"].includes(e.type))].filter((e) => e.a === id && e.fac.includes(f) && !(e.via && e.via.length));
+  if (!p.fac.includes(f)) return `<p class="hint">${esc(p.name)}是${p.fac ? TV_FAC[p.fac] : "还没开放"}的地点，${TV_FAC[tv.fac]}用不了这里的交通。</p>`;
+  return `<section class="tv-route"><h3>从${esc(p.name)}能直接去</h3>
+    ${fly.length ? `<table class="gtable tv-direct"><thead><tr><th>直飞</th><th>约</th><th>费用</th></tr></thead><tbody>${fly.map((e) => `<tr><td><button type="button" class="tv-link" data-to="${e.b}">${tvName(e.b)}</button></td><td>${tvMin(e.t / (tv.ff ? 1.2 : 1))}</td><td>${tvMoney(e.cost * (tv.ff ? 0.5 : 1))}</td></tr>`).join("")}</tbody></table>` : `<p class="hint">这里没有${TV_FAC[f]}的飞行航线。</p>`}
+    ${rides.length ? `<ul class="tv-rides">${rides.map((e) => `<li><span class="tv-k" style="--k:${TV_KIND[e.type].col}">${TV_KIND[e.type].cn}</span><button type="button" class="tv-link" data-to="${e.b}">${tvName(e.b)}</button>${e.type === "walk" ? `<span class="tv-meta"><span>直线约 ${e.yd} 码</span></span>` : ""}</li>`).join("")}</ul>` : ""}
+    <p class="hint">再选一个目的地，就能算出怎么走。</p></section>`;
+}
+
+// ---------- 地图 ----------
+function tvSvg(key, res) {
+  const m = TV.maps[key], f = tv.fac;
+  const pd = (pts) => "M" + pts.map((q) => q.join(",")).join("L");
+  const lines = [];
+  for (const e of TV.edges) {
+    if (e.type !== "fly" || !e.fac.includes(f)) continue;
+    if (e.a > e.b && TV.edges.some((x) => x.type === "fly" && x.a === e.b && x.b === e.a && x.fac.includes(f))) continue;
+    for (const s of e.seg) if (s.map === key) lines.push(`<path class="tv-fl" d="${pd(s.d)}"/>`);
+  }
+  const trans = TV.lines.filter((l) => l.fac.includes(f)).flatMap((l) => l.seg.filter((s) => s.map === key).map((s) => `<path class="tv-trbg${l.isNew ? " is-new" : ""}" d="${pd(s.d)}"/><path class="tv-tr" style="--k:${TV_KIND[l.type].col}" d="${pd(s.d)}"><title>${esc(TV_KIND[l.type].cn)}：${esc(l.name)}${l.isNew ? "（《无限》新增）" : ""}</title></path>`));
+  // 当前路线高亮
+  const hi = [];
+  const onRoute = new Set();
+  const paths = res && res.best ? [res.best.path] : [];
+  for (const path of paths) for (const e of path) {
+    onRoute.add(e.a); onRoute.add(e.b);
+    const segs = e.type === "fly" ? e.seg : e.line && e.line.seg.length ? e.line.seg : TVP[e.a].map === TVP[e.b].map ? [{ map: TVP[e.a].map, d: [[TVP[e.a].x, TVP[e.a].y], [TVP[e.b].x, TVP[e.b].y]] }] : [];
+    for (const s of segs) if (s.map === key) hi.push(`<path class="tv-hibg" d="${pd(s.d)}"/><path class="tv-hi" d="${pd(s.d)}"/>`);
+  }
+  for (const x of [res && res.head, res && res.tail]) if (x && TVP[x.from].map === key && TVP[x.to].map === key) { onRoute.add(x.from); onRoute.add(x.to); hi.push(`<path class="tv-hi tv-hi-ride" d="M${TVP[x.from].x},${TVP[x.from].y}L${TVP[x.to].x},${TVP[x.to].y}"/>`); }
+  const dots = TV.places.filter((p) => p.map === key).map((p) => {
+    const own = p.fac.includes(f) && !p.noRoute, sel = p.id === tv.from ? " is-from" : p.id === tv.to ? " is-to" : "";
+    const label = tv.allLabels || TV_MAJOR.has(p.id) || onRoute.has(p.id) || sel || p.id === tv.pop;
+    return `<g class="tv-pt tv-f-${p.fac || "x"}${own ? "" : " is-off"}${sel}${p.isNew ? " is-new" : ""}" transform="translate(${p.x},${p.y})" data-id="${p.id}" tabindex="0" role="button" aria-label="${esc(p.name)}，${esc(p.zone)}">
+      <circle r="${sel ? 13 : p.kind === "fp" ? 8 : 9}"${p.kind !== "fp" ? ' class="sq"' : ""}/>${p.isNew ? `<circle class="ring" r="15"/>` : ""}${label ? `<text x="14" y="7">${esc(p.name)}</text>` : ""}<title>${esc(p.name)}（${esc(p.zone)}）</title></g>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${m.w} ${m.h}" class="tv-svg" role="group" aria-label="${m.name}交通图">
+    <image href="${m.img}" width="${m.w}" height="${m.h}"/>
+    <g class="tv-lines">${lines.join("")}</g><g>${trans.join("")}</g><g>${hi.sort((a, b) => a.startsWith('<path class="tv-hibg"') ? -1 : 1).join("")}</g><g>${dots}</g></svg>`;
+}
+function tvMapsHtml(res) {
+  return `<div class="tv-maptabs seg" role="group" aria-label="选择地图">${TV_MAP_ORDER.map((k) => `<button type="button" data-map="${k}" aria-pressed="${tv.map === k}">${TV.maps[k].name}</button>`).join("")}</div>
+    <div class="tv-maps">${TV_MAP_ORDER.map((k) => `<figure class="tv-fig tv-fig-${k}${tv.map === k ? " is-on" : ""}" data-map="${k}"><figcaption>${TV.maps[k].name}${k === "zeph" ? `<small>独立地图，天裔的出生地</small>` : ""}</figcaption><div class="tv-svgwrap">${tvSvg(k, res)}${tv.pop && TVP[tv.pop].map === k ? tvPopHtml(TVP[tv.pop], k) : ""}</div></figure>`).join("")}</div>
+    <p class="tv-legend"><span><i class="lg-fl"></i>飞行航线</span>${["boat", "zep", "sky", "tram"].map((t) => `<span><i class="lg-tr" style="--k:${TV_KIND[t].col}"></i>${TV_KIND[t].cn}</span>`).join("")}<span><i class="lg-new"></i>《无限》新增</span><span><i class="lg-dot sq"></i>码头、天港和城市</span>
+      <label class="tv-chk"><input type="checkbox" id="tvLabels"${tv.allLabels ? " checked" : ""}> 显示全部地名</label></p>`;
+}
+function tvPopHtml(p, key) {
+  const m = TV.maps[key];
+  const n = TV.edges.filter((e) => e.a === p.id && e.type === "fly" && e.fac.includes(tv.fac)).length;
+  return `<div class="tv-pop" style="left:${(p.x / m.w) * 100}%;top:${(p.y / m.h) * 100}%" role="dialog" aria-label="${esc(p.name)}">
+    <p><b>${esc(p.name)}</b>${p.isNew ? ` <span class="dc-new">新</span>` : ""}<br><span class="tv-zone">${esc(p.zone)}</span> ${tvTag(p)}</p>
+    ${p.noRoute ? `<p class="tv-zone">客户端里还没有这个飞行点的航线</p>` : n ? `<p class="tv-zone">${TV_FAC[tv.fac]}能直飞 ${n} 个地方</p>` : ""}
+    <p class="tv-popbtn"><button type="button" data-set="from" data-id="${p.id}">从这里出发</button><button type="button" data-set="to" data-id="${p.id}">到这里去</button></p>
+    <button type="button" class="tv-x" aria-label="关闭">×</button></div>`;
+}
+
+function tvSelect(id, label, cur) {
+  const groups = TV_MAP_ORDER.map((k) => {
+    const ps = TV.places.filter((p) => p.map === k).sort((a, b) => a.zone.localeCompare(b.zone, "zh") || a.name.localeCompare(b.name, "zh"));
+    return `<optgroup label="${TV.maps[k].name}">${ps.map((p) => `<option value="${p.id}"${p.id === cur ? " selected" : ""}>${esc(p.name)}（${esc(p.zone)}）${p.fac && !p.fac.includes(tv.fac) ? `　${TV_FAC[p.fac]}` : ""}${p.isNew ? "　新" : ""}</option>`).join("")}</optgroup>`;
+  }).join("");
+  return `<label class="tv-sel"><span>${label}</span><select id="tv-${label === "出发地" ? "from" : "to"}"><option value="">选择地点</option>${groups}</select></label>`;
+}
+function tvLinesHtml() {
+  const rows = TV.lines.map((l) => `<tr><td><span class="tv-k" style="--k:${TV_KIND[l.type].col}">${TV_KIND[l.type].cn}</span></td><td><b>${l.stops.map(tvName).join(l.loop ? " → " : "  ⇄  ")}${l.loop ? ` → ${tvName(l.stops[0])}` : ""}</b>${l.isNew ? ` <span class="dc-new">新</span>` : ""}</td><td>${l.fac === "AH" ? "两个阵营" : TV_FAC[l.fac]}</td></tr>`).join("");
+  return `<section class="dm-sec"><div class="ts-h"><h3>船、飞艇和地铁一览</h3></div>
+    <p class="dm-desc">跨大陆只能坐船和飞艇，都免费，来回开，错过了就等下一班。环线按箭头方向开，比如从米奈希尔港去奥伯丁，要先停南海镇。</p>
+    <div class="gtable-wrap"><table class="gtable"><thead><tr><th>类型</th><th>航线</th><th>谁能坐</th></tr></thead><tbody>${rows}</tbody></table></div></section>`;
+}
+
+function renderTravel() {
+  const el = document.getElementById("travelPage");
+  if (!tvLoad()) {
+    el.innerHTML = `<header class="ts-head"><h2>旅行导航</h2></header><p class="hint">${tv.failed ? "交通数据没加载出来。离线版没带地图数据，请打开网站版。" : "正在加载交通数据……"}</p>`;
+    return;
+  }
+  if (tv.from && !TVP[tv.from]) tv.from = null;
+  if (tv.to && !TVP[tv.to]) tv.to = null;
+  const res = tvResult();
+  const focus = tv.from ? TVP[tv.from].map : tv.to ? TVP[tv.to].map : null;
+  if (focus && !tv.pop) tv.map = focus;
+  const keep = document.activeElement && document.activeElement.id;
+  el.innerHTML = `
+    <header class="ts-head"><h2>旅行导航 <span class="dm-en">Travel</span></h2>
+      <p class="lede2">从一个地方到另一个地方，该坐飞行点、船、飞艇还是地铁？选好阵营、出发地和目的地，按顺序告诉你每一段怎么走、要花多少钱。飞行点、航线、票价和船的航路都来自《无限》测试端解包，包括新地图河林、海加尔山和泽风岛。</p>
+    </header>
+    <div class="tv-layout">
+      <div class="tv-side">
+        <div class="tv-form">
+          <div class="seg tv-facseg" role="group" aria-label="阵营">${["A", "H"].map((f) => `<button type="button" data-fac="${f}" aria-pressed="${tv.fac === f}">${TV_FAC[f]}</button>`).join("")}</div>
+          ${tvSelect("出发地", "出发地", tv.from)}
+          <button type="button" class="tv-swap" aria-label="交换出发地和目的地">⇅</button>
+          ${tvSelect("目的地", "目的地", tv.to)}
+          <label class="tv-chk"><input type="checkbox" id="tvFF"${tv.ff ? " checked" : ""}> 有传承「飞行常客」（飞行费用 -50%，速度 +20%）</label>
+        </div>
+        <div class="tv-result" aria-live="polite">${tvResultHtml(res)}</div>
+      </div>
+      <div class="tv-mapcol">${tvMapsHtml(res)}</div>
+    </div>
+    ${tvLinesHtml()}
+    <section class="dm-sec"><div class="ts-h"><h3>出发前要知道</h3></div>
+      <ul class="tv-tips">
+        <li>飞行点要先“开”：到当地和飞行管理员说一次话才算发现，没开过的点飞不过去。路过不等于开了。</li>
+        <li>飞行航线不跨海。去另一块大陆，联盟坐船，部落坐飞艇；棘齿城和藏宝海湾之间的船、热砂港到河林的船两个阵营都能坐。</li>
+        <li>飞艇塔上有两个平台，各去一个地方，上去前看清楚。</li>
+        <li>达纳苏斯没有飞行点，飞行管理员在城外的鲁瑟兰村，从那里走传送门进城。</li>
+        <li>传承「飞行常客」是冒险树里的天赋，飞行费用减半、速度加快 20%，勾上上面的选项就按它来算。</li>
+        <li>有报道说达拉然和暴风城之间有一对传送门，但使用条件还没证实，导航里先不算它。</li>
+      </ul>
+      <p class="hint">数据：本机《魔兽世界：无限》测试端 ${esc(TV.build)} 解包（飞行点、航线、票价、船和飞艇航路，中文名取自国服简体中文客户端文本）。飞行时间按经典的飞行速度（跑步的 434%）估算，船和飞艇的班次客户端里没有，不算时间。测试期数据，正式上线可能会变。</p>
+    </section>`;
+  if (keep) document.getElementById(keep)?.focus({ preventScroll: true });
+}
+
+function tvSet(which, id) {
+  tv[which] = id || null; tv.pop = null;
+  replaceHash(travelHash());
+  renderTravel();
+  if (tv.from && tv.to) announce(`已规划：${TVP[tv.from].name} 到 ${TVP[tv.to].name}`);
+}
+document.getElementById("travelPage").addEventListener("click", (e) => {
+  const t = e.target;
+  const fac = t.closest("[data-fac]");
+  if (fac) { tv.fac = fac.dataset.fac; store.set("forever-travel-fac", tv.fac); replaceHash(travelHash()); renderTravel(); announce(`已切换到${TV_FAC[tv.fac]}`); return; }
+  const mp = t.closest(".tv-maptabs [data-map]");
+  if (mp) { tv.map = mp.dataset.map; tv.pop = null; renderTravel(); return; }
+  if (t.closest(".tv-swap")) { [tv.from, tv.to] = [tv.to, tv.from]; tvSet("from", tv.from); return; }
+  const set = t.closest("[data-set]");
+  if (set) { tvSet(set.dataset.set, set.dataset.id); return; }
+  if (t.closest(".tv-x")) { tv.pop = null; renderTravel(); return; }
+  const link = t.closest(".tv-link");
+  if (link) { tvSet("to", link.dataset.to); return; }
+  const pt = t.closest(".tv-pt");
+  if (pt) { tv.pop = tv.pop === pt.dataset.id ? null : pt.dataset.id; tv.map = TVP[pt.dataset.id].map; renderTravel(); document.querySelector(".tv-pop [data-set]")?.focus({ preventScroll: true }); return; }
+  if (tv.pop && !t.closest(".tv-pop")) { tv.pop = null; renderTravel(); }
+});
+document.getElementById("travelPage").addEventListener("keydown", (e) => {
+  const pt = e.target.closest && e.target.closest(".tv-pt");
+  if (pt && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pt.dispatchEvent(new MouseEvent("click", { bubbles: true })); }
+  if (e.key === "Escape" && tv.pop) { tv.pop = null; renderTravel(); }
+});
+document.getElementById("travelPage").addEventListener("change", (e) => {
+  const t = e.target;
+  if (t.id === "tv-from") tvSet("from", t.value);
+  else if (t.id === "tv-to") tvSet("to", t.value);
+  else if (t.id === "tvFF") { tv.ff = t.checked; store.set("forever-travel-ff", tv.ff); renderTravel(); }
+  else if (t.id === "tvLabels") { tv.allLabels = t.checked; renderTravel(); }
+});
 
 
 // ===================== 新手入门 =====================
