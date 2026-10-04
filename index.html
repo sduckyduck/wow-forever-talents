@@ -1179,69 +1179,123 @@ html.detail-open{overflow:hidden}
 .sim-tree-art .scell[data-s="part"] .rk{color:#71ed66}.sim-tree-art .scell[data-s="max"] .rk{color:#ffe35b}
 .sim-tree-art .arrows line{stroke:#aab5c2;stroke-width:.035}.sim-tree-art .arrows line.met{stroke:#e6c171}
 @media(max-width:700px){.sim-tree-art{padding:4px 0}.sim-instruction{line-height:1.4}body[data-route="legacy"] .controls{display:none}}
-/* ---- 旅行导航 ---- */
-:root{--tv-a:#2F64B5;--tv-h:#B83A33;--tv-n:#B8862B;--tv-fly:#7A5A2A}
-.tv-layout{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:24px;align-items:start;margin-bottom:28px}
-.tv-side{position:sticky;top:120px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.tv-form{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
-.tv-facseg{justify-self:start}
-.tv-sel{display:grid;gap:4px;font-size:12px;color:var(--muted)}
-.tv-sel select{font:inherit;font-size:15px;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-height:44px;width:100%}
-.tv-swap{justify-self:center;width:44px;height:36px;border:1px solid var(--line);border-radius:999px;background:var(--sunken);color:var(--ink);cursor:pointer;font-size:18px;margin:-4px 0}
-.tv-swap:hover{border-color:var(--accent)}
+/* ---- 旅行导航（世界地图）---- */
+body[data-route="travel"] .brand .lede,body[data-route="travel"] .brand .byline,body[data-route="travel"] .brand nav,body[data-route="travel"] .brand .kick{display:none}
+body[data-route="travel"] .brand-in{padding-block:10px;gap:6px 14px}body[data-route="travel"] .brand .logo{width:56px}body[data-route="travel"] .brand h1{font-size:22px;margin:0}
+.tv-wait{padding:40px 0}
+.tv-app{display:grid;grid-template-columns:1fr 380px;height:calc(100vh - 150px);min-height:580px;max-height:1100px;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:0 0 28px;background:#0E1A2A;isolation:isolate}
+.tv-mapwrap{position:relative;min-width:0;z-index:0}
+.tv-map,.tv-map.leaflet-container{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,#16283D 0%,#0E1A2A 60%,#0A1320 100%);font-family:var(--f-body)}
+.tv-map .leaflet-tile-pane{filter:saturate(.92) brightness(.94)}
+.tv-panel{overflow:auto;background:var(--ground);border-left:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:14px;overscroll-behavior:contain}
+.tv-form{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.tv-row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.tv-lv{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.tv-lv input{width:64px;font:inherit;font-size:15px;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-height:40px}
+.tv-search{position:relative;display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.tv-search input{font:inherit;font-size:15px;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-height:44px;width:100%}
+.tv-search input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.tv-ac{position:absolute;top:100%;left:0;right:0;z-index:5;list-style:none;margin:4px 0 0;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.3);max-height:320px;overflow:auto}
+.tv-ac li{display:flex;align-items:baseline;gap:8px;padding:8px;border-radius:6px;cursor:pointer;color:var(--ink);font-size:14px}
+.tv-ac li[aria-selected="true"],.tv-ac li:hover{background:var(--accent-soft)}
+.tv-ac small{color:var(--faint);font-size:12px;margin-left:auto;white-space:nowrap}
+.tv-acnone{color:var(--faint)!important;cursor:default!important}
+.tv-tk{font-size:11px;border-radius:4px;padding:1px 5px;background:var(--sunken);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tv-tk-place{color:#B8862B;border-color:#B8862B}.tv-tk-zone{color:#3E7BE0;border-color:#3E7BE0}.tv-tk-dungeon,.tv-tk-raid{color:#B0479B;border-color:#B0479B}.tv-tk-capital{color:#C77D1A;border-color:#C77D1A}
+.tv-swap{justify-self:center;width:44px;height:34px;border:1px solid var(--line);border-radius:999px;background:var(--sunken);color:var(--ink);cursor:pointer;font-size:18px;margin:-4px 0}
 .tv-chk{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);cursor:pointer}
-.tv-chk input{width:18px;height:18px;accent-color:var(--accent)}
-.tv-result{min-width:0}
-.tv-route{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 14px 6px}
-.tv-route h3{margin:0 0 4px;font-size:16px}
-.tv-sum{margin:0 0 10px;font-size:13px;color:var(--muted)}
-.tv-steps{list-style:none;margin:0;padding:0;counter-reset:tv}
-.tv-step{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.tv-chk input{width:17px;height:17px;accent-color:var(--accent);flex:none}
+.tv-route,.tv-box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 12px 6px}
+.tv-route h3,.tv-box h3{margin:0 0 4px;font-size:15px}
+.tv-box{padding-bottom:10px}
+.tv-sum{margin:0 0 8px;font-size:13px;color:var(--muted)}
+.tv-steps{list-style:none;margin:0;padding:0}
+.tv-step{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
 .tv-step p{margin:0}.tv-step b{color:var(--ink)}
-.tv-k{display:inline-block;min-width:3.4em;text-align:center;font-size:12px;font-weight:600;color:#fff;background:var(--k);border-radius:5px;padding:2px 6px;align-self:start;margin-top:1px}
-.tv-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--faint);margin-top:3px!important}
-.tv-note{font-size:13px;background:var(--accent-soft);border-radius:8px;padding:8px 10px;margin:0 0 10px}
-.tv-alt{margin-top:10px}.tv-alt summary{cursor:pointer;font-size:13px;color:var(--accent);min-height:36px;display:flex;align-items:center}
+.tv-k{display:inline-block;min-width:3.4em;text-align:center;font-size:12px;font-weight:700;color:#14100a;background:var(--k);border-radius:5px;padding:2px 6px;align-self:start;margin-top:1px;white-space:nowrap}
+.tv-meta{display:flex;flex-wrap:wrap;gap:3px 12px;font-size:12px;color:var(--faint);margin-top:3px!important}
+.tv-alt{margin-top:8px}.tv-alt summary{cursor:pointer;font-size:13px;color:var(--accent);min-height:36px;display:flex;align-items:center}
 .tv-direct{width:100%;font-size:13px}.tv-direct td,.tv-direct th{padding:5px 8px}
-.tv-link{border:0;background:none;padding:0;color:var(--accent);font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
-.tv-rides{list-style:none;padding:0;margin:10px 0;display:grid;gap:6px;font-size:13px}.tv-rides li{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.tv-maptabs{display:none;margin-bottom:8px}
-.tv-maps{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
-.tv-fig{margin:0;min-width:0}.tv-fig-zeph{grid-column:1/-1;max-width:420px}
-.tv-fig figcaption{font-family:var(--f-display);font-weight:700;font-size:16px;margin-bottom:4px}.tv-fig figcaption small{font-family:var(--f-body);font-weight:400;font-size:12px;color:var(--faint);margin-left:8px}
-.tv-svgwrap{position:relative;border-radius:8px;overflow:hidden;background:#3a2f22}
-.tv-svg{display:block;width:100%;height:auto}
-.tv-fl{fill:none;stroke:#FFF3D6;stroke-width:2.2;opacity:.55}
-.tv-tr{fill:none;stroke:var(--k);stroke-width:5;stroke-dasharray:14 8;stroke-linecap:round}
-.tv-trbg{fill:none;stroke:rgba(255,248,230,.75);stroke-width:9;stroke-linecap:round}.tv-trbg.is-new{stroke:#FFD86B;stroke-width:13}
-.tv-hibg{fill:none;stroke:#1b1309;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
-.tv-hi{fill:none;stroke:#FFD34D;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
-.tv-hi-ride{stroke:#F2C14E;stroke-dasharray:4 12}
-.tv-pt{cursor:pointer;outline:none}
-.tv-pt circle{stroke:#1b1309;stroke-width:2.5}
-.tv-pt.tv-f-A circle{fill:var(--tv-a)}.tv-pt.tv-f-H circle{fill:var(--tv-h)}.tv-pt.tv-f-AH circle{fill:var(--tv-n)}.tv-pt.tv-f-x circle{fill:#888}
-.tv-pt circle.sq{stroke:#fff;stroke-width:3}
-.tv-pt circle.ring{fill:none!important;stroke:#FFE08A;stroke-width:3}
-.tv-pt.is-off{opacity:.38}
-.tv-pt.is-from circle:first-child,.tv-pt.is-to circle:first-child{stroke:#fff;stroke-width:4}
-.tv-pt:hover circle:first-child,.tv-pt:focus-visible circle:first-child{stroke:#FFE08A;stroke-width:4}
-.tv-pt text{font:700 22px var(--f-body);fill:#fff;paint-order:stroke;stroke:#1b1309;stroke-width:5px;stroke-linejoin:round;pointer-events:none}
-.tv-pop{position:absolute;transform:translate(-50%,calc(-100% - 16px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:13px;width:max-content;max-width:240px;z-index:2}
-.tv-pop p{margin:0 0 6px}.tv-zone{color:var(--faint);font-size:12px}
-.tv-popbtn{display:flex;gap:6px;margin:8px 0 0!important}
-.tv-popbtn button{flex:1;min-height:40px;border:1px solid var(--line);border-radius:8px;background:var(--sunken);color:var(--ink);cursor:pointer;font:inherit;font-size:13px;white-space:nowrap;padding:0 10px}
-.tv-popbtn button:hover{border-color:var(--accent)}
-.tv-x{position:absolute;top:2px;right:4px;border:0;background:none;color:var(--faint);font-size:18px;cursor:pointer;width:32px;height:32px}
-.tv-fac{font-size:11px;border-radius:4px;padding:1px 5px;color:#fff;white-space:nowrap}.tv-fac-A{background:var(--tv-a)}.tv-fac-H{background:var(--tv-h)}.tv-fac-AH{background:var(--tv-n)}.tv-fac-x{background:#888}
-.tv-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin:10px 0 0;align-items:center}
-.tv-legend span{display:inline-flex;align-items:center;gap:6px}
-.tv-legend i{display:inline-block;width:22px;height:0;border-top:3px solid #C9B48A}
-.tv-legend i.lg-tr{border-top:3px dashed var(--k)}.tv-legend i.lg-new{border-top:6px solid #F2C14E;opacity:.7}
-.tv-legend i.lg-dot{width:12px;height:12px;border:2px solid #fff;border-radius:50%;background:var(--tv-n);box-shadow:0 0 0 1px #1b1309}
-.tv-legend .tv-chk{margin-left:auto}
+.tv-link{border:0;background:none;padding:0;color:var(--accent);font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px;text-align:left}
+.tv-rides,.tv-dlist{list-style:none;padding:0;margin:6px 0;display:grid;gap:6px;font-size:13px}.tv-rides li,.tv-dlist li{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tv-dlist li>span{color:var(--faint);font-size:12px;margin-left:auto}
+.tv-keyh{margin:10px 0 4px;font-size:12px;color:var(--faint);font-weight:600}
+.tv-zone{color:var(--faint);font-size:12px}
+.tv-fac{font-size:11px;border-radius:4px;padding:1px 5px;color:#fff;white-space:nowrap}.tv-fac-A{background:#2F64B5}.tv-fac-H{background:#B83A33}.tv-fac-AH{background:#A87A22}.tv-fac-x{background:#777}
 .tv-tips{margin:0 0 10px;padding-left:20px;display:grid;gap:6px;max-width:80ch}
-@media(max-width:1000px){.tv-layout{grid-template-columns:1fr}.tv-side{position:static}.tv-maptabs{display:flex}.tv-maps{grid-template-columns:1fr}.tv-fig{display:none}.tv-fig.is-on{display:block;max-width:none}.tv-fig figcaption{display:none}}
-@media(max-width:700px){.tv-pt text{font-size:30px;stroke-width:7px}.tv-pop{max-width:200px}.tv-legend .tv-chk{margin-left:0}}
+/* 地图上的浮层 */
+.tv-keywrap{position:absolute;top:12px;left:12px;z-index:800;max-width:min(270px,calc(100% - 24px))}
+.tv-key{background:rgba(12,20,32,.9);color:#E8EDF3;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:8px 12px;font-size:13px;backdrop-filter:blur(6px);box-shadow:0 6px 20px rgba(0,0,0,.35);max-height:calc(100vh - 260px);overflow:auto}
+.tv-key summary{cursor:pointer;font-weight:700;min-height:32px;display:flex;align-items:center}
+.tv-key .tv-chk{color:#D5DCE4;padding:3px 0}
+.tv-key .tv-keyh{color:#9AA6B5}
+.tv-sw{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0;font-size:12px;color:#D5DCE4}
+.tv-sw span{display:inline-flex;align-items:center;gap:5px}
+.tv-sw i{width:12px;height:12px;border-radius:3px;background:var(--c);opacity:.85;display:inline-block}
+.tv-sw b{width:20px;height:0;border-top:3px dashed var(--c);display:inline-block}.tv-sw b.nw{border-top:6px solid #FFD86B;opacity:.6}
+.tv-sw i.pin{width:11px;height:11px;border-radius:50%;background:#E2B24A;border:2px solid #fff;opacity:1}.tv-sw i.pin.sq{border-radius:2px;background:#58C2D0}
+.tv-sw i.pin.dg{border-radius:2px;transform:rotate(45deg);background:#C78BF5;border-color:#2a1638}.tv-sw i.pin.rd{border-radius:2px;transform:rotate(45deg);background:#F07A3C;border-color:#3a1608}
+.tv-all{position:absolute;right:12px;top:12px;z-index:800;border:1px solid rgba(255,255,255,.2);background:rgba(12,20,32,.88);color:#E8EDF3;border-radius:8px;min-height:38px;padding:0 14px;cursor:pointer;font:inherit;font-size:13px}
+.tv-map .leaflet-control-zoom a{background:rgba(12,20,32,.9);color:#E8EDF3;border-color:rgba(255,255,255,.18);width:36px;height:36px;line-height:34px}
+.tv-map .leaflet-bar{border:1px solid rgba(255,255,255,.18);box-shadow:none}
+.tv-map[data-z="4"] .leaflet-tvZones-pane{opacity:.6}.tv-map[data-z="5"] .leaflet-tvZones-pane,.tv-map[data-z="6"] .leaflet-tvZones-pane,.tv-map[data-z="7"] .leaflet-tvZones-pane,.tv-map[data-z="8"] .leaflet-tvZones-pane{opacity:.3}
+/* 大陆名、区域名 */
+.tv-cl{pointer-events:none;white-space:nowrap;transform:translate(-50%,-50%);font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:.3em;color:rgba(255,240,205,.9);text-shadow:0 0 6px #000,0 2px 3px #000}
+.tv-map:not([data-z="0"]):not([data-z="1"]) .tv-cl{display:none}
+.tv-map[data-z="0"] .tv-zl,.tv-map[data-z="1"] .tv-zl{display:none}
+.tv-zl{pointer-events:none;text-align:center;white-space:nowrap;transform:translate(-50%,-50%);color:#F6EFDD;text-shadow:0 0 3px #000,0 0 6px rgba(0,0,0,.8),0 1px 2px #000;font-family:var(--f-display);font-weight:700;line-height:1.15}
+.tv-zl span{display:block;font-size:13px;letter-spacing:.04em}.tv-zl small{display:block;font:600 11px var(--f-num);color:#FFE7A8;letter-spacing:.04em}
+.tv-zl.is-new span{color:#FFE08A}
+.tv-map[data-z="1"] .tv-zl.zl-mid,.tv-map[data-z="1"] .tv-zl.zl-sm,.tv-map[data-z="2"] .tv-zl.zl-mid,.tv-map[data-z="2"] .tv-zl.zl-sm,.tv-map[data-z="3"] .tv-zl.zl-sm,.tv-map[data-z="1"] .tv-zl small,.tv-map[data-z="2"] .tv-zl small{display:none}
+.tv-map[data-z="3"] .tv-zl span,.tv-map[data-z="4"] .tv-zl span{font-size:16px}
+.tv-map[data-z="5"] .tv-zl{opacity:.55}.tv-map[data-z="6"] .tv-zl,.tv-map[data-z="7"] .tv-zl,.tv-map[data-z="8"] .tv-zl{display:none}
+/* 交通地点 */
+.tv-pin,.tv-poi,.tv-dg{position:relative;width:0;height:0}
+.tv-pin i,.tv-poi i,.tv-dg i{position:absolute;left:0;top:0;transform:translate(-50%,-50%);display:block;cursor:pointer}
+.tv-pin span,.tv-poi span,.tv-dg span{position:absolute;left:9px;top:0;transform:translateY(-50%);white-space:nowrap;color:#fff;font-size:12px;font-weight:700;text-shadow:0 0 3px #000,0 0 5px #000,0 1px 1px #000;pointer-events:none}
+.tv-pin i{width:10px;height:10px;border-radius:50%;border:2px solid #fff;background:#8A94A3;box-shadow:0 0 0 1px rgba(0,0,0,.6)}
+.tv-pf-A i{background:#3F7FE8}.tv-pf-H i{background:#E0473F}.tv-pf-AH i{background:#E2B24A}
+.tv-pin-dock i,.tv-pin-city i{border-radius:3px;background:#58C2D0}.tv-pin-city.tv-pf-A i{background:#3F7FE8}
+.tv-pin.is-major i{width:14px;height:14px;border-width:3px}.tv-pin.is-major span{font-size:14px;color:#FFF3D0}
+.tv-pin.is-new i{box-shadow:0 0 0 2px #FFD86B,0 0 8px #FFD86B}
+.tv-pin.is-off{opacity:.42}
+.tv-pin:hover i,.tv-poi:hover i{transform:translate(-50%,-50%) scale(1.25)}
+.tv-map[data-z="1"] .tv-pin:not(.is-major) span,.tv-map[data-z="2"] .tv-pin:not(.is-major) span,.tv-map[data-z="3"] .tv-pin:not(.is-major) span{display:none}
+.tv-map[data-z="1"] .tv-pin:not(.is-major) i,.tv-map[data-z="2"] .tv-pin:not(.is-major) i{width:7px;height:7px;border-width:1.5px}
+/* 城镇和地标 */
+.tv-poi i{width:6px;height:6px;border-radius:50%;background:#F4E9CF;box-shadow:0 0 0 1px rgba(0,0,0,.7)}
+.tv-poi span{left:7px;font-size:11px;font-weight:600;color:#F4E9CF}
+.tv-poi-capital i{width:9px;height:9px;background:#FFC857}
+.tv-map[data-z="1"] .tv-poi,.tv-map[data-z="2"] .tv-poi,.tv-map[data-z="3"] .tv-poi,.tv-map[data-z="4"] .tv-poi-spot{display:none}
+.tv-map[data-z="4"] .tv-poi span,.tv-map[data-z="5"] .tv-poi-spot span{display:none}
+/* 地下城和团本 */
+.tv-dg i{width:10px;height:10px;border-radius:2px;transform:translate(-50%,-50%) rotate(45deg);background:#C78BF5;border:2px solid #2a1638}
+.tv-dg.is-raid i{background:#F07A3C;border-color:#3a1608;width:12px;height:12px}
+.tv-dg.is-new i{box-shadow:0 0 0 2px #FFD86B,0 0 8px #FFD86B}
+.tv-dg span{color:#EBD7FF}.tv-dg.is-raid span{color:#FFD2B8}
+.tv-dg small{font:700 11px var(--f-num);margin-left:4px;color:#FFE7A8}
+.tv-dg:hover i{transform:translate(-50%,-50%) rotate(45deg) scale(1.25)}
+.tv-map[data-z="1"] .tv-dg,.tv-map[data-z="2"] .tv-dg,.tv-map[data-z="3"] .tv-dg span{display:none}
+/* 路线 */
+.tv-route-line{stroke-dasharray:14 10;animation:tvdash 1.2s linear infinite}
+@keyframes tvdash{to{stroke-dashoffset:-24}}
+@media (prefers-reduced-motion:reduce){.tv-route-line{animation:none}}
+.tv-end{position:relative;width:0;height:0}
+.tv-end i{position:absolute;left:0;top:0;transform:translate(-50%,-115%);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#2E9E5B;border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.5);font-style:normal;font-weight:800;font-size:13px;color:#fff;line-height:1}
+.tv-end-b i{background:#D9443D}
+.tv-tip{background:rgba(12,20,32,.92);color:#E8EDF3;border:1px solid rgba(255,255,255,.18);border-radius:6px;font-size:12px}
+.tv-tip::before{display:none}
+.tv-popup .leaflet-popup-content-wrapper{background:var(--surface);color:var(--ink);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.tv-popup .leaflet-popup-tip{background:var(--surface)}
+.tv-popup .leaflet-popup-content{margin:12px 14px;font-size:13px;font-family:var(--f-body);min-width:190px}
+.tv-popup p{margin:0 0 6px}
+.tv-popbtn{display:flex;gap:6px;margin:8px 0 0!important}
+.tv-popbtn button{flex:1;min-height:38px;border:1px solid var(--line);border-radius:8px;background:var(--sunken);color:var(--ink);cursor:pointer;font:inherit;font-size:13px;white-space:nowrap;padding:0 10px}
+.tv-popbtn button:hover{border-color:var(--accent)}
+.tv-popup a.leaflet-popup-close-button{color:var(--faint)}
+@media(max-width:900px){.tv-app{grid-template-columns:1fr;height:auto;max-height:none;min-height:0}.tv-mapwrap{height:68vh;min-height:420px}.tv-panel{border-left:0;border-top:1px solid var(--line);overflow:visible}}
+@media(max-width:700px){.tv-cl{font-size:15px;letter-spacing:.12em}.tv-app{margin-inline:-12px;border-radius:0;border-inline:0}.tv-key{max-height:55vh}.tv-zl span{font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -2975,37 +3029,52 @@ legacyEl.addEventListener('pointerover', e => { const node = e.target.closest('.
 legacyEl.addEventListener('pointerout', e => { if (e.target.closest('.lgnode')) scheduleTipHide(); });
 
 // ===================== 旅行导航（#/travel/<阵营>/<出发>/<目的地>）=====================
-// 数据 site/assets/travel/travel.js 由 talent/travel/build_travel.cjs 从本机无限测试端解包生成，进这一页才加载
+// 一张可缩放的世界地图（Leaflet）。数据 site/assets/travel/travel.js、瓦片 site/assets/travel/tiles/ 由
+// talent/travel/extract_worldmap.py → build_worldmap.py → build_travel.cjs 从本机无限测试端解包生成，进这一页才加载。
 const TV_KIND = {
-  fly: { cn: "飞行", verb: "飞", col: "var(--tv-fly)" },
-  boat: { cn: "船", verb: "坐船", col: "#1C8C8C" },
-  zep: { cn: "飞艇", verb: "坐飞艇", col: "#D07A1C" },
-  sky: { cn: "天空快艇", verb: "坐天空快艇", col: "#8E5AC8" },
-  tram: { cn: "地铁", verb: "坐矿道地铁", col: "#6B4FB8" },
-  portal: { cn: "传送门", verb: "走传送门", col: "#B0479B" },
-  walk: { cn: "步行", verb: "步行", col: "var(--faint)" },
+  fly: { cn: "飞行", verb: "飞", col: "#E9C46A" },
+  boat: { cn: "船", verb: "坐船", col: "#3FB8C9" },
+  zep: { cn: "飞艇", verb: "坐飞艇", col: "#F08A3C" },
+  sky: { cn: "天空快艇", verb: "坐天空快艇", col: "#B98CF0" },
+  tram: { cn: "地铁", verb: "坐矿道地铁", col: "#9C8CF0" },
+  portal: { cn: "传送门", verb: "走传送门", col: "#E07BD0" },
+  walk: { cn: "步行", verb: "步行", col: "#C9D1DA" },
+  ride: { cn: "赶路", verb: "跑过去", col: "#C9D1DA" },
 };
 const TV_FAC = { A: "联盟", H: "部落" };
-const TV_MAP_ORDER = ["kal", "ek", "zeph"];
-const TV_MAJOR = new Set(["fp2", "fp6", "fp11", "fp23", "fp22", "darnassus", "swHarbor", "dalaran", "valanaar"]);
-const tv = { fac: store.get("forever-travel-fac", "A"), from: null, to: null, ff: store.get("forever-travel-ff", false), map: "ek", allLabels: false, pop: null, loading: false, failed: false };
-let TV = null, TVP = null;
+const TV_FCOL = { A: "#4C8DF0", H: "#E0504A", AH: "#E2B24A", "": "#8A94A3" };
+const TV_ZCOL = { 2: "#3E7BE0", 4: "#D9443D", 0: "#C9A54A", 6: "#9A6BE0", 8: "#4A4F57" }; // 区域归属：联盟 / 部落 / 争夺 / 两个阵营 / 进不去
+const TV_LAYERS = [
+  ["fly", "飞行航线", true], ["zones", "区域阵营和等级", true], ["boat", "船", true], ["other", "飞艇、天空快艇、地铁、传送门", true],
+  ["dungeons", "地下城和团本", true], ["towns", "城镇和地标", true], ["newOnly", "只看《无限》新增", false],
+];
+const YD = 1600 / 3 / 256; // 最大缩放级每像素多少码
+const RUN = 7;              // 跑步 7 码/秒
+const tv = {
+  fac: store.get("forever-travel-fac", "A"), from: null, to: null, ff: store.get("forever-travel-ff", false),
+  level: store.get("forever-travel-level", ""), layers: Object.assign(Object.fromEntries(TV_LAYERS.map(([k, , on]) => [k, on])), store.get("forever-travel-layers", {})),
+  loading: false, failed: false, keyOpen: false,
+};
+let TV = null, TVP = null, TVT = null, LMAP = null, LL = {};
 
 function travelReadRoute(p) {
   if (p[1] === "A" || p[1] === "H") tv.fac = p[1];
-  tv.from = p[2] || null; tv.to = p[3] || null;
+  tv.from = p[2] && p[2] !== "-" ? decodeURIComponent(p[2]) : null; tv.to = p[3] ? decodeURIComponent(p[3]) : null;
 }
 function travelHash() { return `#/travel/${tv.fac}${tv.from || tv.to ? `/${tv.from || "-"}` : ""}${tv.to ? `/${tv.to}` : ""}`; }
 
+// ---------- 加载 ----------
+function tvScript(src) { return new Promise((ok, no) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
 function tvLoad() {
-  if (window.FOREVER_TRAVEL) { tvInit(); return true; }
+  if (TV && window.L) return true;
   if (!tv.loading) {
     tv.loading = true;
-    const s = document.createElement("script");
-    s.src = "assets/travel/travel.js";
-    s.onload = () => { tvInit(); if (route.name === "travel") renderTravel(); };
-    s.onerror = () => { tv.failed = true; if (route.name === "travel") renderTravel(); };
-    document.head.appendChild(s);
+    const css = document.createElement("link");
+    css.rel = "stylesheet"; css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+    document.head.appendChild(css);
+    Promise.all([window.L ? 0 : tvScript("https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"), window.FOREVER_TRAVEL ? 0 : tvScript("assets/travel/travel.js")])
+      .then(() => { tvInit(); if (route.name === "travel") renderTravel(); })
+      .catch(() => { tv.failed = true; if (route.name === "travel") renderTravel(); });
   }
   return false;
 }
@@ -3013,21 +3082,30 @@ function tvInit() {
   if (TV) return;
   TV = window.FOREVER_TRAVEL;
   TVP = Object.fromEntries(TV.places.map((p) => [p.id, p]));
+  // 可以搜的目标：交通地点、城镇地标、区域、地下城
+  TVT = {};
+  for (const p of TV.places) TVT[p.id] = { id: p.id, kind: "place", name: p.name, sub: p.zone, x: p.x, y: p.y, cont: p.cont, place: p };
+  for (const p of TV.pois) TVT["p" + p.id] = { id: "p" + p.id, kind: p.kind, name: p.zh, sub: p.zone || "", x: p.x, y: p.y, cont: p.cont };
+  for (const z of TV.zones) TVT["z" + z.id] = { id: "z" + z.id, kind: "zone", name: z.zh, sub: z.lv ? `${z.lv} 级` : "", x: z.label[0], y: z.label[1], cont: z.cont, zone: z };
+  for (const d of TV.dungeons) if (d.x != null) TVT["d" + d.id] = { id: "d" + d.id, kind: d.raid ? "raid" : "dungeon", name: d.zh, sub: d.lv ? `${d.lv} 级起` : "", x: d.x, y: d.y, cont: d.cont, dungeon: d };
   // 船、飞艇、天空快艇按线路生成「上船 → 下船」的边；环线可以坐过中间站不下船
   TV.rides = [];
+  TV.lineById = Object.fromEntries(TV.lines.map((l) => [l.id, l]));
   for (const l of TV.lines) {
     if (!["boat", "zep", "sky"].includes(l.type)) continue;
     const st = l.stops, n = st.length;
     if (l.loop) { for (let i = 0; i < n; i++) for (let k = 1; k < n; k++) TV.rides.push({ type: l.type, a: st[i], b: st[(i + k) % n], via: Array.from({ length: k - 1 }, (_, j) => st[(i + j + 1) % n]), fac: l.fac, line: l }); }
     else for (const [a, b] of [[st[0], st[1]], [st[1], st[0]]]) TV.rides.push({ type: l.type, a, b, via: [], fac: l.fac, line: l });
   }
-  TV.lineById = Object.fromEntries(TV.lines.map((l) => [l.id, l]));
   for (const e of TV.edges) if (e.type === "tram" || e.type === "portal") e.line = TV.lineById[e.line];
 }
-// 每段的「代价」只用来挑路线：飞行按估算秒数，船和飞艇每段算 7 分钟（含等船，坐过一站加 2 分钟），地铁 1.5 分钟
+
+// ---------- 路线 ----------
+const tvDist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y) * YD;
+// 每段的「代价」只用来挑路线：飞行按估算秒数，船和飞艇每段算 7 分钟（含等船，坐过一站加 2 分钟），地铁 1.5 分钟，赶路按跑步速度
 function tvWeight(e) {
   if (e.type === "fly") return e.t / (tv.ff ? 1.2 : 1) + 20;
-  if (e.type === "walk") return e.t + 30;
+  if (e.type === "walk" || e.type === "ride") return e.t + 30;
   if (e.type === "tram") return 90;
   if (e.type === "portal") return 10;
   return 420 + 120 * e.via.length;
@@ -3037,8 +3115,22 @@ function tvGraph(f) {
   for (const e of [...TV.edges.filter((x) => !["boat", "zep", "sky"].includes(x.type)), ...TV.rides]) if (e.fac.includes(f)) (adj[e.a] ||= []).push(e);
   return adj;
 }
+const tvUsable = (p, f) => p.fac.includes(f) && !p.noRoute;
+// 起点或终点不是交通地点（城镇、区域、地下城）：连到同一块大陆上自己阵营能用的地点，按跑步时间算
+function tvLinks(t, f, dir) {
+  if (t.place && tvUsable(t.place, f)) return [];
+  // 目的地是区域：到了区域里任何一个能用的飞行点就算到了
+  const inZone = t.zone ? TV.places.filter((p) => p.zone === t.zone.zh && p.cont === t.cont && tvUsable(p, f)) : [];
+  if (inZone.length) return inZone.map((p) => dir === "out" ? { type: "ride", a: t.id, b: p.id, fac: f, t: 0, yd: 0 } : { type: "ride", a: p.id, b: t.id, fac: f, t: 0, yd: 0 });
+  const near = TV.places.filter((p) => p.cont === t.cont && tvUsable(p, f) && p.id !== t.id).map((p) => ({ p, d: tvDist(p, t) })).sort((a, b) => a.d - b.d).slice(0, 6);
+  return near.map(({ p, d }) => dir === "out" ? { type: "ride", a: t.id, b: p.id, fac: f, t: d / RUN, yd: Math.round(d) } : { type: "ride", a: p.id, b: t.id, fac: f, t: d / RUN, yd: Math.round(d) });
+}
 function tvPlan(from, to, f, banned = new Set()) {
-  const adj = tvGraph(f), dist = { [from]: 0 }, prev = {}, done = new Set();
+  const adj = tvGraph(f), extra = [...tvLinks(TVT[from], f, "out"), ...tvLinks(TVT[to], f, "in")];
+  for (const e of extra) (adj[e.a] ||= []).push(e);
+  // 同一块大陆上两个非交通地点，直接跑过去也算一个选项
+  if (TVT[from].cont === TVT[to].cont && (!TVT[from].place || !TVT[to].place)) { const d = tvDist(TVT[from], TVT[to]); (adj[from] ||= []).push({ type: "ride", a: from, b: to, fac: f, t: d / RUN, yd: Math.round(d) }); }
+  const dist = { [from]: 0 }, prev = {}, done = new Set();
   for (;;) {
     let u = null;
     for (const k in dist) if (!done.has(k) && (u == null || dist[k] < dist[u])) u = k;
@@ -3055,13 +3147,27 @@ function tvPlan(from, to, f, banned = new Set()) {
   for (let k = to; k !== from; k = prev[k].a) path.unshift(prev[k]);
   return { path, w: dist[to] };
 }
-// 连续的飞行合成一次（飞行管理员会自动经停），其余一段一步
+function tvResult() {
+  if (!tv.from || !tv.to || !TVT[tv.from] || !TVT[tv.to]) return null;
+  if (tv.from === tv.to) return { same: true };
+  const best = tvPlan(tv.from, tv.to, tv.fac);
+  if (!best) return { none: true };
+  let alt = null;
+  const key = (p) => p.path.filter((e) => e.type !== "fly" && e.type !== "ride").map((e) => (e.line ? e.line.id : e.type) + e.a).join("|");
+  for (const e of best.path.filter((x) => x.type !== "fly" && x.type !== "ride")) {
+    const r = tvPlan(tv.from, tv.to, tv.fac, new Set([e]));
+    if (r && key(r) !== key(best) && r.w < best.w * 1.8 + 300 && (!alt || r.w < alt.w)) alt = r;
+  }
+  return { best, alt };
+}
+// 连续的飞行合成一次（飞行管理员会自动经停）
 function tvSteps(path) {
   const steps = [];
   for (const e of path) {
+    if (e.type === "ride" && !e.yd) continue; // 已经在目的地区域里了
     const last = steps[steps.length - 1];
-    if (e.type === "fly" && last && last.type === "fly") { last.via.push(e.a); last.b = e.b; last.cost += e.cost; last.t += e.t; last.edges.push(e); }
-    else steps.push({ type: e.type, a: e.a, b: e.b, via: e.via ? [...e.via] : [], cost: e.cost || 0, t: e.t || 0, yd: e.yd, line: e.line, edges: [e] });
+    if (e.type === "fly" && last && last.type === "fly") { last.via.push(e.a); last.b = e.b; last.cost += e.cost; last.t += e.t; }
+    else steps.push({ type: e.type, a: e.a, b: e.b, via: e.via ? [...e.via] : [], cost: e.cost || 0, t: e.t || 0, yd: e.yd, line: e.line });
   }
   return steps;
 }
@@ -3072,56 +3178,22 @@ function tvMoney(c) {
   return [g && `${g}金`, s && `${s}银`, b && `${b}铜`].filter(Boolean).join("");
 }
 const tvMin = (sec) => (sec < 90 ? `${Math.max(1, Math.round(sec / 10) * 10)} 秒` : `${Math.round(sec / 60)} 分钟`);
-const tvName = (id) => esc(TVP[id].name);
-const tvTag = (p) => `<span class="tv-fac tv-fac-${p.fac || "x"}">${p.fac === "AH" ? "两个阵营" : p.fac ? TV_FAC[p.fac] : "暂无航线"}</span>`;
-
-// 目的地是对方阵营的飞行点：先导航到同一张地图上最近的己方地点，再自己过去
-function tvNearestOwn(id, f) {
-  const t = TVP[id];
-  let best = null, bd = Infinity;
-  for (const p of TV.places) {
-    if (p.id === id || p.map !== t.map || !p.fac.includes(f) || p.noRoute) continue;
-    const d = Math.hypot(p.x - t.x, p.y - t.y);
-    if (d < bd) { bd = d; best = p; }
-  }
-  return best;
+const tvName = (id) => esc(TVT[id] ? TVT[id].name : id);
+function tvDir(a, b) {
+  const ang = (Math.atan2(-(b.y - a.y), b.x - a.x) * 180) / Math.PI;
+  return ["东", "东北", "北", "西北", "西", "西南", "南", "东南"][((Math.round(ang / 45) % 8) + 8) % 8];
 }
 
-function tvResult() {
-  if (!tv.from || !tv.to || !TVP[tv.from] || !TVP[tv.to]) return null;
-  const f = tv.fac;
-  if (tv.from === tv.to) return { same: true };
-  let to = tv.to, tail = null;
-  if (!TVP[to].fac.includes(f) || TVP[to].noRoute) {
-    const near = tvNearestOwn(to, f);
-    if (!near) return { none: true };
-    tail = { from: near.id, to }; to = near.id;
-  }
-  let from = tv.from, head = null;
-  if (!TVP[from].fac.includes(f) || TVP[from].noRoute) {
-    const near = tvNearestOwn(from, f);
-    if (!near) return { none: true };
-    head = { from, to: near.id }; from = near.id;
-  }
-  const best = from === to ? { path: [], w: 0 } : tvPlan(from, to, f);
-  if (!best) return { none: true, head, tail };
-  // 另一条路：把最优路线里的非飞行段逐个禁掉重算，取最快且换乘不同的一条
-  let alt = null;
-  const key = (p) => p.path.filter((e) => e.type !== "fly").map((e) => (e.line ? e.line.id : e.type) + e.a).join("|");
-  for (const e of best.path.filter((x) => x.type !== "fly")) {
-    const r = tvPlan(from, to, f, new Set([e]));
-    if (r && key(r) !== key(best) && r.w < best.w * 1.8 + 300 && (!alt || r.w < alt.w)) alt = r;
-  }
-  return { best, alt, head, tail };
-}
-
-function tvStepHtml(s, i) {
+function tvStepHtml(s) {
   const k = TV_KIND[s.type], a = tvName(s.a), b = tvName(s.b);
   let what, meta = [];
   if (s.type === "fly") {
     what = `在<b>${a}</b>找飞行管理员，飞到<b>${b}</b>`;
     if (s.via.length) meta.push(`中途经停 ${s.via.map(tvName).join("、")}`);
     meta.push(`约 ${tvMin(s.t / (tv.ff ? 1.2 : 1))}`, tvMoney(s.cost * (tv.ff ? 0.5 : 1)));
+  } else if (s.type === "ride") {
+    what = `从<b>${a}</b>往<b>${tvDir(TVT[s.a], TVT[s.b])}</b>跑到<b>${b}</b>`;
+    meta.push(`直线约 ${s.yd} 码`, `跑步约 ${tvMin(s.t)}，骑马更快`, "路上可能要绕山");
   } else if (s.type === "walk") {
     what = `从<b>${a}</b>步行到<b>${b}</b>`;
     meta.push(`直线约 ${s.yd} 码`);
@@ -3147,80 +3219,218 @@ function tvRouteHtml(r, title) {
   const sum = [`${steps.length} 段`, fly.length ? `飞行费用：${tvMoney(cost)}` : "", t ? `飞行约 ${tvMin(t)}` : "", ride.length ? `另有 ${ride.length} 段${[...new Set(ride.map((s) => TV_KIND[s.type].cn))].join("、")}（等班次的时间不固定，没算进去）` : ""].filter(Boolean);
   return `<section class="tv-route"><h3>${title}</h3><p class="tv-sum">${sum.join("，")}</p><ol class="tv-steps">${steps.map(tvStepHtml).join("")}</ol></section>`;
 }
-
 function tvResultHtml(res) {
-  if (!tv.from && !tv.to) return `<p class="hint">选好出发地和目的地，或者直接在地图上点地点。</p>`;
+  if (!tv.from && !tv.to) return `<p class="hint">在上面搜地名，或者直接点地图上的飞行点、城镇和地下城。</p>`;
   if (!res) return tv.from ? tvFromHtml(tv.from) : `<p class="hint">再选一个出发地。</p>`;
   if (res.same) return `<p class="hint">出发地和目的地是同一个地方。</p>`;
-  const extra = (x, last) => x ? `<p class="tv-note">${tvName(x.from)}和${tvName(x.to)}之间没有${TV_FAC[tv.fac]}能用的航线，${last ? `先到${tvName(x.from)}，再骑马过去` : `先从${tvName(x.from)}骑马到${tvName(x.to)}`}（${TVP[x.to].kind === "fp" && !TVP[x.to].fac.includes(tv.fac) ? "对方阵营的地盘，小心守卫" : "地图上看方向"}）。</p>` : "";
-  if (res.none) return `${extra(res.head)}<p class="hint">${TV_FAC[tv.fac]}在客户端数据里找不到能到那里的交通，只能自己跑过去。</p>`;
-  return `${extra(res.head, false)}${res.best.path.length ? tvRouteHtml(res.best, "推荐走法") : ""}${extra(res.tail, true)}${res.alt ? `<details class="tv-alt"><summary>另一种走法</summary>${tvRouteHtml(res.alt, "备选")}</details>` : ""}`;
+  if (res.none) return `<p class="hint">${TV_FAC[tv.fac]}在客户端数据里找不到能到那里的交通。</p>`;
+  return `${tvRouteHtml(res.best, "推荐走法")}${res.alt ? `<details class="tv-alt"><summary>另一种走法</summary>${tvRouteHtml(res.alt, "备选")}</details>` : ""}`;
 }
 // 只选了出发地：从这里能直接去哪
 function tvFromHtml(id) {
-  const p = TVP[id], f = tv.fac;
+  const t = TVT[id], f = tv.fac;
+  if (!t.place) return `<p class="hint">再选一个目的地，就能算出从${esc(t.name)}怎么走。</p>`;
+  const p = t.place;
+  if (!p.fac.includes(f)) return `<p class="hint">${esc(p.name)}是${p.fac ? TV_FAC[p.fac] : "还没开放"}的地点，${TV_FAC[f]}用不了这里的交通。</p>`;
   const fly = TV.edges.filter((e) => e.type === "fly" && e.a === id && e.fac.includes(f)).sort((x, y) => x.cost - y.cost);
   const rides = [...TV.rides, ...TV.edges.filter((e) => ["walk", "tram", "portal"].includes(e.type))].filter((e) => e.a === id && e.fac.includes(f) && !(e.via && e.via.length));
-  if (!p.fac.includes(f)) return `<p class="hint">${esc(p.name)}是${p.fac ? TV_FAC[p.fac] : "还没开放"}的地点，${TV_FAC[tv.fac]}用不了这里的交通。</p>`;
   return `<section class="tv-route"><h3>从${esc(p.name)}能直接去</h3>
     ${fly.length ? `<table class="gtable tv-direct"><thead><tr><th>直飞</th><th>约</th><th>费用</th></tr></thead><tbody>${fly.map((e) => `<tr><td><button type="button" class="tv-link" data-to="${e.b}">${tvName(e.b)}</button></td><td>${tvMin(e.t / (tv.ff ? 1.2 : 1))}</td><td>${tvMoney(e.cost * (tv.ff ? 0.5 : 1))}</td></tr>`).join("")}</tbody></table>` : `<p class="hint">这里没有${TV_FAC[f]}的飞行航线。</p>`}
     ${rides.length ? `<ul class="tv-rides">${rides.map((e) => `<li><span class="tv-k" style="--k:${TV_KIND[e.type].col}">${TV_KIND[e.type].cn}</span><button type="button" class="tv-link" data-to="${e.b}">${tvName(e.b)}</button>${e.type === "walk" ? `<span class="tv-meta"><span>直线约 ${e.yd} 码</span></span>` : ""}</li>`).join("")}</ul>` : ""}
     <p class="hint">再选一个目的地，就能算出怎么走。</p></section>`;
 }
 
-// ---------- 地图 ----------
-function tvSvg(key, res) {
-  const m = TV.maps[key], f = tv.fac;
-  const pd = (pts) => "M" + pts.map((q) => q.join(",")).join("L");
-  const lines = [];
-  for (const e of TV.edges) {
-    if (e.type !== "fly" || !e.fac.includes(f)) continue;
-    if (e.a > e.b && TV.edges.some((x) => x.type === "fly" && x.a === e.b && x.b === e.a && x.fac.includes(f))) continue;
-    for (const s of e.seg) if (s.map === key) lines.push(`<path class="tv-fl" d="${pd(s.d)}"/>`);
-  }
-  const trans = TV.lines.filter((l) => l.fac.includes(f)).flatMap((l) => l.seg.filter((s) => s.map === key).map((s) => `<path class="tv-trbg${l.isNew ? " is-new" : ""}" d="${pd(s.d)}"/><path class="tv-tr" style="--k:${TV_KIND[l.type].col}" d="${pd(s.d)}"><title>${esc(TV_KIND[l.type].cn)}：${esc(l.name)}${l.isNew ? "（《无限》新增）" : ""}</title></path>`));
-  // 当前路线高亮
-  const hi = [];
-  const onRoute = new Set();
-  const paths = res && res.best ? [res.best.path] : [];
-  for (const path of paths) for (const e of path) {
-    onRoute.add(e.a); onRoute.add(e.b);
-    const segs = e.type === "fly" ? e.seg : e.line && e.line.seg.length ? e.line.seg : TVP[e.a].map === TVP[e.b].map ? [{ map: TVP[e.a].map, d: [[TVP[e.a].x, TVP[e.a].y], [TVP[e.b].x, TVP[e.b].y]] }] : [];
-    for (const s of segs) if (s.map === key) hi.push(`<path class="tv-hibg" d="${pd(s.d)}"/><path class="tv-hi" d="${pd(s.d)}"/>`);
-  }
-  for (const x of [res && res.head, res && res.tail]) if (x && TVP[x.from].map === key && TVP[x.to].map === key) { onRoute.add(x.from); onRoute.add(x.to); hi.push(`<path class="tv-hi tv-hi-ride" d="M${TVP[x.from].x},${TVP[x.from].y}L${TVP[x.to].x},${TVP[x.to].y}"/>`); }
-  const dots = TV.places.filter((p) => p.map === key).map((p) => {
-    const own = p.fac.includes(f) && !p.noRoute, sel = p.id === tv.from ? " is-from" : p.id === tv.to ? " is-to" : "";
-    const label = tv.allLabels || TV_MAJOR.has(p.id) || onRoute.has(p.id) || sel || p.id === tv.pop;
-    return `<g class="tv-pt tv-f-${p.fac || "x"}${own ? "" : " is-off"}${sel}${p.isNew ? " is-new" : ""}" transform="translate(${p.x},${p.y})" data-id="${p.id}" tabindex="0" role="button" aria-label="${esc(p.name)}，${esc(p.zone)}">
-      <circle r="${sel ? 13 : p.kind === "fp" ? 8 : 9}"${p.kind !== "fp" ? ' class="sq"' : ""}/>${p.isNew ? `<circle class="ring" r="15"/>` : ""}${label ? `<text x="14" y="7">${esc(p.name)}</text>` : ""}<title>${esc(p.name)}（${esc(p.zone)}）</title></g>`;
-  }).join("");
-  return `<svg viewBox="0 0 ${m.w} ${m.h}" class="tv-svg" role="group" aria-label="${m.name}交通图">
-    <image href="${m.img}" width="${m.w}" height="${m.h}"/>
-    <g class="tv-lines">${lines.join("")}</g><g>${trans.join("")}</g><g>${hi.sort((a, b) => a.startsWith('<path class="tv-hibg"') ? -1 : 1).join("")}</g><g>${dots}</g></svg>`;
+// ---------- 搜索框 ----------
+const TV_TKIND = { place: "交通", capital: "主城", town: "城镇", spot: "地点", zone: "区域", dungeon: "地下城", raid: "团本" };
+function tvSearchHtml(which, label) {
+  const t = tv[which] && TVT[tv[which]];
+  return `<div class="tv-search" data-which="${which}"><label for="tvq-${which}">${label}</label>
+    <input id="tvq-${which}" type="search" autocomplete="off" spellcheck="false" placeholder="搜地名：城镇、飞行点、区域、地下城" value="${t ? esc(t.name) : ""}" role="combobox" aria-expanded="false" aria-controls="tvl-${which}" aria-autocomplete="list">
+    <ul class="tv-ac" id="tvl-${which}" role="listbox" hidden></ul></div>`;
 }
-function tvMapsHtml(res) {
-  return `<div class="tv-maptabs seg" role="group" aria-label="选择地图">${TV_MAP_ORDER.map((k) => `<button type="button" data-map="${k}" aria-pressed="${tv.map === k}">${TV.maps[k].name}</button>`).join("")}</div>
-    <div class="tv-maps">${TV_MAP_ORDER.map((k) => `<figure class="tv-fig tv-fig-${k}${tv.map === k ? " is-on" : ""}" data-map="${k}"><figcaption>${TV.maps[k].name}${k === "zeph" ? `<small>独立地图，天裔的出生地</small>` : ""}</figcaption><div class="tv-svgwrap">${tvSvg(k, res)}${tv.pop && TVP[tv.pop].map === k ? tvPopHtml(TVP[tv.pop], k) : ""}</div></figure>`).join("")}</div>
-    <p class="tv-legend"><span><i class="lg-fl"></i>飞行航线</span>${["boat", "zep", "sky", "tram"].map((t) => `<span><i class="lg-tr" style="--k:${TV_KIND[t].col}"></i>${TV_KIND[t].cn}</span>`).join("")}<span><i class="lg-new"></i>《无限》新增</span><span><i class="lg-dot sq"></i>码头、天港和城市</span>
-      <label class="tv-chk"><input type="checkbox" id="tvLabels"${tv.allLabels ? " checked" : ""}> 显示全部地名</label></p>`;
+function tvSearch(q) {
+  q = q.trim().toLowerCase();
+  if (!q) return [];
+  const rank = { place: 0, capital: 0, zone: 1, town: 1, dungeon: 2, raid: 2, spot: 3 };
+  const seen = new Set();
+  return Object.values(TVT).filter((t) => t.name.toLowerCase().includes(q) || (t.place && t.place.en.toLowerCase().includes(q)))
+    .sort((a, b) => (a.name.toLowerCase().startsWith(q) ? 0 : 1) - (b.name.toLowerCase().startsWith(q) ? 0 : 1) || rank[a.kind] - rank[b.kind] || a.name.length - b.name.length)
+    .filter((t) => { const k = t.name + t.kind; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 12);
 }
-function tvPopHtml(p, key) {
-  const m = TV.maps[key];
-  const n = TV.edges.filter((e) => e.a === p.id && e.type === "fly" && e.fac.includes(tv.fac)).length;
-  return `<div class="tv-pop" style="left:${(p.x / m.w) * 100}%;top:${(p.y / m.h) * 100}%" role="dialog" aria-label="${esc(p.name)}">
-    <p><b>${esc(p.name)}</b>${p.isNew ? ` <span class="dc-new">新</span>` : ""}<br><span class="tv-zone">${esc(p.zone)}</span> ${tvTag(p)}</p>
-    ${p.noRoute ? `<p class="tv-zone">客户端里还没有这个飞行点的航线</p>` : n ? `<p class="tv-zone">${TV_FAC[tv.fac]}能直飞 ${n} 个地方</p>` : ""}
-    <p class="tv-popbtn"><button type="button" data-set="from" data-id="${p.id}">从这里出发</button><button type="button" data-set="to" data-id="${p.id}">到这里去</button></p>
-    <button type="button" class="tv-x" aria-label="关闭">×</button></div>`;
+function tvAcRender(box, list) {
+  const ul = box.querySelector(".tv-ac"), inp = box.querySelector("input");
+  ul.innerHTML = list.map((t, i) => `<li role="option" id="tvo-${box.dataset.which}-${i}" data-id="${t.id}"${i === 0 ? ' aria-selected="true"' : ""}><span class="tv-tk tv-tk-${t.kind}">${TV_TKIND[t.kind]}</span><b>${esc(t.name)}</b><small>${esc(t.sub || "")}</small></li>`).join("") || `<li class="tv-acnone">没找到</li>`;
+  ul.hidden = false; inp.setAttribute("aria-expanded", "true");
 }
 
-function tvSelect(id, label, cur) {
-  const groups = TV_MAP_ORDER.map((k) => {
-    const ps = TV.places.filter((p) => p.map === k).sort((a, b) => a.zone.localeCompare(b.zone, "zh") || a.name.localeCompare(b.name, "zh"));
-    return `<optgroup label="${TV.maps[k].name}">${ps.map((p) => `<option value="${p.id}"${p.id === cur ? " selected" : ""}>${esc(p.name)}（${esc(p.zone)}）${p.fac && !p.fac.includes(tv.fac) ? `　${TV_FAC[p.fac]}` : ""}${p.isNew ? "　新" : ""}</option>`).join("")}</optgroup>`;
-  }).join("");
-  return `<label class="tv-sel"><span>${label}</span><select id="tv-${label === "出发地" ? "from" : "to"}"><option value="">选择地点</option>${groups}</select></label>`;
+// ---------- 地图 ----------
+function tvLL(x, y) { return LMAP.unproject([x, y], TV.Z); }
+function tvFitAll() { const [GW, GH] = TV.grid; return L.latLngBounds(tvLL(GW * 256 * 0.04, GH * 256 * 0.97), tvLL(GW * 256 * 0.97, GH * 256 * 0.03)); }
+function tvBuildMap() {
+  const el = document.getElementById("tvMap");
+  if (LMAP) { LMAP.remove(); LMAP = null; }
+  const [GW, GH] = TV.grid, W = GW * 256, H = GH * 256;
+  LMAP = L.map(el, { crs: L.CRS.Simple, minZoom: 1, maxZoom: TV.Z + 1, zoomSnap: 0.25, zoomDelta: 0.5, wheelPxPerZoomLevel: 90, attributionControl: false, zoomControl: false, preferCanvas: true });
+  L.control.zoom({ position: "bottomleft", zoomInTitle: "放大", zoomOutTitle: "缩小" }).addTo(LMAP);
+  const bounds = L.latLngBounds(tvLL(0, H), tvLL(W, 0));
+  LMAP.setMaxBounds(bounds.pad(0.15));
+  const idx = Object.fromEntries(Object.entries(TV.tiles).map(([z, v]) => [z, new Set(v)]));
+  const BLANK = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+  const Tiles = L.TileLayer.extend({ getTileUrl(c) { return idx[c.z] && idx[c.z].has(`${c.x}_${c.y}`) ? `assets/travel/tiles/${c.z}/${c.x}/${c.y}.webp` : BLANK; } });
+  new Tiles("", { maxNativeZoom: TV.Z, maxZoom: TV.Z + 1, minZoom: 0, noWrap: true, bounds, keepBuffer: 3, className: "tv-tiles" }).addTo(LMAP);
+  LMAP.createPane("tvZones").style.zIndex = 350;
+  LMAP.createPane("tvLines").style.zIndex = 420;
+  LMAP.createPane("tvRoute").style.zIndex = 460;
+  LMAP.createPane("tvPts").style.zIndex = 620;
+  LMAP.createPane("tvLabels").style.zIndex = 610;
+  LL = { route: L.layerGroup().addTo(LMAP) };
+  tvDrawLayers();
+  const setZ = () => { el.dataset.z = Math.floor(LMAP.getZoom() + 0.01); };
+  LMAP.on("zoomend", setZ);
+  LMAP.fitBounds(tvFitAll());
+  setZ();
+}
+function tvShow(newFlag) { return !tv.layers.newOnly || newFlag; }
+function tvDrawLayers() {
+  if (!LMAP) return;
+  for (const k of ["zones", "fly", "trans", "pts", "labels"]) if (LL[k]) LL[k].remove();
+  const f = tv.fac, ly = tv.layers;
+  // 区域：阵营底色 + 边界 + 名称和等级
+  LL.zones = L.layerGroup().addTo(LMAP);
+  LL.labels = L.layerGroup().addTo(LMAP);
+  for (const z of TV.zones) {
+    const col = TV_ZCOL[z.fgm] || TV_ZCOL[0];
+    if (ly.zones && tvShow(z.isNew)) L.polygon(z.rings.map((r) => r.d.map(([x, y]) => tvLL(x, y))), { pane: "tvZones", color: "#F4E9CF", weight: 1, opacity: 0.5, fillColor: col, fillOpacity: z.fgm === 0 ? 0.08 : z.fgm === 8 ? 0.55 : 0.22, interactive: false }).addTo(LL.zones);
+    if (!tvShow(z.isNew)) continue;
+    const big = z.cells > 2500 ? "zl-big" : z.cells > 600 ? "zl-mid" : "zl-sm";
+    L.marker(tvLL(z.label[0], z.label[1]), { pane: "tvLabels", interactive: false, keyboard: false, icon: L.divIcon({ className: `tv-zl ${big}${z.isNew ? " is-new" : ""}`, html: `<span>${esc(z.zh)}</span>${ly.zones && z.lv ? `<small>${z.lv}</small>` : ""}`, iconSize: null }) }).addTo(LL.labels);
+  }
+  // 大陆名（缩得最小时只看这几个字）
+  for (const [c, name] of [[0, "东部王国"], [1, "卡利姆多"], [2991, "泽风岛"]]) {
+    const zs = TV.zones.filter((z) => z.cont === c), w = zs.reduce((s, z) => s + z.cells, 0);
+    if (!w) continue;
+    const x = zs.reduce((s, z) => s + z.label[0] * z.cells, 0) / w, y = zs.reduce((s, z) => s + z.label[1] * z.cells, 0) / w;
+    L.marker(tvLL(x, y), { pane: "tvLabels", interactive: false, keyboard: false, icon: L.divIcon({ className: "tv-cl", html: `<span>${name}</span>`, iconSize: null }) }).addTo(LL.labels);
+  }
+  // 飞行航线（每对地点画一条）
+  LL.fly = L.layerGroup().addTo(LMAP);
+  if (ly.fly) {
+    const drawn = new Set();
+    for (const e of TV.edges) {
+      if (e.type !== "fly" || !e.fac.includes(f)) continue;
+      const k = [e.a, e.b].sort().join("|");
+      if (drawn.has(k)) continue;
+      drawn.add(k);
+      if (!tvShow(TVP[e.a].isNew || TVP[e.b].isNew)) continue;
+      L.polyline(e.seg.map(([x, y]) => tvLL(x, y)), { pane: "tvLines", color: TV_FCOL[f], weight: 1.6, opacity: 0.6, interactive: false }).addTo(LL.fly);
+    }
+  }
+  // 船、飞艇、天空快艇、地铁、传送门
+  LL.trans = L.layerGroup().addTo(LMAP);
+  for (const l of TV.lines) {
+    if (!l.fac.includes(f) || !tvShow(l.isNew) || !(l.type === "boat" ? ly.boat : ly.other) || !l.seg.length) continue;
+    const pts = l.seg.map(([x, y]) => tvLL(x, y));
+    if (l.isNew) L.polyline(pts, { pane: "tvLines", color: "#FFD86B", weight: 8, opacity: 0.32, interactive: false }).addTo(LL.trans);
+    L.polyline(pts, { pane: "tvLines", color: TV_KIND[l.type].col, weight: 2.6, opacity: 0.95, dashArray: l.type === "portal" || l.type === "tram" ? "2 6" : "9 7", lineCap: "round" })
+      .bindTooltip(`${TV_KIND[l.type].cn}：${esc(l.name)}${l.isNew ? "（《无限》新增）" : ""}`, { sticky: true, className: "tv-tip" }).addTo(LL.trans);
+  }
+  // 点：交通地点、城镇、地下城
+  LL.pts = L.layerGroup().addTo(LMAP);
+  const pin = (x, y, cls, html, title, id) => L.marker(tvLL(x, y), { pane: "tvPts", icon: L.divIcon({ className: cls, html, iconSize: null }), title, riseOnHover: true })
+    .on("click", (ev) => { L.DomEvent.stop(ev); tvPopup(id); }).addTo(LL.pts);
+  for (const p of TV.places) {
+    if (!tvShow(p.isNew)) continue;
+    const own = tvUsable(p, f);
+    pin(p.x, p.y, `tv-pin tv-pin-${p.kind} tv-pf-${p.fac || "x"}${own ? "" : " is-off"}${p.isNew ? " is-new" : ""}${p.major ? " is-major" : ""}`, `<i></i><span>${esc(p.name)}</span>`, p.name, p.id);
+  }
+  if (ly.towns && !ly.newOnly) for (const p of TV.pois) if (!p.dup) pin(p.x, p.y, `tv-poi tv-poi-${p.kind}`, `<i></i><span>${esc(p.zh)}</span>`, p.zh, "p" + p.id);
+  if (ly.dungeons) for (const d of TV.dungeons) {
+    if (d.x == null || !tvShow(d.new)) continue;
+    pin(d.x, d.y, `tv-dg${d.raid ? " is-raid" : ""}${d.new ? " is-new" : ""}`, `<i></i><span>${esc(d.zh)}${d.lv ? `<small>${d.lv}</small>` : ""}</span>`, d.zh, "d" + d.id);
+  }
+}
+function tvPopup(id) {
+  const t = TVT[id];
+  if (!t || !LMAP) return;
+  const f = tv.fac;
+  let info = "";
+  if (t.place) {
+    const p = t.place, n = TV.edges.filter((e) => e.a === p.id && e.type === "fly" && e.fac.includes(f)).length;
+    info = `<span class="tv-fac tv-fac-${p.fac || "x"}">${p.fac === "AH" ? "两个阵营" : p.fac ? TV_FAC[p.fac] : "暂无航线"}</span>${p.noRoute ? `<br>客户端里还没有这个飞行点的航线` : n ? `<br>${TV_FAC[f]}能直飞 ${n} 个地方` : ""}`;
+  } else if (t.dungeon) info = `${t.dungeon.raid ? `${t.dungeon.players} 人团本` : "5 人地下城"}${t.dungeon.lv ? `，建议 ${t.dungeon.lv} 级起` : ""}${t.dungeon.new ? "，《无限》新增，位置按地形区域估的" : ""}`;
+  else if (t.zone) info = `${{ 2: "联盟领地", 4: "部落领地", 0: "争夺地区", 6: "两个阵营", 8: "地形在，但玩家进不去" }[t.zone.fgm] || ""}${t.zone.lv ? `，${t.zone.lv} 级` : ""}`;
+  else info = esc(TV_TKIND[t.kind]);
+  const isNew = (t.place && t.place.isNew) || (t.dungeon && t.dungeon.new) || (t.zone && t.zone.isNew);
+  L.popup({ className: "tv-popup", offset: [0, -4], autoPanPadding: [40, 40] }).setLatLng(tvLL(t.x, t.y)).setContent(`<p><b>${esc(t.name)}</b>${isNew ? ` <span class="dc-new">新</span>` : ""}<br><span class="tv-zone">${esc(t.sub || "")}</span></p><p class="tv-zone">${info}</p>
+    <p class="tv-popbtn"><button type="button" data-set="from" data-id="${t.id}">从这里出发</button><button type="button" data-set="to" data-id="${t.id}">到这里去</button></p>`).openOn(LMAP);
+}
+// 船只画上船到下船这一段：在线路折线上取离两端最近的点
+function tvLegSeg(e) {
+  const seg = e.line.seg, a = TVT[e.a], b = TVT[e.b];
+  const near = (t) => seg.reduce((bi, p, i) => (Math.hypot(p[0] - t.x, p[1] - t.y) < Math.hypot(seg[bi][0] - t.x, seg[bi][1] - t.y) ? i : bi), 0);
+  const i = near(a), j = near(b);
+  if (e.line.loop && j < i) return [...seg.slice(i), ...seg.slice(0, j + 1)];
+  return i <= j ? seg.slice(i, j + 1) : seg.slice(j, i + 1).reverse();
+}
+function tvDrawRoute(res, fly) {
+  if (!LMAP) return;
+  LL.route.clearLayers();
+  const r = L.svg({ pane: "tvRoute" });
+  const all = [];
+  if (res && res.best) for (const e of res.best.path) {
+    if (e.type === "ride" && !e.yd) continue;
+    const seg = e.type === "fly" ? e.seg : e.line && e.line.seg.length ? tvLegSeg(e) : [[TVT[e.a].x, TVT[e.a].y], [TVT[e.b].x, TVT[e.b].y]];
+    const pts = seg.map(([x, y]) => tvLL(x, y));
+    all.push(...pts);
+    L.polyline(pts, { renderer: r, pane: "tvRoute", color: "#120C04", weight: 11, opacity: 0.7, lineCap: "round", lineJoin: "round", interactive: false }).addTo(LL.route);
+    L.polyline(pts, { renderer: r, pane: "tvRoute", color: e.type === "fly" ? "#FFD34D" : TV_KIND[e.type].col, weight: 5.5, lineCap: "round", lineJoin: "round", className: "tv-route-line", interactive: false, dashArray: e.type === "ride" || e.type === "walk" ? "2 10" : null }).addTo(LL.route);
+  }
+  for (const id of [tv.from, tv.to]) if (id && TVT[id]) {
+    all.push(tvLL(TVT[id].x, TVT[id].y));
+    L.marker(tvLL(TVT[id].x, TVT[id].y), { pane: "tvRoute", interactive: false, keyboard: false, icon: L.divIcon({ className: `tv-end tv-end-${id === tv.from ? "a" : "b"}`, html: `<i>${id === tv.from ? "起" : "终"}</i>`, iconSize: null }) }).addTo(LL.route);
+  }
+  if (fly && all.length) LMAP.flyToBounds(L.latLngBounds(all), { padding: [70, 70], maxZoom: TV.Z - 2, duration: motionOK() ? 0.8 : 0 });
+}
+
+// ---------- 页面 ----------
+function tvKeyHtml() {
+  return `<details class="tv-key"${tv.keyOpen ? " open" : ""}><summary>图层</summary>
+    ${TV_LAYERS.map(([k, label]) => `<label class="tv-chk"><input type="checkbox" data-layer="${k}"${tv.layers[k] ? " checked" : ""}> ${label}</label>`).join("")}
+    <p class="tv-keyh">区域归属</p>
+    <p class="tv-sw"><span><i style="--c:${TV_ZCOL[2]}"></i>联盟</span><span><i style="--c:${TV_ZCOL[4]}"></i>部落</span><span><i style="--c:${TV_ZCOL[0]}"></i>争夺</span><span><i style="--c:${TV_ZCOL[6]}"></i>两个阵营</span><span><i style="--c:${TV_ZCOL[8]}"></i>进不去</span></p>
+    <p class="tv-keyh">交通</p>
+    <p class="tv-sw">${["boat", "zep", "sky", "tram"].map((t) => `<span><b style="--c:${TV_KIND[t].col}"></b>${TV_KIND[t].cn}</span>`).join("")}<span><b class="nw"></b>《无限》新增</span></p>
+    <p class="tv-keyh">标记</p>
+    <p class="tv-sw tv-sw-pins"><span><i class="pin"></i>飞行点</span><span><i class="pin sq"></i>码头、天港</span><span><i class="pin dg"></i>地下城</span><span><i class="pin rd"></i>团本</span></p>
+  </details>`;
+}
+function tvLevelHtml() {
+  const L0 = +tv.level;
+  if (!L0) return "";
+  const list = TV.dungeons.filter((d) => d.lv && !d.raid && d.lv <= L0 + 3 && d.lv >= L0 - 8).sort((a, b) => a.lv - b.lv);
+  return `<section class="tv-box"><h3>${L0} 级适合的地下城</h3>${list.length ? `<ul class="tv-dlist">${list.map((d) => `<li>${d.x != null ? `<button type="button" class="tv-link" data-to="d${d.id}">${esc(d.zh)}</button>` : esc(d.zh)}<span>${d.lv} 级起${d.new ? `  <span class="dc-new">新</span>` : ""}${d.x == null ? "  入口位置未知" : ""}</span></li>`).join("")}</ul>` : `<p class="hint">这个等级附近没有地下城。</p>`}<p class="tv-zone">等级是客户端地下城查找器里的建议起始等级，点名字就规划过去。</p></section>`;
+}
+function tvNewHtml() {
+  const zs = TV.zones.filter((z) => z.isNew), ds = TV.dungeons.filter((d) => d.new), ls = TV.lines.filter((l) => l.isNew), ps = TV.places.filter((p) => p.isNew && p.kind === "fp");
+  const go = (id, name, extra = "") => `<li><button type="button" class="tv-link" data-go="${id}">${esc(name)}</button>${extra}</li>`;
+  return `<section class="tv-box"><h3>《无限》新增</h3>
+    <p class="tv-keyh">新地区</p><ul class="tv-dlist">${zs.map((z) => go("z" + z.id, z.zh, z.lv ? `<span>${z.lv} 级</span>` : "")).join("")}</ul>
+    <p class="tv-keyh">新地下城</p><ul class="tv-dlist">${ds.map((d) => d.x != null ? go("d" + d.id, d.zh, `<span>${d.lv} 级起</span>`) : `<li>${esc(d.zh)}<span>${d.lv} 级起  入口位置未知</span></li>`).join("")}</ul>
+    <p class="tv-keyh">新航线</p><ul class="tv-dlist">${ls.map((l) => `<li><span class="tv-k" style="--k:${TV_KIND[l.type].col}">${TV_KIND[l.type].cn}</span>${esc(l.name)}</li>`).join("")}</ul>
+    <p class="tv-keyh">新飞行点</p><ul class="tv-dlist">${ps.map((p) => go(p.id, p.name, `<span>${esc(p.zone)}</span>`)).join("")}</ul></section>`;
+}
+function tvPanelHtml(res) {
+  return `<div class="tv-form">
+      <div class="tv-row"><div class="seg tv-facseg" role="group" aria-label="阵营">${["A", "H"].map((f) => `<button type="button" data-fac="${f}" aria-pressed="${tv.fac === f}">${TV_FAC[f]}</button>`).join("")}</div>
+        <label class="tv-lv">等级 <input id="tvLevel" type="number" inputmode="numeric" min="1" max="60" placeholder="1–60" value="${esc(tv.level)}"></label></div>
+      ${tvSearchHtml("from", "出发地")}
+      <button type="button" class="tv-swap" aria-label="交换出发地和目的地">⇅</button>
+      ${tvSearchHtml("to", "目的地")}
+      <label class="tv-chk"><input type="checkbox" id="tvFF"${tv.ff ? " checked" : ""}> 有传承「飞行常客」（飞行费用 -50%，速度 +20%）</label>
+    </div>
+    <div class="tv-result" aria-live="polite">${tvResultHtml(res)}</div>
+    ${tvLevelHtml()}
+    ${tvNewHtml()}`;
 }
 function tvLinesHtml() {
   const rows = TV.lines.map((l) => `<tr><td><span class="tv-k" style="--k:${TV_KIND[l.type].col}">${TV_KIND[l.type].cn}</span></td><td><b>${l.stops.map(tvName).join(l.loop ? " → " : "  ⇄  ")}${l.loop ? ` → ${tvName(l.stops[0])}` : ""}</b>${l.isNew ? ` <span class="dc-new">新</span>` : ""}</td><td>${l.fac === "AH" ? "两个阵营" : TV_FAC[l.fac]}</td></tr>`).join("");
@@ -3228,85 +3438,103 @@ function tvLinesHtml() {
     <p class="dm-desc">跨大陆只能坐船和飞艇，都免费，来回开，错过了就等下一班。环线按箭头方向开，比如从米奈希尔港去奥伯丁，要先停南海镇。</p>
     <div class="gtable-wrap"><table class="gtable"><thead><tr><th>类型</th><th>航线</th><th>谁能坐</th></tr></thead><tbody>${rows}</tbody></table></div></section>`;
 }
-
+let tvLastKey = "";
 function renderTravel() {
   const el = document.getElementById("travelPage");
   if (!tvLoad()) {
-    el.innerHTML = `<header class="ts-head"><h2>旅行导航</h2></header><p class="hint">${tv.failed ? "交通数据没加载出来。离线版没带地图数据，请打开网站版。" : "正在加载交通数据……"}</p>`;
+    el.innerHTML = `<p class="hint tv-wait">${tv.failed ? "地图没加载出来：需要联网（地图组件从 cdnjs 加载），离线版也没带地图数据，请打开网站版。" : "正在加载世界地图……"}</p>`;
     return;
   }
-  if (tv.from && !TVP[tv.from]) tv.from = null;
-  if (tv.to && !TVP[tv.to]) tv.to = null;
+  if (tv.from && !TVT[tv.from]) tv.from = null;
+  if (tv.to && !TVT[tv.to]) tv.to = null;
   const res = tvResult();
-  const focus = tv.from ? TVP[tv.from].map : tv.to ? TVP[tv.to].map : null;
-  if (focus && !tv.pop) tv.map = focus;
-  const keep = document.activeElement && document.activeElement.id;
-  el.innerHTML = `
-    <header class="ts-head"><h2>旅行导航 <span class="dm-en">Travel</span></h2>
-      <p class="lede2">从一个地方到另一个地方，该坐飞行点、船、飞艇还是地铁？选好阵营、出发地和目的地，按顺序告诉你每一段怎么走、要花多少钱。飞行点、航线、票价和船的航路都来自《无限》测试端解包，包括新地图河林、海加尔山和泽风岛。</p>
-    </header>
-    <div class="tv-layout">
-      <div class="tv-side">
-        <div class="tv-form">
-          <div class="seg tv-facseg" role="group" aria-label="阵营">${["A", "H"].map((f) => `<button type="button" data-fac="${f}" aria-pressed="${tv.fac === f}">${TV_FAC[f]}</button>`).join("")}</div>
-          ${tvSelect("出发地", "出发地", tv.from)}
-          <button type="button" class="tv-swap" aria-label="交换出发地和目的地">⇅</button>
-          ${tvSelect("目的地", "目的地", tv.to)}
-          <label class="tv-chk"><input type="checkbox" id="tvFF"${tv.ff ? " checked" : ""}> 有传承「飞行常客」（飞行费用 -50%，速度 +20%）</label>
-        </div>
-        <div class="tv-result" aria-live="polite">${tvResultHtml(res)}</div>
+  if (!el.querySelector("#tvMap") || !LMAP) {
+    el.innerHTML = `
+      <div class="tv-app">
+        <div class="tv-mapwrap"><div id="tvMap" class="tv-map" role="application" aria-label="《魔兽世界：无限》世界交通地图"></div><div class="tv-keywrap">${tvKeyHtml()}</div>
+          <button type="button" class="tv-all" title="看全图">全图</button></div>
+        <aside class="tv-panel" id="tvPanel">${tvPanelHtml(res)}</aside>
       </div>
-      <div class="tv-mapcol">${tvMapsHtml(res)}</div>
-    </div>
-    ${tvLinesHtml()}
-    <section class="dm-sec"><div class="ts-h"><h3>出发前要知道</h3></div>
-      <ul class="tv-tips">
-        <li>飞行点要先“开”：到当地和飞行管理员说一次话才算发现，没开过的点飞不过去。路过不等于开了。</li>
-        <li>飞行航线不跨海。去另一块大陆，联盟坐船，部落坐飞艇；棘齿城和藏宝海湾之间的船、热砂港到河林的船两个阵营都能坐。</li>
-        <li>飞艇塔上有两个平台，各去一个地方，上去前看清楚。</li>
-        <li>达纳苏斯没有飞行点，飞行管理员在城外的鲁瑟兰村，从那里走传送门进城。</li>
-        <li>传承「飞行常客」是冒险树里的天赋，飞行费用减半、速度加快 20%，勾上上面的选项就按它来算。</li>
-        <li>有报道说达拉然和暴风城之间有一对传送门，但使用条件还没证实，导航里先不算它。</li>
-      </ul>
-      <p class="hint">数据：本机《魔兽世界：无限》测试端 ${esc(TV.build)} 解包（飞行点、航线、票价、船和飞艇航路，中文名取自国服简体中文客户端文本）。飞行时间按经典的飞行速度（跑步的 434%）估算，船和飞艇的班次客户端里没有，不算时间。测试期数据，正式上线可能会变。</p>
-    </section>`;
-  if (keep) document.getElementById(keep)?.focus({ preventScroll: true });
+      ${tvLinesHtml()}
+      <section class="dm-sec"><div class="ts-h"><h3>出发前要知道</h3></div>
+        <ul class="tv-tips">
+          <li>飞行点要先“开”：到当地和飞行管理员说一次话才算发现，没开过的点飞不过去。路过不等于开了。</li>
+          <li>飞行航线不跨海。去另一块大陆，联盟坐船，部落坐飞艇；棘齿城和藏宝海湾之间的船、热砂港到河林的船两个阵营都能坐。</li>
+          <li>飞艇塔上有两个平台，各去一个地方，上去前看清楚。</li>
+          <li>达纳苏斯没有飞行点，飞行管理员在城外的鲁瑟兰村，从那里走传送门进城。</li>
+          <li>传承「飞行常客」是冒险树里的天赋，飞行费用减半、速度加快 20%，勾上上面的选项就按它来算。</li>
+          <li>有报道说达拉然和暴风城之间有一对传送门，但使用条件还没证实，导航里先不算它。</li>
+        </ul>
+        <p class="hint">数据：本机《魔兽世界：无限》测试端 ${esc(TV.build)} 解包。地图由客户端的小地图地形瓦片拼成；区域边界取自地形数据里每 33 码一格的区域编号；飞行点、航线、票价、船和飞艇航路、城镇和地下城位置、地下城建议等级都来自客户端数据表，中文名取自国服简体中文客户端文本。泽风岛是独立地图，放在两块大陆之间只是示意。区域等级范围客户端里没有，按经典旧世的通行范围标，河林按官方公布的 30–45 级。飞行时间按经典的飞行速度（跑步的 434%）估算，船和飞艇的班次客户端里没有，不算时间。测试期数据，正式上线可能会变。</p>
+      </section>`;
+    tvBuildMap();
+    tvLastKey = "";
+  } else {
+    document.getElementById("tvPanel").innerHTML = tvPanelHtml(res);
+  }
+  const key = `${tv.fac}|${tv.from}|${tv.to}|${tv.ff}`;
+  tvDrawRoute(res, key !== tvLastKey && !!(tv.from || tv.to));
+  tvLastKey = key;
 }
 
+// ---------- 交互 ----------
 function tvSet(which, id) {
-  tv[which] = id || null; tv.pop = null;
+  tv[which] = id || null;
+  if (LMAP) LMAP.closePopup();
   replaceHash(travelHash());
   renderTravel();
-  if (tv.from && tv.to) announce(`已规划：${TVP[tv.from].name} 到 ${TVP[tv.to].name}`);
+  if (tv.from && tv.to && TVT[tv.from] && TVT[tv.to]) announce(`已规划：${TVT[tv.from].name} 到 ${TVT[tv.to].name}`);
+}
+function tvGo(id) {
+  const t = TVT[id];
+  if (!t || !LMAP) return;
+  LMAP.flyTo(tvLL(t.x, t.y), Math.max(LMAP.getZoom(), t.kind === "zone" ? TV.Z - 3 : TV.Z - 2), { duration: motionOK() ? 0.8 : 0 });
+  setTimeout(() => tvPopup(id), motionOK() ? 850 : 0);
 }
 document.getElementById("travelPage").addEventListener("click", (e) => {
   const t = e.target;
   const fac = t.closest("[data-fac]");
-  if (fac) { tv.fac = fac.dataset.fac; store.set("forever-travel-fac", tv.fac); replaceHash(travelHash()); renderTravel(); announce(`已切换到${TV_FAC[tv.fac]}`); return; }
-  const mp = t.closest(".tv-maptabs [data-map]");
-  if (mp) { tv.map = mp.dataset.map; tv.pop = null; renderTravel(); return; }
+  if (fac) { tv.fac = fac.dataset.fac; store.set("forever-travel-fac", tv.fac); replaceHash(travelHash()); renderTravel(); tvDrawLayers(); announce(`已切换到${TV_FAC[tv.fac]}`); return; }
   if (t.closest(".tv-swap")) { [tv.from, tv.to] = [tv.to, tv.from]; tvSet("from", tv.from); return; }
+  if (t.closest(".tv-all")) { LMAP.flyToBounds(tvFitAll(), { duration: motionOK() ? 0.6 : 0 }); return; }
   const set = t.closest("[data-set]");
   if (set) { tvSet(set.dataset.set, set.dataset.id); return; }
-  if (t.closest(".tv-x")) { tv.pop = null; renderTravel(); return; }
-  const link = t.closest(".tv-link");
+  const link = t.closest(".tv-link[data-to]");
   if (link) { tvSet("to", link.dataset.to); return; }
-  const pt = t.closest(".tv-pt");
-  if (pt) { tv.pop = tv.pop === pt.dataset.id ? null : pt.dataset.id; tv.map = TVP[pt.dataset.id].map; renderTravel(); document.querySelector(".tv-pop [data-set]")?.focus({ preventScroll: true }); return; }
-  if (tv.pop && !t.closest(".tv-pop")) { tv.pop = null; renderTravel(); }
+  const go = t.closest("[data-go]");
+  if (go) { if (matchMedia("(max-width:900px)").matches) document.getElementById("tvMap").scrollIntoView({ behavior: "auto", block: "start" }); tvGo(go.dataset.go); return; }
+  const opt = t.closest(".tv-ac li[data-id]");
+  if (opt) { tvSet(opt.closest(".tv-search").dataset.which, opt.dataset.id); return; }
+});
+document.getElementById("travelPage").addEventListener("input", (e) => {
+  const box = e.target.closest(".tv-search");
+  if (box) tvAcRender(box, tvSearch(e.target.value));
 });
 document.getElementById("travelPage").addEventListener("keydown", (e) => {
-  const pt = e.target.closest && e.target.closest(".tv-pt");
-  if (pt && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pt.dispatchEvent(new MouseEvent("click", { bubbles: true })); }
-  if (e.key === "Escape" && tv.pop) { tv.pop = null; renderTravel(); }
+  const box = e.target.closest && e.target.closest(".tv-search");
+  if (!box) return;
+  const items = [...box.querySelectorAll("li[data-id]")];
+  let i = items.findIndex((li) => li.getAttribute("aria-selected") === "true");
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    e.preventDefault();
+    if (!items.length) return;
+    i = (i + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
+    items.forEach((li, k) => li.setAttribute("aria-selected", k === i ? "true" : "false"));
+    e.target.setAttribute("aria-activedescendant", items[i].id);
+  } else if (e.key === "Enter" && items[Math.max(0, i)]) { e.preventDefault(); tvSet(box.dataset.which, items[Math.max(0, i)].dataset.id); }
+  else if (e.key === "Escape") { box.querySelector(".tv-ac").hidden = true; }
+});
+document.getElementById("travelPage").addEventListener("focusout", (e) => {
+  const box = e.target.closest && e.target.closest(".tv-search");
+  if (box) setTimeout(() => { if (!box.contains(document.activeElement)) { box.querySelector(".tv-ac").hidden = true; const t = tv[box.dataset.which] && TVT[tv[box.dataset.which]]; box.querySelector("input").value = t ? t.name : ""; } }, 150);
 });
 document.getElementById("travelPage").addEventListener("change", (e) => {
   const t = e.target;
-  if (t.id === "tv-from") tvSet("from", t.value);
-  else if (t.id === "tv-to") tvSet("to", t.value);
-  else if (t.id === "tvFF") { tv.ff = t.checked; store.set("forever-travel-ff", tv.ff); renderTravel(); }
-  else if (t.id === "tvLabels") { tv.allLabels = t.checked; renderTravel(); }
+  if (t.id === "tvFF") { tv.ff = t.checked; store.set("forever-travel-ff", tv.ff); renderTravel(); }
+  else if (t.id === "tvLevel") { tv.level = t.value ? String(Math.max(1, Math.min(60, Math.round(+t.value)))) : ""; store.set("forever-travel-level", tv.level); renderTravel(); }
+  else if (t.dataset.layer) { tv.layers[t.dataset.layer] = t.checked; store.set("forever-travel-layers", tv.layers); tvDrawLayers(); }
 });
+document.getElementById("travelPage").addEventListener("toggle", (e) => { if (e.target.classList && e.target.classList.contains("tv-key")) tv.keyOpen = e.target.open; }, true);
 
 
 // ===================== 新手入门 =====================
