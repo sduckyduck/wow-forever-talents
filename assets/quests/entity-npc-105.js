@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"npc:216854":{"id":216854,"kind":"npc","name":"npc #216854","nameEn":"","positions":[],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

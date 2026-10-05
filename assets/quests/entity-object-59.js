@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:121264":{"id":121264,"kind":"object","name":"卢修斯的箱子","nameEn":"Lucius's Lockbox","positions":[{"zone":44,"x":46.95,"y":44.69,"mapId":1433,"world":[16400.22,8266.6]}],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

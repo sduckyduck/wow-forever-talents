@@ -1,0 +1,1051 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "build": "1.60.1.70205",
+    "product": "wow_classic_beta",
+    "updatedAt": "2026-10-05T01:57:17.556438+00:00",
+    "clientQuestIds": 6609,
+    "namedQuests": 5416,
+    "foreverListed": 5372,
+    "observed": 72,
+    "classicQuests": 5009,
+    "changes": {
+      "unchanged": 4018,
+      "updated": 451,
+      "unconfirmed": 46,
+      "new": 737,
+      "unknown": 120
+    },
+    "corrections": [
+      {
+        "file": "src\\corrections\\Forever\\legacy\\classicQuestFixes.lua",
+        "rows": 1844,
+        "layer": "questiedb-forever-seed-correction"
+      },
+      {
+        "file": "src\\corrections\\Forever\\legacy\\classicNPCFixes.lua",
+        "rows": 985,
+        "layer": "questiedb-forever-seed-correction"
+      },
+      {
+        "file": "src\\corrections\\Forever\\legacy\\classicObjectFixes.lua",
+        "rows": 139,
+        "layer": "questiedb-forever-seed-correction"
+      },
+      {
+        "file": "src\\corrections\\Forever\\legacy\\classicItemFixes.lua",
+        "rows": 405,
+        "layer": "questiedb-forever-seed-correction"
+      },
+      {
+        "file": "src\\corrections\\Forever\\legacy\\classicQuestReputationFixes.lua",
+        "rows": 4254,
+        "layer": "questiedb-forever-seed-correction"
+      },
+      {
+        "file": "src\\corrections\\Forever\\legacy\\itemStartFixes.lua",
+        "rows": 452,
+        "layer": "questiedb-forever-seed-correction"
+      },
+      {
+        "file": "src\\corrections\\Forever\\generated\\foreverBaseQuest.lua",
+        "rows": 770,
+        "layer": "questiedb-forever-delta"
+      },
+      {
+        "file": "src\\corrections\\Forever\\generated\\foreverBaseNpc.lua",
+        "rows": 3394,
+        "layer": "questiedb-forever-delta"
+      },
+      {
+        "file": "src\\corrections\\Forever\\generated\\foreverBaseObject.lua",
+        "rows": 297,
+        "layer": "questiedb-forever-delta"
+      },
+      {
+        "file": "src\\corrections\\Forever\\generated\\foreverBaseItem.lua",
+        "rows": 8112,
+        "layer": "questiedb-forever-delta"
+      },
+      {
+        "file": "src\\corrections\\Forever\\traces\\foreverQuestTraces.lua",
+        "rows": 508,
+        "layer": "questiedb-forever-trace"
+      },
+      {
+        "file": "src\\corrections\\Forever\\traces\\foreverNpcTraces.lua",
+        "rows": 898,
+        "layer": "questiedb-forever-trace"
+      },
+      {
+        "file": "src\\corrections\\Forever\\traces\\foreverObjectTraces.lua",
+        "rows": 59,
+        "layer": "questiedb-forever-trace"
+      },
+      {
+        "file": "src\\corrections\\Forever\\traces\\foreverItemTraces.lua",
+        "rows": 313,
+        "layer": "questiedb-forever-trace"
+      },
+      {
+        "file": "src\\corrections\\Forever\\foreverQuestFixes.lua",
+        "rows": 170,
+        "layer": "questiedb-forever-authored"
+      },
+      {
+        "file": "src\\corrections\\Forever\\foreverNPCFixes.lua",
+        "rows": 34,
+        "layer": "questiedb-forever-authored"
+      },
+      {
+        "file": "src\\corrections\\Forever\\foreverObjectFixes.lua",
+        "rows": 19,
+        "layer": "questiedb-forever-authored"
+      },
+      {
+        "file": "src\\corrections\\Forever\\foreverItemFixes.lua",
+        "rows": 8,
+        "layer": "questiedb-forever-authored"
+      }
+    ],
+    "coverage": {
+      "rewards": 5372,
+      "relations": 3107,
+      "foreverRelations": 121,
+      "foreverDetails": 239,
+      "chineseTitles": 4268,
+      "startCoordinates": 4328,
+      "indexOnly": 1981,
+      "placeholders": 141,
+      "publicChinese": 4225,
+      "publicRelations": 3107,
+      "publicStartCoordinates": 4321
+    },
+    "clientEvidence": {
+      "product": "wow_classic_beta",
+      "version": "1.60.1.70205",
+      "locale": "zhCN",
+      "localeMask": 64
+    }
+  },
+  "questieDBSnapshot": {
+    "commit": "9d39232dab48e35811a7cc02473c2f4e42b62ab6",
+    "files": [
+      {
+        "file": "PROVENANCE.md",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/PROVENANCE.md",
+        "sha256": "f0af04c5daf16d72952710d6f78d82524f3c9d2f2876a1d59b86cc4759a7f628",
+        "bytes": 4198
+      },
+      {
+        "file": "data/Forever/conversion.json",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/data/Forever/conversion.json",
+        "sha256": "0229566017126c2577e77d2bcc7c9f995648fb27ed32a7918fa44ace0664fb22",
+        "bytes": 56775
+      },
+      {
+        "file": "data/Forever/foreverItemDB.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/data/Forever/foreverItemDB.lua",
+        "sha256": "987d037b6df94d5b0b1dc326a1670581e3abb952736a4ae055fd9f161328b71c",
+        "bytes": 2181706
+      },
+      {
+        "file": "data/Forever/foreverNpcDB.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/data/Forever/foreverNpcDB.lua",
+        "sha256": "a8c4169690726323dac3c6441f74f7a4d9cafcc08ec42231d72ff28c9471f0ee",
+        "bytes": 2033176
+      },
+      {
+        "file": "data/Forever/foreverObjectDB.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/data/Forever/foreverObjectDB.lua",
+        "sha256": "af4536c12c5b1da5fd32cb33be5c9c01d2436f97a5b9f60e2cdd238273b2cc09",
+        "bytes": 1011387
+      },
+      {
+        "file": "data/Forever/foreverQuestDB.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/data/Forever/foreverQuestDB.lua",
+        "sha256": "d5be8516877505334f02073826ea0f22a394ddbf604bb5a33f5a39de5bb1ee87",
+        "bytes": 1057548
+      },
+      {
+        "file": "docs/adr/0016-table-correction-operations.md",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/docs/adr/0016-table-correction-operations.md",
+        "sha256": "a3d2716dafcd148baa41410f0cc3678df1d90bf2615abe800e88578dc8c304a5",
+        "bytes": 6271
+      },
+      {
+        "file": "docs/api.md",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/docs/api.md",
+        "sha256": "cc1facde29bcf4817966a3533a44472e962b9801f82fc0ef16b907be82051ac6",
+        "bytes": 43483
+      },
+      {
+        "file": "docs/forever-coordinate-audit.md",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/docs/forever-coordinate-audit.md",
+        "sha256": "ac4b4e56f34911c104ae374d2d936443fbf91a43e0cb76562b964ea95739aab6",
+        "bytes": 9878
+      },
+      {
+        "file": "docs/forever-data.md",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/docs/forever-data.md",
+        "sha256": "c16928cd378ca585a7185893b03062040479ed0187fed68ffbdadb2b33c3f0a2",
+        "bytes": 24297
+      },
+      {
+        "file": "docs/forever-delta-base.md",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/docs/forever-delta-base.md",
+        "sha256": "22a9fbf77c2116aa880d9081716a1736cb0cb5603b9bb77c2f376ad816b2361f",
+        "bytes": 14948
+      },
+      {
+        "file": "docs/forever.md",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/docs/forever.md",
+        "sha256": "84d4b088d04615ecaa2483329fb9c1b0af15abbe121e53fb912e9f14c61e383b",
+        "bytes": 12319
+      },
+      {
+        "file": "l10n/Forever/lookupItems/zhCN.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/l10n/Forever/lookupItems/zhCN.lua",
+        "sha256": "a832cec0e32fefc273f6e9f725f27011b8674da5fdc610d81af59f4878a347c2",
+        "bytes": 704311
+      },
+      {
+        "file": "l10n/Forever/lookupNpcs/zhCN.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/l10n/Forever/lookupNpcs/zhCN.lua",
+        "sha256": "361b9e7c7cbf436ede17c39cf260503e8e4bae5c6dda5da87340e7a10145c9ba",
+        "bytes": 353038
+      },
+      {
+        "file": "l10n/Forever/lookupObjects/zhCN.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/l10n/Forever/lookupObjects/zhCN.lua",
+        "sha256": "be396a67be580a9f8585060cbe83750d14a3ee90633fc5ce009ad98d1a4946b0",
+        "bytes": 33140
+      },
+      {
+        "file": "l10n/Forever/lookupQuests/zhCN.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/l10n/Forever/lookupQuests/zhCN.lua",
+        "sha256": "97691d81c5fd42233a2e311d301bfe01b323255a4e4df1d0a453c720a71ede48",
+        "bytes": 501532
+      },
+      {
+        "file": "src/corrections/Forever/foreverItemFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/foreverItemFixes.lua",
+        "sha256": "09488e2e183a0e4808b9895ddba23c4394a10e5e3ddc0df1947b5625bd113224",
+        "bytes": 1793
+      },
+      {
+        "file": "src/corrections/Forever/foreverNPCFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/foreverNPCFixes.lua",
+        "sha256": "fdda3e44936c198b54c862f05a11b8297239c0421754fe2757ba80e177dc89ab",
+        "bytes": 5461
+      },
+      {
+        "file": "src/corrections/Forever/foreverObjectFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/foreverObjectFixes.lua",
+        "sha256": "922c5f041e77ea0c932f690f7efd9858adb6c91710bdc7b2c7b226072698ecf6",
+        "bytes": 6486
+      },
+      {
+        "file": "src/corrections/Forever/foreverQuestFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/foreverQuestFixes.lua",
+        "sha256": "52f68cee27a04a63c15f2fd577a16dff83ee78095b6e79c438b4b15a0126c1d3",
+        "bytes": 29895
+      },
+      {
+        "file": "src/corrections/Forever/generated/foreverBaseItem.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/generated/foreverBaseItem.lua",
+        "sha256": "870bb7ab64bec27210c3f9e40fd5bb957c0441aba22d3944a87ddd5c66d0add4",
+        "bytes": 2471337
+      },
+      {
+        "file": "src/corrections/Forever/generated/foreverBaseNpc.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/generated/foreverBaseNpc.lua",
+        "sha256": "3015c2660d72810e16f28b11d58297bfae37b0843ce35ee6cdd8b7757d47e771",
+        "bytes": 914455
+      },
+      {
+        "file": "src/corrections/Forever/generated/foreverBaseObject.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/generated/foreverBaseObject.lua",
+        "sha256": "cc3d0bacbeea23e1efd0b144367eb413f9e8276c65ca0a19d0d0ae328fb3736b",
+        "bytes": 106826
+      },
+      {
+        "file": "src/corrections/Forever/generated/foreverBaseQuest.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/generated/foreverBaseQuest.lua",
+        "sha256": "c92ebcb106f72913e5e666db48539e60d9e77a77c3e08938bf2df682d83dd714",
+        "bytes": 527243
+      },
+      {
+        "file": "src/corrections/Forever/legacy/classicItemFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/legacy/classicItemFixes.lua",
+        "sha256": "688286a44e5d95045ff943d55ba3a9fccffce7ca4a982fa55a67499b39509b87",
+        "bytes": 62628
+      },
+      {
+        "file": "src/corrections/Forever/legacy/classicNPCFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/legacy/classicNPCFixes.lua",
+        "sha256": "1de19d17db00581a35d397c7440124aa3f14150d5456c771d2deb3cfba79f031",
+        "bytes": 251507
+      },
+      {
+        "file": "src/corrections/Forever/legacy/classicObjectFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/legacy/classicObjectFixes.lua",
+        "sha256": "181bea5a5db73f8af1bebe1d8aa835d28e2d4c11adf9ff786c4f54edb3cdc76a",
+        "bytes": 63547
+      },
+      {
+        "file": "src/corrections/Forever/legacy/classicQuestFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/legacy/classicQuestFixes.lua",
+        "sha256": "76cd6a05f035826cabc6180a0ff2a1a37c5e7946c891eb0a06412fab5a4caf2e",
+        "bytes": 317446
+      },
+      {
+        "file": "src/corrections/Forever/legacy/classicQuestReputationFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/legacy/classicQuestReputationFixes.lua",
+        "sha256": "155b2502990304339833f65c5d5f46d6f1ad84527b9e476a976f4f9157a14322",
+        "bytes": 351294
+      },
+      {
+        "file": "src/corrections/Forever/legacy/itemStartFixes.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/legacy/itemStartFixes.lua",
+        "sha256": "c5f379867c82a401432e0ba2ef58c4e44ffe878a806f4901e070f9f090523bc6",
+        "bytes": 99433
+      },
+      {
+        "file": "src/corrections/Forever/traces/foreverItemTraces.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/traces/foreverItemTraces.lua",
+        "sha256": "a1c22054bc41bb6db038c9b841ceca8042137b1d2bb2b2c1eabb05c1ddf4acff",
+        "bytes": 46037
+      },
+      {
+        "file": "src/corrections/Forever/traces/foreverNpcTraces.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/traces/foreverNpcTraces.lua",
+        "sha256": "87acac144d1f78b1173c9710bbaf9d1fc850753d48704143018aa20ed3b98811",
+        "bytes": 432014
+      },
+      {
+        "file": "src/corrections/Forever/traces/foreverObjectTraces.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/traces/foreverObjectTraces.lua",
+        "sha256": "37b6228caab31daee9a450d4f4833c032ca3232a05649fcfda83b49c8dd33fae",
+        "bytes": 14572
+      },
+      {
+        "file": "src/corrections/Forever/traces/foreverQuestTraces.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/Forever/traces/foreverQuestTraces.lua",
+        "sha256": "5b91bce88419b38e320dbaf9207c26a8a6f1b801fcce354dc1b9e7869dd99570",
+        "bytes": 179903
+      },
+      {
+        "file": "src/corrections/enum/constants.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/constants.lua",
+        "sha256": "2689392de0e0eb8845779a4f0e6007bff0c481675cd5cfbe2566e4eba752bff4",
+        "bytes": 1095
+      },
+      {
+        "file": "src/corrections/enum/expansions.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/expansions.lua",
+        "sha256": "362e9d9e62a491d4f1b737ad6b840b278b5c313b4f61cb204921e02d2bfeedca",
+        "bytes": 9184
+      },
+      {
+        "file": "src/corrections/enum/factions.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/factions.lua",
+        "sha256": "c6c8c6dc12d5fa0e7a7aa22a21491706aaeba8d55fb68ba3a469c87e2687cbfc",
+        "bytes": 4163
+      },
+      {
+        "file": "src/corrections/enum/icons.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/icons.lua",
+        "sha256": "ea4390aadd96d99ad9feab6cf564ecad50350353a526e3695fe39e40c144011b",
+        "bytes": 1005
+      },
+      {
+        "file": "src/corrections/enum/items.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/items.lua",
+        "sha256": "c4b861584fe54ad3edb8a46338064e6ffa9759032dcbaa79756ba4172fa579a2",
+        "bytes": 346
+      },
+      {
+        "file": "src/corrections/enum/phases.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/phases.lua",
+        "sha256": "1736eb5fccfeb3788a07eb94e2c871e84b4cff805ccbb6aa9040e337fb687622",
+        "bytes": 18874
+      },
+      {
+        "file": "src/corrections/enum/professions.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/professions.lua",
+        "sha256": "3ae501a3b0d288159c566c88622c2f870fc4fd937a919a0f640a8ead8b3fc138",
+        "bytes": 1666
+      },
+      {
+        "file": "src/corrections/enum/quests.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/quests.lua",
+        "sha256": "eb15f94f58be894772786706bb9c3db56756df1985d7ab93fc180d7567103ede",
+        "bytes": 2242
+      },
+      {
+        "file": "src/corrections/enum/waypoints.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/waypoints.lua",
+        "sha256": "10f2b234c70d87ba42163782b6022f522affa4d16230eddde55b0a30f7c3861b",
+        "bytes": 6709
+      },
+      {
+        "file": "src/corrections/enum/zones.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/corrections/enum/zones.lua",
+        "sha256": "dd738ec0c1a9785946c5574a5f7cb8d2a64745b099dffccebd00ee8864fbb88a",
+        "bytes": 13708
+      },
+      {
+        "file": "src/meta/questMeta.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/src/meta/questMeta.lua",
+        "sha256": "2cf91fe3dc43ac06b06fadf31c9dc05c48c545005ef49d70d3d413a3437e2bb2",
+        "bytes": 6972
+      },
+      {
+        "file": "support/Forever/Zones/areaIdToUiMapId.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/support/Forever/Zones/areaIdToUiMapId.lua",
+        "sha256": "cf9ae6f896e3e2fb1e43352b11596641312d9e61365ca7f281e5af1092185d07",
+        "bytes": 59350
+      },
+      {
+        "file": "support/Forever/Zones/dungeons.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/support/Forever/Zones/dungeons.lua",
+        "sha256": "e2aa4eb8daf0096958da848727af5d57d7b184b5fa73a3d3643bcb818a045b44",
+        "bytes": 13207
+      },
+      {
+        "file": "support/Forever/Zones/instanceIdToAreaId.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/support/Forever/Zones/instanceIdToAreaId.lua",
+        "sha256": "ae38cc4913237f16a69db5e6b4308124d9601cb85e1330d345b0ce9e599cd39c",
+        "bytes": 5330
+      },
+      {
+        "file": "support/Forever/Zones/subZoneToParentZone.lua",
+        "url": "https://raw.githubusercontent.com/Questie/QuestieDB/9d39232dab48e35811a7cc02473c2f4e42b62ab6/support/Forever/Zones/subZoneToParentZone.lua",
+        "sha256": "2a1f44ca00a25dd962c80ce81c6c6963ca829bcc2ed0d7a6359cf115f7eba8c7",
+        "bytes": 124042
+      }
+    ]
+  },
+  "sources": [
+    {
+      "file": "Interface/AddOns/Questie/Database/Zones/data/zoneIds.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "55d56138c2a6aeab0d76dd43003c894aae09b899ab0e998649a94796153c9a80",
+      "bytes": 18389
+    },
+    {
+      "file": "Interface/AddOns/Questie/Database/QuestieDB.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "46569757cf8a43eb0d91447ca3f68523ebb5b1daa0843285acf9b9562bbd992d",
+      "bytes": 95988
+    },
+    {
+      "file": "Interface/AddOns/Questie/Database/Constants.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "6ac9af7454c00e169fb9c7ddb83f5fe543cf2d079a27f5530b5169cceb3cad94",
+      "bytes": 1547
+    },
+    {
+      "file": "Interface/AddOns/Questie/Database/questDB.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "54e029afb88b2f46cdaca9f589dfb54730446d599ad4acb21c08338073ba45f1",
+      "bytes": 11921
+    },
+    {
+      "file": "Interface/AddOns/Questie/Database/npcDB.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "9933f87a06ad83f75998b050e75292fe301aa0699cede5c173c231d827b64aae",
+      "bytes": 3520
+    },
+    {
+      "file": "Interface/AddOns/Questie/Database/objectDB.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "d81ebb5569842646692a160ddcb37f980581d4ea0d341905d9d23cfb14c374a5",
+      "bytes": 1355
+    },
+    {
+      "file": "Interface/AddOns/Questie/Database/itemDB.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "a09faf75930a03f864b5a64a46b02d5de948eb63411d3a4d356554922c21e740",
+      "bytes": 4302
+    },
+    {
+      "file": "Interface/AddOns/Questie/Modules/QuestieProfessions.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "e10a9b2f93925c52d9525d79b07b96aaa857df1315c65f4ebd1dbea847324eb8",
+      "bytes": 23996
+    },
+    {
+      "file": "Interface/AddOns/Questie/Database/Zones/data/zoneIds.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "55d56138c2a6aeab0d76dd43003c894aae09b899ab0e998649a94796153c9a80",
+      "bytes": 18389
+    },
+    {
+      "file": "talent/quests/raw/questiedb/data/Forever/foreverQuestDB.lua",
+      "kind": "questiedb-forever-coordinate-seed",
+      "sha256": "d5be8516877505334f02073826ea0f22a394ddbf604bb5a33f5a39de5bb1ee87",
+      "bytes": 1057548
+    },
+    {
+      "file": "talent/quests/raw/questiedb/data/Forever/foreverNpcDB.lua",
+      "kind": "questiedb-forever-coordinate-seed",
+      "sha256": "a8c4169690726323dac3c6441f74f7a4d9cafcc08ec42231d72ff28c9471f0ee",
+      "bytes": 2033176
+    },
+    {
+      "file": "talent/quests/raw/questiedb/data/Forever/foreverObjectDB.lua",
+      "kind": "questiedb-forever-coordinate-seed",
+      "sha256": "af4536c12c5b1da5fd32cb33be5c9c01d2436f97a5b9f60e2cdd238273b2cc09",
+      "bytes": 1011387
+    },
+    {
+      "file": "talent/quests/raw/questiedb/data/Forever/foreverItemDB.lua",
+      "kind": "questiedb-forever-coordinate-seed",
+      "sha256": "987d037b6df94d5b0b1dc326a1670581e3abb952736a4ae055fd9f161328b71c",
+      "bytes": 2181706
+    },
+    {
+      "file": "Interface/AddOns/Questie/Modules/Phasing.lua",
+      "kind": "questie-classic-schema",
+      "sha256": "85778876fdd09c37c6cdba263beb119363dfb953b1ad7647547d58bdc1e40410",
+      "bytes": 90813
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/expansions.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "362e9d9e62a491d4f1b737ad6b840b278b5c313b4f61cb204921e02d2bfeedca",
+      "bytes": 9184
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/factions.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "c6c8c6dc12d5fa0e7a7aa22a21491706aaeba8d55fb68ba3a469c87e2687cbfc",
+      "bytes": 4163
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/icons.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "ea4390aadd96d99ad9feab6cf564ecad50350353a526e3695fe39e40c144011b",
+      "bytes": 1005
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/items.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "c4b861584fe54ad3edb8a46338064e6ffa9759032dcbaa79756ba4172fa579a2",
+      "bytes": 346
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/phases.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "1736eb5fccfeb3788a07eb94e2c871e84b4cff805ccbb6aa9040e337fb687622",
+      "bytes": 18874
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/professions.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "3ae501a3b0d288159c566c88622c2f870fc4fd937a919a0f640a8ead8b3fc138",
+      "bytes": 1666
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/quests.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "eb15f94f58be894772786706bb9c3db56756df1985d7ab93fc180d7567103ede",
+      "bytes": 2242
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/waypoints.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "10f2b234c70d87ba42163782b6022f522affa4d16230eddde55b0a30f7c3861b",
+      "bytes": 6709
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/enum/zones.lua",
+      "kind": "questiedb-forever-schema",
+      "sha256": "dd738ec0c1a9785946c5574a5f7cb8d2a64745b099dffccebd00ee8864fbb88a",
+      "bytes": 13708
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/legacy/classicQuestFixes.lua",
+      "kind": "questiedb-forever-seed-correction",
+      "sha256": "76cd6a05f035826cabc6180a0ff2a1a37c5e7946c891eb0a06412fab5a4caf2e",
+      "bytes": 317446
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/legacy/classicNPCFixes.lua",
+      "kind": "questiedb-forever-seed-correction",
+      "sha256": "1de19d17db00581a35d397c7440124aa3f14150d5456c771d2deb3cfba79f031",
+      "bytes": 251507
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/legacy/classicObjectFixes.lua",
+      "kind": "questiedb-forever-seed-correction",
+      "sha256": "181bea5a5db73f8af1bebe1d8aa835d28e2d4c11adf9ff786c4f54edb3cdc76a",
+      "bytes": 63547
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/legacy/classicItemFixes.lua",
+      "kind": "questiedb-forever-seed-correction",
+      "sha256": "688286a44e5d95045ff943d55ba3a9fccffce7ca4a982fa55a67499b39509b87",
+      "bytes": 62628
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/legacy/classicQuestReputationFixes.lua",
+      "kind": "questiedb-forever-seed-correction",
+      "sha256": "155b2502990304339833f65c5d5f46d6f1ad84527b9e476a976f4f9157a14322",
+      "bytes": 351294
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/legacy/itemStartFixes.lua",
+      "kind": "questiedb-forever-seed-correction",
+      "sha256": "c5f379867c82a401432e0ba2ef58c4e44ffe878a806f4901e070f9f090523bc6",
+      "bytes": 99433
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/generated/foreverBaseQuest.lua",
+      "kind": "questiedb-forever-delta",
+      "sha256": "c92ebcb106f72913e5e666db48539e60d9e77a77c3e08938bf2df682d83dd714",
+      "bytes": 527243
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/generated/foreverBaseNpc.lua",
+      "kind": "questiedb-forever-delta",
+      "sha256": "3015c2660d72810e16f28b11d58297bfae37b0843ce35ee6cdd8b7757d47e771",
+      "bytes": 914455
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/generated/foreverBaseObject.lua",
+      "kind": "questiedb-forever-delta",
+      "sha256": "cc3d0bacbeea23e1efd0b144367eb413f9e8276c65ca0a19d0d0ae328fb3736b",
+      "bytes": 106826
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/generated/foreverBaseItem.lua",
+      "kind": "questiedb-forever-delta",
+      "sha256": "870bb7ab64bec27210c3f9e40fd5bb957c0441aba22d3944a87ddd5c66d0add4",
+      "bytes": 2471337
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/traces/foreverQuestTraces.lua",
+      "kind": "questiedb-forever-trace",
+      "sha256": "5b91bce88419b38e320dbaf9207c26a8a6f1b801fcce354dc1b9e7869dd99570",
+      "bytes": 179903
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/traces/foreverNpcTraces.lua",
+      "kind": "questiedb-forever-trace",
+      "sha256": "87acac144d1f78b1173c9710bbaf9d1fc850753d48704143018aa20ed3b98811",
+      "bytes": 432014
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/traces/foreverObjectTraces.lua",
+      "kind": "questiedb-forever-trace",
+      "sha256": "37b6228caab31daee9a450d4f4833c032ca3232a05649fcfda83b49c8dd33fae",
+      "bytes": 14572
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/traces/foreverItemTraces.lua",
+      "kind": "questiedb-forever-trace",
+      "sha256": "a1c22054bc41bb6db038c9b841ceca8042137b1d2bb2b2c1eabb05c1ddf4acff",
+      "bytes": 46037
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/foreverQuestFixes.lua",
+      "kind": "questiedb-forever-authored",
+      "sha256": "52f68cee27a04a63c15f2fd577a16dff83ee78095b6e79c438b4b15a0126c1d3",
+      "bytes": 29895
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/foreverNPCFixes.lua",
+      "kind": "questiedb-forever-authored",
+      "sha256": "fdda3e44936c198b54c862f05a11b8297239c0421754fe2757ba80e177dc89ab",
+      "bytes": 5461
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/foreverObjectFixes.lua",
+      "kind": "questiedb-forever-authored",
+      "sha256": "922c5f041e77ea0c932f690f7efd9858adb6c91710bdc7b2c7b226072698ecf6",
+      "bytes": 6486
+    },
+    {
+      "file": "talent/quests/raw/questiedb/src/corrections/Forever/foreverItemFixes.lua",
+      "kind": "questiedb-forever-authored",
+      "sha256": "09488e2e183a0e4808b9895ddba23c4394a10e5e3ddc0df1947b5625bd113224",
+      "bytes": 1793
+    },
+    {
+      "file": "talent/quests/raw/questiedb/l10n/Forever/lookupQuests/zhCN.lua",
+      "kind": "questiedb-forever-localization-seed",
+      "sha256": "97691d81c5fd42233a2e311d301bfe01b323255a4e4df1d0a453c720a71ede48",
+      "bytes": 501532
+    },
+    {
+      "file": "talent/quests/raw/questiedb/l10n/Forever/lookupNpcs/zhCN.lua",
+      "kind": "questiedb-forever-localization-seed",
+      "sha256": "361b9e7c7cbf436ede17c39cf260503e8e4bae5c6dda5da87340e7a10145c9ba",
+      "bytes": 353038
+    },
+    {
+      "file": "talent/quests/raw/questiedb/l10n/Forever/lookupObjects/zhCN.lua",
+      "kind": "questiedb-forever-localization-seed",
+      "sha256": "be396a67be580a9f8585060cbe83750d14a3ee90633fc5ce009ad98d1a4946b0",
+      "bytes": 33140
+    },
+    {
+      "file": "talent/quests/raw/questiedb/l10n/Forever/lookupItems/zhCN.lua",
+      "kind": "questiedb-forever-localization-seed",
+      "sha256": "a832cec0e32fefc273f6e9f725f27011b8674da5fdc610d81af59f4878a347c2",
+      "bytes": 704311
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-worldzh/db2/AreaTable.json",
+      "kind": "local-client-db2",
+      "sha256": "220700613eb0f6acae195aea8d020df8326fc70ac3115aa2aeec1267109bb79d",
+      "bytes": 709662
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-worldzh/db2/Map.json",
+      "kind": "local-client-db2",
+      "sha256": "76c19658c136391623b22a43853e24ba9d945552488a42e0e5bc242fa3fae152",
+      "bytes": 43744
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quests-zhCN/db2/QuestSort.json",
+      "kind": "local-client-db2",
+      "sha256": "eaee0bbfe41784b179f910b68954e14f191df1e34ae84d99abd20028e218c7eb",
+      "bytes": 2620
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quests-zhCN/db2/UiMap.json",
+      "kind": "local-client-db2",
+      "sha256": "5e83cd1d74526050b30b19319ed6c6a73ff1056157c234ced824b01a05215bb9",
+      "bytes": 17976
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quests-zhCN/db2/UiMapAssignment.json",
+      "kind": "local-client-db2",
+      "sha256": "9edaffc471dc9b71fc9e0eac31674c5f0d875e9be43bcca3bf0f5772afb14846",
+      "bytes": 15379
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quest-entities-zhCN/db2/ItemSparse.json",
+      "kind": "local-client-db2",
+      "sha256": "b7c75ea5348cef3f5c38f36f0e2eb884ab80f27072e0db0b91cbaad0bc75fbe3",
+      "bytes": 27998155
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quest-entities-zhCN/db2/Faction.json",
+      "kind": "local-client-db2",
+      "sha256": "1b4eb461ca60861838e4c5569d39a6d7aaa35f8d72888e41816525308def8b5c",
+      "bytes": 139213
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quests-zhCN/db2/ChrRaces.json",
+      "kind": "local-client-db2",
+      "sha256": "c7d2bce26244330a5a1e9f0ac3705378a56420d3e458a8423fdfbda419630718",
+      "bytes": 88038
+    },
+    {
+      "file": "talent/quests/raw/wowhead-catalog.json",
+      "kind": "third-party-forever-metadata",
+      "sha256": "bc5fb48a3af78140d6ae97738e24724d7cba07834467e6ca3b07dfc0df6e567f",
+      "bytes": 2442898
+    },
+    {
+      "file": ".build.info",
+      "kind": "local-client-build-evidence",
+      "sha256": "9b1c6bb766263b29fe5eebd71d3d1be0d183540adf95a112d0abb8c488aef881",
+      "bytes": 811
+    },
+    {
+      "file": "talent/quests/raw/wowhead-details.json",
+      "kind": "third-party-forever-detail-facts",
+      "sha256": "e7ebd0363e77c13a04d71766bfb6f0b6d7b80f1f42345c46f2f1c37b472cc8d4",
+      "bytes": 338780
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quests-zhCN/db2/QuestV2.json",
+      "kind": "local-client-db2",
+      "sha256": "8708e22ce524d8019a29c84f0a1e7b1ea230cc99e13f5448d06c7840e8abbb89",
+      "bytes": 393300
+    },
+    {
+      "file": "WTF/Account/<local-account>/SavedVariables/Questie.lua",
+      "kind": "local-game-observation",
+      "sha256": "20d52098d4085003dc777a71423286351f0ba55b65d8389344d06255fc09529e",
+      "bytes": 7529473
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quests-zhCN/db2/QuestPOIBlob.json",
+      "kind": "local-client-db2",
+      "sha256": "138ad66d224e810512edf3637e170601bd63405f0dfb2a86763c360e06d35ccb",
+      "bytes": 9162
+    },
+    {
+      "file": "output/wow-cinema/index/1.60.1.70205-quests-zhCN/db2/QuestPOIPoint.json",
+      "kind": "local-client-db2",
+      "sha256": "ec0bc04bd90f86a8e172127256b603ebd697fd028919e2d54547d652c6b65416",
+      "bytes": 6463
+    }
+  ],
+  "remoteResponses": [
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:-1/max-level:0",
+      "file": "wowhead-level--1-0.html",
+      "sha256": "dca9c4ac6b99e3eae1975b860ff9ec215f66b9af2b578ff8c3c98dbac3430bec",
+      "count": 31,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:1/max-level:9",
+      "file": "wowhead-level-1-9.html",
+      "sha256": "0d7eeb381faf5e9e9d4b75930e10b9cb23c6b9243f2d103b5cf8d512938fc52e",
+      "count": 566,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:10/max-level:19",
+      "file": "wowhead-level-10-19.html",
+      "sha256": "62f7f9e674b035d3a90fd6decb5b3c5deec7503be4c2adcd9f6228c079226fef",
+      "count": 822,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:20/max-level:29",
+      "file": "wowhead-level-20-29.html",
+      "sha256": "7de43cd4be22cfdc15a86914075c0fd4ba9bc4c0c679c34481802429f35b32c6",
+      "count": 608,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:40/max-level:49",
+      "file": "wowhead-level-40-49.html",
+      "sha256": "1f5b1b610fb22717ae54047a1579360e910b5665786d0b7830a1d26ed06e64c4",
+      "count": 547,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:30/max-level:39",
+      "file": "wowhead-level-30-39.html",
+      "sha256": "788fb7334ae2427ed413bc302b60f10cc923f21d07d798082dca21c095242b22",
+      "count": 602,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:61/max-level:255",
+      "file": "wowhead-level-61-255.html",
+      "sha256": "95d576f16f68c9f3130d784cd652eafa636e27319b092073886bcec231b85e49",
+      "count": 1,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:50/max-level:59",
+      "file": "wowhead-level-50-59.html",
+      "sha256": "4fca0a2adbe8a6187884ba267eda1516a5009351d5885afef0cd024ca1843b8f",
+      "count": 685,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60",
+      "file": "wowhead-level-60-60.html",
+      "sha256": "cbf807b6c76624db56c7dcd1b312854cd4d273a4e10314c4e8033076ff232adc",
+      "count": 1000,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:20/max-req-level:29",
+      "file": "wowhead-level-60-60-req-20-29.html",
+      "sha256": "dc60b30ec1ca4d3df02065cc818910394c0f0120f543850efb9ae27c1c607dc8",
+      "count": 24,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:10/max-req-level:19",
+      "file": "wowhead-level-60-60-req-10-19.html",
+      "sha256": "5ee30c83ccf7ab6a87aa6e39f25749a7d6687058a80cd87de8d4e3aa33869ad3",
+      "count": 62,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:0/max-req-level:9",
+      "file": "wowhead-level-60-60-req-0-9.html",
+      "sha256": "6cde89458c7ca107a8cad1a970194730eb5fbaca6086aa8fe812cc5bee78aaeb",
+      "count": 411,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:30/max-req-level:39",
+      "file": "wowhead-level-60-60-req-30-39.html",
+      "sha256": "d30ef48b61ec804a928322c369dfe3d7ccd4710aa0dc0a413075912b959f8149",
+      "count": 18,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:40/max-req-level:49",
+      "file": "wowhead-level-60-60-req-40-49.html",
+      "sha256": "77729701e7574482a42d2d03fe54aaf94dbdecee659cf5d13436d8276270d2d7",
+      "count": 56,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:50/max-req-level:59",
+      "file": "wowhead-level-60-60-req-50-59.html",
+      "sha256": "1709f5cfde276328e78f0a8d369df63994057dcb88ef9933e6c3ac4ececce1b7",
+      "count": 562,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:60/max-req-level:69",
+      "file": "wowhead-level-60-60-req-60-69.html",
+      "sha256": "355f335fb7dead0b2959756ad45381668ef41bf25e5fb9d342d9425b04f31348",
+      "count": 377,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:70/max-req-level:79",
+      "file": "wowhead-level-60-60-req-70-79.html",
+      "sha256": "3e925e41424f0068a5dc00c31b092d9d2f1330979ce202b7f3280e7b88d71db8",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:80/max-req-level:89",
+      "file": "wowhead-level-60-60-req-80-89.html",
+      "sha256": "aea4201aa4cf7e6fd2da5bc4322463a816029969791077830d3e6da2b2f265cd",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:90/max-req-level:99",
+      "file": "wowhead-level-60-60-req-90-99.html",
+      "sha256": "83c8b46ef929d27d0c95db51d96c67fccd05bbded67fef06e37fc457b09beb1b",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:100/max-req-level:109",
+      "file": "wowhead-level-60-60-req-100-109.html",
+      "sha256": "371feea64f7b71682bec1e87b78652bb2b450d3e06be96997d1c33ab10109fc6",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:110/max-req-level:119",
+      "file": "wowhead-level-60-60-req-110-119.html",
+      "sha256": "e41ff3c901a9f434bb76c644fce2c862c949e46cec6d27e44bc6ec7c59503597",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:120/max-req-level:129",
+      "file": "wowhead-level-60-60-req-120-129.html",
+      "sha256": "0468bbe0673c2ff28d13ef6213452cec84f51100e9b4d16490b5b93c70c948a1",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:130/max-req-level:139",
+      "file": "wowhead-level-60-60-req-130-139.html",
+      "sha256": "bfdf983bc6309e6652c5b4f28092f0a1b488e29c6140e1572b34ab1c973b0a41",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:140/max-req-level:149",
+      "file": "wowhead-level-60-60-req-140-149.html",
+      "sha256": "21e9a16e0cba2bfa2de3dfa038b971c4ce26fc197bad664c7a6796eb1debdb50",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:150/max-req-level:159",
+      "file": "wowhead-level-60-60-req-150-159.html",
+      "sha256": "18714e78feaa9c3bb1519be0e416a47615a8fe033389615a49947cdf2b32cecb",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:160/max-req-level:169",
+      "file": "wowhead-level-60-60-req-160-169.html",
+      "sha256": "943c0f3ab3b37c6948154b7c0cd3c5be5cbc2d0d511701a324547836d9955ede",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:180/max-req-level:189",
+      "file": "wowhead-level-60-60-req-180-189.html",
+      "sha256": "38f6fa524fdbf74a3cd73be65beba0604572666cb898514393e2c1f2f51fcf5e",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:170/max-req-level:179",
+      "file": "wowhead-level-60-60-req-170-179.html",
+      "sha256": "40beadb7a9e0b6463fb86fb34091742d121e80d0a92c2425e44498784ad41b60",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:190/max-req-level:199",
+      "file": "wowhead-level-60-60-req-190-199.html",
+      "sha256": "0403f9834aaf6e88296ba8a235c4c1999766133d4bd65715f1e1f05e1d44c7ff",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:200/max-req-level:209",
+      "file": "wowhead-level-60-60-req-200-209.html",
+      "sha256": "0d017caa44c4ab14cd90d57c3bd4e588c1c3cda2b70b8e6084078938ea35843d",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:210/max-req-level:219",
+      "file": "wowhead-level-60-60-req-210-219.html",
+      "sha256": "dfdb6cabd5bdabce480a9d17e6642ac4f5a4254fd1ec29f58ed223d2c40fb28a",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:220/max-req-level:229",
+      "file": "wowhead-level-60-60-req-220-229.html",
+      "sha256": "d31aa5cc5229457f1d0b6cd1f3123082d7408257817b99c429faf6e4ec620cac",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:230/max-req-level:239",
+      "file": "wowhead-level-60-60-req-230-239.html",
+      "sha256": "af6cb42a0cf997c3f606ca5bdff66a56a733862b0b40ae455b3b737d0fabb913",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:240/max-req-level:249",
+      "file": "wowhead-level-60-60-req-240-249.html",
+      "sha256": "3fe44b7d38bf7e1848271986bd38d78bc9c548058f0d00a005d43a78ca773777",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    },
+    {
+      "url": "https://www.wowhead.com/forever/quests/min-level:60/max-level:60/min-req-level:250/max-req-level:255",
+      "file": "wowhead-level-60-60-req-250-255.html",
+      "sha256": "5cad84d9d4f4acbd3199341c33e6a9bdaa935f9dc7bd6f263361d367c1701afb",
+      "count": 0,
+      "readAt": "2026-10-05T01:00:56Z"
+    }
+  ],
+  "knownLimitations": [
+    "QuestV2 IDs do not prove playable availability. Index-only entries are hidden by default.",
+    "Forever coordinate seed preserves inherited world positions; it does not detect moved content. Static correction layers are pinned; player-specific dynamic corrections are not flattened.",
+    "Inherited prerequisite fields remain historical references unless specifically updated; an absent prerequisite is not proof that none exists.",
+    "A changed Forever quest can retain its ID while its objectives, races, prerequisites and locations change.",
+    "Forever observations override only fields actually observed, and no player progress is published.",
+    "Rewards are public Forever metadata, not locally verified reward offers.",
+    "XP listed is the database base value; character level and server hotfixes can change the actual award.",
+    "New quest translations and complete server-side prerequisite/reward offers are not all available.",
+    "239 current detail pages were captured before HTTP 403; repeated requests were stopped, not bypassed.",
+    "QuestLine order is a narrative ordering; it is not treated as a mandatory prerequisite."
+  ]
+}

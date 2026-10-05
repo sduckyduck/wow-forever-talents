@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:83763":{"id":83763,"kind":"object","name":"被偷走的书","nameEn":"Stolen Books","positions":[{"zone":12,"x":56.71,"y":43.96,"mapId":1429,"world":[15311.79,8139.4]}],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

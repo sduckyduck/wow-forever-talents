@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:68865":{"id":68865,"kind":"object","name":"地鼠指挥棒","nameEn":"Snufflenose Command Sticks","positions":[{"zone":17,"x":62.34,"y":37.6,"mapId":1413,"world":[5357.22,6589.37]}],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

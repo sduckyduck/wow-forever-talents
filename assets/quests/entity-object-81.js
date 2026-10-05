@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:166863":{"id":166863,"kind":"object","name":"新鲜的蛇颈龙肉","nameEn":"Fresh Threshadon Carcass","positions":[{"zone":490,"x":68.74,"y":56.71,"mapId":1449,"world":[4548.82,9679.45]}],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

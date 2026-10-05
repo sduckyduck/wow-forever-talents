@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:169294":{"id":169294,"kind":"object","name":"七贤石板","nameEn":"Tablet of the Seven","positions":[{"zone":46,"x":54.12,"y":40.76,"mapId":1428,"world":[15992.93,7596.92]}],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

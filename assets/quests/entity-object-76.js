@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:156561":{"id":156561,"kind":"object","name":"通缉告示","nameEn":"Wanted Poster","positions":[{"zone":12,"x":24.57,"y":78.23,"mapId":1429,"world":[14776.34,8520.14]}],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

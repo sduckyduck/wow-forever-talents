@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:129127":{"id":129127,"kind":"object","name":"Gallywix's Lockbox","nameEn":"Gallywix's Lockbox","positions":[{"zone":17,"x":54.76,"y":5.56,"mapId":1413,"world":[4988.53,5550.31]}],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

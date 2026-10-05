@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:51708":{"id":51708,"kind":"object","name":"伊莉莎的坟墓","nameEn":"Eliza's Grave Dirt","positions":[{"zone":10,"x":28.87,"y":30.75,"mapId":1431,"world":[15078.16,8769.68]}],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});

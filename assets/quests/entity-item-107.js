@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"item:219526":{"id":219526,"kind":"item","name":"使命简报：暮色森林","nameEn":"","positions":[],"instanceZones":[],"source":"client-name+questiedb-forever-sources","fieldSources":{},"itemLevel":1,"requiredLevel":0,"quality":1}});

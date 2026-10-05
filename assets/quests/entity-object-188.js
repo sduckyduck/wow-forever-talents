@@ -1,0 +1,1 @@
+window.FOREVER_QUEST_ENTITIES=window.FOREVER_QUEST_ENTITIES||{};Object.assign(window.FOREVER_QUEST_ENTITIES,{"object:386759":{"id":386759,"kind":"object","name":"object #386759","nameEn":"","positions":[],"instanceZones":[],"source":"questiedb-forever-coordinate-seed","fieldSources":{}}});
