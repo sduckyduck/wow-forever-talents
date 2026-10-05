@@ -233,7 +233,8 @@ async function qaPrepare() {
   const key=JSON.stringify(qa.filters),rows=qaRows();el.innerHTML='<p role="status">正在展开所有已知前置…</p>';
   try {await qaEntities();const details=new Map();for(const row of rows){const g=await qaLoadGraph(row.id);for(const [id,q]of g)details.set(id,q);}if(key!==JSON.stringify(qa.filters))return;
     const ids=[...new Set([...details.keys()])],extra=ids.filter(id=>!rows.some(q=>q.id===id));
-    el.innerHTML=`<h4>${esc(qaZone(+qa.filters.dungeon))}：${rows.length} 条关联任务，${extra.length} 条上游前置</h4><p>建议出发前核对前置分支与职业限制；物品触发任务可在副本内取得后再接。</p><h5>副本关联任务</h5>${qaRelationList(rows.map(q=>q.id))}${extra.length?'<h5>副本外前置也一起检查</h5>'+qaRelationList(extra):''}<button type="button" id="qaExportChecklist">导出任务清单</button>`;
+    const groups=QuestAtlasModel.preparationGroups(extra,id=>QAI[id],QA.zones);
+    el.innerHTML=`<h4>${esc(qaZone(+qa.filters.dungeon))}：${rows.length} 条关联任务，${extra.length} 条上游前置</h4><p>建议出发前核对前置分支与职业限制；物品触发任务可在副本内取得后再接。</p><h5>副本关联任务</h5>${qaRelationList(rows.map(q=>q.id))}${groups.outside.length?'<h5>副本外的上游前置</h5>'+qaRelationList(groups.outside):''}${groups.instances.length?'<h5>涉及副本的上游前置</h5>'+qaRelationList(groups.instances):''}${groups.unknown.length?'<h5>地点资料待补齐的上游前置</h5>'+qaRelationList(groups.unknown):''}<button type="button" id="qaExportChecklist">导出任务清单</button>`;
     document.getElementById('qaExportChecklist').onclick=()=>qaDownload('forever-dungeon-checklist.json',{schemaVersion:1,dungeon:qaZone(+qa.filters.dungeon),side:qa.filters.side,tasks:ids.map(id=>({id,name:qaName(id),completed:qa.done.has(id),requiresAll:details.get(id)?.all||[],requiresAny:details.get(id)?.any||[]}))});
   }catch(e){el.innerHTML=`<p>${esc(e.message)}，可以点击按钮重试。</p>`;}
 }

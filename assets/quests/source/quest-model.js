@@ -46,5 +46,14 @@ const QuestAtlasModel = (() => {
     if (!input || input.schemaVersion !== 1 || (input.product && input.product !== 'wow_classic_beta') || !Array.isArray(input.completed) || input.completed.length > 20000 || input.completed.some(id => !Number.isSafeInteger(id) || id <= 0)) throw new Error('请选择本站导出的任务进度 JSON 文件。');
     return [...new Set(input.completed)];
   }
-  return { prerequisites, prerequisitesMet, ancestors, filter, validateProgress };
+  function preparationGroups(ids,lookup,zones){
+    const groups={outside:[],instances:[],unknown:[]};
+    for(const id of ids){const q=lookup(id);if(!q){groups.unknown.push(id);continue;}
+      if((q.dungeons||[]).length||q.type===81||q.type===62)groups.instances.push(id);
+      else if((q.zone>0&&zones[q.zone]&&!zones[q.zone].dungeon)||(q.startLocations||[]).some(p=>zones[p.zone]&&!zones[p.zone].dungeon))groups.outside.push(id);
+      else groups.unknown.push(id);
+    }
+    return groups;
+  }
+  return { prerequisites, prerequisitesMet, ancestors, filter, validateProgress, preparationGroups };
 })();

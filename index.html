@@ -3611,7 +3611,16 @@ const QuestAtlasModel = (() => {
     if (!input || input.schemaVersion !== 1 || (input.product && input.product !== 'wow_classic_beta') || !Array.isArray(input.completed) || input.completed.length > 20000 || input.completed.some(id => !Number.isSafeInteger(id) || id <= 0)) throw new Error('请选择本站导出的任务进度 JSON 文件。');
     return [...new Set(input.completed)];
   }
-  return { prerequisites, prerequisitesMet, ancestors, filter, validateProgress };
+  function preparationGroups(ids,lookup,zones){
+    const groups={outside:[],instances:[],unknown:[]};
+    for(const id of ids){const q=lookup(id);if(!q){groups.unknown.push(id);continue;}
+      if((q.dungeons||[]).length||q.type===81||q.type===62)groups.instances.push(id);
+      else if((q.zone>0&&zones[q.zone]&&!zones[q.zone].dungeon)||(q.startLocations||[]).some(p=>zones[p.zone]&&!zones[p.zone].dungeon))groups.outside.push(id);
+      else groups.unknown.push(id);
+    }
+    return groups;
+  }
+  return { prerequisites, prerequisitesMet, ancestors, filter, validateProgress, preparationGroups };
 })();
 
 // ===================== 任务百科（#/quests[/<任务ID>]）=====================
@@ -3619,7 +3628,7 @@ const QA_KIND = { 0:'普通任务',1:'精英任务',21:'职业任务',41:'PvP任
 const QA_CHANGE = { new:'无限新增',updated:'无限改动',unchanged:'经典延续',unconfirmed:'资料待确认',unknown:'资料待补齐' };
 const QA_SIDE = { 1:'联盟',2:'部落',3:'双方' };
 const QA_CLASSES = [[1,'战士'],[2,'圣骑士'],[4,'猎人'],[8,'潜行者'],[16,'牧师'],[64,'萨满祭司'],[128,'法师'],[256,'术士'],[1024,'德鲁伊']];
-const QA_REV='202610050157175564380000';
+const QA_REV='202610050201306810290000';
 const qaSavedDone=store.get('forever-quest-completed-v1',[]);
 const qa = { filters: { side:'',classMask:'',zone:'',dungeon:'',kind:'',change:'',search:'',min:'',max:'',hideDone:false,indexOnly:false }, page:0, id:null, load:null, entityLoad:null, detailLoad:new Map(), token:0, map:null, layers:null, tab:'all', error:null, done:new Set((Array.isArray(qaSavedDone)?qaSavedDone:[]).filter(id=>Number.isSafeInteger(id)&&id>0)), mapKinds:{start:true,end:true,npc:true,object:true,poi:true}, selectedPoint:null };
 let QA = null, QAE = {}, QAI = {};
@@ -3849,7 +3858,8 @@ async function qaPrepare() {
   const key=JSON.stringify(qa.filters),rows=qaRows();el.innerHTML='<p role="status">正在展开所有已知前置…</p>';
   try {await qaEntities();const details=new Map();for(const row of rows){const g=await qaLoadGraph(row.id);for(const [id,q]of g)details.set(id,q);}if(key!==JSON.stringify(qa.filters))return;
     const ids=[...new Set([...details.keys()])],extra=ids.filter(id=>!rows.some(q=>q.id===id));
-    el.innerHTML=`<h4>${esc(qaZone(+qa.filters.dungeon))}：${rows.length} 条关联任务，${extra.length} 条上游前置</h4><p>建议出发前核对前置分支与职业限制；物品触发任务可在副本内取得后再接。</p><h5>副本关联任务</h5>${qaRelationList(rows.map(q=>q.id))}${extra.length?'<h5>副本外前置也一起检查</h5>'+qaRelationList(extra):''}<button type="button" id="qaExportChecklist">导出任务清单</button>`;
+    const groups=QuestAtlasModel.preparationGroups(extra,id=>QAI[id],QA.zones);
+    el.innerHTML=`<h4>${esc(qaZone(+qa.filters.dungeon))}：${rows.length} 条关联任务，${extra.length} 条上游前置</h4><p>建议出发前核对前置分支与职业限制；物品触发任务可在副本内取得后再接。</p><h5>副本关联任务</h5>${qaRelationList(rows.map(q=>q.id))}${groups.outside.length?'<h5>副本外的上游前置</h5>'+qaRelationList(groups.outside):''}${groups.instances.length?'<h5>涉及副本的上游前置</h5>'+qaRelationList(groups.instances):''}${groups.unknown.length?'<h5>地点资料待补齐的上游前置</h5>'+qaRelationList(groups.unknown):''}<button type="button" id="qaExportChecklist">导出任务清单</button>`;
     document.getElementById('qaExportChecklist').onclick=()=>qaDownload('forever-dungeon-checklist.json',{schemaVersion:1,dungeon:qaZone(+qa.filters.dungeon),side:qa.filters.side,tasks:ids.map(id=>({id,name:qaName(id),completed:qa.done.has(id),requiresAll:details.get(id)?.all||[],requiresAny:details.get(id)?.any||[]}))});
   }catch(e){el.innerHTML=`<p>${esc(e.message)}，可以点击按钮重试。</p>`;}
 }
